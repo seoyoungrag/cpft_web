@@ -42,6 +42,13 @@ type navItem = {|
 
 const navBarItems: Array<navItem> = [
   {
+    value: "Test",
+    to: "/",
+    icon: "Test",
+    LinkComponent: withRouter(NavLink),
+    useExact: true,
+  },
+  {
     value: "Home",
     to: "/",
     icon: "home",

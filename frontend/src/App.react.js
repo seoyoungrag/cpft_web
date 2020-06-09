@@ -13,6 +13,7 @@ import {
   Empty,
   Email,
   ProfilePage,
+  Test,
 } from "./pages";
 
 import HomePage from "./HomePage.react";
@@ -26,7 +27,7 @@ import GalleryPage from "./GalleryPage.react";
 import MapCardsPage from "./components/MapCardsPage.react";
 import BlogPage from "./components/BlogPage.react";
 
-import "tabler-react/dist/Tabler.css";
+//import "tabler-react/dist/Tabler.css";
 
 type Props = {||};
 
@@ -35,6 +36,7 @@ function App(props: Props): React.Node {
     <React.StrictMode>
       <Router>
         <Switch>
+          <Route exact path="/test" component={Test} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/400" component={Error400} />
           <Route exact path="/401" component={Error401} />

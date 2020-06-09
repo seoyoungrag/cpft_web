@@ -6,7 +6,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "./c3jscustom.css";
 
-import App from "./App.react";
+//import App from "./App.react";
+import App from "./pages/Test.js";
+
+//import 'bootstrap/dist/css/bootstrap.css'
+
+import "./css/style.css";
 
 const rootElement = document.getElementById("root");
 
