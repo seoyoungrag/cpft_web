@@ -43,7 +43,7 @@ type navItem = {|
 const navBarItems: Array<navItem> = [
   {
     value: "Test",
-    to: "/",
+    to: "/test",
     icon: "Test",
     LinkComponent: withRouter(NavLink),
     useExact: true,
@@ -219,7 +219,7 @@ class SiteWrapper extends React.Component<Props, State> {
               this.setState(
                 () => ({
                   notificationsObjects: this.state.notificationsObjects.map(
-                    v => ({ ...v, unread: false })
+                    (v) => ({ ...v, unread: false })
                   ),
                 }),
                 () =>
@@ -227,7 +227,7 @@ class SiteWrapper extends React.Component<Props, State> {
                     () =>
                       this.setState({
                         notificationsObjects: this.state.notificationsObjects.map(
-                          v => ({ ...v, unread: true })
+                          (v) => ({ ...v, unread: true })
                         ),
                       }),
                     5000
