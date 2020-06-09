@@ -1,0 +1,24 @@
+server:
+  port: 40080
+logging:
+  level:
+    root: warn
+    kr.co.teamfresh.cpft.capi: info
+  file:
+    max-history: 7
+    path: C:\logs\cpft_capi
+spring:
+  profiles: prod
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    url: jdbc:h2:mem:~/test;IGNORECASE=TRUE;DB_CLOSE_ON_EXIT=TRUE;FILE_LOCK=NO
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: yrseo
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    showSql: true
