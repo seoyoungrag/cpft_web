@@ -27,6 +27,7 @@ import GalleryPage from "./GalleryPage.react";
 import MapCardsPage from "./components/MapCardsPage.react";
 import BlogPage from "./components/BlogPage.react";
 
+import Main from "./Main";
 //import "tabler-react/dist/Tabler.css";
 
 type Props = {||};
@@ -36,6 +37,7 @@ function App(props: Props): React.Node {
     <React.StrictMode>
       <Router>
         <Switch>
+          <Route exact path="/main" component={Main} />
           <Route exact path="/test" component={Test} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/400" component={Error400} />

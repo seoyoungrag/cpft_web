@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import axios from "axios";
-import "./bootstrap.min.css";
+
 import logo from "../img/logo_indigo_teamfresh.png";
 
 type Props = {||};
