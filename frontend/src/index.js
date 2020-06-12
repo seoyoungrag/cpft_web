@@ -2,23 +2,30 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import "./include/bootstrap";
 
 //import "./index.css";
 //import "./c3jscustom.css";
 
-import App from "./App.react";
+//import App from "./components/App";
+import Root from "./Root";
 //import App from "./pages/Test.js";
 
 //import 'bootstrap/dist/css/bootstrap.css'
 
-import "./css/bootstrap.min.css";
-import "./css/style.css";
-import "./css/font-awesome.min.css";
+//import "./styles/bootstrap.min.css";
+import "./styles/font-awesome.min.css";
+import "./styles/fonts.css";
+import "./styles/sb-admin-2.css";
+import "./styles/style.css";
+import "./vendor/fontawesome-free/css/all.css";
+//import "./styles/utils.css";
 
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
-  ReactDOM.render(<App />, rootElement);
+  //ReactDOM.render(<Root />, rootElement);
+  ReactDOM.render(<Root />, rootElement);
 } else {
   throw new Error("Could not find root element to mount to!");
 }

@@ -1,0 +1,29 @@
+.header {
+  background: #7950f2;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+.header .logo {
+  color: white;
+
+  font-weight: 800;
+  font-size: 1.5rem;
+
+  cursor: pointer;
+
+  margin-left: 1rem;
+
+  user-select: none;
+}
+
+.header .logout {
+  margin-left: auto;
+  margin-right: 1rem;
+  color: white;
+
+  font-weight: 800;
+  font-size: 2rem;
+
+  cursor: pointer;
+}

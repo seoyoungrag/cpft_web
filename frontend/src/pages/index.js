@@ -11,7 +11,9 @@ import Error503 from "./503.react";
 import Email from "./Email.react";
 import ProfilePage from "./ProfilePage.react";
 import Test from "./Test";
-
+import Main from "./Main";
+import Auth from "./Auth";
+import NotFound from "./NotFound";
 export {
   ForgotPasswordPage,
   LoginPage,
@@ -25,5 +27,8 @@ export {
   Empty,
   Email,
   ProfilePage,
-  Test
+  Test,
+  Main,
+  Auth,
+  NotFound,
 };

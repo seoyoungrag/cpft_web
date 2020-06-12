@@ -42,6 +42,13 @@ type navItem = {|
 
 const navBarItems: Array<navItem> = [
   {
+    value: "로그인",
+    to: "/auth/login",
+    icon: "login",
+    LinkComponent: withRouter(NavLink),
+    useExact: true,
+  },
+  {
     value: "메인",
     to: "/main",
     icon: "home",
