@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 export class BaseContainer extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.logged !== this.props.logged || !this.props.logged) {
-      window.location.href = "/v1/signin";
+      //window.location.href = "/v1/signin";
     }
   }
 

@@ -20,6 +20,7 @@ import "./styles/sb-admin-2.css";
 import "./styles/style.css";
 import "./vendor/fontawesome-free/css/all.css";
 //import "./styles/utils.css";
+import ReactStore from "ReactStore";
 
 const rootElement = document.getElementById("root");
 

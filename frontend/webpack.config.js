@@ -8,8 +8,12 @@ module.exports = {
   context: __dirname,
   devtool: "sourcemaps",
   entry: "./src/index.js",
+  resolve: {
+    modules: [path.join(__dirname, "src"), "node_modules"],
+  },
   output: {
     path: path.resolve(__dirname, "../src/main/resources/static/"),
+    publicPath: "/",
     filename: "bundle.[hash].js",
   },
   module: {
@@ -44,8 +48,8 @@ module.exports = {
         options: {
           limit: 1024,
           name: "[name].[ext]",
-          publicPath: "/styles/",
-          outputPath: "/styles/",
+          //publicPath: "./styles/",
+          //outputPath: "/styles/",
         },
       },
     ],
@@ -58,11 +62,13 @@ module.exports = {
       path: path.resolve(__dirname, "../src/main/resources/static/"),
       filename: "./index.html",
       //favicon: "public/favicon.ico",
+      publicPath: "/",
     }),
     new MiniCssExtractPlugin({
       path: path.resolve(__dirname, "../src/main/resources/static/"),
       filename: "[name].css",
       chunkFilename: "[id].css",
+      publicPath: "/",
     }),
   ],
   devServer: {

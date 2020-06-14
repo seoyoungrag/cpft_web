@@ -5,7 +5,8 @@ import NoteContainer from "../containers/NoteContainer";
 const Main = () => {
   return (
     <MainStructure>
-      <NoteContainer />
+      {/*<NoteContainer />*/}
+      hello
     </MainStructure>
   );
 };
