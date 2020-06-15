@@ -14,7 +14,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../src/main/resources/static/"),
     publicPath: "/",
-    filename: "bundle.[hash].js",
+    /*filename: "bundle.[hash].js",*/
+    filename: "bundle.js",
   },
   module: {
     rules: [

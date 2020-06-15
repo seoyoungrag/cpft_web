@@ -16,6 +16,7 @@ class OrderRegist extends Component {
   };
 
   this._onChangeHandler = async (e) => {
+   $("#registOrderWorkingArea").siblings("div.awesomplete").show();
    this._searchJusos(e.target.value);
   };
   this._searchJusos = async (value) => {
@@ -24,7 +25,7 @@ class OrderRegist extends Component {
     const res = await axios(
      "http://www.juso.go.kr/addrlink/addrLinkApi.do?currentPage=1&countPerPage=10&keyword=" +
       value +
-      "&confmKey=devU01TX0FVVEgyMDIwMDYxNTE1MDg1NTEwOTg2Njc=&resultType=json"
+      "&confmKey=devU01TX0FVVEgyMDIwMDYxNjA3NTczNzEwOTg2ODc=&resultType=json"
     );
 
     const geoResult =
@@ -52,6 +53,8 @@ class OrderRegist extends Component {
     const siNmList = geoResult.filter((e) => {
      if (e.siNm.indexOf($("#registOrderWorkingArea").val()) > -1) {
       e.label = e.siNm;
+      e.sggNm = "";
+      e.emdNm = "";
       return true;
      }
     });
@@ -59,6 +62,7 @@ class OrderRegist extends Component {
     const sggNmList = geoResult.filter((e) => {
      if (e.sggNm.indexOf($("#registOrderWorkingArea").val()) > -1) {
       e.label = e.siNm + " " + e.sggNm;
+      e.sggNm = "";
       return true;
      }
     });
@@ -90,17 +94,42 @@ class OrderRegist extends Component {
    }
    return array;
   };
+  this._onclickJuso = (e) => {
+   console.log(e.target.dataset);
+   $("#registOrderWorkingArea").val(e.target.innerText);
+   $("#registOrderWorkingArea").siblings("div.awesomplete").hide();
+  };
  }
 
  get renderJusos() {
-  let jusos = <div>검색된 주소가 없습니다.</div>;
+  let jusos = <div className="awesomplete"></div>;
   if (this.state.jusos && this.state.jusos.length > 0) {
    jusos = (
-    <ul>
-     {this.state.jusos.map((e, i) => {
-      return <li key={i}>{e.label}</li>;
-     })}
-    </ul>
+    <div className="awesomplete">
+     <ul>
+      {this.state.jusos.map((e, i) => {
+       return (
+        <li
+         onClick={this._onclickJuso}
+         key={i}
+         data-sinm={e.siNm}
+         data-sggnm={e.sggNm}
+         data-emdnm={e.emdNm}
+        >
+         {e.label}
+        </li>
+       );
+      })}
+     </ul>
+    </div>
+   );
+  } else {
+   jusos = (
+    <div className="awesomplete">
+     <ul>
+      <li>검색된 주소가 없습니다.</li>
+     </ul>
+    </div>
    );
   }
 
@@ -205,7 +234,6 @@ class OrderRegist extends Component {
                  id="customRadio3"
                  type="radio"
                  name="customRadio"
-                 disabled={true}
                 />
                 <label className="custom-control-label" htmlFor="customRadio3">
                  용차
@@ -331,7 +359,7 @@ class OrderRegist extends Component {
                 className="form-control"
                 id="exampleFormControlInput5"
                 type="email"
-                placeholder="서울시 송파구"
+                placeholder="ex) 서울시"
                 key="exampleFormControlInput5"
                />
               </div>
