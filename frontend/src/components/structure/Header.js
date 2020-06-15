@@ -11,7 +11,7 @@ const Header = ({ onLogout }) => (
     >
       <i className="fa fa-bars"></i>
     </button>
-
+    {/*
     <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
       <div className="input-group">
         <input
@@ -28,7 +28,7 @@ const Header = ({ onLogout }) => (
         </div>
       </div>
     </form>
-
+*/}
     <ul className="navbar-nav ml-auto">
       <li className="nav-item dropdown no-arrow d-sm-none">
         <a
@@ -85,7 +85,7 @@ const Header = ({ onLogout }) => (
           className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
           aria-labelledby="alertsDropdown"
         >
-          <h6 className="dropdown-header">Alerts Center</h6>
+          <h6 className="dropdown-header">공지사항</h6>
           <a className="dropdown-item d-flex align-items-center" href="#">
             <div className="mr-3">
               <div className="icon-circle bg-primary">
@@ -93,9 +93,9 @@ const Header = ({ onLogout }) => (
               </div>
             </div>
             <div>
-              <div className="small text-gray-500">December 12, 2019</div>
+              <div className="small text-gray-500">2020.06.15</div>
               <span className="font-weight-bold">
-                A new monthly report is ready to download!
+                용차블루 운송사1.0이 오픈되었습니다.
               </span>
             </div>
           </a>
@@ -106,8 +106,8 @@ const Header = ({ onLogout }) => (
               </div>
             </div>
             <div>
-              <div className="small text-gray-500">December 7, 2019</div>
-              $290.29 has been deposited into your account!
+              <div className="small text-gray-500">2020.06.15</div>
+              정기점검 공지
             </div>
           </a>
           <a className="dropdown-item d-flex align-items-center" href="#">
@@ -117,17 +117,16 @@ const Header = ({ onLogout }) => (
               </div>
             </div>
             <div>
-              <div className="small text-gray-500">December 2, 2019</div>
-              Spending Alert: We've noticed unusually high spending for your
-              account.
+              <div className="small text-gray-500">2020.06.15</div>
+              서비스 내역 공지
             </div>
           </a>
           <a className="dropdown-item text-center small text-gray-500" href="#">
-            Show All Alerts
+            전체 공지사항 보기
           </a>
         </div>
       </li>
-
+      {/*
       <li className="nav-item dropdown no-arrow mx-1">
         <a
           className="nav-link dropdown-toggle"
@@ -221,7 +220,7 @@ const Header = ({ onLogout }) => (
           </a>
         </div>
       </li>
-
+*/}
       <div className="topbar-divider d-none d-sm-block"></div>
 
       <li className="nav-item dropdown no-arrow">
@@ -235,12 +234,9 @@ const Header = ({ onLogout }) => (
           aria-expanded="false"
         >
           <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-            Valerie Luna
+            서영락
           </span>
-          <img
-            className="img-profile rounded-circle"
-            src="https://source.unsplash.com/QAB-WJcbgJk/60x60"
-          />
+          <i className="fa fa-cog" aria-hidden="true"></i>
         </a>
 
         <div
@@ -249,15 +245,15 @@ const Header = ({ onLogout }) => (
         >
           <a className="dropdown-item" href="#">
             <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            Profile
+            개인정보
           </a>
           <a className="dropdown-item" href="#">
             <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-            Settings
+            설정
           </a>
           <a className="dropdown-item" href="#">
             <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-            Activity Log
+            활동 로그
           </a>
           <div className="dropdown-divider"></div>
           <a
@@ -267,7 +263,7 @@ const Header = ({ onLogout }) => (
             data-target="#logoutModal"
           >
             <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-            Logout
+            로그아웃
             <MdLock onClick={onLogout} />
           </a>
         </div>

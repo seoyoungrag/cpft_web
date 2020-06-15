@@ -71,7 +71,7 @@ class SideNav extends Component {
       <ReactStore.Consumer>
         {(store) => (
           <ul
-            className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+            className="navbar-nav bg-gradient-light sidebar sidebar-dark accordion"
             id="accordionSidebar"
           >
             <a
