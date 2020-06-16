@@ -51,7 +51,8 @@ public class SignController {
 
 		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name)
 				.roles(Collections.singletonList("ROLE_USER")).build());
-		return responseService.getSuccessResult();
+		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CEmailSigninFailedException::new);
+		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 	}
 
 	@ApiOperation(value = "로그인", notes = "이메일 회원 로그인을 한다.")

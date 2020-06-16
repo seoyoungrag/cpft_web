@@ -70,9 +70,25 @@ const AuthForm = ({
           placeholder="1234"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
-          autoComplete="on"
+          autoComplete="off"
          />
         </div>
+        {kind === "register" ? (
+         <div className="form-group">
+          <label className="small mb-1" htmlFor="userNm">
+           사용자 이름
+          </label>
+          <input
+           className="form-control py-4"
+           id="userNm"
+           name="userNm"
+           type="text"
+           placeholder="서영락"
+           onChange={handleChange}
+           onKeyPress={handleKeyPress}
+          />
+         </div>
+        ) : null}
         <ul className="errorsList">
          {error.triggered && <li>{error.message}</li>}
         </ul>
@@ -100,7 +116,7 @@ const AuthForm = ({
            {kind.toUpperCase()}
           </div>
          ) : (
-          <div className={cx("auth-button")} onClick={onLogin}>
+          <div className="btn btn-primary" onClick={onLogin}>
            {kind.toUpperCase()}
           </div>
          )}

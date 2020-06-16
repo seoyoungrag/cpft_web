@@ -186,20 +186,28 @@ const registerEpic = (action$, state$) => {
   ofType(REGISTER),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
-   const { username, password } = state.auth.form;
-   return ajax.post(`/v1/signup/`, { username, password }).pipe(
-    map((response) => {
-     const { user, token } = response.response;
-     return registerSuccess({ user, token });
-    }),
-    catchError((error) =>
-     of({
-      type: REGISTER_FAILURE,
-      payload: error,
-      error: true,
-     })
-    )
-   );
+   const { loginUserId, loginUserPw, userNm } = state.auth.form;
+   return ajax
+    .post(`/v1/signup/`, {
+     id: loginUserId,
+     password: loginUserPw,
+     name: userNm,
+    })
+    .pipe(
+     map((response) => {
+      const { data } = response.response;
+      const user = jwt(data); // decode your token here
+      console.log(user);
+      return registerSuccess({ user, token });
+     }),
+     catchError((error) =>
+      of({
+       type: REGISTER_FAILURE,
+       payload: error,
+       error: true,
+      })
+     )
+    );
   })
  );
 };
@@ -279,8 +287,9 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: true,
     userInfo: {
-     id: action.payload.user.id,
-     username: action.payload.user.username,
+     userLoginId: action.payload.user.userLoginId,
+     userNm: action.payload.user.userNm,
+     userSeq: action.payload.user.userSeq,
      token: action.payload.token,
     },
    };
@@ -299,7 +308,7 @@ export const auth = (state = initialState, action) => {
       ...state,
       error: {
        triggered: true,
-       message: "TOO SHORT USERNAME OR PASSWORD",
+       message: action.payload.response.msg,
       },
      };
     default:

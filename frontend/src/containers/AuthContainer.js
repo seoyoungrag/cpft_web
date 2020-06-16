@@ -6,12 +6,15 @@ import * as authActions from "../store/modules/auth";
 
 export class AuthContainer extends Component {
  componentDidMount() {
+  console.log("authcontainer mount");
   this.initialize();
  }
 
  componentDidUpdate(prevProps, prevState) {
   // 하단에 AuthContainer를 withRouter로 감쌌기 때문에, history를 props로 이용할수 있습니다.
+  console.log("authcontainer componentDidUpdate");
   const { history } = this.props;
+  console.log("authcontainer " + prevProps.kind + " vs " + this.props.kind);
   if (prevProps.kind !== this.props.kind) {
    this.initialize();
   }
