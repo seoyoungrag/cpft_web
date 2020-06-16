@@ -39,14 +39,14 @@ import lombok.NoArgsConstructor;
 public class User extends CommonDateEntity implements UserDetails { // 날짜 필드 상속 처리	
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long msrl;
+	private long userSeq;
 	@Column(nullable = false, unique = true, length = 50)
-	private String uid;
+	private String userLoginId;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(nullable = false, length = 100)
-	private String password;
+	private String userLoginPw;
 	@Column(nullable = false, length = 100)
-	private String name;
+	private String userNm;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Builder.Default
@@ -60,9 +60,15 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Override
 	public String getUsername() {
-		return this.uid;
+		return this.userLoginId;
 	}
 
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@Override
+	public String getPassword() {
+		return this.userLoginPw;
+	}
+	
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Override
 	public boolean isAccountNonExpired() {

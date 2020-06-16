@@ -27,358 +27,362 @@ const LOGOUT_SUCCESS = "auth/LOGOUT_SUCCESS";
 const LOGOUT_FAILURE = "auth/LOGOUT_FAILURE";
 
 export const logout = () => ({
-  type: LOGOUT,
+ type: LOGOUT,
 });
 
 export const logoutSuccess = () => ({
-  type: LOGOUT_SUCCESS,
+ type: LOGOUT_SUCCESS,
 });
 
 export const logoutFailure = () => ({
-  type: LOGOUT_FAILURE,
+ type: LOGOUT_FAILURE,
 });
 
 export const checkUser = () => ({
-  type: CHECK_USER,
+ type: CHECK_USER,
 });
 
 export const checkUserSuccess = () => ({
-  type: CHECK_USER_SUCCESS,
+ type: CHECK_USER_SUCCESS,
 });
 
 export const checkUserFailure = (error) => ({
-  type: CHECK_USER_FAILURE,
-  payload: {
-    error,
-  },
+ type: CHECK_USER_FAILURE,
+ payload: {
+  error,
+ },
 });
 
 export const setUserTemp = ({ id, username, token }) => ({
-  type: SET_USER_TEMP,
-  payload: {
-    id,
-    username,
-    token,
-  },
+ type: SET_USER_TEMP,
+ payload: {
+  id,
+  username,
+  token,
+ },
 });
 export const register = () => ({
-  type: REGISTER,
+ type: REGISTER,
 });
 
 export const registerSuccess = ({ user, token }) => ({
-  type: REGISTER_SUCCESS,
-  payload: {
-    user,
-    token,
-  },
+ type: REGISTER_SUCCESS,
+ payload: {
+  user,
+  token,
+ },
 });
 
 export const registerFailure = (error) => ({
-  type: REGISTER_FAILURE,
-  payload: {
-    error,
-  },
+ type: REGISTER_FAILURE,
+ payload: {
+  error,
+ },
 });
 
 export const login = () => ({
-  type: LOGIN,
+ type: LOGIN,
 });
 
 export const loginSuccess = ({ user, token }) => ({
-  type: LOGIN_SUCCESS,
-  payload: {
-    user,
-    token,
-  },
+ type: LOGIN_SUCCESS,
+ payload: {
+  user,
+  token,
+ },
 });
 
 export const loginFailure = (error) => ({
-  type: LOGIN_FAILURE,
-  payload: {
-    error,
-  },
+ type: LOGIN_FAILURE,
+ payload: {
+  error,
+ },
 });
 
 export const initializeError = () => ({
-  type: INITIALIZE_ERROR,
+ type: INITIALIZE_ERROR,
 });
 
 export const initializeInput = () => ({
-  type: INITIALIZE_INPUT,
+ type: INITIALIZE_INPUT,
 });
 
 export const changeInput = ({ name, value }) => ({
-  type: CHANGE_INPUT,
-  payload: {
-    name,
-    value,
-  },
+ type: CHANGE_INPUT,
+ payload: {
+  name,
+  value,
+ },
 });
 
 const logoutEpic = (action$, state$) => {
-  return action$.pipe(
-    ofType(LOGOUT),
-    withLatestFrom(state$),
-    mergeMap(([action, state]) => {
-      const token = localStorage.getItem("userInfo")
-        ? JSON.parse(localStorage.getItem("userInfo")).token
-        : null;
-      return ajax
-        .post(
-          `/api/auth/logout/`,
-          // post의 body를 비워놓는다.
-          {},
-          {
-            "Content-Type": "application/json",
-            Authorization: `token ${token}`,
-          }
-        )
-        .pipe(
-          map((response) => {
-            // success시 localStorage에서 userInfo 삭제.
-            localStorage.removeItem("userInfo");
-            return logoutSuccess();
-          }),
-          catchError((error) => {
-            of({
-              type: LOGIN_FAILURE,
-              payload: error,
-              error: true,
-            });
-          })
-        );
-    })
-  );
+ return action$.pipe(
+  ofType(LOGOUT),
+  withLatestFrom(state$),
+  mergeMap(([action, state]) => {
+   const token = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo")).token
+    : null;
+   return ajax
+    .post(
+     `/api/auth/logout/`,
+     // post의 body를 비워놓는다.
+     {},
+     {
+      "Content-Type": "application/json",
+      Authorization: `token ${token}`,
+     }
+    )
+    .pipe(
+     map((response) => {
+      // success시 localStorage에서 userInfo 삭제.
+      localStorage.removeItem("userInfo");
+      return logoutSuccess();
+     }),
+     catchError((error) => {
+      of({
+       type: LOGIN_FAILURE,
+       payload: error,
+       error: true,
+      });
+     })
+    );
+  })
+ );
 };
 
 const checkUserEpic = (action$, state$) => {
-  return action$.pipe(
-    ofType(CHECK_USER),
-    withLatestFrom(state$),
-    mergeMap(([action, state]) => {
-      const token = localStorage.getItem("userInfo")
-        ? JSON.parse(localStorage.getItem("userInfo")).token
-        : null;
-      return ajax
-        .get(`/v1/user/`, {
-          "Content-Type": "application/json",
-          Authorization: `X-AUTH-TOKEN ${token}`,
-        })
-        .pipe(
-          map((response) => {
-            return checkUserSuccess();
-          }),
-          catchError((error) =>
-            of({
-              type: CHECK_USER_FAILURE,
-              payload: error,
-              error: true,
-            })
-          )
-        );
+ return action$.pipe(
+  ofType(CHECK_USER),
+  withLatestFrom(state$),
+  mergeMap(([action, state]) => {
+   const token = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo")).token
+    : null;
+   return ajax
+    .get(`/v1/user/`, {
+     "Content-Type": "application/json",
+     Authorization: `X-AUTH-TOKEN ${token}`,
     })
-  );
+    .pipe(
+     map((response) => {
+      return checkUserSuccess();
+     }),
+     catchError((error) =>
+      of({
+       type: CHECK_USER_FAILURE,
+       payload: error,
+       error: true,
+      })
+     )
+    );
+  })
+ );
 };
 const registerEpic = (action$, state$) => {
-  return action$.pipe(
-    ofType(REGISTER),
-    withLatestFrom(state$),
-    mergeMap(([action, state]) => {
-      const { username, password } = state.auth.form;
-      return ajax.post(`/v1/signup/`, { username, password }).pipe(
-        map((response) => {
-          const { user, token } = response.response;
-          return registerSuccess({ user, token });
-        }),
-        catchError((error) =>
-          of({
-            type: REGISTER_FAILURE,
-            payload: error,
-            error: true,
-          })
-        )
-      );
-    })
-  );
+ return action$.pipe(
+  ofType(REGISTER),
+  withLatestFrom(state$),
+  mergeMap(([action, state]) => {
+   const { username, password } = state.auth.form;
+   return ajax.post(`/v1/signup/`, { username, password }).pipe(
+    map((response) => {
+     const { user, token } = response.response;
+     return registerSuccess({ user, token });
+    }),
+    catchError((error) =>
+     of({
+      type: REGISTER_FAILURE,
+      payload: error,
+      error: true,
+     })
+    )
+   );
+  })
+ );
 };
 
 const loginEpic = (action$, state$) => {
-  return action$.pipe(
-    ofType(LOGIN),
-    withLatestFrom(state$),
-    mergeMap(([action, state]) => {
-      const { username, password } = state.auth.form;
-      return ajax.post(`/v1/signin/`, { id: username, password }).pipe(
-        map((response) => {
-          const { user, token } = response.response;
-          return loginSuccess({ user, token });
-        }),
-        catchError((error) =>
-          of({
-            type: LOGIN_FAILURE,
-            payload: error,
-            error: true,
-          })
-        )
-      );
-    })
-  );
+ return action$.pipe(
+  ofType(LOGIN),
+  withLatestFrom(state$),
+  mergeMap(([action, state]) => {
+   const { loginUserId, loginUserPw } = state.auth.form;
+   return ajax
+    .post(`/v1/signin/`, { id: loginUserId, password: loginUserPw })
+    .pipe(
+     map((response) => {
+      console.log(response.response);
+      const { data } = response.response;
+      return loginSuccess({ loginUserId, token });
+     }),
+     catchError((error) =>
+      of({
+       type: LOGIN_FAILURE,
+       payload: error,
+       error: true,
+       msg: error.response.msg,
+      })
+     )
+    );
+  })
+ );
 };
 
 const initialState = {
-  form: {
-    username: "",
-    password: "",
-  },
-  error: {
-    triggered: false,
-    message: "",
-  },
-  logged: false,
-  userInfo: {
-    id: null,
-    username: "",
-    token: null,
-  },
+ form: {
+  username: "",
+  password: "",
+ },
+ error: {
+  triggered: false,
+  message: "",
+ },
+ logged: false,
+ userInfo: {
+  id: null,
+  username: "",
+  token: null,
+ },
 };
 
 export const auth = (state = initialState, action) => {
-  switch (action.type) {
-    case INITIALIZE_INPUT:
-      return {
-        ...state,
-        form: {
-          username: "",
-          password: "",
-        },
-      };
-    case CHANGE_INPUT:
-      let newForm = state.form;
-      newForm[action.payload.name] = action.payload.value;
-      return {
-        ...state,
-        form: newForm,
-      };
-    case INITIALIZE_ERROR:
-      return {
-        ...state,
-        error: {
-          triggered: false,
-          message: "",
-        },
-      };
-    case REGISTER_SUCCESS:
-      return {
-        ...state,
-        logged: true,
-        userInfo: {
-          id: action.payload.user.id,
-          username: action.payload.user.username,
-          token: action.payload.token,
-        },
-      };
-    case REGISTER_FAILURE:
-      switch (action.payload.status) {
-        case 400:
-          return {
-            ...state,
-            error: {
-              triggered: true,
-              message: "WRONG USERNAME OR PASSWORD",
-            },
-          };
-        case 500:
-          return {
-            ...state,
-            error: {
-              triggered: true,
-              message: "TOO SHORT USERNAME OR PASSWORD",
-            },
-          };
-        default:
-          return {
-            ...state,
-          };
-      }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        logged: true,
-        userInfo: {
-          id: action.payload.user.id,
-          username: action.payload.user.username,
-          token: action.payload.token,
-        },
-      };
-    case CHECK_USER_SUCCESS:
-      return {
-        ...state,
-      };
-    case CHECK_USER_FAILURE:
-      return {
-        ...state,
-        logged: false,
-        userInfo: {
-          id: null,
-          username: "",
-          token: null,
-        },
-      };
-    case SET_USER_TEMP:
-      return {
-        ...state,
-        logged: true,
-        userInfo: {
-          id: action.payload.id,
-          username: action.payload.username,
-          token: action.payload.token,
-        },
-      };
-    case LOGOUT_SUCCESS:
-      return {
-        ...state,
-        logged: false,
-        userInfo: {
-          id: null,
-          message: "",
-          token: null,
-        },
-      };
-    case LOGOUT_FAILURE:
-      return {
-        ...state,
-        error: {
-          triggered: true,
-          message: "LOGOUT ERROR, PLEASE TRY AGAIN",
-        },
-      };
-    case LOGIN_FAILURE:
-      switch (action.payload.status) {
-        case 400:
-          return {
-            ...state,
-            error: {
-              triggered: true,
-              message: "WRONG USERNAME OR PASSWORD",
-            },
-          };
-        case 500:
-          return {
-            ...state,
-            error: {
-              triggered: true,
-              message: "PLEASE TRY AGAIN",
-            },
-          };
-        default:
-          return {
-            ...state,
-          };
-      }
-
+ switch (action.type) {
+  case INITIALIZE_INPUT:
+   return {
+    ...state,
+    form: {
+     username: "",
+     password: "",
+    },
+   };
+  case CHANGE_INPUT:
+   let newForm = state.form;
+   newForm[action.payload.name] = action.payload.value;
+   return {
+    ...state,
+    form: newForm,
+   };
+  case INITIALIZE_ERROR:
+   return {
+    ...state,
+    error: {
+     triggered: false,
+     message: "",
+    },
+   };
+  case REGISTER_SUCCESS:
+   return {
+    ...state,
+    logged: true,
+    userInfo: {
+     id: action.payload.user.id,
+     username: action.payload.user.username,
+     token: action.payload.token,
+    },
+   };
+  case REGISTER_FAILURE:
+   switch (action.payload.status) {
+    case 400:
+     return {
+      ...state,
+      error: {
+       triggered: true,
+       message: "WRONG USERNAME OR PASSWORD",
+      },
+     };
+    case 500:
+     return {
+      ...state,
+      error: {
+       triggered: true,
+       message: "TOO SHORT USERNAME OR PASSWORD",
+      },
+     };
     default:
-      return state;
-  }
+     return {
+      ...state,
+     };
+   }
+  case LOGIN_SUCCESS:
+   return {
+    ...state,
+    logged: true,
+    userInfo: {
+     id: action.payload.user.id,
+     username: action.payload.user.username,
+     token: action.payload.token,
+    },
+   };
+  case CHECK_USER_SUCCESS:
+   return {
+    ...state,
+   };
+  case CHECK_USER_FAILURE:
+   return {
+    ...state,
+    logged: false,
+    userInfo: {
+     id: null,
+     username: "",
+     token: null,
+    },
+   };
+  case SET_USER_TEMP:
+   return {
+    ...state,
+    logged: true,
+    userInfo: {
+     id: action.payload.id,
+     username: action.payload.username,
+     token: action.payload.token,
+    },
+   };
+  case LOGOUT_SUCCESS:
+   return {
+    ...state,
+    logged: false,
+    userInfo: {
+     id: null,
+     message: "",
+     token: null,
+    },
+   };
+  case LOGOUT_FAILURE:
+   return {
+    ...state,
+    error: {
+     triggered: true,
+     message: "LOGOUT ERROR, PLEASE TRY AGAIN",
+    },
+   };
+  case LOGIN_FAILURE:
+   switch (action.payload.status) {
+    case 400:
+     return {
+      ...state,
+      error: {
+       triggered: true,
+       message: "WRONG USERNAME OR PASSWORD",
+      },
+     };
+    case 500:
+     return {
+      ...state,
+      error: {
+       triggered: true,
+       message: action.payload.response.msg,
+      },
+     };
+    default:
+     return {
+      ...state,
+     };
+   }
+
+  default:
+   return state;
+ }
 };
 
 export const authEpics = { registerEpic, loginEpic, checkUserEpic, logoutEpic };

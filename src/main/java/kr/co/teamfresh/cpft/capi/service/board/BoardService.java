@@ -54,7 +54,7 @@ public class BoardService {
 	@CacheEvict(value = CacheKey.POSTS, key = "#boardName")
 	public Post writePost(String uid, String boardName, ParamsPost paramsPost) {
 		Board board = findBoard(boardName);
-		Post post = new Post(userJpaRepo.findByUid(uid).orElseThrow(CUserNotFoundException::new), board,
+		Post post = new Post(userJpaRepo.findByUserLoginId(uid).orElseThrow(CUserNotFoundException::new), board,
 				paramsPost.getAuthor(), paramsPost.getTitle(), paramsPost.getContent());
 		return postJpaRepo.save(post);
 	}
@@ -64,7 +64,7 @@ public class BoardService {
 	public Post updatePost(long postId, String uid, ParamsPost paramsPost) {
 		Post post = getPost(postId);
 		User user = post.getUser();
-		if (!uid.equals(user.getUid()))
+		if (!uid.equals(user.getUserLoginId()))
 			throw new CNotOwnerException();
 		post.setUpdate(paramsPost.getAuthor(), paramsPost.getTitle(), paramsPost.getContent());
 		cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());
@@ -75,7 +75,7 @@ public class BoardService {
 	public boolean deletePost(long postId, String uid) {
 		Post post = getPost(postId);
 		User user = post.getUser();
-		if (!uid.equals(user.getUid()))
+		if (!uid.equals(user.getUserLoginId()))
 			throw new CNotOwnerException();
 		postJpaRepo.delete(post);
 		cacheService.deleteBoardCache(post.getPostId(), post.getBoard().getName());

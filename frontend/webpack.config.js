@@ -73,5 +73,12 @@ module.exports = {
   port: port,
   historyApiFallback: true,
   open: true,
+  proxy: {
+   "/v1": {
+    target: "http://localhost",
+    secure: false,
+    changeOrigin: true,
+   },
+  },
  },
 };

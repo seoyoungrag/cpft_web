@@ -4,10 +4,13 @@ import * as authActions from "../store/modules/auth";
 import { withRouter } from "react-router-dom";
 
 export class BaseContainer extends React.Component {
+ componentDidMount() {
+  this.checkUser();
+ }
  componentDidUpdate(prevProps, prevState) {
+  console.log(prevProps);
   if (prevProps.logged !== this.props.logged || !this.props.logged) {
-   //window.location.href = "/v1/signin";
-   //history.push("/auth/login");
+   window.location.href = "/auth/login";
   }
  }
 

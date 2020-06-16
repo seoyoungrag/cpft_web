@@ -35,12 +35,12 @@ public class SignController {
 	@PostMapping(value = "/signin")
 	public SingleResult<String> signin(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id,
 			@ApiParam(value = "비밀번호", required = true) @RequestParam String password) {
-		User user = userJpaRepo.findByUid(id).orElseThrow(CEmailSigninFailedException::new);
+		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CEmailSigninFailedException::new);
 		if (!passwordEncoder.matches(password, user.getPassword()))
 			throw new CEmailSigninFailedException();
 
 		return responseService
-				.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getMsrl()), user.getRoles()));
+				.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user.getRoles()));
 
 	}
 
@@ -50,7 +50,7 @@ public class SignController {
 			@ApiParam(value = "비밀번호", required = true) @RequestParam String password,
 			@ApiParam(value = "이름", required = true) @RequestParam String name) {
 
-		userJpaRepo.save(User.builder().uid(id).password(passwordEncoder.encode(password)).name(name)
+		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name)
 				.roles(Collections.singletonList("ROLE_USER")).build());
 		return responseService.getSuccessResult();
 	}
