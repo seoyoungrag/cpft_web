@@ -7,7 +7,9 @@ var path = require("path");
 module.exports = {
  context: __dirname,
  devtool: "sourcemaps",
- entry: "./src/index.js",
+ entry: {
+  app: ["babel-polyfill", "./src/index.js"],
+ },
  resolve: {
   modules: [path.join(__dirname, "src"), "node_modules"],
  },
@@ -51,8 +53,9 @@ module.exports = {
    },
   ],
  },
- devtool: "inline-source-map",
- mode: "development",
+ //devtool: "inline-source-map",
+ //mode: "development",
+ mode: "production",
  plugins: [
   new HtmlWebpackPlugin({
    template: "./public/index.html",

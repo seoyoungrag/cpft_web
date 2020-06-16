@@ -16,13 +16,15 @@ export class AuthContainer extends Component {
    this.initialize();
   }
 
+  console.log("authcontainer " + prevProps.logged + " vs " + this.props.logged);
   if (prevProps.logged !== this.props.logged && this.props.logged) {
    // logged가 true가 되면 localStorage에 값을 저장합니다.
    localStorage.setItem(
     "userInfo",
     JSON.stringify({
-     id: this.props.userInfo.id,
-     username: this.props.userInfo.username,
+     userLoginId: this.props.userInfo.userLoginId,
+     userNm: this.props.userInfo.userNm,
+     userSeq: this.props.userInfo.userSeq,
      token: this.props.userInfo.token,
     })
    );
@@ -52,13 +54,13 @@ export class AuthContainer extends Component {
   register();
  };
  render() {
-  const { kind, username, password, error } = this.props;
+  const { kind, loginUserId, loginUserPw, error } = this.props;
   const { handleChangeInput, handleLogin, handleRegister } = this;
   return (
    <AuthForm
     kind={kind}
-    username={username}
-    password={password}
+    loginUserId={loginUserId}
+    loginUserPw={loginUserPw}
     onChangeInput={handleChangeInput}
     onLogin={handleLogin}
     onRegister={handleRegister}
@@ -69,8 +71,8 @@ export class AuthContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
- username: state.auth.form.username,
- password: state.auth.form.password,
+ loginUserId: state.auth.form.loginUserId,
+ loginUserPw: state.auth.form.loginUserPw,
  userInfo: state.auth.userInfo,
  logged: state.auth.logged,
  error: state.auth.error,

@@ -39,8 +39,7 @@ public class SignController {
 		if (!passwordEncoder.matches(password, user.getPassword()))
 			throw new CEmailSigninFailedException();
 
-		return responseService
-				.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user.getRoles()));
+		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 
 	}
 
@@ -53,5 +52,12 @@ public class SignController {
 		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name)
 				.roles(Collections.singletonList("ROLE_USER")).build());
 		return responseService.getSuccessResult();
+	}
+
+	@ApiOperation(value = "로그인", notes = "이메일 회원 로그인을 한다.")
+	@PostMapping(value = "/logout")
+	public CommonResult logout() {
+		return responseService.getSuccessResult();
+
 	}
 }

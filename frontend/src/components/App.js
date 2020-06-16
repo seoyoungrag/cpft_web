@@ -36,10 +36,10 @@ class App extends React.Component {
  };
  render() {
   return (
-   <div>
+   <>
     <Switch>
      <Route exact path="/" component={Main} />
-     <Route path="/auth/:kind" exact={true} component={Auth} />
+     <Route exact path="/auth/:kind" component={Auth} />
      <Route exact path="/test" component={Test} />
      <Route exact path="/order/regist" component={OrderRegist} />
      <Route exact path="/order/manage" component={OrderManage} />
@@ -54,7 +54,7 @@ class App extends React.Component {
      <Route component={NotFound} />
     </Switch>
     <BaseContainer />
-   </div>
+   </>
   );
  }
 }

@@ -81,11 +81,9 @@ class Root extends Component {
  }
 
  componentDidMount = () => {
-  console.log("mount");
   this._initNav();
  };
  componentDidUpdate = () => {
-  console.log("update");
   /*
     first = location.pathname;
     first.indexOf(1);

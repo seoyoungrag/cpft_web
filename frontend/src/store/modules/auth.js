@@ -2,6 +2,7 @@ import { ajax } from "rxjs/observable/dom/ajax";
 import { of } from "rxjs";
 import { map, mergeMap, catchError, withLatestFrom } from "rxjs/operators";
 import { ofType } from "redux-observable";
+import jwt from "jwt-decode";
 
 const INITIALIZE_INPUT = "auth/INITIALIZE_INPUT";
 
@@ -53,11 +54,11 @@ export const checkUserFailure = (error) => ({
  },
 });
 
-export const setUserTemp = ({ id, username, token }) => ({
+export const setUserTemp = ({ userLoginId, userNm, token }) => ({
  type: SET_USER_TEMP,
  payload: {
-  id,
-  username,
+  userLoginId,
+  userNm,
   token,
  },
 });
@@ -120,12 +121,13 @@ const logoutEpic = (action$, state$) => {
   ofType(LOGOUT),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
+   console.log("logout!");
    const token = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo")).token
     : null;
    return ajax
     .post(
-     `/api/auth/logout/`,
+     `/v1/logout/`,
      // post의 body를 비워놓는다.
      {},
      {
@@ -212,16 +214,16 @@ const loginEpic = (action$, state$) => {
     .post(`/v1/signin/`, { id: loginUserId, password: loginUserPw })
     .pipe(
      map((response) => {
-      console.log(response.response);
       const { data } = response.response;
-      return loginSuccess({ loginUserId, token });
+      const user = jwt(data); // decode your token here
+      console.log(user);
+      return loginSuccess({ user, data });
      }),
      catchError((error) =>
       of({
        type: LOGIN_FAILURE,
        payload: error,
        error: true,
-       msg: error.response.msg,
       })
      )
     );
@@ -231,8 +233,8 @@ const loginEpic = (action$, state$) => {
 
 const initialState = {
  form: {
-  username: "",
-  password: "",
+  userLoginId: "",
+  userLoginPw: "",
  },
  error: {
   triggered: false,
@@ -240,8 +242,9 @@ const initialState = {
  },
  logged: false,
  userInfo: {
-  id: null,
-  username: "",
+  userSeq: null,
+  userLoginId: "",
+  userNm: "",
   token: null,
  },
 };
@@ -252,8 +255,8 @@ export const auth = (state = initialState, action) => {
    return {
     ...state,
     form: {
-     username: "",
-     password: "",
+     userLoginId: "",
+     userLoginPw: "",
     },
    };
   case CHANGE_INPUT:
@@ -309,8 +312,9 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: true,
     userInfo: {
-     id: action.payload.user.id,
-     username: action.payload.user.username,
+     userLoginId: action.payload.user.userLoginId,
+     userNm: action.payload.user.userNm,
+     userSeq: action.payload.user.userSeq,
      token: action.payload.token,
     },
    };
@@ -333,8 +337,9 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: true,
     userInfo: {
-     id: action.payload.id,
-     username: action.payload.username,
+     userLoginId: action.payload.userLoginId,
+     userNm: action.payload.userNm,
+     userSeq: action.payload.userSeq,
      token: action.payload.token,
     },
    };
@@ -343,9 +348,11 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: false,
     userInfo: {
-     id: null,
-     message: "",
+     userSeq: null,
+     userLoginId: "",
+     userNm: "",
      token: null,
+     message: "",
     },
    };
   case LOGOUT_FAILURE:
@@ -353,7 +360,7 @@ export const auth = (state = initialState, action) => {
     ...state,
     error: {
      triggered: true,
-     message: "LOGOUT ERROR, PLEASE TRY AGAIN",
+     message: "로그아웃이 실패했습니다. 다시 시도해주세요.",
     },
    };
   case LOGIN_FAILURE:

@@ -1,12 +1,12 @@
 server:
-  port: 40080
+  port: 80
 logging:
   level:
     root: warn
     kr.co.teamfresh.cpft.capi: info
   file:
     max-history: 7
-    path: C:\logs\cpft_capi
+    path: \logs\cpft_capi
 spring:
   profiles: prod
   redis:

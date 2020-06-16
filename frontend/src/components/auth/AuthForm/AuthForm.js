@@ -52,7 +52,7 @@ const AuthForm = ({
           name="loginUserId"
           type="text"
           value={loginUserId}
-          placeholder="아이디를 입력해 주세요."
+          placeholder="youngrag.seo"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
          />
@@ -67,7 +67,7 @@ const AuthForm = ({
           name="loginUserPw"
           type="password"
           value={loginUserPw}
-          placeholder="비밀번호를 입력해 주세요."
+          placeholder="1234"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
           autoComplete="on"

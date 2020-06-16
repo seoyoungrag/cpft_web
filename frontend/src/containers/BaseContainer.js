@@ -5,11 +5,18 @@ import { withRouter } from "react-router-dom";
 
 export class BaseContainer extends React.Component {
  componentDidMount() {
+  console.log("base mounted");
   this.checkUser();
  }
  componentDidUpdate(prevProps, prevState) {
-  console.log(prevProps);
-  if (prevProps.logged !== this.props.logged || !this.props.logged) {
+  console.log("base updated");
+  console.log(prevProps.logged);
+  console.log(this.props.logged);
+  console.log(
+   "3" + prevProps.logged !== this.props.logged && !this.props.logged
+  );
+  if (prevProps.logged !== this.props.logged && !this.props.logged) {
+   console.log("4");
    window.location.href = "/auth/login";
   }
  }
@@ -17,15 +24,24 @@ export class BaseContainer extends React.Component {
  checkUser = () => {
   const { checkUser, setUserTemp, history } = this.props;
 
+  console.log("checkUser before ");
   // 먼저 localStorage에 값이 저장되있는지 확인, userInfo값이 있다면, 로그인을 한것으로 인식하고,
   // 바로 setUserTemp를 실시.
   // 이를 하는 이유는 새로고침 했을시, state가 초기화 되어 logged값도 false로 바뀌는데, 새로고침 했을시
   // 로그인을 유지하기 위함.
-  if (localStorage.getItem("userInfo")) {
+
+  if (
+   localStorage.getItem("userInfo") &&
+   JSON.parse(localStorage.getItem("userInfo")).userLoginId
+  ) {
+   console.log("checkUser middle");
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   console.log("BaseContainer:25");
+   console.log(userInfo);
    setUserTemp({
-    id: userInfo.id,
-    username: userInfo.username,
+    userLoginId: userInfo.userLoginId,
+    userNm: userInfo.userNm,
+    userSeq: userInfo.userSeq,
     token: userInfo.token,
    });
    return;
@@ -55,8 +71,8 @@ const mapDispatchToProps = (dispatch) => {
   checkUser: () => {
    dispatch(authActions.checkUser());
   },
-  setUserTemp: ({ id, username }) => {
-   dispatch(authActions.setUserTemp({ id, username }));
+  setUserTemp: ({ userLoginId, userNm, userSeq, token }) => {
+   dispatch(authActions.setUserTemp({ userLoginId, userNm, userSeq, token }));
   },
  };
 };

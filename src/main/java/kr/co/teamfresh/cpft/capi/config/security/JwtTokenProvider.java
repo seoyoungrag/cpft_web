@@ -18,6 +18,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import kr.co.teamfresh.cpft.capi.entity.User;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -37,9 +38,12 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 	}
 
 // Jwt 토큰 생성
-	public String createToken(String userPk, List<String> roles) {
+	public String createToken(String userPk, User user) {
 		Claims claims = Jwts.claims().setSubject(userPk);
-		claims.put("roles", roles);
+		claims.put("userLoginId", user.getUserLoginId());
+		claims.put("userNm", user.getUserNm());
+		claims.put("userSeq", user.getUserNm());
+		claims.put("roles", user.getRoles());
 		Date now = new Date();
 		return Jwts.builder().setClaims(claims) // 데이터
 				.setIssuedAt(now) // 토큰 발행일자

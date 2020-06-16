@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { MdLock } from "react-icons/md";
 
 const Header = ({ onLogout }) => (
-  <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-    <button
-      id="sidebarToggleTop"
-      className="btn btn-link d-md-none rounded-circle mr-3"
-    >
-      <i className="fa fa-bars"></i>
-    </button>
-    {/*
+ <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <button
+   id="sidebarToggleTop"
+   className="btn btn-link d-md-none rounded-circle mr-3"
+  >
+   <i className="fa fa-bars"></i>
+  </button>
+  {/*
     <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
       <div className="input-group">
         <input
@@ -29,104 +29,104 @@ const Header = ({ onLogout }) => (
       </div>
     </form>
 */}
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item dropdown no-arrow d-sm-none">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          id="searchDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i className="fas fa-search fa-fw"></i>
-        </a>
+  <ul className="navbar-nav ml-auto">
+   <li className="nav-item dropdown no-arrow d-sm-none">
+    <a
+     className="nav-link dropdown-toggle"
+     href="#"
+     id="searchDropdown"
+     role="button"
+     data-toggle="dropdown"
+     aria-haspopup="true"
+     aria-expanded="false"
+    >
+     <i className="fas fa-search fa-fw"></i>
+    </a>
 
-        <div
-          className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-          aria-labelledby="searchDropdown"
-        >
-          <form className="form-inline mr-auto w-100 navbar-search">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control bg-light border-0 small"
-                placeholder="Search for..."
-                aria-label="Search"
-                aria-describedby="basic-addon2"
-              />
-              <div className="input-group-append">
-                <button className="btn btn-primary" type="button">
-                  <i className="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
+    <div
+     className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+     aria-labelledby="searchDropdown"
+    >
+     <form className="form-inline mr-auto w-100 navbar-search">
+      <div className="input-group">
+       <input
+        type="text"
+        className="form-control bg-light border-0 small"
+        placeholder="Search for..."
+        aria-label="Search"
+        aria-describedby="basic-addon2"
+       />
+       <div className="input-group-append">
+        <button className="btn btn-primary" type="button">
+         <i className="fas fa-search fa-sm"></i>
+        </button>
+       </div>
+      </div>
+     </form>
+    </div>
+   </li>
 
-      <li className="nav-item dropdown no-arrow mx-1">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          id="alertsDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <i className="fas fa-bell fa-fw"></i>
+   <li className="nav-item dropdown no-arrow mx-1">
+    <a
+     className="nav-link dropdown-toggle"
+     href="#"
+     id="alertsDropdown"
+     role="button"
+     data-toggle="dropdown"
+     aria-haspopup="true"
+     aria-expanded="false"
+    >
+     <i className="fas fa-bell fa-fw"></i>
 
-          <span className="badge badge-danger badge-counter">3+</span>
-        </a>
+     <span className="badge badge-danger badge-counter">3+</span>
+    </a>
 
-        <div
-          className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-          aria-labelledby="alertsDropdown"
-        >
-          <h6 className="dropdown-header">공지사항</h6>
-          <a className="dropdown-item d-flex align-items-center" href="#">
-            <div className="mr-3">
-              <div className="icon-circle bg-primary">
-                <i className="fas fa-file-alt text-white"></i>
-              </div>
-            </div>
-            <div>
-              <div className="small text-gray-500">2020.06.15</div>
-              <span className="font-weight-bold">
-                용차블루 운송사1.0이 오픈되었습니다.
-              </span>
-            </div>
-          </a>
-          <a className="dropdown-item d-flex align-items-center" href="#">
-            <div className="mr-3">
-              <div className="icon-circle bg-success">
-                <i className="fas fa-donate text-white"></i>
-              </div>
-            </div>
-            <div>
-              <div className="small text-gray-500">2020.06.15</div>
-              정기점검 공지
-            </div>
-          </a>
-          <a className="dropdown-item d-flex align-items-center" href="#">
-            <div className="mr-3">
-              <div className="icon-circle bg-warning">
-                <i className="fas fa-exclamation-triangle text-white"></i>
-              </div>
-            </div>
-            <div>
-              <div className="small text-gray-500">2020.06.15</div>
-              서비스 내역 공지
-            </div>
-          </a>
-          <a className="dropdown-item text-center small text-gray-500" href="#">
-            전체 공지사항 보기
-          </a>
-        </div>
-      </li>
-      {/*
+    <div
+     className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+     aria-labelledby="alertsDropdown"
+    >
+     <h6 className="dropdown-header">공지사항</h6>
+     <a className="dropdown-item d-flex align-items-center" href="#">
+      <div className="mr-3">
+       <div className="icon-circle bg-primary">
+        <i className="fas fa-file-alt text-white"></i>
+       </div>
+      </div>
+      <div>
+       <div className="small text-gray-500">2020.06.15</div>
+       <span className="font-weight-bold">
+        용차블루 운송사1.0이 오픈되었습니다.
+       </span>
+      </div>
+     </a>
+     <a className="dropdown-item d-flex align-items-center" href="#">
+      <div className="mr-3">
+       <div className="icon-circle bg-success">
+        <i className="fas fa-donate text-white"></i>
+       </div>
+      </div>
+      <div>
+       <div className="small text-gray-500">2020.06.15</div>
+       정기점검 공지
+      </div>
+     </a>
+     <a className="dropdown-item d-flex align-items-center" href="#">
+      <div className="mr-3">
+       <div className="icon-circle bg-warning">
+        <i className="fas fa-exclamation-triangle text-white"></i>
+       </div>
+      </div>
+      <div>
+       <div className="small text-gray-500">2020.06.15</div>
+       서비스 내역 공지
+      </div>
+     </a>
+     <a className="dropdown-item text-center small text-gray-500" href="#">
+      전체 공지사항 보기
+     </a>
+    </div>
+   </li>
+   {/*
       <li className="nav-item dropdown no-arrow mx-1">
         <a
           className="nav-link dropdown-toggle"
@@ -221,54 +221,87 @@ const Header = ({ onLogout }) => (
         </div>
       </li>
 */}
-      <div className="topbar-divider d-none d-sm-block"></div>
+   <div className="topbar-divider d-none d-sm-block"></div>
 
-      <li className="nav-item dropdown no-arrow">
-        <a
-          className="nav-link dropdown-toggle"
-          href="#"
-          id="userDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-            서영락
-          </span>
-          <i className="fa fa-cog" aria-hidden="true"></i>
-        </a>
+   <li className="nav-item dropdown no-arrow">
+    <a
+     className="nav-link dropdown-toggle"
+     href="#"
+     id="userDropdown"
+     role="button"
+     data-toggle="dropdown"
+     aria-haspopup="true"
+     aria-expanded="false"
+    >
+     <span className="mr-2 d-none d-lg-inline text-gray-600 small">서영락</span>
+     <i className="fa fa-cog" aria-hidden="true"></i>
+    </a>
 
-        <div
-          className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-          aria-labelledby="userDropdown"
-        >
-          <a className="dropdown-item" href="#">
-            <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            개인정보
-          </a>
-          <a className="dropdown-item" href="#">
-            <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-            설정
-          </a>
-          <a className="dropdown-item" href="#">
-            <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-            활동 로그
-          </a>
-          <div className="dropdown-divider"></div>
-          <a
-            className="dropdown-item"
-            href="#"
-            data-toggle="modal"
-            data-target="#logoutModal"
-          >
-            <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-            로그아웃
-            <MdLock onClick={onLogout} />
-          </a>
-        </div>
-      </li>
-    </ul>
-  </nav>
+    <div
+     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+     aria-labelledby="userDropdown"
+    >
+     <a className="dropdown-item" href="#">
+      <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+      개인정보
+     </a>
+     <a className="dropdown-item" href="#">
+      <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+      설정
+     </a>
+     <a className="dropdown-item" href="#">
+      <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+      활동 로그
+     </a>
+     <div className="dropdown-divider"></div>
+     <a
+      className="dropdown-item"
+      href="#"
+      data-toggle="modal"
+      data-target="#logoutModal"
+     >
+      <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+      로그아웃
+     </a>
+    </div>
+   </li>
+  </ul>
+
+  <div
+   className="modal fade show"
+   id="logoutModal"
+   tabIndex="-1"
+   role="dialog"
+   aria-labelledby="exampleModalLabel"
+   style={{ display: "none" }}
+   aria-hidden="true"
+  >
+   <div className="modal-dialog" role="document">
+    <div className="modal-content">
+     <div className="modal-header">
+      <h5 className="modal-title" id="exampleModalLabel">
+       정말로 로그인하시겠습니까?
+      </h5>
+      <button
+       className="close"
+       type="button"
+       data-dismiss="modal"
+       aria-label="Close"
+      >
+       <span aria-hidden="true">×</span>
+      </button>
+     </div>
+     <div className="modal-footer">
+      <button className="btn btn-secondary" type="button" data-dismiss="modal">
+       취소
+      </button>
+      <a className="btn btn-primary" onClick={onLogout}>
+       로그아웃
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+ </nav>
 );
 export default Header;
