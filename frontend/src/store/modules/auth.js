@@ -85,11 +85,12 @@ export const login = () => ({
  type: LOGIN,
 });
 
-export const loginSuccess = ({ user, token }) => ({
+export const loginSuccess = ({ user, token, rememberMe }) => ({
  type: LOGIN_SUCCESS,
  payload: {
   user,
   token,
+  rememberMe,
  },
 });
 
@@ -186,11 +187,12 @@ const registerEpic = (action$, state$) => {
   ofType(REGISTER),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
-   const { loginUserId, loginUserPw, userNm } = state.auth.form;
+   const { userLoginId, userLoginPw, userNm } = state.auth.form;
+   console.log(state.auth.form);
    return ajax
     .post(`/v1/signup/`, {
-     id: loginUserId,
-     password: loginUserPw,
+     id: userLoginId,
+     password: userLoginPw,
      name: userNm,
     })
     .pipe(
@@ -198,7 +200,7 @@ const registerEpic = (action$, state$) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
       console.log(user);
-      return registerSuccess({ user, token });
+      return registerSuccess({ user, data });
      }),
      catchError((error) =>
       of({
@@ -217,15 +219,18 @@ const loginEpic = (action$, state$) => {
   ofType(LOGIN),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
-   const { loginUserId, loginUserPw } = state.auth.form;
+   const { userLoginId, userLoginPw, rememberMe } = state.auth.form;
+   let rememberMeBoolean = (rememberMe == "on" ? true : false) || false;
+
+   console.log(state.auth.form);
    return ajax
-    .post(`/v1/signin/`, { id: loginUserId, password: loginUserPw })
+    .post(`/v1/signin/`, { id: userLoginId, password: userLoginPw })
     .pipe(
      map((response) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
       console.log(user);
-      return loginSuccess({ user, data });
+      return loginSuccess({ user, data, rememberMe: rememberMeBoolean });
      }),
      catchError((error) =>
       of({
@@ -255,6 +260,7 @@ const initialState = {
   userNm: "",
   token: null,
  },
+ rememberMe: false,
 };
 
 export const auth = (state = initialState, action) => {
@@ -282,7 +288,7 @@ export const auth = (state = initialState, action) => {
      message: "",
     },
    };
-  case REGISTER_SUCCESS:
+  case LOGIN_SUCCESS:
    return {
     ...state,
     logged: true,
@@ -292,6 +298,7 @@ export const auth = (state = initialState, action) => {
      userSeq: action.payload.user.userSeq,
      token: action.payload.token,
     },
+    rememberMe: action.payload.rememberMe,
    };
   case REGISTER_FAILURE:
    switch (action.payload.status) {
@@ -316,7 +323,7 @@ export const auth = (state = initialState, action) => {
       ...state,
      };
    }
-  case LOGIN_SUCCESS:
+  case REGISTER_SUCCESS:
    return {
     ...state,
     logged: true,

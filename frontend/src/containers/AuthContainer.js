@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AuthForm from "../components/auth/AuthForm";
+import AuthForm from "components/auth/AuthForm";
 import { withRouter } from "react-router-dom";
-import * as authActions from "../store/modules/auth";
+import * as authActions from "store/modules/auth";
 
 export class AuthContainer extends Component {
  componentDidMount() {
@@ -22,15 +22,19 @@ export class AuthContainer extends Component {
   console.log("authcontainer " + prevProps.logged + " vs " + this.props.logged);
   if (prevProps.logged !== this.props.logged && this.props.logged) {
    // logged가 true가 되면 localStorage에 값을 저장합니다.
-   localStorage.setItem(
-    "userInfo",
-    JSON.stringify({
-     userLoginId: this.props.userInfo.userLoginId,
-     userNm: this.props.userInfo.userNm,
-     userSeq: this.props.userInfo.userSeq,
-     token: this.props.userInfo.token,
-    })
-   );
+   console.log("rememberMe");
+   console.log(this.props.rememberMe);
+   if (this.props.rememberMe == true) {
+    localStorage.setItem(
+     "userInfo",
+     JSON.stringify({
+      userLoginId: this.props.userInfo.userLoginId,
+      userNm: this.props.userInfo.userNm,
+      userSeq: this.props.userInfo.userSeq,
+      token: this.props.userInfo.token,
+     })
+    );
+   }
    // 값을 저장후, main페이지로 이동시켜줍니다.
    history.push("/");
   }
@@ -57,13 +61,13 @@ export class AuthContainer extends Component {
   register();
  };
  render() {
-  const { kind, loginUserId, loginUserPw, error } = this.props;
+  const { kind, userLoginId, userLoginPw, error } = this.props;
   const { handleChangeInput, handleLogin, handleRegister } = this;
   return (
    <AuthForm
     kind={kind}
-    loginUserId={loginUserId}
-    loginUserPw={loginUserPw}
+    userLoginId={userLoginId}
+    userLoginPw={userLoginPw}
     onChangeInput={handleChangeInput}
     onLogin={handleLogin}
     onRegister={handleRegister}
@@ -74,11 +78,12 @@ export class AuthContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
- loginUserId: state.auth.form.loginUserId,
- loginUserPw: state.auth.form.loginUserPw,
+ userLoginId: state.auth.form.userLoginId,
+ userLoginPw: state.auth.form.userLoginPw,
  userInfo: state.auth.userInfo,
  logged: state.auth.logged,
  error: state.auth.error,
+ rememberMe: state.auth.rememberMe,
 });
 
 const mapDispatchToProps = (dispatch) => {

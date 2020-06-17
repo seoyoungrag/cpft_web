@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
 
@@ -8,12 +8,13 @@ const cx = (txt) => {
 const AuthForm = ({
  kind,
  onChangeInput,
- loginUserId,
- loginUserPw,
+ userLoginId,
+ userLoginPw,
  onLogin,
  onRegister,
  error,
 }) => {
+ const [rememberMe, setRememberMe] = useState(false);
  const handleChange = (e) => {
   const { name, value } = e.target;
   onChangeInput({ name, value });
@@ -32,41 +33,47 @@ const AuthForm = ({
    }
   }
  };
+ const toggleRememberMe = (e) => {
+  setRememberMe(!rememberMe);
+  handleChange(e);
+ };
  return (
   <div className="container">
    <div className="row justify-content-center">
     <div className="col-lg-5">
      <div className="card shadow-lg border-0 rounded-lg mt-5">
       <div className="card-header justify-content-center">
-       <h3 className="font-weight-light my-4">{kind.toUpperCase()}</h3>
+       <h3 className="font-weight-light my-4">
+        {kind == "login" ? "로그인" : "회원가입"}
+       </h3>
       </div>
       <div className="card-body">
        <form>
         <div className="form-group">
-         <label className="small mb-1" htmlFor="loginUserId">
+         <label className="small mb-1" htmlFor="userLoginId">
           아이디
          </label>
          <input
           className="form-control py-4"
-          id="loginUserId"
-          name="loginUserId"
+          id="userLoginId"
+          name="userLoginId"
           type="text"
-          value={loginUserId}
+          value={userLoginId}
           placeholder="youngrag.seo"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
          />
         </div>
         <div className="form-group">
-         <label className="small mb-1" htmlFor="loginUserPw">
+         <label className="small mb-1" htmlFor="userLoginPw">
           비밀번호
          </label>
          <input
           className="form-control py-4"
-          id="loginUserPw"
-          name="loginUserPw"
+          id="userLoginPw"
+          name="userLoginPw"
           type="password"
-          value={loginUserPw}
+          value={userLoginPw}
           placeholder="1234"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
@@ -96,28 +103,29 @@ const AuthForm = ({
          <div className="custom-control custom-checkbox">
           <input
            className="custom-control-input"
-           id="rememberPasswordCheck"
+           id="rememberMe"
+           name="rememberMe"
            type="checkbox"
+           useref="rememberMe"
+           onChange={toggleRememberMe}
+           defaultChecked={rememberMe}
           />
-          <label
-           className="custom-control-label"
-           htmlFor="rememberPasswordCheck"
-          >
+          <label className="custom-control-label" htmlFor="rememberMe">
            로그인 유지하기
           </label>
          </div>
         </div>
         <div className="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
          <a className="small" href="password-basic.html">
-          비밀번호를 잊으셨나용?
+          비밀번호를 잊으셨나요?
          </a>
          {kind === "register" ? (
           <div className="btn btn-primary" onClick={onRegister}>
-           {kind.toUpperCase()}
+           회원가입
           </div>
          ) : (
           <div className="btn btn-primary" onClick={onLogin}>
-           {kind.toUpperCase()}
+           로그인
           </div>
          )}
         </div>
@@ -129,11 +137,11 @@ const AuthForm = ({
 
         {kind === "register" ? (
          <Link to={`/auth/login`} className={cx("description")}>
-          if you already have account...
+          이미 계정을 가지고 계신가요?
          </Link>
         ) : (
          <Link to={`/auth/register`} className={cx("description")}>
-          계정이 없으센여? 회원가입해!
+          회원가입이 필요하시나요?
          </Link>
         )}
        </div>

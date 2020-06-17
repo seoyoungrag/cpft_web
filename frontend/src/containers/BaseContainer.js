@@ -48,7 +48,11 @@ export class BaseContainer extends React.Component {
   }
 
   // 만약 userInfo값이 localStorage에 없을때에는, api통신을 실시.
-  checkUser();
+  //checkUser();
+  console.log(this.props.userInfo);
+  if (!this.props.userInfo) {
+   history.push("/auth/login");
+  }
 
   // 만약 checkUser가 실패 했다면, logged는 false로 바뀌므로, 로그인 페이지로 이동시킨다.
   // 또한, /auth/register에서는 /auth/login으로 이동할 필요가 없으므로, auth라는 path가 url에 포함될때는 제외시킨다
@@ -64,6 +68,7 @@ export class BaseContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
  logged: state.auth.logged,
+ userInfo: state.auth.userInfo,
 });
 
 const mapDispatchToProps = (dispatch) => {
