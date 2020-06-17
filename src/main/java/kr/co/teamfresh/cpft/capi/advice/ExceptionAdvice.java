@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import kr.co.teamfresh.cpft.capi.advice.exception.CAuthenticationEntryPointException;
-import kr.co.teamfresh.cpft.capi.advice.exception.PasswordNotMatchedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CPasswordNotMatchedException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CNotOwnerException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CResourceNotExistException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CUserEmailDuplicatedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CUserLoginIdDuplicatedException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
 import kr.co.teamfresh.cpft.capi.service.ResponseService;
@@ -34,6 +36,20 @@ public class ExceptionAdvice {
 		return responseService.getFailResult(Integer.valueOf(getMessage("unKnown.code")), getMessage("unKnown.msg"));
 	}
 
+	@ExceptionHandler(CUserLoginIdDuplicatedException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	protected CommonResult userLoginIdDuplicatedException(HttpServletRequest request, CUserLoginIdDuplicatedException e) {
+		// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
+		return responseService.getFailResult(Integer.valueOf(getMessage("userLoginIdDuplicated.code")),
+				getMessage("userLoginIdDuplicated.msg"));
+	}
+	@ExceptionHandler(CUserEmailDuplicatedException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	protected CommonResult userEmailDuplicatedException(HttpServletRequest request, CUserEmailDuplicatedException e) {
+		// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
+		return responseService.getFailResult(Integer.valueOf(getMessage("userEmailDuplicated.code")),
+				getMessage("userEmailDuplicated.msg"));
+	}
 	@ExceptionHandler(CUserNotFoundException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	protected CommonResult userNotFoundException(HttpServletRequest request, CUserNotFoundException e) {
@@ -42,9 +58,9 @@ public class ExceptionAdvice {
 				getMessage("userNotFound.msg"));
 	}
 
-	@ExceptionHandler(PasswordNotMatchedException.class)
+	@ExceptionHandler(CPasswordNotMatchedException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	protected CommonResult emailSigninFailed(HttpServletRequest request, PasswordNotMatchedException e) {
+	protected CommonResult emailSigninFailed(HttpServletRequest request, CPasswordNotMatchedException e) {
 		return responseService.getFailResult(Integer.valueOf(getMessage("passwordNotMatched.code")),
 				getMessage("passwordNotMatched.msg"));
 	}

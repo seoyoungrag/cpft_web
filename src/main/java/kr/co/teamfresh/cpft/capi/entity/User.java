@@ -48,6 +48,9 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
 	@Column(nullable = false, length = 100)
 	private String userNm;
 
+	@Column(nullable = false, length = 100)
+	private String userEmail;
+	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<String> roles = new ArrayList<>();

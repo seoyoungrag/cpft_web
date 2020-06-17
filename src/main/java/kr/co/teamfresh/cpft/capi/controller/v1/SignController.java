@@ -1,6 +1,7 @@
 package kr.co.teamfresh.cpft.capi.controller.v1;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import kr.co.teamfresh.cpft.capi.advice.exception.PasswordNotMatchedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CPasswordNotMatchedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CUserEmailDuplicatedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CUserLoginIdDuplicatedException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
 import kr.co.teamfresh.cpft.capi.config.security.JwtTokenProvider;
 import kr.co.teamfresh.cpft.capi.entity.User;
@@ -38,7 +41,7 @@ public class SignController {
 			@ApiParam(value = "비밀번호", required = true) @RequestParam String password) {
 		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CUserNotFoundException::new);
 		if (!passwordEncoder.matches(password, user.getPassword()))
-			throw new PasswordNotMatchedException();
+			throw new CPasswordNotMatchedException();
 
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 
@@ -48,11 +51,20 @@ public class SignController {
 	@PostMapping(value = "/signup")
 	public CommonResult signin(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id,
 			@ApiParam(value = "비밀번호", required = true) @RequestParam String password,
-			@ApiParam(value = "이름", required = true) @RequestParam String name) {
+			@ApiParam(value = "이름", required = true) @RequestParam String name,
+			@ApiParam(value = "이메일", required = true) @RequestParam String email) {
 
-		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name)
+		Optional<User> userLoginIdCheck = userJpaRepo.findByUserLoginId(id);
+		if(userLoginIdCheck.isPresent()) {
+			throw new CUserLoginIdDuplicatedException();
+		}
+		Optional<User> userEmailCheck = userJpaRepo.findByUserEmail(email);
+		if(userEmailCheck.isPresent()) {
+			throw new CUserEmailDuplicatedException();
+		}
+		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name).userEmail(email)
 				.roles(Collections.singletonList("ROLE_USER")).build());
-		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(PasswordNotMatchedException::new);
+		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CPasswordNotMatchedException::new);
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 	}
 

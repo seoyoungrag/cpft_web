@@ -54,11 +54,12 @@ export const checkUserFailure = (error) => ({
  },
 });
 
-export const setUserTemp = ({ userLoginId, userNm, token }) => ({
+export const setUserTemp = ({ userLoginId, userNm, userEmail, token }) => ({
  type: SET_USER_TEMP,
  payload: {
   userLoginId,
   userNm,
+  userEmail,
   token,
  },
 });
@@ -66,11 +67,12 @@ export const register = () => ({
  type: REGISTER,
 });
 
-export const registerSuccess = ({ user, token }) => ({
+export const registerSuccess = ({ user, token, rememberMe }) => ({
  type: REGISTER_SUCCESS,
  payload: {
   user,
   token,
+  rememberMe,
  },
 });
 
@@ -187,20 +189,28 @@ const registerEpic = (action$, state$) => {
   ofType(REGISTER),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
-   const { userLoginId, userLoginPw, userNm } = state.auth.form;
+   const {
+    userLoginId,
+    userLoginPw,
+    userNm,
+    userEmail,
+    rememberMe,
+   } = state.auth.form;
+
    console.log(state.auth.form);
    return ajax
     .post(`/v1/signup/`, {
      id: userLoginId,
      password: userLoginPw,
      name: userNm,
+     email: userEmail,
     })
     .pipe(
      map((response) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
       console.log(user);
-      return registerSuccess({ user, data });
+      return registerSuccess({ user, data, rememberMe });
      }),
      catchError((error) =>
       of({
@@ -220,7 +230,6 @@ const loginEpic = (action$, state$) => {
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
    const { userLoginId, userLoginPw, rememberMe } = state.auth.form;
-   let rememberMeBoolean = (rememberMe == "on" ? true : false) || false;
 
    console.log(state.auth.form);
    return ajax
@@ -230,7 +239,7 @@ const loginEpic = (action$, state$) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
       console.log(user);
-      return loginSuccess({ user, data, rememberMe: rememberMeBoolean });
+      return loginSuccess({ user, data, rememberMe });
      }),
      catchError((error) =>
       of({
@@ -258,9 +267,10 @@ const initialState = {
   userSeq: null,
   userLoginId: "",
   userNm: "",
+  userEmail: "",
   token: null,
  },
- rememberMe: false,
+ rememberMe: true,
 };
 
 export const auth = (state = initialState, action) => {
@@ -271,6 +281,8 @@ export const auth = (state = initialState, action) => {
     form: {
      userLoginId: "",
      userLoginPw: "",
+     userNm: "",
+     userEmail: "",
     },
    };
   case CHANGE_INPUT:
@@ -295,6 +307,7 @@ export const auth = (state = initialState, action) => {
     userInfo: {
      userLoginId: action.payload.user.userLoginId,
      userNm: action.payload.user.userNm,
+     userEmail: action.payload.user.userEmail,
      userSeq: action.payload.user.userSeq,
      token: action.payload.token,
     },
@@ -330,9 +343,11 @@ export const auth = (state = initialState, action) => {
     userInfo: {
      userLoginId: action.payload.user.userLoginId,
      userNm: action.payload.user.userNm,
+     userEmail: action.payload.user.userEmail,
      userSeq: action.payload.user.userSeq,
      token: action.payload.token,
     },
+    rememberMe: action.payload.rememberMe,
    };
   case CHECK_USER_SUCCESS:
    return {
@@ -343,8 +358,10 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: false,
     userInfo: {
-     id: null,
-     username: "",
+     userLoginId: null,
+     userNm: "",
+     userSeq: null,
+     userEmail: "",
      token: null,
     },
    };
@@ -355,6 +372,7 @@ export const auth = (state = initialState, action) => {
     userInfo: {
      userLoginId: action.payload.userLoginId,
      userNm: action.payload.userNm,
+     userEmail: action.payload.userEmail,
      userSeq: action.payload.userSeq,
      token: action.payload.token,
     },
@@ -367,6 +385,7 @@ export const auth = (state = initialState, action) => {
      userSeq: null,
      userLoginId: "",
      userNm: "",
+     userEmail: "",
      token: null,
      message: "",
     },

@@ -8,4 +8,6 @@ import kr.co.teamfresh.cpft.capi.entity.User;
 
 public interface UserJpaRepo extends JpaRepository<User, Long> {
 	Optional<User> findByUserLoginId(String id);
+
+	Optional<User> findByUserEmail(String email);
 }

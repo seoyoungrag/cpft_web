@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./AuthForm.css";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const cx = (txt) => {
  return txt;
@@ -14,28 +15,38 @@ const AuthForm = ({
  onRegister,
  error,
 }) => {
- const [rememberMe, setRememberMe] = useState(true);
+ const [rememberMe, setRememberMe] = useState(false);
  const handleChange = (e) => {
   const { name, value } = e.target;
-  onChangeInput({ name, value });
+  const dataValue = e.target.type == "checkbox" ? e.target.checked : value;
+  console.log(name);
+  console.log(value);
+  console.log(dataValue);
+  onChangeInput({ name, value: dataValue });
  };
  const handleKeyPress = (e) => {
   if (e.key === "Enter") {
-   switch (kind) {
-    case "register":
-     onRegister();
-     return;
-    case "login":
-     onLogin();
-     return;
-    default:
-     return;
-   }
+   triggerSubmit();
   }
  };
  const toggleRememberMe = (e) => {
   setRememberMe(!rememberMe);
   handleChange(e);
+ };
+ const { handleSubmit, register, errors, watch } = useForm();
+
+ const onSubmit = (values) => {
+  console.log(values);
+  if (kind == "register") {
+   onRegister();
+  } else {
+   onLogin();
+  }
+ };
+
+ const authForm = useRef(null);
+ const triggerSubmit = () => {
+  authForm.current.dispatchEvent(new Event("submit"));
  };
  return (
   <div className="container">
@@ -48,7 +59,7 @@ const AuthForm = ({
        </h3>
       </div>
       <div className="card-body">
-       <form>
+       <form onSubmit={handleSubmit(onSubmit)} ref={authForm}>
         <div className="form-group">
          <label className="small mb-1" htmlFor="userLoginId">
           아이디
@@ -58,12 +69,21 @@ const AuthForm = ({
           id="userLoginId"
           name="userLoginId"
           type="text"
-          value={userLoginId}
           placeholder="youngrag.seo"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
+          ref={register({
+           required: "true",
+           minLength: 4,
+           maxLength: 20,
+          })}
          />
         </div>
+        {errors.userLoginId && (
+         <ul className="errorsList">
+          <li>4~20자로 적어주세요.</li>
+         </ul>
+        )}
         <div className="form-group">
          <label className="small mb-1" htmlFor="userLoginPw">
           비밀번호
@@ -73,27 +93,95 @@ const AuthForm = ({
           id="userLoginPw"
           name="userLoginPw"
           type="password"
-          value={userLoginPw}
           placeholder="1234"
           onChange={handleChange}
           onKeyPress={handleKeyPress}
           autoComplete="off"
+          ref={register({
+           required: "true",
+           minLength: 4,
+           maxLength: 20,
+          })}
          />
         </div>
+        {errors.userLoginPw && (
+         <ul className="errorsList">
+          <li>4~20자로 적어주세요.</li>
+         </ul>
+        )}
         {kind === "register" ? (
-         <div className="form-group">
-          <label className="small mb-1" htmlFor="userNm">
-           사용자 이름
-          </label>
-          <input
-           className="form-control py-4"
-           id="userNm"
-           name="userNm"
-           type="text"
-           placeholder="서영락"
-           onChange={handleChange}
-           onKeyPress={handleKeyPress}
-          />
+         <div>
+          <div className="form-group">
+           <label className="small mb-1" htmlFor="userLoginPw_repeat">
+            비밀번호 확인
+           </label>
+           <input
+            className="form-control py-4"
+            id="userLoginPw_repeat"
+            name="userLoginPw_repeat"
+            type="password"
+            placeholder="1234"
+            ref={register({
+             validate: (value) => {
+              return value === watch("userLoginPw");
+             },
+            })}
+           />
+          </div>
+          {errors.userLoginPw_repeat && (
+           <ul className="errorsList">
+            <li>비밀번호가 일치하지 않습니다.</li>
+           </ul>
+          )}
+          <div className="form-group">
+           <label className="small mb-1" htmlFor="userNm">
+            사용자 이름
+           </label>
+           <input
+            className="form-control py-4"
+            id="userNm"
+            name="userNm"
+            type="text"
+            placeholder="서영락"
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            ref={register({
+             required: "true",
+             minLength: 2,
+             maxLength: 6,
+            })}
+           />
+          </div>
+          {errors.userNm && (
+           <ul className="errorsList">
+            <li>2~6자로 적어주세요.</li>
+           </ul>
+          )}
+          <div className="form-group">
+           <label className="small mb-1" htmlFor="userNm">
+            사용자 이메일
+           </label>
+           <input
+            className="form-control py-4"
+            id="userEmail"
+            name="userEmail"
+            type="email"
+            placeholder="youngrag.seo@timf.co.kr"
+            onChange={handleChange}
+            onKeyPress={handleKeyPress}
+            ref={register({
+             required: "true",
+             pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/i,
+             },
+            })}
+           />
+          </div>
+          {errors.userEmail && (
+           <ul className="errorsList">
+            <li>올바른 이메일 형태로 적어주세요.</li>
+           </ul>
+          )}
          </div>
         ) : null}
         <ul className="errorsList">
@@ -120,11 +208,11 @@ const AuthForm = ({
           비밀번호를 잊으셨나요?
          </a>
          {kind === "register" ? (
-          <div className="btn btn-primary" onClick={onRegister}>
+          <div className="btn btn-primary" onClick={triggerSubmit}>
            회원가입
           </div>
          ) : (
-          <div className="btn btn-primary" onClick={onLogin}>
+          <div className="btn btn-primary" onClick={triggerSubmit}>
            로그인
           </div>
          )}
