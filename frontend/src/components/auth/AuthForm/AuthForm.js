@@ -14,7 +14,7 @@ const AuthForm = ({
  onRegister,
  error,
 }) => {
- const [rememberMe, setRememberMe] = useState(false);
+ const [rememberMe, setRememberMe] = useState(true);
  const handleChange = (e) => {
   const { name, value } = e.target;
   onChangeInput({ name, value });

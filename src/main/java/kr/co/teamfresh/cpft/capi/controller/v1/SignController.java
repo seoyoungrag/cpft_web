@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import kr.co.teamfresh.cpft.capi.advice.exception.CEmailSigninFailedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.PasswordNotMatchedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
 import kr.co.teamfresh.cpft.capi.config.security.JwtTokenProvider;
 import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
@@ -35,9 +36,9 @@ public class SignController {
 	@PostMapping(value = "/signin")
 	public SingleResult<String> signin(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id,
 			@ApiParam(value = "비밀번호", required = true) @RequestParam String password) {
-		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CEmailSigninFailedException::new);
+		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CUserNotFoundException::new);
 		if (!passwordEncoder.matches(password, user.getPassword()))
-			throw new CEmailSigninFailedException();
+			throw new PasswordNotMatchedException();
 
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 
@@ -51,7 +52,7 @@ public class SignController {
 
 		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name)
 				.roles(Collections.singletonList("ROLE_USER")).build());
-		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CEmailSigninFailedException::new);
+		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(PasswordNotMatchedException::new);
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 	}
 

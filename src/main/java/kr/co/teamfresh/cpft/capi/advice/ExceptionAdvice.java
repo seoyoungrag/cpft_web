@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import kr.co.teamfresh.cpft.capi.advice.exception.CAuthenticationEntryPointException;
-import kr.co.teamfresh.cpft.capi.advice.exception.CEmailSigninFailedException;
+import kr.co.teamfresh.cpft.capi.advice.exception.PasswordNotMatchedException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CNotOwnerException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CResourceNotExistException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
@@ -30,23 +30,23 @@ public class ExceptionAdvice {
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	protected CommonResult defaultException(HttpServletRequest request, Exception e) {
-// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
+		// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
 		return responseService.getFailResult(Integer.valueOf(getMessage("unKnown.code")), getMessage("unKnown.msg"));
 	}
 
 	@ExceptionHandler(CUserNotFoundException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	protected CommonResult userNotFoundException(HttpServletRequest request, CUserNotFoundException e) {
-// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
+		// 예외 처리의 메시지를 MessageSource에서 가져오도록 수정
 		return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")),
 				getMessage("userNotFound.msg"));
 	}
 
-	@ExceptionHandler(CEmailSigninFailedException.class)
+	@ExceptionHandler(PasswordNotMatchedException.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	protected CommonResult emailSigninFailed(HttpServletRequest request, CEmailSigninFailedException e) {
-		return responseService.getFailResult(Integer.valueOf(getMessage("emailSigninFailed.code")),
-				getMessage("emailSigninFailed.msg"));
+	protected CommonResult emailSigninFailed(HttpServletRequest request, PasswordNotMatchedException e) {
+		return responseService.getFailResult(Integer.valueOf(getMessage("passwordNotMatched.code")),
+				getMessage("passwordNotMatched.msg"));
 	}
 
 	@ExceptionHandler(CAuthenticationEntryPointException.class)

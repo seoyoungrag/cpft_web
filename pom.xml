@@ -122,19 +122,21 @@
 
 	<profiles>
 		<profile>
-			<id>dev</id><!-- 
+			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-			</activation> -->
+			</activation>
 			<properties>
 				<spring.profiles.active>dev</spring.profiles.active>
 			</properties>
 		</profile>
 		<profile>
 			<id>prod</id>
+			<!-- 
 			<activation>
 				<activeByDefault>true</activeByDefault>
-			</activation>
+			</activation> 
+			-->
 			<build>
 				<plugins>
 					<plugin>
