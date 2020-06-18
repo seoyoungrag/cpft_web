@@ -19,9 +19,6 @@ const AuthForm = ({
  const handleChange = (e) => {
   const { name, value } = e.target;
   const dataValue = e.target.type == "checkbox" ? e.target.checked : value;
-  console.log(name);
-  console.log(value);
-  console.log(dataValue);
   onChangeInput({ name, value: dataValue });
  };
  const handleKeyPress = (e) => {
@@ -36,7 +33,6 @@ const AuthForm = ({
  const { handleSubmit, register, errors, watch } = useForm();
 
  const onSubmit = (values) => {
-  console.log(values);
   if (kind == "register") {
    onRegister();
   } else {
@@ -204,9 +200,9 @@ const AuthForm = ({
          </div>
         </div>
         <div className="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-         <a className="small" href="password-basic.html">
+         <Link className="small" to="/auth/passwordRecovery">
           비밀번호를 잊으셨나요?
-         </a>
+         </Link>
          {kind === "register" ? (
           <div className="btn btn-primary" onClick={triggerSubmit}>
            회원가입

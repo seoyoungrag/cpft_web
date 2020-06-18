@@ -8,6 +8,7 @@ import Test from "./Test";
 import Main from "./Main";
 import Auth from "./Auth";
 import NotFound from "./NotFound";
+import PasswordRecovery from "./PasswordRecovery";
 export {
  Error400,
  Error401,
@@ -19,4 +20,5 @@ export {
  Main,
  Auth,
  NotFound,
+ PasswordRecovery,
 };

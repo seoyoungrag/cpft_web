@@ -19,6 +19,7 @@ import {
  Main,
  Auth,
  NotFound,
+ PasswordRecovery,
 } from "pages";
 
 import OrderRegist from "pages/order/OrderRegist";
@@ -39,12 +40,14 @@ class App extends React.Component {
    <>
     <Switch>
      <Route exact path="/" component={Main} />
+     <Route exact path="/auth/passwordRecovery" component={PasswordRecovery} />
      <Route exact path="/auth/:kind" component={Auth} />
      <Route exact path="/test" component={Test} />
      <Route exact path="/order/regist" component={OrderRegist} />
      <Route exact path="/order/manage" component={OrderManage} />
      <Route exact path="/order/applicant/manage" component={ApplicantManage} />
      <Route exact path="/order/black/list" component={BlackList} />
+     <Route exact path="/auth/black/list" component={PasswordRecovery} />
      <Route exact path="/400" component={Error400} />
      <Route exact path="/401" component={Error401} />
      <Route exact path="/403" component={Error403} />
