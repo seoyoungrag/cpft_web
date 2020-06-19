@@ -3,8 +3,10 @@ package kr.co.teamfresh.cpft.capi.controller.v1;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -79,7 +81,9 @@ public class SignController {
 			throw new CUserEmailDuplicatedException();
 		}
 		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name).userEmail(email)
-				.roles(Collections.singletonList("ROLE_USER")).build());
+				//.roles(Collections.singletonList("ROLE_USER")).build());
+				.roles(Arrays.asList(new String[]{"ROLE_USER", "CARRIER_USER"})).build());
+
 		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CPasswordNotMatchedException::new);
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
 	}
