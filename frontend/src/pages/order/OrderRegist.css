@@ -475,20 +475,6 @@ textarea.form-control {
 .tab-content > .active {
  display: block;
 }
-.card {
- position: relative;
- display: -webkit-box;
- display: flex;
- -webkit-box-orient: vertical;
- -webkit-box-direction: normal;
- flex-direction: column;
- min-width: 0;
- word-wrap: break-word;
- background-color: #fff;
- background-clip: border-box;
- border: 1px solid rgba(31, 45, 65, 0.125);
- border-radius: 0.35rem;
-}
 .card-body {
  -webkit-box-flex: 1;
  flex: 1 1 auto;
@@ -504,9 +490,6 @@ textarea.form-control {
  background-color: rgba(31, 45, 65, 0.03);
  border-bottom: 1px solid rgba(31, 45, 65, 0.125);
 }
-.card-header:first-child {
- border-radius: 0.35rem 0.35rem 0 0;
-}
 .bg-secondary {
  background-color: #6900c7 !important;
 }
@@ -517,9 +500,6 @@ textarea.form-control {
 }
 .mr-1 {
  margin-right: 0.25rem !important;
-}
-.mb-4 {
- margin-bottom: 1.5rem !important;
 }
 .mt-n10 {
  margin-top: -6rem !important;
@@ -600,20 +580,6 @@ textarea.form-control {
 .btn-sm .feather {
  height: 0.875rem;
  width: 0.875rem;
-}
-.card {
- box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
- overflow: hidden;
-}
-.card .card-header {
- display: -webkit-box;
- display: flex;
- -webkit-box-align: center;
- align-items: center;
- font-weight: 500;
-}
-.card:not([class*="bg-"]) .card-header {
- color: #0061f2;
 }
 .card-icon .card-icon-aside {
  display: -webkit-box;
@@ -864,20 +830,6 @@ a:hover {
 .nav-link:focus {
  text-decoration: none;
 }
-.card {
- position: relative;
- display: -webkit-box;
- display: flex;
- -webkit-box-orient: vertical;
- -webkit-box-direction: normal;
- flex-direction: column;
- min-width: 0;
- word-wrap: break-word;
- background-color: #fff;
- background-clip: border-box;
- border: 1px solid rgba(31, 45, 65, 0.125);
- border-radius: 0.35rem;
-}
 .card-body {
  -webkit-box-flex: 1;
  flex: 1 1 auto;
@@ -899,10 +851,6 @@ a:hover {
  a:not(.btn) {
   text-decoration: underline;
  }
-}
-.card {
- box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
- overflow: hidden;
 }
 .sticky-top,
 .nav-sticky {

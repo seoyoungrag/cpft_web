@@ -8,6 +8,7 @@ logging:
       sql: debug
       type.descriptor.sql: trace
     com.zaxxer.hikari: debug
+    com.baroservice: trace
 spring:
   profiles: dev
   redis:

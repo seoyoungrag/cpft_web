@@ -114,9 +114,21 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>com.github.ulisesbocchio</groupId>
-		    <artifactId>jasypt-spring-boot-starter</artifactId>
-		    <version>2.0.0</version>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>baroservice</groupId>
+			<artifactId>baroservice</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/libs/barobill-api-cxf.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 	</dependencies>
 
@@ -125,6 +137,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -132,9 +147,6 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<properties>
 				<spring.profiles.active>dev</spring.profiles.active>
 			</properties>
@@ -172,6 +184,9 @@
 		</profile>
 		<profile>
 			<id>prod</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
 			<build>
 				<plugins>

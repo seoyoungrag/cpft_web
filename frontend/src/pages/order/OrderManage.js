@@ -181,7 +181,10 @@ class OrderManage extends Component {
              </li>
              <li className="nav-item">
               <a className="nav-link" href="#settings" data-toggle="tab">
-               <i class="fa fa-fw fa-pencil-square-o" aria-hidden="true"></i>
+               <i
+                className="fa fa-fw fa-pencil-square-o"
+                aria-hidden="true"
+               ></i>
                임시저장
                <div className="ripple-container"></div>
               </a>
@@ -199,100 +202,556 @@ class OrderManage extends Component {
          <div className="card-body">
           <div className="tab-content">
            <div className="tab-pane active" id="profile">
-            <table ref="main" names={this.state.names} />
-            <Input
-             onAddClick={(name, nickname) => {
-              this.onAddClick(name, nickname);
-             }}
-            />
+            <table className="table">
+             <tbody>
+              <tr>
+               <td>
+                <div className="inner">
+                 <div className="jobTitWrap">
+                  <span className="infoBx">
+                   <span className="date">
+                    <span className="date">
+                     공고번호 <span className="tahoma">31938638</span>
+                    </span>
+                    <span className="name">홍차장</span>
+                   </span>
+                  </span>
+
+                  <a
+                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                   className="tit devLinkExpire"
+                   data-pts="-77"
+                  >
+                   <em className="used">진행중</em> 프로그래머 채용
+                  </a>
+                 </div>
+
+                 <div className="apyStatusBoard">
+                  <div className="tbCol tbDate">
+                   <span className="date">
+                    <span className="tahoma">
+                     2020.06.09 ~ 2020.09.07{" "}
+                     <span className="mday">
+                      <span className="tahoma">06.09</span> 등록
+                     </span>
+                    </span>
+                   </span>
+                  </div>
+
+                  <div className="tbCol tbStatus">
+                   <ul className="boardItem">
+                    <li>
+                     <strong className="stepTit">전체 지원자</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li className="apyStatusNotRead ">
+                     <strong className="stepTit">미열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li className="on">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">예비합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">서류합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                 <div className="btnFunc">
+                  <a
+                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+                   className="btnMtcTpl_1"
+                   target="_blank"
+                  >
+                   <span>공고 보기</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Edit/31938638"
+                   className="btnMtcTpl_1"
+                  >
+                   <span>수정</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Copy/4/31938638"
+                   className="btnMtcTpl_1"
+                   onClick="go_copy(this); return false;"
+                  >
+                   복사
+                  </a>
+
+                  <button
+                   type="button"
+                   className="btnMtcTpl_1"
+                   onClick="go_end(31938638, 35612593);"
+                  >
+                   <span>마감</span>
+                  </button>
+                  <button
+                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
+                   className="btnMtcTpl_1"
+                   type="button"
+                  >
+                   <span>삭제</span>
+                  </button>
+                 </div>
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td>
+                <div className="inner">
+                 <div className="jobTitWrap">
+                  <span className="infoBx">
+                   <span className="date">
+                    <span className="date">
+                     공고번호 <span className="tahoma">31938638</span>
+                    </span>
+                    <span className="name">홍차장</span>
+                   </span>
+                  </span>
+
+                  <a
+                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                   className="tit devLinkExpire"
+                   data-pts="-77"
+                  >
+                   <em className="used">진행중</em> 프로그래머 채용
+                  </a>
+                 </div>
+
+                 <div className="apyStatusBoard">
+                  <div className="tbCol tbDate">
+                   <span className="date">
+                    <span className="tahoma">
+                     2020.06.09 ~ 2020.09.07{" "}
+                     <span className="mday">
+                      <span className="tahoma">06.09</span> 등록
+                     </span>
+                    </span>
+                   </span>
+                  </div>
+
+                  <div className="tbCol tbStatus">
+                   <ul className="boardItem">
+                    <li>
+                     <strong className="stepTit">전체 지원자</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li className="apyStatusNotRead ">
+                     <strong className="stepTit">미열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li className="on">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">예비합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">서류합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                 <div className="btnFunc">
+                  <a
+                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+                   className="btnMtcTpl_1"
+                   target="_blank"
+                  >
+                   <span>공고 보기</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Edit/31938638"
+                   className="btnMtcTpl_1"
+                  >
+                   <span>수정</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Copy/4/31938638"
+                   className="btnMtcTpl_1"
+                   onClick="go_copy(this); return false;"
+                  >
+                   복사
+                  </a>
+
+                  <button
+                   type="button"
+                   className="btnMtcTpl_1"
+                   onClick="go_end(31938638, 35612593);"
+                  >
+                   <span>마감</span>
+                  </button>
+                  <button
+                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
+                   className="btnMtcTpl_1"
+                   type="button"
+                  >
+                   <span>삭제</span>
+                  </button>
+                 </div>
+                </div>
+               </td>
+              </tr>
+             </tbody>
+            </table>
            </div>
            <div className="tab-pane" id="messages">
             <table className="table">
              <tbody>
               <tr>
                <td>
-                <div className="form-check">
-                 <label className="form-check-label">
-                  <input
-                   className="form-check-input"
-                   type="checkbox"
-                   value=""
-                   checked=""
-                  />
-                  <span className="form-check-sign">
-                   <span className="check"></span>
+                <div className="inner">
+                 <div className="jobTitWrap">
+                  <span className="infoBx">
+                   <span className="date">
+                    <span className="date">
+                     공고번호 <span className="tahoma">31938638</span>
+                    </span>
+                    <span className="name">홍차장</span>
+                   </span>
                   </span>
-                 </label>
+
+                  <a
+                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                   className="tit devLinkExpire"
+                   data-pts="-77"
+                  >
+                   <em className="used">진행중</em> 프로그래머 채용
+                  </a>
+                 </div>
+
+                 <div className="apyStatusBoard">
+                  <div className="tbCol tbDate">
+                   <span className="date">
+                    <span className="tahoma">
+                     2020.06.09 ~ 2020.09.07{" "}
+                     <span className="mday">
+                      <span className="tahoma">06.09</span> 등록
+                     </span>
+                    </span>
+                   </span>
+                  </div>
+
+                  <div className="tbCol tbStatus">
+                   <ul className="boardItem">
+                    <li>
+                     <strong className="stepTit">전체 지원자</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li className="apyStatusNotRead ">
+                     <strong className="stepTit">미열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li className="on">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">예비합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">서류합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                 <div className="btnFunc">
+                  <a
+                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+                   className="btnMtcTpl_1"
+                   target="_blank"
+                  >
+                   <span>공고 보기</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Edit/31938638"
+                   className="btnMtcTpl_1"
+                  >
+                   <span>수정</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Copy/4/31938638"
+                   className="btnMtcTpl_1"
+                   onClick="go_copy(this); return false;"
+                  >
+                   복사
+                  </a>
+
+                  <button
+                   type="button"
+                   className="btnMtcTpl_1"
+                   onClick="go_end(31938638, 35612593);"
+                  >
+                   <span>마감</span>
+                  </button>
+                  <button
+                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
+                   className="btnMtcTpl_1"
+                   type="button"
+                  >
+                   <span>삭제</span>
+                  </button>
+                 </div>
                 </div>
-               </td>
-               <td>
-                Flooded: One year later, assessing what was lost and what was
-                found when a ravaging rain swept through metro Detroit
-               </td>
-               <td className="td-actions text-right">
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-primary btn-link btn-sm"
-                 data-original-title="Edit Task"
-                >
-                 <i className="material-icons">edit</i>
-                </button>
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-danger btn-link btn-sm"
-                 data-original-title="Remove"
-                >
-                 <i className="material-icons">close</i>
-                </button>
                </td>
               </tr>
               <tr>
                <td>
-                <div className="form-check">
-                 <label className="form-check-label">
-                  <input
-                   className="form-check-input"
-                   type="checkbox"
-                   value=""
-                  />
-                  <span className="form-check-sign">
-                   <span className="check"></span>
+                <div className="inner">
+                 <div className="jobTitWrap">
+                  <span className="infoBx">
+                   <span className="date">
+                    <span className="date">
+                     공고번호 <span className="tahoma">31938638</span>
+                    </span>
+                    <span className="name">홍차장</span>
+                   </span>
                   </span>
-                 </label>
+
+                  <a
+                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                   className="tit devLinkExpire"
+                   data-pts="-77"
+                  >
+                   <em className="used">진행중</em> 프로그래머 채용
+                  </a>
+                 </div>
+
+                 <div className="apyStatusBoard">
+                  <div className="tbCol tbDate">
+                   <span className="date">
+                    <span className="tahoma">
+                     2020.06.09 ~ 2020.09.07{" "}
+                     <span className="mday">
+                      <span className="tahoma">06.09</span> 등록
+                     </span>
+                    </span>
+                   </span>
+                  </div>
+
+                  <div className="tbCol tbStatus">
+                   <ul className="boardItem">
+                    <li>
+                     <strong className="stepTit">전체 지원자</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li className="apyStatusNotRead ">
+                     <strong className="stepTit">미열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li className="on">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">예비합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+
+                    <li>
+                     <strong className="stepTit">서류합격</strong>
+                     <a
+                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                 <div className="btnFunc">
+                  <a
+                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+                   className="btnMtcTpl_1"
+                   target="_blank"
+                  >
+                   <span>공고 보기</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Edit/31938638"
+                   className="btnMtcTpl_1"
+                  >
+                   <span>수정</span>
+                  </a>
+                  <a
+                   href="/Yocruit/Mng/GI_Copy/4/31938638"
+                   className="btnMtcTpl_1"
+                   onClick="go_copy(this); return false;"
+                  >
+                   복사
+                  </a>
+
+                  <button
+                   type="button"
+                   className="btnMtcTpl_1"
+                   onClick="go_end(31938638, 35612593);"
+                  >
+                   <span>마감</span>
+                  </button>
+                  <button
+                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
+                   className="btnMtcTpl_1"
+                   type="button"
+                  >
+                   <span>삭제</span>
+                  </button>
+                 </div>
                 </div>
-               </td>
-               <td>
-                Sign contract for "What are conference organizers afraid of?"
-               </td>
-               <td className="td-actions text-right">
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-primary btn-link btn-sm"
-                 data-original-title="Edit Task"
-                >
-                 <i className="material-icons">edit</i>
-                </button>
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-danger btn-link btn-sm"
-                 data-original-title="Remove"
-                >
-                 <i className="material-icons">close</i>
-                </button>
                </td>
               </tr>
              </tbody>
             </table>
            </div>
            <div className="tab-pane" id="settings">
+            <table ref="main" names={this.state.names} />
+            <Input
+             onAddClick={(name, nickname) => {
+              this.onAddClick(name, nickname);
+             }}
+            />
             <table className="table">
              <tbody>
               <tr>
