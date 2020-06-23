@@ -27,23 +27,9 @@ svg:not(:root).svg-inline--fa {
  width: 0.625em;
 }
 /*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-*,
-*::before,
-*::after {
- box-sizing: border-box;
-}
 ul {
  margin-top: 0;
  margin-bottom: 1rem;
-}
-a {
- color: #0061f2;
- text-decoration: none;
- background-color: transparent;
-}
-a:hover {
- color: #0042a6;
- text-decoration: underline;
 }
 svg {
  overflow: hidden;
@@ -339,12 +325,6 @@ button::-moz-focus-inner {
  flex: 1 1 auto;
  min-height: 1px;
  padding: 1.35rem;
-}
-.card-header {
- padding: 1rem 1.35rem;
- margin-bottom: 0;
- background-color: rgba(31, 45, 65, 0.03);
- border-bottom: 1px solid rgba(31, 45, 65, 0.125);
 }
 .pagination {
  display: -webkit-box;
@@ -681,30 +661,4 @@ div.table-responsive
  > div.row
  > div[class^="col-"]:last-child {
  padding-right: 0;
-}
-/*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-*,
-*::before,
-*::after {
- box-sizing: border-box;
-}
-.card-header {
- padding: 1rem 1.35rem;
- margin-bottom: 0;
- background-color: rgba(31, 45, 65, 0.03);
- border-bottom: 1px solid rgba(31, 45, 65, 0.125);
-}
-@media print {
- *,
- *::before,
- *::after {
-  text-shadow: none !important;
-  box-shadow: none !important;
- }
-}
-.card-header {
- padding: 1rem 1.35rem;
- margin-bottom: 0;
- background-color: rgba(31, 45, 65, 0.03);
- border-bottom: 1px solid rgba(31, 45, 65, 0.125);
 }

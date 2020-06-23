@@ -154,7 +154,7 @@ class OrderManage extends Component {
      </div>
      <div className="container-fluid mt-n10">
       <div className="row">
-       <div className="col-lg-9">
+       <div className="col-lg-12">
         <div className="card">
          <div className="card-header card-header-tabs card-header-primary">
           <div className="nav-tabs-navigation">
@@ -217,11 +217,7 @@ class OrderManage extends Component {
                    </span>
                   </span>
 
-                  <a
-                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
-                   className="tit devLinkExpire"
-                   data-pts="-77"
-                  >
+                  <a href="#" className="tit devLinkExpire" data-pts="-77">
                    <em className="used">진행중</em> 프로그래머 채용
                   </a>
                  </div>
@@ -243,7 +239,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">전체 지원자</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -254,7 +250,7 @@ class OrderManage extends Component {
                     <li className="apyStatusNotRead ">
                      <strong className="stepTit">미열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -265,7 +261,7 @@ class OrderManage extends Component {
                     <li className="on">
                      <strong className="stepTit">열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -276,7 +272,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">예비합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -287,7 +283,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">서류합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -298,39 +294,20 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="btnFunc">
-                  <a
-                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-                   className="btnMtcTpl_1"
-                   target="_blank"
-                  >
+                  <a href="#" className="btnMtcTpl_1" target="_blank">
                    <span>공고 보기</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Edit/31938638"
-                   className="btnMtcTpl_1"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    <span>수정</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Copy/4/31938638"
-                   className="btnMtcTpl_1"
-                   onClick="go_copy(this); return false;"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    복사
                   </a>
 
-                  <button
-                   type="button"
-                   className="btnMtcTpl_1"
-                   onClick="go_end(31938638, 35612593);"
-                  >
+                  <button type="button" className="btnMtcTpl_1">
                    <span>마감</span>
                   </button>
-                  <button
-                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
-                   className="btnMtcTpl_1"
-                   type="button"
-                  >
+                  <button className="btnMtcTpl_1" type="button">
                    <span>삭제</span>
                   </button>
                  </div>
@@ -350,11 +327,7 @@ class OrderManage extends Component {
                    </span>
                   </span>
 
-                  <a
-                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
-                   className="tit devLinkExpire"
-                   data-pts="-77"
-                  >
+                  <a href="#" className="tit devLinkExpire" data-pts="-77">
                    <em className="used">진행중</em> 프로그래머 채용
                   </a>
                  </div>
@@ -376,7 +349,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">전체 지원자</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -387,7 +360,7 @@ class OrderManage extends Component {
                     <li className="apyStatusNotRead ">
                      <strong className="stepTit">미열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -398,7 +371,7 @@ class OrderManage extends Component {
                     <li className="on">
                      <strong className="stepTit">열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -409,7 +382,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">예비합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -420,7 +393,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">서류합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -431,39 +404,20 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="btnFunc">
-                  <a
-                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-                   className="btnMtcTpl_1"
-                   target="_blank"
-                  >
+                  <a href="#" className="btnMtcTpl_1" target="_blank">
                    <span>공고 보기</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Edit/31938638"
-                   className="btnMtcTpl_1"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    <span>수정</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Copy/4/31938638"
-                   className="btnMtcTpl_1"
-                   onClick="go_copy(this); return false;"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    복사
                   </a>
 
-                  <button
-                   type="button"
-                   className="btnMtcTpl_1"
-                   onClick="go_end(31938638, 35612593);"
-                  >
+                  <button type="button" className="btnMtcTpl_1">
                    <span>마감</span>
                   </button>
-                  <button
-                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
-                   className="btnMtcTpl_1"
-                   type="button"
-                  >
+                  <button className="btnMtcTpl_1" type="button">
                    <span>삭제</span>
                   </button>
                  </div>
@@ -489,11 +443,7 @@ class OrderManage extends Component {
                    </span>
                   </span>
 
-                  <a
-                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
-                   className="tit devLinkExpire"
-                   data-pts="-77"
-                  >
+                  <a href="#" className="tit devLinkExpire" data-pts="-77">
                    <em className="used">진행중</em> 프로그래머 채용
                   </a>
                  </div>
@@ -515,7 +465,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">전체 지원자</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -526,7 +476,7 @@ class OrderManage extends Component {
                     <li className="apyStatusNotRead ">
                      <strong className="stepTit">미열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -537,7 +487,7 @@ class OrderManage extends Component {
                     <li className="on">
                      <strong className="stepTit">열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -548,7 +498,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">예비합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -559,7 +509,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">서류합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -570,39 +520,20 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="btnFunc">
-                  <a
-                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-                   className="btnMtcTpl_1"
-                   target="_blank"
-                  >
+                  <a href="#" className="btnMtcTpl_1" target="_blank">
                    <span>공고 보기</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Edit/31938638"
-                   className="btnMtcTpl_1"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    <span>수정</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Copy/4/31938638"
-                   className="btnMtcTpl_1"
-                   onClick="go_copy(this); return false;"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    복사
                   </a>
 
-                  <button
-                   type="button"
-                   className="btnMtcTpl_1"
-                   onClick="go_end(31938638, 35612593);"
-                  >
+                  <button type="button" className="btnMtcTpl_1">
                    <span>마감</span>
                   </button>
-                  <button
-                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
-                   className="btnMtcTpl_1"
-                   type="button"
-                  >
+                  <button className="btnMtcTpl_1" type="button">
                    <span>삭제</span>
                   </button>
                  </div>
@@ -622,11 +553,7 @@ class OrderManage extends Component {
                    </span>
                   </span>
 
-                  <a
-                   href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
-                   className="tit devLinkExpire"
-                   data-pts="-77"
-                  >
+                  <a href="#" className="tit devLinkExpire" data-pts="-77">
                    <em className="used">진행중</em> 프로그래머 채용
                   </a>
                  </div>
@@ -648,7 +575,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">전체 지원자</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YA"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -659,7 +586,7 @@ class OrderManage extends Component {
                     <li className="apyStatusNotRead ">
                      <strong className="stepTit">미열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YN"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -670,7 +597,7 @@ class OrderManage extends Component {
                     <li className="on">
                      <strong className="stepTit">열람</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YE"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -681,7 +608,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">예비합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YP"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -692,7 +619,7 @@ class OrderManage extends Component {
                     <li>
                      <strong className="stepTit">서류합격</strong>
                      <a
-                      href="/Corp/Applicant/list?GI_No=35612593&amp;PageCode=YO"
+                      href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
@@ -703,39 +630,20 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="btnFunc">
-                  <a
-                   href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-                   className="btnMtcTpl_1"
-                   target="_blank"
-                  >
+                  <a href="#" className="btnMtcTpl_1" target="_blank">
                    <span>공고 보기</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Edit/31938638"
-                   className="btnMtcTpl_1"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    <span>수정</span>
                   </a>
-                  <a
-                   href="/Yocruit/Mng/GI_Copy/4/31938638"
-                   className="btnMtcTpl_1"
-                   onClick="go_copy(this); return false;"
-                  >
+                  <a href="#" className="btnMtcTpl_1">
                    복사
                   </a>
 
-                  <button
-                   type="button"
-                   className="btnMtcTpl_1"
-                   onClick="go_end(31938638, 35612593);"
-                  >
+                  <button type="button" className="btnMtcTpl_1">
                    <span>마감</span>
                   </button>
-                  <button
-                   onClick="go_del(31938638, 35612593, 0, 1); return false;"
-                   className="btnMtcTpl_1"
-                   type="button"
-                  >
+                  <button className="btnMtcTpl_1" type="button">
                    <span>삭제</span>
                   </button>
                  </div>
@@ -801,7 +709,7 @@ class OrderManage extends Component {
                    className="form-check-input"
                    type="checkbox"
                    value=""
-                   checked=""
+                   checked
                   />
                   <span className="form-check-sign">
                    <span className="check"></span>
@@ -842,7 +750,7 @@ class OrderManage extends Component {
                    className="form-check-input"
                    type="checkbox"
                    value=""
-                   checked=""
+                   checked
                   />
                   <span className="form-check-sign">
                    <span className="check"></span>
@@ -877,36 +785,6 @@ class OrderManage extends Component {
              </tbody>
             </table>
            </div>
-          </div>
-         </div>
-        </div>
-       </div>
-       <div className="col-lg-3">
-        <div className="nav-sticky">
-         <div className="card">
-          <div className="card-body">
-           <ul className="nav flex-column" id="stickyNav">
-            <li className="nav-item">
-             <a className="nav-link" href="#default">
-              Default Form Controls
-             </a>
-            </li>
-            <li className="nav-item">
-             <a className="nav-link" href="#solid">
-              Solid Form Controls
-             </a>
-            </li>
-            <li className="nav-item">
-             <a className="nav-link" href="#checkbox">
-              Default Checkboxes &amp; Radio
-             </a>
-            </li>
-            <li className="nav-item">
-             <a className="nav-link" href="#checkboxSolid">
-              Solid Checkboxes &amp; Radio
-             </a>
-            </li>
-           </ul>
           </div>
          </div>
         </div>

@@ -33,11 +33,6 @@ svg:not(:root).svg-inline--fa {
  width: 0.875em;
 }
 /*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-*,
-*::before,
-*::after {
- box-sizing: border-box;
-}
 main {
  display: block;
 }
@@ -54,15 +49,6 @@ p {
 ul {
  margin-top: 0;
  margin-bottom: 1rem;
-}
-a {
- color: #0061f2;
- text-decoration: none;
- background-color: transparent;
-}
-a:hover {
- color: #0042a6;
- text-decoration: underline;
 }
 pre,
 code {
@@ -433,18 +419,6 @@ textarea.form-control {
   transition: none;
  }
 }
-.nav {
- display: -webkit-box;
- display: flex;
- flex-wrap: wrap;
- padding-left: 0;
- margin-bottom: 0;
- list-style: none;
-}
-.nav-link {
- display: block;
- padding: 0.5rem 1rem;
-}
 .nav-link:hover,
 .nav-link:focus {
  text-decoration: none;
@@ -452,22 +426,9 @@ textarea.form-control {
 .nav-tabs {
  border-bottom: 1px solid #d7dce3;
 }
-.nav-tabs .nav-item {
- margin-bottom: -1px;
-}
-.nav-tabs .nav-link {
- border: 1px solid transparent;
- border-top-left-radius: 0.35rem;
- border-top-right-radius: 0.35rem;
-}
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
  border-color: #e3e6ec #e3e6ec #d7dce3;
-}
-.nav-tabs .nav-link.active {
- color: #485260;
- background-color: #eff3f9;
- border-color: #d7dce3 #d7dce3 #eff3f9;
 }
 .tab-content > .tab-pane {
  display: none;
@@ -483,20 +444,6 @@ textarea.form-control {
 }
 .card-title {
  margin-bottom: 1rem;
-}
-.card-header {
- padding: 1rem 1.35rem;
- margin-bottom: 0;
- background-color: rgba(31, 45, 65, 0.03);
- border-bottom: 1px solid rgba(31, 45, 65, 0.125);
-}
-.bg-secondary {
- background-color: #6900c7 !important;
-}
-.flex-column {
- -webkit-box-orient: vertical !important;
- -webkit-box-direction: normal !important;
- flex-direction: column !important;
 }
 .mr-1 {
  margin-right: 0.25rem !important;
@@ -796,35 +743,9 @@ pre[class*="language-"] {
 }
 /*! right sav */
 /*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-*,
-*::before,
-*::after {
- box-sizing: border-box;
-}
 ul {
  margin-top: 0;
  margin-bottom: 1rem;
-}
-a {
- color: #0061f2;
- text-decoration: none;
- background-color: transparent;
-}
-a:hover {
- color: #0042a6;
- text-decoration: underline;
-}
-.nav {
- display: -webkit-box;
- display: flex;
- flex-wrap: wrap;
- padding-left: 0;
- margin-bottom: 0;
- list-style: none;
-}
-.nav-link {
- display: block;
- padding: 0.5rem 1rem;
 }
 .nav-link:hover,
 .nav-link:focus {
@@ -835,11 +756,6 @@ a:hover {
  flex: 1 1 auto;
  min-height: 1px;
  padding: 1.35rem;
-}
-.flex-column {
- -webkit-box-orient: vertical !important;
- -webkit-box-direction: normal !important;
- flex-direction: column !important;
 }
 @media print {
  *,
@@ -891,11 +807,6 @@ mark {
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
  }
-}
-* {
- -webkit-box-sizing: border-box;
- -moz-box-sizing: border-box;
- box-sizing: border-box;
 }
 :after,
 :before {

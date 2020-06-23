@@ -1,21 +1,7 @@
 /*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-*,
-*::before,
-*::after {
- box-sizing: border-box;
-}
 h3 {
  margin-top: 0;
  margin-bottom: 0.5rem;
-}
-a {
- color: #0061f2;
- text-decoration: none;
- background-color: transparent;
-}
-a:hover {
- color: #0042a6;
- text-decoration: underline;
 }
 label {
  display: inline-block;
@@ -323,12 +309,6 @@ h3 {
  min-height: 1px;
  padding: 1.35rem;
 }
-.card-header {
- padding: 1rem 1.35rem;
- margin-bottom: 0;
- background-color: rgba(31, 45, 65, 0.03);
- border-bottom: 1px solid rgba(31, 45, 65, 0.125);
-}
 .card-footer {
  padding: 1rem 1.35rem;
  background-color: rgba(31, 45, 65, 0.03);
@@ -446,27 +426,7 @@ h3 {
  text-rendering: optimizeLegibility;
  -moz-osx-font-smoothing: grayscale;
 }
-ul,
-li {
- margin: 0;
- padding: 0;
-}
-ul {
- list-style: none;
-}
 /*! CSS Used from: https://jsfiddle.net/css/dist-session.css?fc7b59b5dd7cab298927d3310be1b86d6bb01b3f */
-* {
- -webkit-font-smoothing: antialiased;
- -moz-osx-font-smoothing: grayscale;
-}
-ul,
-li {
- margin: 0;
- padding: 0;
-}
-ul {
- list-style: none;
-}
 ::-webkit-input-placeholder {
  color: #8d8f91;
 }
@@ -478,9 +438,6 @@ ul {
 }
 :-ms-input-placeholder {
  color: #8d8f91;
-}
-* {
- box-sizing: border-box;
 }
 .errorsList {
  font-size: 13px;

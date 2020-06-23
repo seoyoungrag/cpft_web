@@ -195,7 +195,7 @@ class OrderRegist extends Component {
      </div>
      <div className="container-fluid mt-n10">
       <div className="row">
-       <div className="col-lg-9">
+       <div className="col-lg-12">
         <div id="default">
          <div className="card mb-4">
           <div className="card-header">모집 요강</div>
@@ -495,103 +495,6 @@ class OrderRegist extends Component {
              입력해 주세요.
             </div>
            </div>
-          </div>
-         </div>
-        </div>
-        <div id="solid">
-         <div className="card mb-4">
-          <div className="card-header">근무 조건</div>
-          <div className="card-body">
-           <div className="sbp-preview">
-            <div className="sbp-preview-content">
-             <form>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput9">품목</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput9"
-                type="email"
-                placeholder="신선식품"
-                key="exampleFormControlInput9"
-               />
-              </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput10">출발지</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput10"
-                type="email"
-                placeholder="서이천물류센터"
-                key="exampleFormControlInput10"
-               />
-              </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput11">운행구간</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput11"
-                type="email"
-                placeholder="서울시 송파구"
-                key="exampleFormControlInput11"
-               />
-              </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput12">급여</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput12"
-                type="email"
-                placeholder="월 500만원"
-                key="exampleFormControlInput12"
-               />
-              </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput13">근무시간</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput13"
-                type="email"
-                placeholder="02:00~10:00"
-                key="exampleFormControlInput13"
-               />
-              </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput14">상세 정보</label>
-               <input
-                className="form-control"
-                id="exampleFormControlInput14"
-                type="email"
-                placeholder="연락 주세요. 02-xxx-xxxx"
-                key="exampleFormControlInput14"
-               />
-              </div>
-             </form>
-            </div>
-            <div className="sbp-preview-text">
-             임시저장 버튼을 누르면, 현재까지 정보를 기록한뒤 다시 작성할 수
-             있습니다. 모든 정보가 작성되었다면 오더 등록 완료를 눌러 주세요.
-            </div>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-       <div className="col-lg-3">
-        <div className="nav-sticky">
-         <div className="card">
-          <div className="card-body">
-           <ul className="nav flex-column" id="stickyNav">
-            <li className="nav-item">
-             <a className="nav-link" href="#default">
-              모집요강
-             </a>
-            </li>
-            <li className="nav-item">
-             <a className="nav-link" href="#solid">
-              근무조건
-             </a>
-            </li>
-           </ul>
           </div>
          </div>
         </div>
