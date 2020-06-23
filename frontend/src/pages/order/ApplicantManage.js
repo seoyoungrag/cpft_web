@@ -163,34 +163,27 @@ class ApplicantManage extends Component {
          >
           <div className="row">
            <div className="col-sm-12 col-md-6">
-            <div className="dataTables_length" id="dataTable_length">
-             <label>
-              Show{" "}
-              <select
-               name="dataTable_length"
-               aria-controls="dataTable"
-               className="custom-select custom-select-sm form-control form-control-sm"
-              >
-               <option value="10">10</option>
-               <option value="25">25</option>
-               <option value="50">50</option>
-               <option value="100">100</option>
-              </select>{" "}
-              entries
-             </label>
+            <div className="col-12 form-group">
+             <select className="form-control" id="orderRegistWorkType">
+              <option defaultValue>
+               001 팀프레시 하남 고정 개인사업자 차주 모집
+              </option>
+              <option>002 팀프레시 하남 고정 개인사업자 차주 모집</option>
+             </select>
             </div>
            </div>
-           <div className="col-sm-12 col-md-6">
-            <div id="dataTable_filter" className="dataTables_filter">
-             <label>
-              검색:
-              <input
-               type="search"
-               className="form-control form-control-sm"
-               placeholder=""
-               aria-controls="dataTable"
-              />
-             </label>
+           <div className="col-sm-12 col-md-6 row">
+            <div className="col-6">
+             <a
+              href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+              className="btnMtcTpl_1"
+              target="_blank"
+             >
+              <span>공고 수정</span>
+             </a>
+            </div>
+            <div className="col-6">
+             <span>진행중 공고 지원자 3</span>
             </div>
            </div>
           </div>
@@ -207,6 +200,19 @@ class ApplicantManage extends Component {
             >
              <thead>
               <tr role="row">
+               <th>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </th>
                <th
                 className="sorting_asc"
                 tabIndex="0"
@@ -390,36 +396,11 @@ class ApplicantManage extends Component {
                  ></path>
                 </svg>
                </th>
-               <th
-                className="sorting"
-                tabIndex="0"
-                aria-controls="dataTable"
-                rowSpan="1"
-                colSpan="1"
-                aria-label="Actions: activate to sort column ascending"
-                style={{ width: "80px" }}
-               >
-                Actions
-                <svg
-                 data-fa-pseudo-element=":after"
-                 data-prefix="fas"
-                 data-icon="sort"
-                 className="svg-inline--fa fa-sort fa-w-10"
-                 role="img"
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 320 512"
-                 data-fa-i2svg=""
-                >
-                 <path
-                  fill="currentColor"
-                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                 ></path>
-                </svg>
-               </th>
               </tr>
              </thead>
              <tfoot>
               <tr>
+               <th rowSpan="1" colSpan="1"></th>
                <th rowSpan="1" colSpan="1">
                 오더 번호
                </th>
@@ -441,13 +422,28 @@ class ApplicantManage extends Component {
                <th rowSpan="1" colSpan="1">
                 열람
                </th>
-               <th rowSpan="1" colSpan="1">
-                Actions
-               </th>
               </tr>
              </tfoot>
              <tbody>
-              <tr role="row" className="odd">
+              <tr
+               role="row"
+               className="odd"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>1t 냉장</td>
@@ -457,48 +453,27 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
               </tr>
-              <tr role="row" className="even">
-               <td className="sorting_1">002</td>
+              <tr
+               role="row"
+               className="even"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
                <td>5년</td>
@@ -507,48 +482,27 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
               </tr>
-              <tr role="row" className="odd">
-               <td className="sorting_1">003</td>
+              <tr
+               role="row"
+               className="odd"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>1t 냉장</td>
                <td>3년</td>
@@ -557,396 +511,208 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-secondary badge-pill">미열람</div>
                </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
               </tr>
-              <tr role="row" className="even">
-               <td className="sorting_1">Bradley Greer</td>
-               <td>Software Engineer</td>
-               <td>London</td>
-               <td>41</td>
-               <td>2012/10/13</td>
-               <td>$132,000</td>
+              <tr
+               role="row"
+               className="even"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
                <td>
-                <div className="badge badge-warning badge-pill">Pending</div>
-               </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
-              </tr>
-              <tr role="row" className="odd">
-               <td className="sorting_1">Brenden Wagner</td>
-               <td>Software Engineer</td>
-               <td>San Francisco</td>
-               <td>28</td>
-               <td>2011/06/07</td>
-               <td>$206,850</td>
-               <td>
-                <div className="badge badge-primary badge-pill">Full-time</div>
-               </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
-              </tr>
-              <tr role="row" className="even">
-               <td className="sorting_1">Brielle Williamson</td>
-               <td>Integration Specialist</td>
-               <td>New York</td>
-               <td>61</td>
-               <td>2012/12/02</td>
-               <td>$372,000</td>
-               <td>
-                <div className="badge badge-primary badge-pill">Full-time</div>
-               </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
-              </tr>
-              <tr role="row" className="odd">
-               <td className="sorting_1">Bruno Nash</td>
-               <td>Software Engineer</td>
-               <td>London</td>
-               <td>38</td>
-               <td>2011/05/03</td>
-               <td>$163,500</td>
-               <td>
-                <div className="badge badge-info badge-pill">Contract</div>
-               </td>
-               <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
-               </td>
-              </tr>
-              <tr role="row" className="even">
-               <td className="sorting_1">Caesar Vance</td>
-               <td>Pre-Sales Support</td>
-               <td>New York</td>
-               <td>21</td>
-               <td>2011/12/12</td>
-               <td>$106,450</td>
-               <td>
-                <div className="badge badge-secondary badge-pill">
-                 Part-time
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
                 </div>
                </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>5t 냉장</td>
+               <td>2년</td>
+               <td>안녕하세요.</td>
+               <td>20.06.11</td>
                <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
+                <div className="badge badge-warning badge-pill">취소됨</div>
                </td>
               </tr>
-              <tr role="row" className="odd">
-               <td className="sorting_1">Cara Stevens</td>
-               <td>Sales Assistant</td>
-               <td>New York</td>
-               <td>46</td>
-               <td>2011/12/06</td>
-               <td>$145,600</td>
+              <tr
+               role="row"
+               className="odd"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
                <td>
-                <div className="badge badge-primary badge-pill">Full-time</div>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
                </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>5t 냉장</td>
+               <td>1년</td>
+               <td>안녕하세요2.</td>
+               <td>20.06.12</td>
                <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
+                <div className="badge badge-primary badge-pill">열람</div>
                </td>
               </tr>
-              <tr role="row" className="even">
-               <td className="sorting_1">Cedric Kelly</td>
-               <td>Senior Javascript Developer</td>
-               <td>Edinburgh</td>
-               <td>22</td>
-               <td>2012/03/29</td>
-               <td>$433,060</td>
+              <tr
+               role="row"
+               className="even"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
                <td>
-                <div className="badge badge-info badge-pill">Contract</div>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
                </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>5t 냉장</td>
+               <td>6년</td>
+               <td>안녕하세요3</td>
+               <td>20.06.14</td>
                <td>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-more-vertical"
-                 >
-                  <circle cx="12" cy="12" r="1"></circle>
-                  <circle cx="12" cy="5" r="1"></circle>
-                  <circle cx="12" cy="19" r="1"></circle>
-                 </svg>
-                </button>
-                <button className="btn btn-datatable btn-icon btn-transparent-dark">
-                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-trash-2"
-                 >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                 </svg>
-                </button>
+                <div className="badge badge-primary badge-pill">열람</div>
+               </td>
+              </tr>
+              <tr
+               role="row"
+               className="odd"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>3t 냉장</td>
+               <td>1년</td>
+               <td>안녕하세요4</td>
+               <td>20.06.16</td>
+               <td>
+                <div className="badge badge-info badge-pill">채용확정</div>
+               </td>
+              </tr>
+              <tr
+               role="row"
+               className="even"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>1t 냉장</td>
+               <td>3년</td>
+               <td>안녕하세요6</td>
+               <td>20.06.16</td>
+               <td>
+                <div className="badge badge-secondary badge-pill">미열람</div>
+               </td>
+              </tr>
+              <tr
+               role="row"
+               className="odd"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>5t 냉장</td>
+               <td>7년</td>
+               <td>안녕하세요7</td>
+               <td>20.06.17</td>
+               <td>
+                <div className="badge badge-primary badge-pill">열람</div>
+               </td>
+              </tr>
+              <tr
+               role="row"
+               className="even"
+               data-toggle="modal"
+               data-target="#exampleModalCenter"
+              >
+               <td>
+                <div className="custom-control custom-checkbox">
+                 <input
+                  className="custom-control-input"
+                  id="checkAll"
+                  type="checkbox"
+                 />
+                 <label
+                  className="custom-control-label"
+                  htmlFor="checkAll"
+                 ></label>
+                </div>
+               </td>
+               <td className="sorting_1">001</td>
+               <td>김차0 30세</td>
+               <td>5t 냉장</td>
+               <td>1년 미만</td>
+               <td>안녕하세요5</td>
+               <td>20.06.17</td>
+               <td>
+                <div className="badge badge-info badge-pill">채용확정</div>
                </td>
               </tr>
              </tbody>
@@ -961,7 +727,7 @@ class ApplicantManage extends Component {
              role="status"
              aria-live="polite"
             >
-             Showing 1 to 10 of 57 entries
+             1 ~ 10 총 57
             </div>
            </div>
            <div className="col-sm-12 col-md-7">
@@ -1068,6 +834,89 @@ class ApplicantManage extends Component {
             </div>
            </div>
           </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div
+       className="modal fade"
+       id="exampleModalCenter"
+       tabIndex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalCenterTitle"
+       aria-hidden="true"
+      >
+       <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+         <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalCenterTitle">
+           오더번호 001
+          </h5>
+          <button
+           className="close"
+           type="button"
+           data-dismiss="modal"
+           aria-label="Close"
+          >
+           <span aria-hidden="true">×</span>
+          </button>
+         </div>
+         <div className="modal-body">
+          <div className="card mb-4">
+           <div className="card-body">
+            <h5 className="card-title text-primary">김차일 010-1111-1411</h5>
+            <div className="card-text row">
+             <div className="col-6">
+              <div>차량: 1t 냉장</div>
+              <div>경력: 1년 미만</div>
+             </div>
+             <div className="col-6">
+              <div>
+               <h4>면허 및 자격</h4>
+              </div>
+              <div>1종 대형</div>
+              <div>화물운송자격증 보유</div>
+              <div>개인사업자</div>
+             </div>
+            </div>
+           </div>
+           <a
+            className="card-footer d-flex align-items-center justify-content-between"
+            href="#"
+           >
+            차주 상세 보기
+            <svg
+             xmlns="http://www.w3.org/2000/svg"
+             width="24"
+             height="24"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+             className="feather feather-arrow-right"
+            >
+             <line x1="5" y1="12" x2="19" y2="12"></line>
+             <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+           </a>
+          </div>
+         </div>
+         <div className="modal-footer">
+          <button
+           className="btn btn-secondary"
+           type="button"
+           data-dismiss="modal"
+          >
+           닫기
+          </button>
+          <button className="btn btn-primary" type="button">
+           채용확정
+          </button>
+          <button className="btn btn-danger" type="button">
+           채용거절
+          </button>
          </div>
         </div>
        </div>
