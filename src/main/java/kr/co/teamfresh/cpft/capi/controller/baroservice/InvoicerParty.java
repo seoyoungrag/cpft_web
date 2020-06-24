@@ -11,7 +11,7 @@ import lombok.Setter;
 public class InvoicerParty {
 	@ApiModelProperty(value = "mgtNum", example="ABC123", required = false, hidden = true)
 	String mgtNum;// 연동사부여 문자키
-	@ApiModelProperty(value = "corpNum", example="1548801468", required = true)
+	@ApiModelProperty(value = "corpNum", example="8888888888", required = true)
 	String corpNum; //사업자 번호 //	'-'를 제외한 숫자만 입력 개인의 경우 주민등록번호 13자리, 외국인인 경우 '9999999999999'를 입력하고, 비고1 에 외국인등록번호 또는 여권번호 기입
 	@ApiModelProperty(value = "taxRegID", example="", required = false, hidden = true)
 	String taxRegID; //종사업장 번호 // 사업자 단위 과세제도 사용시 국세청 부여 종사업장 식별번호 숫자 4자리
@@ -26,7 +26,7 @@ public class InvoicerParty {
 	@ApiModelProperty(value = "bizType", example="", required = false, hidden = true)
 	String bizType; //업태
 	@ApiModelProperty(value = "contactID", example="timfcc", required = false, hidden = true)
-	String contactID="timfcc"; //바로빌 회원 아이디 //대소문자 구분
+	String contactID="timfcc22"; //바로빌 회원 아이디 //대소문자 구분
 	@ApiModelProperty(value = "contactName", example="유아름", required = false, hidden = true)
 	String contactName="유아름"; //담당자명
 	@ApiModelProperty(value = "hp", example="", required = false, hidden = true)

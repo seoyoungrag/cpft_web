@@ -25,6 +25,7 @@ import kr.co.teamfresh.cpft.capi.controller.baroservice.RegistAndIssueTaxInvoice
 import kr.co.teamfresh.cpft.capi.controller.baroservice.RegistBrokerTaxInvoiceEX;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
 import kr.co.teamfresh.cpft.capi.service.ResponseService;
+import kr.co.teamfresh.cpft.capi.util.ObjectMapperUtils;
 import lombok.RequiredArgsConstructor;
 
 @Api(tags = { "0. Barobill" })
@@ -41,7 +42,7 @@ public class BaroController {
 
 	String certKey = "330E5BFA-0EAB-46F5-ADBE-14134EF67FE9"; // 인증키
 	String corpNum = "5618801138"; // 연계사업자 사업자번호 ('-' 제외, 10자리)
-	String checkCorpNumDumy = "5618801138"; // 확인할 사업자번호 ('-' 제외, 10자리)
+	String checkCorpNumDumy = "1548801468"; // 확인할 사업자번호 ('-' 제외, 10자리)
 
 	@Transactional
 	@ApiOperation(value = "CheckCorpIsMember - 회원사 여부 확인", notes = "바로빌에 가입되어 있는 사업자인지 확인합니다.")
@@ -55,9 +56,8 @@ public class BaroController {
 	}
 
 	@Transactional
-	@ApiOperation(value = "RegistAndIssueTaxInvoice - 간편 발행", notes = "(세금)계산서의 '임시저장'과 '발행'을 한번에 처리합니다. (RegistTaxInvoice 함수 + IssueTaxInvoice 함수)\r\n" + 
-			"발행을 위해서는 공급자의 공인인증서가 바로빌에 등록되어야 합니다.\r\n" + 
-			"발행이 완료된 (세금)계산서는 자동으로 국세청으로 전송됩니다.")
+	@ApiOperation(value = "RegistAndIssueTaxInvoice - 간편 발행", notes = "(세금)계산서의 '임시저장'과 '발행'을 한번에 처리합니다. (RegistTaxInvoice 함수 + IssueTaxInvoice 함수)\r\n"
+			+ "발행을 위해서는 공급자의 공인인증서가 바로빌에 등록되어야 합니다.\r\n" + "발행이 완료된 (세금)계산서는 자동으로 국세청으로 전송됩니다.")
 	@PostMapping(value = "/registAndIssueTaxInvoice")
 	public CommonResult registAndIssueTaxInvoice(
 			@ApiParam(value = "간편 발행 요청값", required = true) @RequestBody RegistAndIssueTaxInvoice registAndIssueTaxInvoice)
@@ -117,12 +117,11 @@ public class BaroController {
 
 		com.baroservice.ws.TaxInvoice requestInfo = modelMapper.map(registAndIssueBrokerTaxInvoice.getInvoice(),
 				com.baroservice.ws.TaxInvoice.class);
-		logger.info(mapper.writeValueAsString(requestInfo));
 
 		requestInfo.getInvoicerParty().setMgtNum(mgtKey);
 		requestInfo.getInvoiceeParty().setMgtNum(mgtKey);
 		requestInfo.getBrokerParty().setMgtNum(mgtKey);
-		
+
 		int result = barobillApiService.taxInvoice.registAndIssueBrokerTaxInvoice(certKey, corpNum, requestInfo,
 				registAndIssueBrokerTaxInvoice.isSendSMS(), registAndIssueBrokerTaxInvoice.isForceIssue(),
 				registAndIssueBrokerTaxInvoice.getMailTitle());
@@ -138,16 +137,16 @@ public class BaroController {
 			if (responseInfo.getTaxInvoiceType() < 0) {
 				String errResult = result + " " + getErrString(result);
 				return responseService.getFailResult(result, errResult);
-			}else {
-				/*
-				barobillApiService.taxInvoice.GetTaxInvoicePopUpURL(certKey, corpNum,
-						mgtKey, "timflabs","Timf180525!");
-				*/
-				logger.info(mapper.writeValueAsString(responseInfo));	
+			} else {
+				String url = barobillApiService.taxInvoice.getTaxInvoicePopUpURL(certKey, corpNum, mgtKey, "timflabs",
+						"Timf180525!");
+
+				logger.info(mapper.writeValueAsString(url));
+				logger.info(mapper.writeValueAsString(responseInfo));
 				return responseService.getSingleResult(responseInfo);
 			}
 		}
-		//return responseService.getSingleResult(result);
+		// return responseService.getSingleResult(result);
 	}
 
 	@Transactional
@@ -187,6 +186,37 @@ public class BaroController {
 
 		if (result < 0) {
 			String errResult = result + " " + getErrString(result);
+			return responseService.getFailResult(result, errResult);
+		}
+		return responseService.getSingleResult(result);
+	}
+
+	@Transactional
+	@ApiOperation(value = "RegistCorp - 바로빌 회원가입", notes = "연동사의 고객을 바로빌에 회원가입 합니다.")
+	@PostMapping(value = "/registCorp")
+	public CommonResult registCorp(
+			@ApiParam(value = "사업자번호 ('-'제외)", required = true) @RequestParam(defaultValue = "888-88-78888") String CorpNum,
+			@ApiParam(value = "회사명", required = true) @RequestParam(defaultValue = "테스트 회사용") String corpName,
+			@ApiParam(value = "대표자명", required = true) @RequestParam(defaultValue = "서영락") String ceoName,
+			@ApiParam(value = "업태", required = true) @RequestParam(defaultValue = "서비스") String bizType,
+			@ApiParam(value = "업종", required = true) @RequestParam(defaultValue = "물류") String bizClass,
+			@ApiParam(value = "우편번호", required = true) @RequestParam(defaultValue = "05637") String postNum,
+			@ApiParam(value = "주소", required = true) @RequestParam(defaultValue = "서울 송파구 위례성대로 12길 15-1 (방이동)") String addr1,
+			@ApiParam(value = "상세주소", required = true) @RequestParam(defaultValue = "2층") String addr2,
+			@ApiParam(value = "담당자명", required = true) @RequestParam(defaultValue = "서영락") String memberName,
+			@ApiParam(value = "담당자 아이디 (6~20 자)", required = true) @RequestParam(defaultValue = "timflabs") String id,
+			@ApiParam(value = "담당자 비밀번호 (6~20 자)", required = true) @RequestParam(defaultValue = "Timf180525!") String pwd,
+			@ApiParam(value = "담당자 전화번호", required = true) @RequestParam(defaultValue = "01066150136") String tel,
+			@ApiParam(value = "담당자 이메일", required = true) @RequestParam(defaultValue = "youngrag.seo@timf.co.kr") String email)
+			throws JsonProcessingException {
+
+		int result = barobillApiService.bankAccount.registCorp(certKey, CorpNum, corpName, ceoName, bizType, bizClass,
+				postNum, addr1, addr2, memberName, "", id, pwd, "", tel, "", email);
+
+		ObjectMapper mapper = new ObjectMapper();
+		if (result < 0) {
+			String errResult = result + " " + getErrString(result);
+			logger.error(mapper.writeValueAsString(errResult));
 			return responseService.getFailResult(result, errResult);
 		}
 		return responseService.getSingleResult(result);

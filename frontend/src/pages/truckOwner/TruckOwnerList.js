@@ -1,13 +1,12 @@
 import React from "react";
 import MainStructure from "components/structure/MainStructure";
-import "./ApplicantManage.css";
+import "./TruckOwnerList.css";
 
 import "styles/datatables.css";
 import $ from "jquery";
 $.DataTable = require("datatables.net");
 import "datatables.net-dt";
 import { Component } from "react";
-import Input from "./Input";
 
 const columns = [
  {
@@ -22,7 +21,7 @@ const columns = [
  },
 ];
 
-class ApplicantManage extends Component {
+class TruckOwnerList extends Component {
  constructor(props) {
   super(props);
   this.state = {
@@ -146,7 +145,7 @@ class ApplicantManage extends Component {
            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
           </svg>
          </div>
-         <span>지원자 관리</span>
+         <span>전체 차주 리스트</span>
         </h1>
         <div className="page-header-subtitle">지원자를 관리합니다.</div>
        </div>
@@ -154,39 +153,24 @@ class ApplicantManage extends Component {
      </div>
      <div className="container-fluid mt-n10">
       <div className="card mb-4">
-       <div className="card-header">지원자 관리</div>
+       <div className="card-header row">
+        <div className="col-6">전체 차주 리스트</div>
+        <div className="col-6">
+         <a
+          href="/Recruit/GI_Read/31938638?Oem_Code=C1"
+          className="btnMtcTpl_1"
+          target="_blank"
+         >
+          <span>관리</span>
+         </a>
+        </div>
+       </div>
        <div className="card-body">
         <div className="datatable table-responsive">
          <div
           id="dataTable_wrapper"
           className="dataTables_wrapper dt-bootstrap4"
          >
-          <div className="row">
-           <div className="col-sm-12 col-md-6">
-            <div className="col-12 form-group">
-             <select className="form-control" id="orderRegistWorkType">
-              <option defaultValue>
-               001 팀프레시 하남 고정 개인사업자 차주 모집
-              </option>
-              <option>002 팀프레시 하남 고정 개인사업자 차주 모집</option>
-             </select>
-            </div>
-           </div>
-           <div className="col-sm-12 col-md-6 row">
-            <div className="col-6">
-             <a
-              href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-              className="btnMtcTpl_1"
-              target="_blank"
-             >
-              <span>공고 수정</span>
-             </a>
-            </div>
-            <div className="col-6">
-             <span>진행중 공고 지원자 3</span>
-            </div>
-           </div>
-          </div>
           <div className="row">
            <div className="col-sm-12">
             <table
@@ -200,19 +184,6 @@ class ApplicantManage extends Component {
             >
              <thead>
               <tr role="row">
-               <th>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </th>
                <th
                 className="sorting_asc"
                 tabIndex="0"
@@ -223,7 +194,7 @@ class ApplicantManage extends Component {
                 aria-label="Name: activate to sort column descending"
                 style={{ width: "152px" }}
                >
-                오더 번호
+                운송그룹
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -249,7 +220,7 @@ class ApplicantManage extends Component {
                 aria-label="Position: activate to sort column ascending"
                 style={{ width: "230px" }}
                >
-                이름/나이
+                담당자
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -275,7 +246,7 @@ class ApplicantManage extends Component {
                 aria-label="Office: activate to sort column ascending"
                 style={{ width: "107px" }}
                >
-                차량 톤수
+                차주명
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -301,7 +272,7 @@ class ApplicantManage extends Component {
                 aria-label="Age: activate to sort column ascending"
                 style={{ width: "49px" }}
                >
-                경력
+                근무 현황
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -327,7 +298,7 @@ class ApplicantManage extends Component {
                 aria-label="Start date: activate to sort column ascending"
                 style={{ width: "100px" }}
                >
-                메세지
+                근무일
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -353,33 +324,7 @@ class ApplicantManage extends Component {
                 aria-label="Salary: activate to sort column ascending"
                 style={{ width: "88px" }}
                >
-                지원일
-                <svg
-                 data-fa-pseudo-element=":after"
-                 data-prefix="fas"
-                 data-icon="sort"
-                 className="svg-inline--fa fa-sort fa-w-10"
-                 role="img"
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 320 512"
-                 data-fa-i2svg=""
-                >
-                 <path
-                  fill="currentColor"
-                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
-                 ></path>
-                </svg>
-               </th>
-               <th
-                className="sorting"
-                tabIndex="0"
-                aria-controls="dataTable"
-                rowSpan="1"
-                colSpan="1"
-                aria-label="Status: activate to sort column ascending"
-                style={{ width: "68px" }}
-               >
-                열람
+                연락처
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -400,27 +345,23 @@ class ApplicantManage extends Component {
              </thead>
              <tfoot>
               <tr>
-               <th rowSpan="1" colSpan="1"></th>
                <th rowSpan="1" colSpan="1">
-                오더 번호
+                운송그룹
                </th>
                <th rowSpan="1" colSpan="1">
-                이름/나이
+                담당자
                </th>
                <th rowSpan="1" colSpan="1">
-                차량 톤수
+                차주명
                </th>
                <th rowSpan="1" colSpan="1">
-                경력
+                근무현황
                </th>
                <th rowSpan="1" colSpan="1">
-                메세지
+                근무일
                </th>
                <th rowSpan="1" colSpan="1">
-                지원일
-               </th>
-               <th rowSpan="1" colSpan="1">
-                열람
+                연락처
                </th>
               </tr>
              </tfoot>
@@ -431,28 +372,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>1t 냉장</td>
-               <td>1년 미만</td>
-               <td>성실함으로 열심히 하겠습니다. 처음이지...</td>
-               <td>20.06.09</td>
-               <td>
-                <div className="badge badge-primary badge-pill">열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -460,28 +385,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>5년</td>
-               <td>5년 경력의 냉장 차주</td>
-               <td>20.06.09</td>
-               <td>
-                <div className="badge badge-primary badge-pill">열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -489,28 +398,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>1t 냉장</td>
-               <td>3년</td>
-               <td>안전, 정확한 배송 책임집니다.</td>
-               <td>20.06.09</td>
-               <td>
-                <div className="badge badge-secondary badge-pill">미열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -518,28 +411,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>2년</td>
-               <td>안녕하세요.</td>
-               <td>20.06.11</td>
-               <td>
-                <div className="badge badge-warning badge-pill">취소됨</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -547,28 +424,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>1년</td>
-               <td>안녕하세요2.</td>
-               <td>20.06.12</td>
-               <td>
-                <div className="badge badge-primary badge-pill">열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -576,28 +437,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>6년</td>
-               <td>안녕하세요3</td>
-               <td>20.06.14</td>
-               <td>
-                <div className="badge badge-primary badge-pill">열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -605,28 +450,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>3t 냉장</td>
-               <td>1년</td>
-               <td>안녕하세요4</td>
-               <td>20.06.16</td>
-               <td>
-                <div className="badge badge-info badge-pill">채용확정</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -634,28 +463,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>1t 냉장</td>
-               <td>3년</td>
-               <td>안녕하세요6</td>
-               <td>20.06.16</td>
-               <td>
-                <div className="badge badge-secondary badge-pill">미열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -663,28 +476,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>7년</td>
-               <td>안녕하세요7</td>
-               <td>20.06.17</td>
-               <td>
-                <div className="badge badge-primary badge-pill">열람</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
               <tr
                role="row"
@@ -692,28 +489,12 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
-               <td className="sorting_1">001</td>
-               <td>김차0 30세</td>
-               <td>5t 냉장</td>
-               <td>1년 미만</td>
-               <td>안녕하세요5</td>
-               <td>20.06.17</td>
-               <td>
-                <div className="badge badge-info badge-pill">채용확정</div>
-               </td>
+               <td className="sorting_1">TS</td>
+               <td>유아름</td>
+               <td>김차일</td>
+               <td>근무중</td>
+               <td>주6(일x)</td>
+               <td>010-1234-5678</td>
               </tr>
              </tbody>
             </table>
@@ -928,4 +709,4 @@ class ApplicantManage extends Component {
  }
 }
 
-export default ApplicantManage;
+export default TruckOwnerList;

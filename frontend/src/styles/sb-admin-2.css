@@ -110,7 +110,6 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
- text-decoration: underline;
  -webkit-text-decoration: underline dotted;
  text-decoration: underline dotted;
  cursor: help;
@@ -175,12 +174,6 @@ sub {
 
 sup {
  top: -0.5em;
-}
-
-a {
- color: #4e73df;
- text-decoration: none;
- background-color: transparent;
 }
 
 a:hover {
@@ -5972,7 +5965,6 @@ a.close.disabled {
  font-style: normal;
  font-weight: 400;
  line-height: 1.5;
- text-align: left;
  text-align: start;
  text-decoration: none;
  text-shadow: none;
@@ -6099,7 +6091,6 @@ a.close.disabled {
  font-style: normal;
  font-weight: 400;
  line-height: 1.5;
- text-align: left;
  text-align: start;
  text-decoration: none;
  text-shadow: none;
@@ -10626,7 +10617,6 @@ a:focus {
  }
  .sidebar .nav-item .nav-link {
   display: block;
-  width: 100%;
   text-align: left;
   padding: 1rem;
   width: 14rem;
@@ -11555,11 +11545,6 @@ div.dataTables_wrapper div.dataTables_paginate {
  color: #0061f2;
  background-color: #fff;
  border: 1px solid #d7dce3;
-}
-a {
- color: #0061f2;
- text-decoration: none;
- background-color: transparent;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {

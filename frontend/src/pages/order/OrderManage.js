@@ -2,7 +2,7 @@ import React from "react";
 import MainStructure from "components/structure/MainStructure";
 import "./OrderManage.css";
 
-import "./datatables.css";
+import "styles/datatables.css";
 import $ from "jquery";
 $.DataTable = require("datatables.net");
 import "datatables.net-dt";

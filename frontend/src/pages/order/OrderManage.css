@@ -832,12 +832,6 @@ ul.nav.nav-tabs {
  margin: -2px 9px 0 8px;
  vertical-align: middle;
 }
-.apyStatusBoard {
- display: block;
- width: 100%;
- vertical-align: top;
- margin-top: 6px;
-}
 .apyStatusBoard .tbCol {
  display: table-cell;
 }
@@ -961,13 +955,6 @@ button {
  vertical-align: middle;
  padding: 0 20px;
 }
-
-.apyStatusBoard {
- display: block;
- width: 100%;
- vertical-align: top;
- margin-top: 6px;
-}
 .jobTitWrap .infoBx {
  display: block;
  color: #888;
@@ -1074,17 +1061,6 @@ button {
 }
 .btnFunc .btnMtcTpl_1 {
  vertical-align: top;
-}
-.btnMtcTpl_1 {
- display: inline-block;
- height: 26px;
- padding: 0 10px;
- line-height: 24px;
- border: 1px solid #ddd;
- color: #888;
- letter-spacing: -1px;
- text-align: center;
- box-sizing: border-box;
 }
 .btnMtcTpl_1 span {
  color: #888;

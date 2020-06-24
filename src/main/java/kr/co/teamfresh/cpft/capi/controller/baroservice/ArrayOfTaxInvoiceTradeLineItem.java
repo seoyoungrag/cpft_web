@@ -19,6 +19,15 @@ public class ArrayOfTaxInvoiceTradeLineItem {
     public List<TaxInvoiceTradeLineItem> getTaxInvoiceTradeLineItem() {
         if (taxInvoiceTradeLineItem == null) {
             taxInvoiceTradeLineItem = new ArrayList<TaxInvoiceTradeLineItem>();
+            TaxInvoiceTradeLineItem item = new TaxInvoiceTradeLineItem();
+            item.setPurchaseExpiry("20200624");
+            item.setName("품목1");
+            item.setInformation("규격");
+            item.setChargeableUnit("1.00");
+            item.setUnitPrice("1.00");
+            item.setAmount("10000");
+            item.setTax("100");
+            taxInvoiceTradeLineItem.add(new TaxInvoiceTradeLineItem());
         }
         return this.taxInvoiceTradeLineItem;
     }

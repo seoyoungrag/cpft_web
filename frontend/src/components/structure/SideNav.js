@@ -117,9 +117,11 @@ class SideNav extends Component {
          <Link to="/order/applicant/manage" className="collapse-item">
           지원자 관리
          </Link>
+         {/*
          <Link to="/order/black/list" className="collapse-item">
           차단 내역
          </Link>
+          */}
         </div>
        </div>
       </li>
@@ -144,11 +146,16 @@ class SideNav extends Component {
        >
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">근무 차주 관리</h6>
-         <a className="collapse-item">전체 차주 리스트</a>
+         <Link to="/truckOwner/list" className="collapse-item">
+          전체 차주 리스트
+         </Link>
+         {/*
          <a className="collapse-item">차주 근태(수기)</a>
          <a className="collapse-item">차주 정산(수기)</a>
 
          <a className="collapse-item">차주 정산 완료 내역</a>
+          */}
+         <a className="collapse-item">명세서</a>
         </div>
        </div>
       </li>
@@ -164,7 +171,7 @@ class SideNav extends Component {
         onClick={() => store.handleClick("button3")}
        >
         <i className="fas fa-fw fa-krw"></i>
-        <span>전자세금계산서</span>
+        <span>정산 관리</span>
        </a>
        <div
         id="collapseUtilities"
@@ -174,9 +181,11 @@ class SideNav extends Component {
        >
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">전자세금계산서</h6>
+         {/*
          <a className="collapse-item" href="utilities-color.html">
           발행받은 내역
          </a>
+          */}
         </div>
        </div>
       </li>
