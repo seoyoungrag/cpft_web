@@ -2,13 +2,17 @@ server:
   port: 80
 logging:
   level:
-    root: warn
+    root: WARN
     kr.co.teamfresh.cpft.capi: debug
     org.hibernate:
       sql: debug
       type.descriptor.sql: trace
-    com.zaxxer.hikari: debug
+    com.zaxxer.hikari: info
     com.baroservice: trace
+    javax.jws: trace
+    org.springframework.ws.server.MessageTracing: trace
+    org.springframework.ws: trace
+    com.sun.xml.ws.transport.http.client.HttpTransportPipe: debug
 spring:
   profiles: dev
   redis:

@@ -17,7 +17,7 @@ public class TaxInvoice {
 	@ApiModelProperty(value = "issueDirection", example="1", required = true)
 	int issueDirection; //발행방향 //1:정발행 2:역발행
 
-	@ApiModelProperty(value = "taxInvoiceType", example="1", required = true)
+	@ApiModelProperty(value = "taxInvoiceType", example="4", required = true)
 	int taxInvoiceType; //(세금)계산서 형태 //1:세금계산서 2:계산서 4:위수탁세금계산서 5:위수탁계산서 7:수입세금계산서 8:수입계산서
 
 	@ApiModelProperty(value = "taxType", example="2", required = true)
@@ -74,11 +74,14 @@ public class TaxInvoice {
 	
 
 	@ApiModelProperty(value = "invoicerParty", required = false)
-    protected InvoiceeParty invoicerParty;
+    protected InvoicerParty invoicerParty;
 
 	@ApiModelProperty(value = "invoiceeParty", required = false)
-    protected InvoicerParty invoiceeParty;
+    protected InvoiceeParty invoiceeParty;
 
+	@ApiModelProperty(value = "brokerParty", required = false)
+    protected BrokerParty BrokerParty;
+	
 	@ApiModelProperty(value = "taxInvoiceTradeLineItems", required = false)
     protected ArrayOfTaxInvoiceTradeLineItem taxInvoiceTradeLineItems;
 	

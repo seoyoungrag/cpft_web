@@ -1,10 +1,7 @@
 package kr.co.teamfresh.cpft.capi.controller.baroservice;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +10,7 @@ import lombok.Setter;
 @ApiModel()
 public class InvoiceeParty {
 	@ApiModelProperty(value = "mgtNum", example="ABC123", required = false, hidden = true)
-	String mgtNum="ABC123";// 연동사부여 문자키
+	String mgtNum;// 연동사부여 문자키
 	@ApiModelProperty(value = "corpNum", example="5618801138", required = true)
 	String corpNum; //사업자 번호 //	'-'를 제외한 숫자만 입력 개인의 경우 주민등록번호 13자리, 외국인인 경우 '9999999999999'를 입력하고, 비고1 에 외국인등록번호 또는 여권번호 기입
 	@ApiModelProperty(value = "taxRegID", example="", required = false, hidden = true)

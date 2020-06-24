@@ -1,10 +1,7 @@
 package kr.co.teamfresh.cpft.capi.controller.baroservice;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +10,6 @@ import lombok.Setter;
 @ApiModel()
 public class BrokerParty {
 	@ApiModelProperty(value = "mgtNum", example="ABC123", required = false, hidden = true)
-	@JsonProperty(defaultValue = "ABC123")
 	String mgtNum;// 연동사부여 문자키
 	@ApiModelProperty(value = "corpNum", example="5618801138", required = true)
 	String corpNum; //사업자 번호 //	'-'를 제외한 숫자만 입력 개인의 경우 주민등록번호 13자리, 외국인인 경우 '9999999999999'를 입력하고, 비고1 에 외국인등록번호 또는 여권번호 기입
@@ -26,9 +22,9 @@ public class BrokerParty {
 	@ApiModelProperty(value = "addr", example="서울 송파구 방이동 196-12", required = true)
 	String addr; //주소
 	@ApiModelProperty(value = "bizClass", example="", required = false, hidden = true)
-	String bizClass; //업종
+	String bizClass="물류대행"; //업종
 	@ApiModelProperty(value = "bizType", example="", required = false, hidden = true)
-	String bizType; //업태
+	String bizType="똥"; //업태
 	@ApiModelProperty(value = "contactID", example="timflabs", required = false, hidden = true)
 	String contactID="timflabs"; //바로빌 회원 아이디 //대소문자 구분
 	@ApiModelProperty(value = "contactName", example="서영락", required = false, hidden = true)
