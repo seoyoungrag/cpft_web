@@ -5,16 +5,47 @@ import $ from "jquery";
 import { Component } from "react";
 import axios from "axios";
 
-import ReactDOM from "react-dom";
-
 class OrderRegist extends Component {
  constructor(props) {
   super(props);
   this.state = {
    jusos: null,
    loading: false,
+   registOrderWorkingAreaEtcMatterToggle: false,
+   orderRegistWorkTypeValue: "",
   };
 
+  this._setorderRegistWorkType = (event) => {
+   console.log(event.target.value);
+   switch (event.target.value) {
+    case "needSelect":
+     $("[id^=orderRegistWorkDayDetail]").prop("checked", false);
+     $("[id^=orderRegistWorkDayDetail]").attr("disabled", true);
+     break;
+    case "sixDay":
+     $("[id^=orderRegistWorkDayDetail]").prop("checked", true);
+     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
+     $("[id=orderRegistWorkDayDetailSat]").prop("checked", false);
+     $("[id=orderRegistWorkDayDetailSun]").prop("checked", false);
+     break;
+    case "fiveDay":
+     $("[id^=orderRegistWorkDayDetail]").prop("checked", true);
+     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
+     $("[id=orderRegistWorkDayDetailSun]").prop("checked", false);
+     break;
+    case "directCheck":
+     $("[id^=orderRegistWorkDayDetail]").prop("checked", false);
+     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
+     break;
+    default:
+     break;
+   }
+  };
+  this._setRegistOrderWorkingAreaEtcMatterToggle = (event) => {
+   this.setState({
+    registOrderWorkingAreaEtcMatterToggle: event.target.checked,
+   });
+  };
   this._onChangeHandler = async (e) => {
    $("#registOrderWorkingArea").siblings("div.awesomplete").show();
    this._searchJusos(e.target.value);
@@ -99,6 +130,35 @@ class OrderRegist extends Component {
    $("#registOrderWorkingArea").val(e.target.innerText);
    $("#registOrderWorkingArea").siblings("div.awesomplete").hide();
   };
+  this._setTimes = (hour, minute) => {
+   var mil = false; // use am/pm
+
+   var hour = document.getElementById(hour);
+   var min = document.getElementById(minute);
+
+   for (var i = 0; i < 24; i++) {
+    var val = i < 10 && mil ? "0" + i : i;
+    if (!mil && val > 12) val -= 12;
+    hour.options[i] = new Option(val, i);
+   }
+   for (var i = 0; i < 60; i++) {
+    var val = i < 10 ? "0" + i : i;
+    min.options[i] = new Option(val, i);
+   }
+   /*
+   hour.onchange = function () {
+    document.getElementById(hour).value =
+     hour.options[hour.selectedIndex].text + ":" + min.value;
+   };
+   min.onchange = function () {
+    hour.onchange();
+   };
+   var now = new Date();
+   hour.selectedIndex = now.getHours();
+   min.selectedIndex = now.getMinutes();
+   hour.onchange();
+   */
+  };
  }
 
  get renderJusos() {
@@ -160,6 +220,8 @@ class OrderRegist extends Component {
     }
    }
   });
+  this._setTimes("orderRegisWorkHourStart", "orderRegisWorkMinuteStart");
+  this._setTimes("orderRegisWorkHourEnd", "orderRegisWorkMinuteEnd");
  }
 
  render() {
@@ -508,32 +570,55 @@ class OrderRegist extends Component {
                >
                 지역
                </label>
-               <input
-                value={this.state.value}
-                onChange={this._onChangeHandler}
-                className="form-control col-10"
-                id="registOrderWorkingArea"
-                type="text"
-                placeholder="서이천물류센터"
-                key="registOrderWorkingArea"
-                autoComplete="off"
-               />
-               {this.renderJusos}
-              </div>
-              <div className="form-group row">
-               <label
-                htmlFor="registOrderWorkingAreaEtcMatter"
-                className="col-2 col-form-label"
-               >
-                지역 기타입력사항
-               </label>
-               <input
-                className="form-control col-10"
-                id="registOrderWorkingAreaEtcMatter"
-                type="text"
-                placeholder="ex) 기타입력사항"
-                key="registOrderWorkingAreaEtcMatter"
-               />
+               <div className="col-10 row">
+                <div className="col-12 row">
+                 <input
+                  value={this.state.value}
+                  onChange={this._onChangeHandler}
+                  className="form-control col-8"
+                  id="registOrderWorkingArea"
+                  type="text"
+                  placeholder="서이천물류센터"
+                  key="registOrderWorkingArea"
+                  autoComplete="off"
+                 />
+
+                 {this.renderJusos}
+
+                 <div className="col-3">
+                  <label
+                   className="col-form-label pr-3 radio-inline"
+                   htmlFor="registOrderWorkingAreaEtcMatterToggle"
+                  >
+                   <input
+                    className="checkbox mr-1"
+                    id="registOrderWorkingAreaEtcMatterToggle"
+                    type="checkbox"
+                    onChange={this._setRegistOrderWorkingAreaEtcMatterToggle}
+                    checked={this.state.registOrderWorkingAreaEtcMatterToggle}
+                   />
+                   기타입력사항
+                  </label>
+                 </div>
+                </div>
+                {this.state.registOrderWorkingAreaEtcMatterToggle ? (
+                 <div className="form-group row col-12 mt-3">
+                  <label
+                   htmlFor="registOrderWorkingAreaEtcMatter"
+                   className="col-2 col-form-label text-right  border border-dark"
+                  >
+                   기타입력사항
+                  </label>
+                  <input
+                   className="form-control col-10  border border-dark"
+                   id="registOrderWorkingAreaEtcMatter"
+                   type="text"
+                   placeholder="ex) 기타입력사항"
+                   key="registOrderWorkingAreaEtcMatter"
+                  />
+                 </div>
+                ) : null}
+               </div>
               </div>
               <div className="form-group row">
                <label
@@ -557,11 +642,15 @@ class OrderRegist extends Component {
                >
                 근무요일
                </label>
-               <select className="form-control col-10" id="orderRegistWorkType">
-                <option>선택</option>
-                <option>주6일</option>
-                <option>주5일</option>
-                <option>직접입력</option>
+               <select
+                className="form-control col-10"
+                id="orderRegistWorkType"
+                onChange={this._setorderRegistWorkType}
+               >
+                <option value="needSelect">선택</option>
+                <option value="sixDay">주6일</option>
+                <option value="fiveDay">주5일</option>
+                <option value="directCheck">직접입력</option>
                </select>
               </div>
               <div className="form-group row">
@@ -668,18 +757,30 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="exampleFormControlInput7"
+                htmlFor="orderRegisWorkTime"
                 className="col-2 col-form-label"
                >
                 근무시간
                </label>
-               <input
-                className="form-control col-10 col-form-label"
-                id="exampleFormControlInput7"
-                type="email"
-                placeholder="02:00~10:00"
-                key="exampleFormControlInput7"
-               />
+               <select
+                className="form-control col-1"
+                id="orderRegisWorkHourStart"
+               ></select>
+               <label className="col-form-label ml-3 mr-3">:</label>
+               <select
+                className="form-control col-1"
+                id="orderRegisWorkMinuteStart"
+               ></select>
+               <label className="col-form-label ml-3 mr-3">~</label>
+               <select
+                className="form-control col-1"
+                id="orderRegisWorkHourEnd"
+               ></select>
+               <label className="col-form-label ml-3 mr-3">:</label>
+               <select
+                className="form-control col-1"
+                id="orderRegisWorkMinuteEnd"
+               ></select>
               </div>
               <div className="form-group row">
                <label

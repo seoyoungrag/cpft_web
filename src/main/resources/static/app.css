@@ -16158,6 +16158,11 @@ div.dataTables_wrapper div.dataTables_paginate {
  line-height: 1;
 }
 
+a.collapse-item {
+ font-size: 11px;
+ line-height: 1;
+}
+
 html,
 body {
   height: 100%;
