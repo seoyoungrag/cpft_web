@@ -26,6 +26,9 @@ import OrderRegist from "pages/order/OrderRegist";
 import OrderManage from "pages/order/OrderManage";
 import ApplicantManage from "pages/order/ApplicantManage";
 import CarOwnerList from "pages/truckOwner/TruckOwnerList";
+import DtStmnList from "pages/truckOwner/DtStmnList";
+import ElctrnTaxBill from "pages/elctrnTaxBill/ElctrnTaxBill";
+
 import BlackList from "pages/order/BlackList";
 //import "tabler-react/dist/Tabler.css";
 import ReactStore from "ReactStore";
@@ -50,6 +53,9 @@ class App extends React.Component {
      <Route exact path="/order/black/list" component={BlackList} />
      <Route exact path="/auth/black/list" component={PasswordRecovery} />
      <Route exact path="/truckOwner/list" component={CarOwnerList} />
+     <Route exact path="/dtStmn/list" component={DtStmnList} />
+     <Route exact path="/elctrnTaxBill/list" component={ElctrnTaxBill} />
+
      <Route exact path="/400" component={Error400} />
      <Route exact path="/401" component={Error401} />
      <Route exact path="/403" component={Error403} />

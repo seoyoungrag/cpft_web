@@ -150,6 +150,30 @@ public class BaroController {
 	}
 
 	@Transactional
+	@ApiOperation(value = "GetTaxInvoicePopUpURL - 세금계산서 URL 반환", notes = "(세금)계산서의 정보를 양식 형태로 볼 수 있는 URL을 반환합니다.\r\n" + 
+			"반환된 URL은 60초까지만 유효합니다.")
+	@PostMapping(value = "/getTaxInvoicePopUpURL")
+	public CommonResult getTaxInvoicePopUpURL(
+			@ApiParam(value = "연동사부여 문서키", required = true) @RequestParam(defaultValue = "7a7a2bg97o2w8oei93j5d18n") String mgtKey)
+			throws JsonProcessingException {
+
+		String url = barobillApiService.taxInvoice.getTaxInvoicePopUpURL(certKey, corpNum, mgtKey, "timflabs",
+				"Timf180525!");
+
+		ObjectMapper mapper = new ObjectMapper();
+		int urlValue = 0;
+	    try{
+	    	urlValue = Integer.valueOf(url);
+			String errResult = urlValue + " " + getErrString(urlValue);
+			logger.error(mapper.writeValueAsString(errResult));
+			logger.error(mgtKey);
+			return responseService.getFailResult(urlValue, errResult);
+	    } catch(NumberFormatException e) {
+			return responseService.getSingleResult(url);
+	    }
+	}
+	
+	@Transactional
 	@ApiOperation(value = "DeleteTaxInvoice - 회원사 여부 확인", notes = "(세금)계산서를 삭제합니다.\r\n'임시저장', '취소', '거부' 인 상태의 (세금)계산서만 삭제 가능합니다.\r\n삭제된 (세금)계산서는 '전자세금계산서 > 보관함 > 삭제 보관함' 에서 조회할 수 있습니다.\r\n")
 	@PostMapping(value = "/deleteTaxInvoice")
 	public CommonResult deleteTaxInvoice(

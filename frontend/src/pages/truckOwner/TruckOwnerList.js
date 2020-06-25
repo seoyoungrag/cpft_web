@@ -1,6 +1,6 @@
 import React from "react";
 import MainStructure from "components/structure/MainStructure";
-import "./TruckOwnerList.css";
+//import "./TruckOwnerList.css";
 
 import "styles/datatables.css";
 import $ from "jquery";
@@ -147,7 +147,9 @@ class TruckOwnerList extends Component {
          </div>
          <span>전체 차주 리스트</span>
         </h1>
-        <div className="page-header-subtitle">지원자를 관리합니다.</div>
+        <div className="page-header-subtitle">
+         전체 차주 리스트를 조회합니다.
+        </div>
        </div>
       </div>
      </div>
@@ -621,7 +623,7 @@ class TruckOwnerList extends Component {
       </div>
       <div
        className="modal fade"
-       id="exampleModalCenter"
+       id="exampleModalCenter1"
        tabIndex="-1"
        role="dialog"
        aria-labelledby="exampleModalCenterTitle"

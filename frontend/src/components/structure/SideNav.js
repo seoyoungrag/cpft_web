@@ -155,7 +155,9 @@ class SideNav extends Component {
 
          <a className="collapse-item">차주 정산 완료 내역</a>
           */}
-         <a className="collapse-item">명세서</a>
+         <Link to="/dtStmn/list" className="collapse-item">
+          명세서
+         </Link>
         </div>
        </div>
       </li>
@@ -181,11 +183,10 @@ class SideNav extends Component {
        >
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">전자세금계산서</h6>
-         {/*
-         <a className="collapse-item" href="utilities-color.html">
-          발행받은 내역
-         </a>
-          */}
+
+         <Link className="collapse-item" to="/elctrnTaxBill/list">
+          전자세금계산서
+         </Link>
         </div>
        </div>
       </li>
