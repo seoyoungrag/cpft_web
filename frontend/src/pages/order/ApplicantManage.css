@@ -1,56 +1,27 @@
-/*! CSS Used from: Embedded */
-svg:not(:root).svg-inline--fa {
- overflow: visible;
-}
-.svg-inline--fa {
- display: inline-block;
- font-size: inherit;
- height: 1em;
- overflow: visible;
- vertical-align: -0.125em;
-}
 .svg-inline--fa.fa-w-10 {
  width: 0.625em;
 }
-/*! CSS Used from: Embedded */
-svg:not(:root).svg-inline--fa {
- overflow: visible;
-}
-.svg-inline--fa {
- display: inline-block;
- font-size: inherit;
- height: 1em;
- overflow: visible;
- vertical-align: -0.125em;
-}
+
 .svg-inline--fa.fa-w-10 {
  width: 0.625em;
 }
 /*! CSS Used from: https://themes.startbootstrap.com/sb-admin-pro/css/styles.css */
-ul {
- margin-top: 0;
- margin-bottom: 1rem;
-}
-svg {
- overflow: hidden;
- vertical-align: middle;
-}
+
 table {
  border-collapse: collapse;
 }
 th {
  text-align: inherit;
 }
-label {
- display: inline-block;
- margin-bottom: 0.5rem;
-}
+
 button {
  border-radius: 0;
 }
 input,
 button,
-select {
+select,
+select,
+textarea {
  margin: 0;
  font-family: inherit;
  font-size: inherit;
@@ -450,6 +421,20 @@ button::-moz-focus-inner {
  .table-bordered th,
  .table-bordered td {
   border: 1px solid #d7dce3 !important;
+ }
+ pre {
+  white-space: pre-wrap !important;
+ }
+ pre {
+  border: 1px solid #a2acba;
+  page-break-inside: avoid;
+ }
+ img {
+  page-break-inside: avoid;
+ }
+ p {
+  orphans: 3;
+  widows: 3;
  }
 }
 .btn {

@@ -198,64 +198,159 @@ class OrderRegist extends Component {
        <div className="col-lg-12">
         <div id="default">
          <div className="card mb-4">
-          <div className="card-header">모집 요강</div>
+          <div className="card-header">오더 등록</div>
           <div className="card-body">
            <div className="sbp-preview">
             <div className="sbp-preview-content">
-             <form>
-              <div className="form-group">
-               <label htmlFor="customRadio1">모집 유형</label>
+             <form role="form">
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegisWorkGroup"
+                className="col-2 col-form-label"
+               >
+                운송그룹
+               </label>
+               <select className="form-control col-4" id="orderRegisWorkGroup">
+                <option>TS</option>
+                <option>FA</option>
+               </select>
+               <label
+                htmlFor="orderRegisWorkGroupManager"
+                className="col-2 text-right pr-5 col-form-label"
+               >
+                담당자
+               </label>
 
-               <div className="custom-control custom-radio">
-                <input
-                 className="custom-control-input"
-                 id="customRadio1"
-                 type="radio"
-                 name="customRadio"
-                />
-                <label className="custom-control-label" htmlFor="customRadio1">
-                 고정
-                </label>
-               </div>
-               <div className="custom-control custom-radio">
-                <input
-                 className="custom-control-input"
-                 id="customRadio2"
-                 type="radio"
-                 name="customRadio"
-                />
-                <label className="custom-control-label" htmlFor="customRadio2">
-                 지입차주
-                </label>
-               </div>
-               <div className="custom-control custom-radio">
-                <input
-                 className="custom-control-input"
-                 id="customRadio3"
-                 type="radio"
-                 name="customRadio"
-                />
-                <label className="custom-control-label" htmlFor="customRadio3">
-                 용차
-                </label>
+               <input
+                className="form-control col-4"
+                id="orderRegisWorkGroupManager"
+                type="email"
+                readOnly
+                placeholder="서영락"
+                key="orderRegisWorkGroupManager"
+               />
+              </div>
+              <div className="form-group row">
+               <label htmlFor="customRadio1" className="col-2 col-form-label">
+                모집 유형
+               </label>
+               <div className="col-10 row">
+                <div>
+                 <label
+                  className="col-form-label pr-3 radio-inline"
+                  htmlFor="customRadio1"
+                 >
+                  <input
+                   className="radio mr-1"
+                   id="customRadio1"
+                   type="radio"
+                   name="customRadio"
+                  />
+                  고정
+                 </label>
+                </div>
+                <div>
+                 <label
+                  className="col-form-label pr-3 radio-inline"
+                  htmlFor="customRadio2"
+                 >
+                  <input
+                   className="radio mr-1"
+                   id="customRadio2"
+                   type="radio"
+                   name="customRadio"
+                  />
+                  지입차주
+                 </label>
+                </div>
+                <div>
+                 <label
+                  className="col-form-label pr-3 radio-inline"
+                  htmlFor="customRadio3"
+                 >
+                  <input
+                   className="radio mr-1"
+                   id="customRadio3"
+                   type="radio"
+                   name="customRadio"
+                  />
+                  용차
+                 </label>
+                </div>
                </div>
               </div>
 
-              <div className="form-group">
-               <label htmlFor="orderRegistCarType">운행차량</label>
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegistCarType"
+                className="col-2 col-form-label"
+               >
+                운행차량
+               </label>
 
-               <div className="row mb-4">
+               <div className="col-10 row">
                 <div className="col-6">
                  <div className="card">
                   <div className="card-header">차종</div>
                   <div className="card-body">
-                   <input
-                    className="form-control"
-                    id="orderRegistCarType"
-                    type="text"
-                    placeholder="탑차"
-                    key="orderRegistCarType"
-                   />
+                   <div className="col-12 row">
+                    <div>
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio1"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio1"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      냉동탑
+                     </label>
+                    </div>
+                    <div>
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio2"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio2"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      냉장탑
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio3"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio3"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      냉장
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio4"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio4"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      윙바디
+                     </label>
+                    </div>
+                   </div>
                   </div>
                  </div>
                 </div>
@@ -263,76 +358,160 @@ class OrderRegist extends Component {
                  <div className="card">
                   <div className="card-header">톤수</div>
                   <div className="card-body">
-                   <input
-                    className="form-control"
-                    id="orderRegistCarTons"
-                    type="text"
-                    placeholder="2톤"
-                    key="orderRegistCarTons"
-                   />
+                   <div className="col-12 row">
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio1"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio1"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      1t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio2"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio2"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      2.5t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio3"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio3"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      3.5t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio4"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio4"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      5t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio5"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio5"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      11t
+                     </label>
+                    </div>
+                   </div>
                   </div>
                  </div>
                 </div>
                </div>
               </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput3">배송 품목</label>
+              <div className="form-group row">
+               <label
+                htmlFor="exampleFormControlInput3"
+                className="col-2 col-form-label"
+               >
+                배송 품목
+               </label>
                <input
-                className="form-control"
+                className="form-control col-10"
                 id="exampleFormControlInput3"
                 type="email"
                 placeholder="ex) 박스 일 40건"
                 key="exampleFormControlInput3"
                />
               </div>
-              <div className="form-group">
-               <label htmlFor="orderRegistPayAmt">급여</label>
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegistPayAmt"
+                className="col-2 col-form-label"
+               >
+                급여
+               </label>
                <input
-                className="form-control"
+                className="form-control col-4"
                 id="orderRegistPayAmt"
                 type="email"
                 placeholder="ex) 500만원"
                 key="orderRegistPayAmt"
                />
-              </div>
-              <div className="form-group">
-               <label htmlFor="orderRegistPayFullTrue">완제/무제</label>
-
-               <div className="custom-control custom-radio">
-                <input
-                 className="custom-control-input"
-                 id="orderRegistPayFullTrue"
-                 type="radio"
-                 name="orderRegistIsFayFull"
-                />
-                <label
-                 className="custom-control-label"
-                 htmlFor="orderRegistPayFullTrue"
-                >
-                 완제
-                </label>
+               <label
+                htmlFor="orderRegistPayFullTrue"
+                className="col-2 text-right pr-5 col-form-label"
+               >
+                완제/무제
+               </label>
+               <div className="col-4 row">
+                <div className="custom-control custom-radio">
+                 <label
+                  className="col-form-label pr-3 radio-inline"
+                  htmlFor="orderRegistPayFullTrue"
+                 >
+                  <input
+                   className="radio mr-1"
+                   id="orderRegistPayFullTrue"
+                   type="radio"
+                   name="orderRegistIsFayFull"
+                  />
+                  완제
+                 </label>
+                </div>
+                <div className="custom-control custom-radio">
+                 <label
+                  className="col-form-label pr-3 radio-inline"
+                  htmlFor="orderRegistPayFullFalse"
+                 >
+                  <input
+                   className="radio mr-1"
+                   id="orderRegistPayFullFalse"
+                   type="radio"
+                   name="orderRegistIsFayFull"
+                  />
+                  무제
+                 </label>
+                </div>
                </div>
-               <div className="custom-control custom-radio">
-                <input
-                 className="custom-control-input"
-                 id="orderRegistPayFullFalse"
-                 type="radio"
-                 name="orderRegistIsFayFull"
-                />
-                <label
-                 className="custom-control-label"
-                 htmlFor="orderRegistPayFullFalse"
-                >
-                 무제
-                </label>
-               </div>
               </div>
-              <div className="form-group">
-               <label htmlFor="registOrderWorkingArea">지역</label>
+              <div className="form-group row">
+               <label
+                htmlFor="registOrderWorkingArea"
+                className="col-2 col-form-label"
+               >
+                지역
+               </label>
                <input
                 value={this.state.value}
                 onChange={this._onChangeHandler}
-                className="form-control"
+                className="form-control col-10"
                 id="registOrderWorkingArea"
                 type="text"
                 placeholder="서이천물류센터"
@@ -341,152 +520,185 @@ class OrderRegist extends Component {
                />
                {this.renderJusos}
               </div>
-              <div className="form-group">
-               <label htmlFor="registOrderWorkingAreaEtcMatter">
+              <div className="form-group row">
+               <label
+                htmlFor="registOrderWorkingAreaEtcMatter"
+                className="col-2 col-form-label"
+               >
                 지역 기타입력사항
                </label>
                <input
-                className="form-control"
+                className="form-control col-10"
                 id="registOrderWorkingAreaEtcMatter"
                 type="text"
                 placeholder="ex) 기타입력사항"
                 key="registOrderWorkingAreaEtcMatter"
                />
               </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput5">운행구간</label>
+              <div className="form-group row">
+               <label
+                htmlFor="exampleFormControlInput5"
+                className="col-2 col-form-label"
+               >
+                운행구간
+               </label>
                <input
-                className="form-control"
+                className="form-control col-10"
                 id="exampleFormControlInput5"
                 type="email"
                 placeholder="ex) 서울시"
                 key="exampleFormControlInput5"
                />
               </div>
-              <div className="form-group">
-               <label htmlFor="orderRegistWorkType">근무요일</label>
-               <select className="form-control" id="orderRegistWorkType">
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegistWorkType"
+                className="col-2 col-form-label"
+               >
+                근무요일
+               </label>
+               <select className="form-control col-10" id="orderRegistWorkType">
                 <option>선택</option>
                 <option>주6일</option>
                 <option>주5일</option>
                 <option>직접입력</option>
                </select>
               </div>
-              <div className="form-group">
-               <label htmlFor="orderRegistWorkDayDetail">상세요일 선택</label>
-               <div className="col-12">
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailMon"
-                  type="checkbox"
-                 />
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegistWorkDayDetail"
+                className="col-2 col-form-label"
+               >
+                상세요일 선택
+               </label>
+               <div className="col-10 row">
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailMon"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailMon"
+                   type="checkbox"
+                  />
                   월
                  </label>
                 </div>
 
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailTue"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailTue"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailTue"
+                   type="checkbox"
+                  />
                   화
                  </label>
                 </div>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailWed"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailWed"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailWed"
+                   type="checkbox"
+                  />
                   수
                  </label>
                 </div>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailThu"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailThu"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailThu"
+                   type="checkbox"
+                  />
                   목
                  </label>
                 </div>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailFri"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailFri"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailFri"
+                   type="checkbox"
+                  />
                   금
                  </label>
                 </div>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailSat"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailSat"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailSat"
+                   type="checkbox"
+                  />
                   토
                  </label>
                 </div>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="orderRegistWorkDayDetailSun"
-                  type="checkbox"
-                 />
+                <div>
                  <label
-                  className="custom-control-label"
+                  className="col-form-label pr-3 radio-inline"
                   htmlFor="orderRegistWorkDayDetailSun"
                  >
+                  <input
+                   className="checkbox mr-1"
+                   id="orderRegistWorkDayDetailSun"
+                   type="checkbox"
+                  />
                   일
                  </label>
                 </div>
                </div>
               </div>
-              <div className="form-group">
-               <label htmlFor="exampleFormControlInput7">근무시간</label>
+              <div className="form-group row">
+               <label
+                htmlFor="exampleFormControlInput7"
+                className="col-2 col-form-label"
+               >
+                근무시간
+               </label>
                <input
-                className="form-control"
+                className="form-control col-10 col-form-label"
                 id="exampleFormControlInput7"
                 type="email"
                 placeholder="02:00~10:00"
                 key="exampleFormControlInput7"
                />
               </div>
-              <div className="form-group">
-               <label htmlFor="orderRegistDetailMatter">상세 사항</label>
+              <div className="form-group row">
+               <label
+                htmlFor="orderRegistDetailMatter"
+                className="col-2 col-form-label"
+               >
+                상세 사항
+               </label>
                <textarea
-                className="form-control"
+                className="form-control col-10"
                 id="orderRegistDetailMatter"
                 rows="3"
                 placeholder="ex) 연락주세요. 02-xxx-xxxx "
                ></textarea>
+              </div>
+              <div className="d-flex flex-row-reverse">
+               <button class="btn btn-primary" type="button">
+                저장
+               </button>
               </div>
              </form>
             </div>

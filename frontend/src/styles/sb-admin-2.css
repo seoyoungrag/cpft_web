@@ -11560,3 +11560,8 @@ div.dataTables_wrapper div.dataTables_paginate {
  border: 0px !important;
  border-radius: 2px;
 }
+
+* {
+ font-size: 12px;
+ line-height: 1;
+}
