@@ -307,50 +307,57 @@ class OrderRegist extends Component {
                <label htmlFor="customRadio1" className="col-2 col-form-label">
                 모집 유형
                </label>
-               <div className="col-10 row">
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="customRadio1"
-                 >
-                  <input
-                   className="radio mr-1"
-                   id="customRadio1"
-                   type="radio"
-                   name="customRadio"
-                  />
-                  고정
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="customRadio2"
-                 >
-                  <input
-                   className="radio mr-1"
-                   id="customRadio2"
-                   type="radio"
-                   name="customRadio"
-                  />
-                  지입차주
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="customRadio3"
-                 >
-                  <input
-                   className="radio mr-1"
-                   id="customRadio3"
-                   type="radio"
-                   name="customRadio"
-                  />
-                  용차
-                 </label>
-                </div>
+               <div className="col-4 pl-0">
+                <label
+                 className="col-form-label pr-3 radio-inline"
+                 htmlFor="customRadio1"
+                >
+                 <input
+                  className="radio mr-1"
+                  id="customRadio1"
+                  type="radio"
+                  name="customRadio"
+                 />
+                 고정
+                </label>
+                <label
+                 className="col-form-label pr-3 radio-inline"
+                 htmlFor="customRadio2"
+                >
+                 <input
+                  className="radio mr-1"
+                  id="customRadio2"
+                  type="radio"
+                  name="customRadio"
+                 />
+                 지입차주
+                </label>
+                <label
+                 className="col-form-label pr-3 radio-inline"
+                 htmlFor="customRadio3"
+                >
+                 <input
+                  className="radio mr-1"
+                  id="customRadio3"
+                  type="radio"
+                  name="customRadio"
+                 />
+                 용차
+                </label>
                </div>
+               <label
+                htmlFor="orderRegisWorkRcritMans"
+                className="col-2 text-right pr-5 col-form-label"
+               >
+                모집인원
+               </label>
+               <input
+                className="form-control col-4"
+                id="orderRegisWorkRcritMans"
+                type="text"
+                placeholder="5"
+                key="orderRegisWorkRcritMans"
+               />
               </div>
 
               <div className="form-group row">
@@ -367,7 +374,7 @@ class OrderRegist extends Component {
                   <div className="card-header">차종</div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
-                    <div>
+                    <div className="custom-control custom-radio">
                      <label
                       className="col-form-label pr-3 radio-inline"
                       htmlFor="orderRegistCarTypeRadio1"
@@ -381,7 +388,7 @@ class OrderRegist extends Component {
                       냉동탑
                      </label>
                     </div>
-                    <div>
+                    <div className="custom-control custom-radio">
                      <label
                       className="col-form-label pr-3 radio-inline"
                       htmlFor="orderRegistCarTypeRadio2"
@@ -406,7 +413,7 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarType"
                       />
-                      냉장
+                      윙바디
                      </label>
                     </div>
                     <div className="custom-control custom-radio">
@@ -420,7 +427,49 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarType"
                       />
-                      윙바디
+                      다마스
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio5"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio5"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      카고
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio6"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio6"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      탑
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio7"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTypeRadio7"
+                       type="radio"
+                       name="orderRegistCarType"
+                      />
+                      라보
                      </label>
                     </div>
                    </div>
@@ -826,7 +875,10 @@ class OrderRegist extends Component {
               </div>
               <div className="d-flex flex-row-reverse">
                <button className="btn btn-primary" type="button">
-                저장
+                등록 완료
+               </button>
+               <button className="btn btn-secondary mr-3" type="button">
+                임시저장
                </button>
               </div>
              </form>
