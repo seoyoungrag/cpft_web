@@ -821,7 +821,9 @@ class ApplicantManage extends Component {
          <div className="modal-body">
           <div className="card mb-4">
            <div className="card-body">
-            <h5 className="card-title text-primary">김차일 010-1111-1411</h5>
+            <h5 className="card-title text-primary row m-auto p-auto">
+             <dt>김차일</dt>&nbsp; <dd>010-1111-1411</dd>
+            </h5>
             <div className="card-text row">
              <dl className="col-6 row mb-auto">
               <dt className="col-3 h-25 d-flex justify-content-end">차량:</dt>{" "}

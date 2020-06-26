@@ -155,10 +155,15 @@ class DtStmnList extends Component {
       <div className="row">
        <div className="col-lg-12">
         <div className="card">
+         <div className="card-header row">
+          <div className="col-6">명세서</div>
+          <div class="col-sm-12 col-md-6 row"></div>
+         </div>
+         {/*
          <div className="card-header card-header-tabs card-header-primary">
           <div className="nav-tabs-navigation">
            <div className="nav-tabs-wrapper">
-            {/*<span className="nav-tabs-title">Tasks:</span>*/}
+            <span className="nav-tabs-title">Tasks:</span>
             <ul className="nav nav-tabs" data-tabs="tabs">
              <li className="nav-item">
               <a className="nav-link active" href="#profile" data-toggle="tab">
@@ -176,6 +181,7 @@ class DtStmnList extends Component {
            </div>
           </div>
          </div>
+*/}
          <div className="card-body">
           <div className="tab-content">
            <div className="tab-pane active" id="profile">
@@ -205,7 +211,7 @@ class DtStmnList extends Component {
                     colSpan="1"
                     aria-sort="ascending"
                     aria-label="Name: activate to sort column descending"
-                    style={{ width: "152px" }}
+                    style={{ width: "15%" }}
                    >
                     운송그룹
                     <svg
@@ -231,7 +237,7 @@ class DtStmnList extends Component {
                     rowSpan="1"
                     colSpan="1"
                     aria-label="Position: activate to sort column ascending"
-                    style={{ width: "230px" }}
+                    style={{ width: "15%" }}
                    >
                     담당자
                     <svg
@@ -257,7 +263,7 @@ class DtStmnList extends Component {
                     rowSpan="1"
                     colSpan="1"
                     aria-label="Office: activate to sort column ascending"
-                    style={{ width: "107px" }}
+                    style={{ width: "15%" }}
                    >
                     차주명
                     <svg
@@ -283,7 +289,7 @@ class DtStmnList extends Component {
                     rowSpan="1"
                     colSpan="1"
                     aria-label="Age: activate to sort column ascending"
-                    style={{ width: "49px" }}
+                    style={{ width: "15%" }}
                    >
                     연락처
                     <svg
@@ -309,7 +315,6 @@ class DtStmnList extends Component {
                     rowSpan="1"
                     colSpan="1"
                     aria-label="Start date: activate to sort column ascending"
-                    style={{ width: "100px" }}
                    >
                     명세서
                     <svg
@@ -335,7 +340,7 @@ class DtStmnList extends Component {
                     rowSpan="1"
                     colSpan="1"
                     aria-label="Salary: activate to sort column ascending"
-                    style={{ width: "88px" }}
+                    style={{ width: "15%" }}
                    >
                     명세서 확인
                     <svg
@@ -394,7 +399,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>O</td>
+                   <td>
+                    <div className="badge badge-primary badge-pill">O</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -411,7 +418,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>재요청</td>
+                   <td>
+                    <div className="badge badge-warning badge-pill">재요청</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -426,9 +435,14 @@ class DtStmnList extends Component {
                    <td>
                     <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
                      5월_명세서_김차삼.jpg
+                     <button className="btn btn-outline-danger shadow-sm ml-3">
+                      X
+                     </button>
                     </button>
                    </td>
-                   <td>X</td>
+                   <td>
+                    <div className="badge badge-danger badge-pill">X</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -443,9 +457,14 @@ class DtStmnList extends Component {
                    <td>
                     <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
                      5월_명세서_김차사.jpg
+                     <button className="btn btn-outline-danger shadow-sm ml-3">
+                      X
+                     </button>
                     </button>
                    </td>
-                   <td>O</td>
+                   <td>
+                    <div className="badge badge-primary badge-pill">O</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -462,7 +481,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>확인</td>
+                   <td>
+                    <div className="badge badge-primary badge-pill">확인</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -479,7 +500,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>재요청</td>
+                   <td>
+                    <div className="badge badge-warning badge-pill">재요청</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -496,7 +519,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>미확인</td>
+                   <td>
+                    <div className="badge badge-info badge-pill">미확인</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -513,7 +538,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>O</td>
+                   <td>
+                    <div className="badge badge-primary badge-pill">O</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -530,7 +557,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>O</td>
+                   <td>
+                    <div className="badge badge-info badge-pill">미확인</div>
+                   </td>
                   </tr>
                   <tr
                    role="row"
@@ -547,7 +576,9 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>O</td>
+                   <td>
+                    <div className="badge badge-primary badge-pill">O</div>
+                   </td>
                   </tr>
                  </tbody>
                 </table>
@@ -1205,23 +1236,38 @@ class DtStmnList extends Component {
          <div className="modal-body">
           <div className="card mb-4">
            <div className="card-body">
-            <h5 className="card-title text-primary">차주명: 김차일</h5>
+            <h5 className="card-title text-primary row m-auto p-auto">
+             <dt>차주명:</dt>&nbsp; <dd>김차일</dd>
+            </h5>
             <div className="card-text row">
-             <div className="col-6">
-              <div>운송그룹: TS</div>
-              <div>요청일: 20.06.05</div>
-             </div>
-             <div className="col-6">
-              <div>매니저코드: TS_0002</div>
-              <div>담당자: 유아름</div>
-             </div>
-             <div className="col-12 mt-3">
-              <div>요청 사유</div>
-              <div>
+             <dl className="col-6 row mb-auto">
+              <dt className="col-4 h-25 d-flex justify-content-end">
+               운송그룹:
+              </dt>{" "}
+              <dd className="col-8 h-25 ">TS</dd>
+              <dt className="col-4 h-25 d-flex justify-content-end">
+               요청일:
+              </dt>{" "}
+              <dd className="col-8 h-25 ">20.06.05</dd>
+             </dl>
+             <dl className="col-6 row mb-auto">
+              <dt className="col-5 h-25 d-flex justify-content-end">
+               매니저코드:
+              </dt>{" "}
+              <dd className="col-7 h-25 ">TS_0002</dd>
+              <dt className="col-5 h-25 d-flex justify-content-end">
+               담당자:
+              </dt>{" "}
+              <dd className="col-7 h-25 ">유아름</dd>
+             </dl>
+             <dl className="col-12 m-auto pt-5">
+              <dt className="mb-3">요청 사유</dt>
+              <dd>
+               {" "}
                무단 결근 한 적이 없는데, 무단 결근처리 되서 패널티가
-               적용되었습니다.
-              </div>
-             </div>
+               적용되었습니다 .
+              </dd>
+             </dl>
             </div>
            </div>
           </div>
