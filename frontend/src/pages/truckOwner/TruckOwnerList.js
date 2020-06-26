@@ -157,14 +157,12 @@ class TruckOwnerList extends Component {
       <div className="card mb-4">
        <div className="card-header row">
         <div className="col-6">전체 차주 리스트</div>
-        <div className="col-6">
-         <a
-          href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-          className="btnMtcTpl_1"
-          target="_blank"
-         >
-          <span>관리</span>
-         </a>
+        <div class="col-sm-12 col-md-6 row">
+         <div class="col-12 d-flex justify-content-end">
+          <button class="btn btn-info">
+           <span>관리</span>
+          </button>
+         </div>
         </div>
        </div>
        <div className="card-body">
@@ -194,7 +192,7 @@ class TruckOwnerList extends Component {
                 colSpan="1"
                 aria-sort="ascending"
                 aria-label="Name: activate to sort column descending"
-                style={{ width: "152px" }}
+                style={{ width: "15%" }}
                >
                 운송그룹
                 <svg
@@ -220,7 +218,7 @@ class TruckOwnerList extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Position: activate to sort column ascending"
-                style={{ width: "230px" }}
+                style={{ width: "15%" }}
                >
                 담당자
                 <svg
@@ -246,7 +244,7 @@ class TruckOwnerList extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Office: activate to sort column ascending"
-                style={{ width: "107px" }}
+                style={{ width: "15%" }}
                >
                 차주명
                 <svg
@@ -272,7 +270,7 @@ class TruckOwnerList extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Age: activate to sort column ascending"
-                style={{ width: "49px" }}
+                style={{ width: "15%" }}
                >
                 근무 현황
                 <svg
@@ -298,7 +296,6 @@ class TruckOwnerList extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Start date: activate to sort column ascending"
-                style={{ width: "100px" }}
                >
                 근무일
                 <svg
@@ -324,7 +321,7 @@ class TruckOwnerList extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "15%" }}
                >
                 연락처
                 <svg
