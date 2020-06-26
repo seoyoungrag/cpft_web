@@ -193,6 +193,18 @@ class OrderManage extends Component {
          <div className="card-body">
           <div className="tab-content">
            <div className="tab-pane active" id="ing">
+            <div className="form-group col-6 row">
+             <label
+              htmlFor="orderRegisWorkGroup"
+              className="col-2 col-form-label"
+             >
+              운송그룹
+             </label>
+             <select className="form-control col-4" id="orderRegisWorkGroup">
+              <option>TS</option>
+              <option>FA</option>
+             </select>
+            </div>
             <table className="table">
              <tbody>
               <tr>
@@ -397,6 +409,18 @@ class OrderManage extends Component {
             </table>
            </div>
            <div className="tab-pane" id="complete">
+            <div className="form-group col-6 row">
+             <label
+              htmlFor="orderRegisWorkGroup"
+              className="col-2 col-form-label"
+             >
+              운송그룹
+             </label>
+             <select className="form-control col-4" id="orderRegisWorkGroup">
+              <option>TS</option>
+              <option>FA</option>
+             </select>
+            </div>
             <table className="table">
              <tbody>
               <tr>
@@ -601,6 +625,18 @@ class OrderManage extends Component {
             </table>
            </div>
            <div className="tab-pane" id="temp">
+            <div className="form-group col-6 row">
+             <label
+              htmlFor="orderRegisWorkGroup"
+              className="col-2 col-form-label"
+             >
+              운송그룹
+             </label>
+             <select className="form-control col-4" id="orderRegisWorkGroup">
+              <option>TS</option>
+              <option>FA</option>
+             </select>
+            </div>
             <table className="table">
              <tbody>
               <tr>
@@ -802,6 +838,18 @@ class OrderManage extends Component {
            </div>
 
            <div className="tab-pane" id="all">
+            <div className="form-group col-6 row">
+             <label
+              htmlFor="orderRegisWorkGroup"
+              className="col-2 col-form-label"
+             >
+              운송그룹
+             </label>
+             <select className="form-control col-4" id="orderRegisWorkGroup">
+              <option>TS</option>
+              <option>FA</option>
+             </select>
+            </div>
             <table className="table">
              <tbody>
               <tr>
