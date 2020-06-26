@@ -67,6 +67,7 @@ module.exports = {
   new MiniCssExtractPlugin({
    path: path.resolve(__dirname, "../src/main/resources/static/"),
    filename: "[name].css",
+   /*filename: "[name].[hash].css",*/
    chunkFilename: "[id].css",
    publicPath: "/",
   }),

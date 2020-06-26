@@ -478,18 +478,6 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
                   <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
                     <li className="w-25">
@@ -577,18 +565,6 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
                   <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
                     <li className="w-25">
@@ -698,57 +674,9 @@ class OrderManage extends Component {
                    <button type="button" className="btn btn-primary mx-1">
                     <span>수정</span>
                    </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
                    <button type="button" className="btn btn-danger  ml-1 mr-0">
                     <span>삭제</span>
                    </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
                   </div>
                  </div>
                 </div>
@@ -1010,57 +938,9 @@ class OrderManage extends Component {
                    <button type="button" className="btn btn-primary mx-1">
                     <span>수정</span>
                    </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
                    <button type="button" className="btn btn-danger  ml-1 mr-0">
                     <span>삭제</span>
                    </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
                   </div>
                  </div>
                 </div>
@@ -1105,18 +985,6 @@ class OrderManage extends Component {
                   </div>
                  </div>
                  <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
                   <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
                     <li className="w-25">

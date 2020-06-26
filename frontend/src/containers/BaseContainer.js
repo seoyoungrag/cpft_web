@@ -5,16 +5,17 @@ import { withRouter } from "react-router-dom";
 
 export class BaseContainer extends React.Component {
  componentDidMount() {
-  console.log("base mounted");
+  /*console.log("base mounted");*/
   this.checkUser();
  }
  componentDidUpdate(prevProps, prevState) {
+  /*
   console.log("base updated");
   console.log(prevProps.logged);
   console.log(this.props.logged);
   console.log(
    "3" + prevProps.logged !== this.props.logged && !this.props.logged
-  );
+  );*/
   if (prevProps.logged !== this.props.logged && !this.props.logged) {
    console.log("4");
    window.location.href = "/auth/login";
@@ -24,7 +25,7 @@ export class BaseContainer extends React.Component {
  checkUser = () => {
   const { checkUser, setUserTemp, history } = this.props;
 
-  console.log("checkUser before ");
+  /*console.log("checkUser before ");*/
   // 먼저 localStorage에 값이 저장되있는지 확인, userInfo값이 있다면, 로그인을 한것으로 인식하고,
   // 바로 setUserTemp를 실시.
   // 이를 하는 이유는 새로고침 했을시, state가 초기화 되어 logged값도 false로 바뀌는데, 새로고침 했을시
@@ -34,10 +35,10 @@ export class BaseContainer extends React.Component {
    localStorage.getItem("userInfo") &&
    JSON.parse(localStorage.getItem("userInfo")).userLoginId
   ) {
-   console.log("checkUser middle");
+   /*console.log("checkUser middle");*/
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-   console.log("BaseContainer:25");
-   console.log(userInfo);
+   /*console.log("BaseContainer:25");
+   console.log(userInfo);*/
    setUserTemp({
     userLoginId: userInfo.userLoginId,
     userNm: userInfo.userNm,
@@ -50,7 +51,7 @@ export class BaseContainer extends React.Component {
 
   // 만약 userInfo값이 localStorage에 없을때에는, api통신을 실시.
   //checkUser();
-  console.log(this.props.userInfo);
+  /*console.log(this.props.userInfo);*/
   if (!this.props.userInfo) {
    history.push("/auth/login");
   }
