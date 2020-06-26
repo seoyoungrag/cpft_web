@@ -30,6 +30,9 @@ class ApplicantManage extends Component {
   };
  }
  componentDidMount() {
+  $("#orderSelectMenu a").on("click", function () {
+   $("#orderSelecteButton").html($(this).html());
+  });
   $(this.refs.main).DataTable({
    dom: '<"data-table-wrapper"t>',
    data: this.props.names,
@@ -156,37 +159,106 @@ class ApplicantManage extends Component {
       <div className="card mb-4">
        <div className="card-header">지원자 관리</div>
        <div className="card-body">
+        <div className="row">
+         <div className="col-sm-12 col-md-6">
+          <div className="col-12 row h-100">
+           <div class="btn-group dropdown col-12 h-100 text-wrap w-auto">
+            <button
+             class="btn btn-secondary btn-sm dropdown-toggle text-wrap mh-100"
+             type="button"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+             id="orderSelecteButton"
+            >
+             전체
+            </button>
+            <div
+             class="dropdown-menu w-100"
+             aria-labelledby="orderSelecteButton"
+             id="orderSelectMenu"
+            >
+             <a class="dropdown-item w-100 text-truncate" href="#">
+              001 팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
+              개인사업자 차주 모집001 팀프레시 하남 고정 개인사업자 차주 모집001
+              팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
+              개인사업자 차주 모집001 팀프레시 하남 고정 개인사업자 차주 모집001
+              팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
+              개인사업자 차주 모집001 팀프레시 하남 고정 개인사업자 차주 모집001
+              팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
+              개인사업자 차주 모집001 팀프레시 하남 고정 개인사업자 차주 모집001
+              팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
+              개인사업자 차주 모집
+             </a>
+             <a class="dropdown-item" href="#">
+              002 팀프레시 하남 고정 개인사업자 차주 모집
+             </a>
+
+             <div class="dropdown-divider"></div>
+             <a class="dropdown-item" href="#">
+              전체
+             </a>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div className="col-sm-12 col-md-6 row">
+          <div className="col-4 d-inline-flex">
+           <button className="btn btn-info">
+            <span>공고 수정</span>
+           </button>
+          </div>
+          <div className="col-8 m-0 p-0 apyStatusBoard">
+           <ul className="boardItem">
+            <li className="w-25">
+             <strong className="stepTit">지원자</strong>
+             <a
+              href="#"
+              className="itemNum tahoma devLinkExpire"
+              data-pts="-77"
+             >
+              1
+             </a>
+            </li>
+            <li className="apyStatusNotRead w-25">
+             <strong className="stepTit">열람</strong>
+             <a
+              href="#"
+              className="itemNum tahoma devLinkExpire"
+              data-pts="-77"
+             >
+              0
+             </a>
+            </li>
+            <li className="on w-25">
+             <strong className="stepTit">연락중</strong>
+             <a
+              href="#"
+              className="itemNum tahoma devLinkExpire"
+              data-pts="-77"
+             >
+              1
+             </a>
+            </li>
+            <li className="w-25">
+             <strong className="stepTit">최종합격</strong>
+             <a
+              href="#"
+              className="itemNum tahoma devLinkExpire"
+              data-pts="-77"
+             >
+              0
+             </a>
+            </li>
+           </ul>
+          </div>
+         </div>
+        </div>
         <div className="datatable table-responsive">
          <div
           id="dataTable_wrapper"
           className="dataTables_wrapper dt-bootstrap4"
          >
-          <div className="row">
-           <div className="col-sm-12 col-md-6">
-            <div className="col-12 form-group">
-             <select className="form-control" id="orderRegistWorkType">
-              <option defaultValue>
-               001 팀프레시 하남 고정 개인사업자 차주 모집
-              </option>
-              <option>002 팀프레시 하남 고정 개인사업자 차주 모집</option>
-             </select>
-            </div>
-           </div>
-           <div className="col-sm-12 col-md-6 row">
-            <div className="col-6">
-             <a
-              href="/Recruit/GI_Read/31938638?Oem_Code=C1"
-              className="btnMtcTpl_1"
-              target="_blank"
-             >
-              <span>공고 수정</span>
-             </a>
-            </div>
-            <div className="col-6">
-             <span>진행중 공고 지원자 3</span>
-            </div>
-           </div>
-          </div>
           <div className="row">
            <div className="col-sm-12">
             <table
