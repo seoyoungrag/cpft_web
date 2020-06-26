@@ -236,47 +236,24 @@ class ElctrnTaxBill extends Component {
       <div className="card mb-4">
        <div className="card-header row">
         <div className="col-6">전자 세금계산서 조회</div>
-        <div className="col-12 row">
-         <div className="col-6">
-          <a href="#" className="btnMtcTpl_1" target="_blank">
-           <span>1주일</span>
-          </a>
-          <a href="#" className="btnMtcTpl_1" target="_blank">
-           <span>1개월</span>
-          </a>
-          <a href="#" className="btnMtcTpl_1" target="_blank">
-           <span>3개월</span>
-          </a>
-          <a href="#" className="btnMtcTpl_1" target="_blank">
-           <span>6개월</span>
-          </a>
-         </div>
-         <div className="col-6 row">
-          <div className="col-10 row">
-           <input
-            className="form-control col-5 datepicker"
-            id="startD"
-            type="text"
-            placeholder="2020-01-01"
-           />
-           <div className="col-2">~</div>
-           <input
-            className="form-control col-5 datepicker"
-            id="endD"
-            type="text"
-            placeholder="2020-06-01"
-           />
-          </div>
-          <div className="col-2">
-           <button className="btn-sm btn-outline-primary shadow-sm">
-            조회
+        <div className="col-12 row mt-3">
+         <div className="col-3">
+          <div class="d-flex justify-content-start">
+           <button type="button" class="btn btn-secondary ml-0 mr-1">
+            <span>1주일</span>
+           </button>
+           <button type="button" class="btn btn-secondary mx-1">
+            <span>1개월</span>
+           </button>
+           <button type="button" class="btn btn-secondary  mx-1">
+            <span>3개월</span>
+           </button>
+           <button type="button" class="btn btn-secondary  ml-1 mr-0">
+            <span>6개월</span>
            </button>
           </div>
          </div>
-        </div>
-
-        <div className="col-12 row">
-         <div className="col-10">
+         <div className="col-5 d-flex justify-content-center">
           <input
            className="form-control"
            id="searchWord"
@@ -284,8 +261,21 @@ class ElctrnTaxBill extends Component {
            placeholder="like 검색창(공급자명)"
           />
          </div>
-         <div className="col-2">
-          <button className="btn-sm btn-outline-primary shadow-sm">조회</button>
+         <div class="form-group row col-4 d-flex justify-content-end m-auto p-auto">
+          <input
+           className="form-control datepicker col-3"
+           id="startD"
+           type="text"
+           placeholder="2020-01-01"
+          />
+          <label class="col-form-label ml-3 mr-3">~</label>
+          <input
+           className="form-control datepicker col-3"
+           id="endD"
+           type="text"
+           placeholder="2020-06-01"
+          />
+          <button className="btn btn-info ml-5">조회</button>
          </div>
         </div>
        </div>
@@ -316,7 +306,7 @@ class ElctrnTaxBill extends Component {
                 colSpan="1"
                 aria-sort="ascending"
                 aria-label="Name: activate to sort column descending"
-                style={{ width: "152px" }}
+                style={{ width: "10%" }}
                >
                 그룹
                 <svg
@@ -342,7 +332,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Position: activate to sort column ascending"
-                style={{ width: "230px" }}
+                style={{ width: "10%" }}
                >
                 공급자
                 <svg
@@ -368,7 +358,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Office: activate to sort column ascending"
-                style={{ width: "107px" }}
+                style={{ width: "10%" }}
                >
                 발행형태
                 <svg
@@ -394,7 +384,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Age: activate to sort column ascending"
-                style={{ width: "49px" }}
+                style={{ width: "10%" }}
                >
                 발급일자
                 <svg
@@ -420,9 +410,9 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Start date: activate to sort column ascending"
-                style={{ width: "100px" }}
+                style={{ width: "10%" }}
                >
-                기업명(공급받는자)
+                기업명
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -446,9 +436,9 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "10%" }}
                >
-                사업자등록번호
+                사업자번호
                 <svg
                  data-fa-pseudo-element=":after"
                  data-prefix="fas"
@@ -472,7 +462,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "10%" }}
                >
                 공급가액
                 <svg
@@ -498,7 +488,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "10%" }}
                >
                 세액
                 <svg
@@ -524,7 +514,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "10%" }}
                >
                 합계
                 <svg
@@ -550,7 +540,7 @@ class ElctrnTaxBill extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "10%" }}
                >
                 세금계산서
                 <svg
@@ -586,10 +576,10 @@ class ElctrnTaxBill extends Component {
                 발급일자
                </th>
                <th rowSpan="1" colSpan="1">
-                기업명(공급받는자)
+                기업명
                </th>
                <th rowSpan="1" colSpan="1">
-                사업자등록번호
+                사업자번호
                </th>
                <th rowSpan="1" colSpan="1">
                 공급가액
@@ -626,9 +616,8 @@ class ElctrnTaxBill extends Component {
                  className="btn btn-outline-primary shadow-sm mr-2 my-1"
                  onClick={this.openTaxInvoice}
                 >
-                 다운로드
-                </button>{" "}
-                미리보기
+                 확인하기
+                </button>
                </td>
               </tr>
               <tr
@@ -648,9 +637,8 @@ class ElctrnTaxBill extends Component {
                <td>3,300,000</td>
                <td>
                 <button className="btn btn-outline-primary shadow-sm mr-2 my-1">
-                 다운로드
-                </button>{" "}
-                미리보기
+                 확인하기
+                </button>
                </td>
               </tr>
 
@@ -671,9 +659,8 @@ class ElctrnTaxBill extends Component {
                <td>3,300,000</td>
                <td>
                 <button className="btn btn-outline-primary shadow-sm mr-2 my-1">
-                 다운로드
-                </button>{" "}
-                미리보기
+                 확인하기
+                </button>
                </td>
               </tr>
               <tr
@@ -693,9 +680,8 @@ class ElctrnTaxBill extends Component {
                <td>3,300,000</td>
                <td>
                 <button className="btn btn-outline-primary shadow-sm mr-2 my-1">
-                 다운로드
-                </button>{" "}
-                미리보기
+                 확인하기
+                </button>
                </td>
               </tr>
              </tbody>

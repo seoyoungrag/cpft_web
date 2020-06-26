@@ -16065,6 +16065,22 @@ a.collapse-item {
  max-width: 0 !important;
 }
 
+a.nav-link {
+ color: #6e707e;
+ height: 40px;
+ margin: auto;
+}
+
+a.nav-link.active {
+ color: #007bff !important;
+}
+
+.card-header.card-header-tabs.card-header-primary {
+ border-bottom-width: 1px;
+ border-bottom-color: #dddfeb;
+ border-bottom-style: solid;
+}
+
 html,
 body {
   height: 100%;

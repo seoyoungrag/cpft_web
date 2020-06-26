@@ -157,31 +157,47 @@ class OrderManage extends Component {
       <div className="row">
        <div className="col-lg-12">
         <div className="card">
-         <div className="card-header card-header-tabs card-header-primary">
+         <div className="card-header card-header-tabs card-header-primary pb-0">
           <div className="nav-tabs-navigation">
            <div className="nav-tabs-wrapper">
             {/*<span className="nav-tabs-title">Tasks:</span>*/}
             <ul className="nav nav-tabs" data-tabs="tabs">
              <li className="nav-item">
-              <a className="nav-link active" href="#ing" data-toggle="tab">
+              <a
+               className="nav-link d-flex align-items-center active"
+               href="#ing"
+               data-toggle="tab"
+              >
                <i className="fas fa-fw fa-hourglass-start"></i> 진행중
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#complete" data-toggle="tab">
+              <a
+               className="nav-link d-flex align-items-center"
+               href="#complete"
+               data-toggle="tab"
+              >
                <i className="fa fa-fw fa-hourglass-half"></i> 채용종료
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#temp" data-toggle="tab">
+              <a
+               className="nav-link d-flex align-items-center"
+               href="#temp"
+               data-toggle="tab"
+              >
                <i className="fa fa-fw fa-hourglass-end"></i> 임시저장
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#all" data-toggle="tab">
+              <a
+               className="nav-link d-flex align-items-center"
+               href="#all"
+               data-toggle="tab"
+              >
                <i className="fa fa-fw fa-hourglass"></i> 전체
                <div className="ripple-container"></div>
               </a>
