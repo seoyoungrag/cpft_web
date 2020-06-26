@@ -1277,8 +1277,8 @@ textarea.form-control {
  width: 3rem;
 }
 .page-header .page-header-content {
- padding-top: 4rem;
- padding-bottom: 4rem;
+ padding-top: 2rem;
+ padding-bottom: 2rem;
 }
 .page-header .page-header-content .page-header-title {
  line-height: normal;
