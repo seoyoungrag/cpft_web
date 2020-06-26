@@ -928,6 +928,9 @@ class ApplicantManage extends Component {
           >
            닫기
           </button>
+          <button className="btn btn-info" type="button">
+           연락중
+          </button>
           <button className="btn btn-primary" type="button">
            채용확정
           </button>
