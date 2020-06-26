@@ -458,6 +458,32 @@ class ApplicantManage extends Component {
                  ></path>
                 </svg>
                </th>
+               <th
+                className="sorting"
+                tabIndex="0"
+                aria-controls="dataTable"
+                rowSpan="1"
+                colSpan="1"
+                aria-label="Status: activate to sort column ascending"
+                style={{ width: "50px" }}
+               >
+                상태
+                <svg
+                 data-fa-pseudo-element=":after"
+                 data-prefix="fas"
+                 data-icon="sort"
+                 className="svg-inline--fa fa-sort fa-w-10"
+                 role="img"
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 320 512"
+                 data-fa-i2svg=""
+                >
+                 <path
+                  fill="currentColor"
+                  d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"
+                 ></path>
+                </svg>
+               </th>
               </tr>
              </thead>
              <tfoot>
@@ -482,6 +508,9 @@ class ApplicantManage extends Component {
                </th>
                <th rowSpan="1" colSpan="1">
                 열람
+               </th>
+               <th rowSpan="1" colSpan="1">
+                상태
                </th>
               </tr>
              </tfoot>
@@ -520,6 +549,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
+               <td>
+                <div className="badge badge-success badge-pill">채용확정</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -535,6 +567,9 @@ class ApplicantManage extends Component {
                <td>20.06.09</td>
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
+               </td>
+               <td>
+                <div className="badge badge-success badge-pill">채용확정</div>
                </td>
               </tr>
               <tr
@@ -552,6 +587,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-secondary badge-pill">미열람</div>
                </td>
+               <td>
+                <div className="badge badge-danger badge-pill">채용거절</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -566,7 +604,10 @@ class ApplicantManage extends Component {
                <td>안녕하세요.</td>
                <td>20.06.11</td>
                <td>
-                <div className="badge badge-warning badge-pill">취소됨</div>
+                <div className="badge badge-secondary badge-pill">미열람</div>
+               </td>
+               <td>
+                <div className="badge badge-danger badge-pill">채용거절</div>
                </td>
               </tr>
               <tr
@@ -584,6 +625,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
+               <td>
+                <div className="badge badge-warning badge-pill">연락중</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -600,6 +644,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
+               <td>
+                <div className="badge badge-warning badge-pill">연락중</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -614,7 +661,10 @@ class ApplicantManage extends Component {
                <td>안녕하세요4</td>
                <td>20.06.16</td>
                <td>
-                <div className="badge badge-info badge-pill">채용확정</div>
+                <div className="badge badge-primary badge-pill">열람</div>
+               </td>
+               <td>
+                <div className="badge badge-success badge-pill">채용확정</div>
                </td>
               </tr>
               <tr
@@ -632,6 +682,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-secondary badge-pill">미열람</div>
                </td>
+               <td>
+                <div className="badge badge-danger badge-pill">채용거절</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -648,6 +701,9 @@ class ApplicantManage extends Component {
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
                </td>
+               <td>
+                <div className="badge badge-success badge-pill">채용확정</div>
+               </td>
               </tr>
               <tr
                role="row"
@@ -662,7 +718,10 @@ class ApplicantManage extends Component {
                <td>안녕하세요5</td>
                <td>20.06.17</td>
                <td>
-                <div className="badge badge-info badge-pill">채용확정</div>
+                <div className="badge badge-primary badge-pill">열람</div>
+               </td>
+               <td>
+                <div className="badge badge-success badge-pill">채용확정</div>
                </td>
               </tr>
              </tbody>

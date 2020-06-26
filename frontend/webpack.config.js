@@ -41,7 +41,7 @@ module.exports = {
     use: [{ loader: "html-loader", options: { minimize: true } }],
    },
    {
-    test: /\.(woff|woff2|eot|ttf|svg|png)$/,
+    test: /\.(woff|woff2|eot|ttf|svg|png|jpg)$/,
     exclude: /node_modules/,
     loader: "file-loader",
     options: {

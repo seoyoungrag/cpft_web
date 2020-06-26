@@ -285,7 +285,7 @@ class OrderRegist extends Component {
                </label>
                <select className="form-control col-4" id="orderRegisWorkGroup">
                 <option>TS</option>
-                <option>FA</option>
+                <option>LF</option>
                </select>
                <label
                 htmlFor="orderRegisWorkGroupManager"
@@ -371,7 +371,7 @@ class OrderRegist extends Component {
                <div className="col-10 row mx-0 px-0 d-flex justify-content-start">
                 <div className="col-6 ml-0 pl-0">
                  <div className="card">
-                  <div className="card-header">차종</div>
+                  <div className="card-header">차종(중복 선택 가능)</div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio">
@@ -380,65 +380,9 @@ class OrderRegist extends Component {
                       htmlFor="orderRegistCarTypeRadio1"
                      >
                       <input
-                       className="radio mr-1"
+                       className="checkbox mr-1"
                        id="orderRegistCarTypeRadio1"
-                       type="radio"
-                       name="orderRegistCarType"
-                      />
-                      냉동탑
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio2"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio2"
-                       type="radio"
-                       name="orderRegistCarType"
-                      />
-                      냉장탑
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio3"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio3"
-                       type="radio"
-                       name="orderRegistCarType"
-                      />
-                      윙바디
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio4"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio4"
-                       type="radio"
-                       name="orderRegistCarType"
-                      />
-                      다마스
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio5"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio5"
-                       type="radio"
+                       type="checkbox"
                        name="orderRegistCarType"
                       />
                       카고
@@ -447,12 +391,26 @@ class OrderRegist extends Component {
                     <div className="custom-control custom-radio">
                      <label
                       className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio6"
+                      htmlFor="orderRegistCarTypeRadio2"
                      >
                       <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio6"
-                       type="radio"
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio2"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      윙바디
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio3"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio3"
+                       type="checkbox"
                        name="orderRegistCarType"
                       />
                       탑
@@ -461,15 +419,99 @@ class OrderRegist extends Component {
                     <div className="custom-control custom-radio">
                      <label
                       className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio7"
+                      htmlFor="orderRegistCarTypeRadio4"
                      >
                       <input
-                       className="radio mr-1"
-                       id="orderRegistCarTypeRadio7"
-                       type="radio"
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio4"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      냉장
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio5"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio5"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      다마스
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio6"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio6"
+                       type="checkbox"
                        name="orderRegistCarType"
                       />
                       라보
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio7"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio7"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      초장축
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio8"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio8"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      호루
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio9"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio9"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      무진동
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTypeRadio10"
+                     >
+                      <input
+                       className="checkbox mr-1"
+                       id="orderRegistCarTypeRadio10"
+                       type="checkbox"
+                       name="orderRegistCarType"
+                      />
+                      추레라
                      </label>
                     </div>
                    </div>
@@ -506,7 +548,7 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarTons"
                       />
-                      2.5t
+                      1.4t
                      </label>
                     </div>
                     <div className="custom-control custom-radio">
@@ -520,7 +562,7 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarTons"
                       />
-                      3.5t
+                      2.5t
                      </label>
                     </div>
                     <div className="custom-control custom-radio">
@@ -534,7 +576,7 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarTons"
                       />
-                      5t
+                      3.5t
                      </label>
                     </div>
                     <div className="custom-control custom-radio">
@@ -548,7 +590,77 @@ class OrderRegist extends Component {
                        type="radio"
                        name="orderRegistCarTons"
                       />
+                      5t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio6"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio6"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      8t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio7"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio7"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
                       11t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio8"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio8"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      14t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio9"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio9"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      18t
+                     </label>
+                    </div>
+                    <div className="custom-control custom-radio">
+                     <label
+                      className="col-form-label pr-3 radio-inline"
+                      htmlFor="orderRegistCarTonsRadio10"
+                     >
+                      <input
+                       className="radio mr-1"
+                       id="orderRegistCarTonsRadio10"
+                       type="radio"
+                       name="orderRegistCarTons"
+                      />
+                      25t
                      </label>
                     </div>
                    </div>

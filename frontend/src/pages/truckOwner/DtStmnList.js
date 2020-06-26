@@ -6,6 +6,7 @@ $.DataTable = require("datatables.net");
 import "datatables.net-dt";
 import { Component } from "react";
 
+import exampleImg from "img/spec_example1.jpg";
 const columns = [
  {
   title: "Name",
@@ -384,12 +385,7 @@ class DtStmnList extends Component {
                   </tr>
                  </tfoot>
                  <tbody>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -400,15 +396,10 @@ class DtStmnList extends Component {
                     </button>
                    </td>
                    <td>
-                    <div className="badge badge-primary badge-pill">O</div>
+                    <div className="badge badge-info badge-pill">미확인</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="even">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -419,43 +410,41 @@ class DtStmnList extends Component {
                     </button>
                    </td>
                    <td>
-                    <div className="badge badge-warning badge-pill">재요청</div>
+                    <div className="badge badge-info badge-pill">미확인</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차삼</td>
                    <td>010-1234-5678</td>
                    <td>
-                    <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
+                    <button
+                     class="btn btn-outline-primary shadow-sm mr-2 my-1"
+                     data-toggle="modal"
+                     data-target="#exampleModalCenter2"
+                    >
                      5월_명세서_김차삼.jpg
                      <button className="btn btn-outline-danger shadow-sm ml-3">
                       X
                      </button>
                     </button>
                    </td>
-                   <td>
-                    <div className="badge badge-danger badge-pill">X</div>
+                   <td data-toggle="modal" data-target="#exampleModalCenter">
+                    <div className="badge badge-danger badge-pill">재요청</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="even">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차사</td>
                    <td>010-1234-5678</td>
                    <td>
-                    <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
+                    <button
+                     class="btn btn-outline-primary shadow-sm mr-2 my-1"
+                     data-toggle="modal"
+                     data-target="#exampleModalCenter2"
+                    >
                      5월_명세서_김차사.jpg
                      <button className="btn btn-outline-danger shadow-sm ml-3">
                       X
@@ -463,15 +452,10 @@ class DtStmnList extends Component {
                     </button>
                    </td>
                    <td>
-                    <div className="badge badge-primary badge-pill">O</div>
+                    <div className="badge badge-success badge-pill">확인됨</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -481,35 +465,11 @@ class DtStmnList extends Component {
                      첨부파일 등록
                     </button>
                    </td>
-                   <td>
-                    <div className="badge badge-primary badge-pill">확인</div>
+                   <td data-toggle="modal" data-target="#exampleModalCenter">
+                    <div className="badge badge-info badge-pill">미확인</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
-                   <td className="sorting_1">TS</td>
-                   <td>유아름</td>
-                   <td>김차일</td>
-                   <td>010-1234-5678</td>
-                   <td>
-                    <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
-                     첨부파일 등록
-                    </button>
-                   </td>
-                   <td>
-                    <div className="badge badge-warning badge-pill">재요청</div>
-                   </td>
-                  </tr>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="even">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -523,31 +483,28 @@ class DtStmnList extends Component {
                     <div className="badge badge-info badge-pill">미확인</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
                    <td>010-1234-5678</td>
                    <td>
-                    <button class="btn btn-outline-primary shadow-sm mr-2 my-1">
-                     첨부파일 등록
+                    <button
+                     class="btn btn-outline-primary shadow-sm mr-2 my-1"
+                     data-toggle="modal"
+                     data-target="#exampleModalCenter2"
+                    >
+                     5월_명세서_김차삼.jpg
+                     <button className="btn btn-outline-danger shadow-sm ml-3">
+                      X
+                     </button>
                     </button>
                    </td>
-                   <td>
-                    <div className="badge badge-primary badge-pill">O</div>
+                   <td data-toggle="modal" data-target="#exampleModalCenter">
+                    <div className="badge badge-danger badge-pill">재요청</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="even">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -561,12 +518,7 @@ class DtStmnList extends Component {
                     <div className="badge badge-info badge-pill">미확인</div>
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -577,7 +529,28 @@ class DtStmnList extends Component {
                     </button>
                    </td>
                    <td>
-                    <div className="badge badge-primary badge-pill">O</div>
+                    <div className="badge badge-info badge-pill">미확인</div>
+                   </td>
+                  </tr>
+                  <tr role="row" className="even">
+                   <td className="sorting_1">TS</td>
+                   <td>유아름</td>
+                   <td>김차일</td>
+                   <td>010-1234-5678</td>
+                   <td>
+                    <button
+                     class="btn btn-outline-primary shadow-sm mr-2 my-1"
+                     data-toggle="modal"
+                     data-target="#exampleModalCenter2"
+                    >
+                     5월_명세서_김차삼.jpg
+                     <button className="btn btn-outline-danger shadow-sm ml-3">
+                      X
+                     </button>
+                    </button>
+                   </td>
+                   <td>
+                    <div className="badge badge-success badge-pill">확인됨</div>
                    </td>
                   </tr>
                  </tbody>
@@ -903,12 +876,7 @@ class DtStmnList extends Component {
                   </tr>
                  </tfoot>
                  <tbody>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -921,12 +889,7 @@ class DtStmnList extends Component {
                     승인
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="even"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="even">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -939,12 +902,7 @@ class DtStmnList extends Component {
                     승인
                    </td>
                   </tr>
-                  <tr
-                   role="row"
-                   className="odd"
-                   data-toggle="modal"
-                   data-target="#exampleModalCenter"
-                  >
+                  <tr role="row" className="odd">
                    <td className="sorting_1">TS</td>
                    <td>유아름</td>
                    <td>김차일</td>
@@ -1212,6 +1170,39 @@ class DtStmnList extends Component {
       </div>
       <div
        className="modal fade"
+       id="exampleModalCenter2"
+       tabIndex="-1"
+       role="dialog"
+       aria-labelledby="exampleModalCenterTitle"
+       aria-hidden="true"
+      >
+       <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+         <div className="modal-header">
+          <h5 className="modal-title" id="exampleModalCenterTitle">
+           명세서 내역
+          </h5>
+          <button
+           className="close"
+           type="button"
+           data-dismiss="modal"
+           aria-label="Close"
+          >
+           <span aria-hidden="true">×</span>
+          </button>
+         </div>
+         <div className="modal-body">
+          <div className="card mb-4">
+           <div className="card-body">
+            <img src={exampleImg} alt="" className="w-100" />
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div
+       className="modal fade"
        id="exampleModalCenter"
        tabIndex="-1"
        role="dialog"
@@ -1271,21 +1262,6 @@ class DtStmnList extends Component {
             </div>
            </div>
           </div>
-         </div>
-         <div className="modal-footer">
-          <button
-           className="btn btn-secondary"
-           type="button"
-           data-dismiss="modal"
-          >
-           닫기
-          </button>
-          <button className="btn btn-primary" type="button">
-           채용확정
-          </button>
-          <button className="btn btn-danger" type="button">
-           채용거절
-          </button>
          </div>
         </div>
        </div>
