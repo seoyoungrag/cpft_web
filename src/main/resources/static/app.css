@@ -1526,14 +1526,6 @@ nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow {
  -webkit-font-feature-settings: "liga";
  -webkit-font-smoothing: antialiased;
 }
-/*! CSS Used fontfaces */
-@font-face {
- font-family: "Material Icons";
- font-style: normal;
- font-weight: 400;
- src: url(https://fonts.gstatic.com/s/materialicons/v52/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
-  format("woff2");
-}
 .card .card-header.card-header-tabs .nav-tabs-title {
  float: left;
  padding: 10px 10px 10px 0;
@@ -1559,83 +1551,6 @@ ul.nav.nav-tabs {
  border-bottom: 0px !important;
 }
 
-/*! CSS Used from: http://i.jobkorea.kr/content/css/ver_2/mtc/mtc_mng-sv-202005071336.css */
-.apyStatusBoard .boardItem li:before {
- background: url(http://i.jobkorea.kr/content/images/ver_1/mtc/manage/mng_sp.png?2017120711)
-  0 0 no-repeat;
-}
-.jobTitWrap .tit:hover {
- color: #3399ff;
-}
-.jobTitWrap .infoBx .name:before {
- content: "";
- display: inline-block;
- font-size: 10px;
- width: 1px;
- height: 10px;
- background-color: #ccc;
- margin: -2px 9px 0 8px;
- vertical-align: middle;
-}
-.apyStatusBoard .tbCol {
- display: table-cell;
-}
-.apyStatusBoard .tbDate {
- font-size: 13px;
- color: #888;
- padding: 0 20px 0 23px;
- vertical-align: top;
-}
-.apyStatusBoard .tbDate .mday:before {
- content: "";
- display: inline-block;
- font-size: 10px;
- width: 1px;
- height: 10px;
- background-color: #ccc;
- margin: -2px 9px 0 8px;
- vertical-align: middle;
-}
-.apyStatusBoard .tbStatus {
- /*width: 482px;*/
- width: 50%;
- float: right;
-}
-.apyStatusBoard .boardItem li {
- display: table-cell;
- width: 20%;
- vertical-align: middle;
- text-align: center;
- position: relative;
-}
-.apyStatusBoard .boardItem li:after {
- content: "";
- display: block;
- width: 1px;
- height: 46px;
- background-color: #efefef;
- position: absolute;
- top: 50%;
- left: 0;
- margin-top: -22px;
-}
-.apyStatusBoard .boardItem li .stepTit {
- display: block;
- font-size: 12px;
- color: #999;
- padding-bottom: 7px;
- font-weight: normal;
-}
-.apyStatusBoard .boardItem li .itemNum {
- font-size: 22px;
- color: #888;
-}
-.apyStatusBoard .boardItem li.on .itemNum {
- color: #3399ff;
-}
-.btnFunc .btnMtcTpl_1 {
- vertical-align: top;
-}
 /*! CSS Used from: http://i.jobkorea.kr/content/css/ver_2/mtc/mtc_common-sv-202006181650.css */
 
 button {
@@ -1665,17 +1580,6 @@ button::-moz-focus-inner {
 }
 button {
  font-family: "맑은 고딕", Malgun Gothic, "돋움", Dotum, sans-serif;
-}
-.btnMtcTpl_1 {
- display: inline-block;
- height: 26px;
- padding: 0 10px;
- line-height: 24px;
- border: 1px solid #ddd;
- color: #888;
- letter-spacing: -1px;
- text-align: center;
- box-sizing: border-box;
 }
 .btnMtcTpl_1 span {
  color: #888;
@@ -1718,7 +1622,7 @@ button {
 .jobTitWrap .tit {
  overflow: hidden;
  display: inline-block;
- font-size: 20px;
+
  color: #000;
  max-width: 606px;
  padding-right: 2px;
@@ -1742,9 +1646,6 @@ button {
  padding: 0 20px 0 23px;
  vertical-align: top;
 }
-.apyStatusBoard .tbCol {
- display: table-cell;
-}
 .apyStatusBoard .tbDate {
  font-size: 13px;
  color: #888;
@@ -1760,9 +1661,6 @@ button {
  background-color: #ccc;
  margin: -2px 9px 0 8px;
  vertical-align: middle;
-}
-.apyStatusBoard .tbCol {
- display: table-cell;
 }
 .apyStatusBoard .boardItem {
  display: table;

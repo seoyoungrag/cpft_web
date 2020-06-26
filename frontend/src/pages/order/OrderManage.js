@@ -30,12 +30,13 @@ class OrderManage extends Component {
   };
  }
  componentDidMount() {
+  /*
   $(this.refs.main).DataTable({
    dom: '<"data-table-wrapper"t>',
    data: this.props.names,
    columns,
    ordering: false,
-  });
+  });*/
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",
@@ -162,35 +163,25 @@ class OrderManage extends Component {
             {/*<span className="nav-tabs-title">Tasks:</span>*/}
             <ul className="nav nav-tabs" data-tabs="tabs">
              <li className="nav-item">
-              <a className="nav-link active" href="#profile" data-toggle="tab">
+              <a className="nav-link active" href="#ing" data-toggle="tab">
                <i className="fas fa-fw fa-hourglass-start"></i> 진행중
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#messages" data-toggle="tab">
-               <i className="fa fa-fw fa-hourglass-half"></i> 접수마감
+              <a className="nav-link" href="#complete" data-toggle="tab">
+               <i className="fa fa-fw fa-hourglass-half"></i> 채용종료
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#settings" data-toggle="tab">
-               <i className="fa fa-fw fa-hourglass-end"></i> 채용종료
+              <a className="nav-link" href="#temp" data-toggle="tab">
+               <i className="fa fa-fw fa-hourglass-end"></i> 임시저장
                <div className="ripple-container"></div>
               </a>
              </li>
              <li className="nav-item">
-              <a className="nav-link" href="#settings" data-toggle="tab">
-               <i
-                className="fa fa-fw fa-pencil-square-o"
-                aria-hidden="true"
-               ></i>
-               임시저장
-               <div className="ripple-container"></div>
-              </a>
-             </li>
-             <li className="nav-item">
-              <a className="nav-link" href="#settings" data-toggle="tab">
+              <a className="nav-link" href="#all" data-toggle="tab">
                <i className="fa fa-fw fa-hourglass"></i> 전체
                <div className="ripple-container"></div>
               </a>
@@ -201,43 +192,64 @@ class OrderManage extends Component {
          </div>
          <div className="card-body">
           <div className="tab-content">
-           <div className="tab-pane active" id="profile">
+           <div className="tab-pane active" id="ing">
             <table className="table">
              <tbody>
               <tr>
                <td>
-                <div className="inner">
-                 <div className="jobTitWrap">
-                  <span className="infoBx">
-                   <span className="date">
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
                     <span className="date">
-                     공고번호 <span className="tahoma">31938638</span>
-                    </span>
-                    <span className="name">홍차장</span>
-                   </span>
-                  </span>
-
-                  <a href="#" className="tit devLinkExpire" data-pts="-77">
-                   <em className="used">진행중</em> 프로그래머 채용
-                  </a>
-                 </div>
-
-                 <div className="apyStatusBoard">
-                  <div className="tbCol tbDate">
-                   <span className="date">
-                    <span className="tahoma">
-                     2020.06.09 ~ 2020.09.07{" "}
-                     <span className="mday">
-                      <span className="tahoma">06.09</span> 등록
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
                      </span>
+                     <span className="name">유아름</span>
                     </span>
                    </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-primary align-top ml-1">
+                     진행중
+                    </span>
+                   </a>
                   </div>
 
-                  <div className="tbCol tbStatus">
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
-                    <li>
-                     <strong className="stepTit">전체 지원자</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -246,42 +258,28 @@ class OrderManage extends Component {
                       1
                      </a>
                     </li>
-
-                    <li className="apyStatusNotRead ">
-                     <strong className="stepTit">미열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-
-                    <li className="on">
+                    <li className="apyStatusNotRead w-25">
                      <strong className="stepTit">열람</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      1
+                      0
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">예비합격</strong>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      0
+                      1
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">서류합격</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -292,62 +290,65 @@ class OrderManage extends Component {
                     </li>
                    </ul>
                   </div>
-                 </div>
-                 <div className="btnFunc">
-                  <a href="#" className="btnMtcTpl_1" target="_blank">
-                   <span>공고 보기</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   <span>수정</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   복사
-                  </a>
-
-                  <button type="button" className="btnMtcTpl_1">
-                   <span>마감</span>
-                  </button>
-                  <button className="btnMtcTpl_1" type="button">
-                   <span>삭제</span>
-                  </button>
                  </div>
                 </div>
                </td>
               </tr>
               <tr>
                <td>
-                <div className="inner">
-                 <div className="jobTitWrap">
-                  <span className="infoBx">
-                   <span className="date">
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
                     <span className="date">
-                     공고번호 <span className="tahoma">31938638</span>
-                    </span>
-                    <span className="name">홍차장</span>
-                   </span>
-                  </span>
-
-                  <a href="#" className="tit devLinkExpire" data-pts="-77">
-                   <em className="used">진행중</em> 프로그래머 채용
-                  </a>
-                 </div>
-
-                 <div className="apyStatusBoard">
-                  <div className="tbCol tbDate">
-                   <span className="date">
-                    <span className="tahoma">
-                     2020.06.09 ~ 2020.09.07{" "}
-                     <span className="mday">
-                      <span className="tahoma">06.09</span> 등록
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
                      </span>
+                     <span className="name">유아름</span>
                     </span>
                    </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-primary align-top ml-1">
+                     진행중
+                    </span>
+                   </a>
                   </div>
 
-                  <div className="tbCol tbStatus">
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
-                    <li>
-                     <strong className="stepTit">전체 지원자</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -356,42 +357,28 @@ class OrderManage extends Component {
                       1
                      </a>
                     </li>
-
-                    <li className="apyStatusNotRead ">
-                     <strong className="stepTit">미열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-
-                    <li className="on">
+                    <li className="apyStatusNotRead w-25">
                      <strong className="stepTit">열람</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      1
+                      0
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">예비합격</strong>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      0
+                      1
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">서류합격</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -402,24 +389,6 @@ class OrderManage extends Component {
                     </li>
                    </ul>
                   </div>
-                 </div>
-                 <div className="btnFunc">
-                  <a href="#" className="btnMtcTpl_1" target="_blank">
-                   <span>공고 보기</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   <span>수정</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   복사
-                  </a>
-
-                  <button type="button" className="btnMtcTpl_1">
-                   <span>마감</span>
-                  </button>
-                  <button className="btnMtcTpl_1" type="button">
-                   <span>삭제</span>
-                  </button>
                  </div>
                 </div>
                </td>
@@ -427,43 +396,64 @@ class OrderManage extends Component {
              </tbody>
             </table>
            </div>
-           <div className="tab-pane" id="messages">
+           <div className="tab-pane" id="complete">
             <table className="table">
              <tbody>
               <tr>
                <td>
-                <div className="inner">
-                 <div className="jobTitWrap">
-                  <span className="infoBx">
-                   <span className="date">
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
                     <span className="date">
-                     공고번호 <span className="tahoma">31938638</span>
-                    </span>
-                    <span className="name">홍차장</span>
-                   </span>
-                  </span>
-
-                  <a href="#" className="tit devLinkExpire" data-pts="-77">
-                   <em className="used">진행중</em> 프로그래머 채용
-                  </a>
-                 </div>
-
-                 <div className="apyStatusBoard">
-                  <div className="tbCol tbDate">
-                   <span className="date">
-                    <span className="tahoma">
-                     2020.06.09 ~ 2020.09.07{" "}
-                     <span className="mday">
-                      <span className="tahoma">06.09</span> 등록
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
                      </span>
+                     <span className="name">유아름</span>
                     </span>
                    </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-success align-top ml-1">
+                     종료
+                    </span>
+                   </a>
                   </div>
 
-                  <div className="tbCol tbStatus">
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
-                    <li>
-                     <strong className="stepTit">전체 지원자</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -472,42 +462,28 @@ class OrderManage extends Component {
                       1
                      </a>
                     </li>
-
-                    <li className="apyStatusNotRead ">
-                     <strong className="stepTit">미열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-
-                    <li className="on">
+                    <li className="apyStatusNotRead w-25">
                      <strong className="stepTit">열람</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      1
+                      0
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">예비합격</strong>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      0
+                      1
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">서류합격</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -518,62 +494,65 @@ class OrderManage extends Component {
                     </li>
                    </ul>
                   </div>
-                 </div>
-                 <div className="btnFunc">
-                  <a href="#" className="btnMtcTpl_1" target="_blank">
-                   <span>공고 보기</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   <span>수정</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   복사
-                  </a>
-
-                  <button type="button" className="btnMtcTpl_1">
-                   <span>마감</span>
-                  </button>
-                  <button className="btnMtcTpl_1" type="button">
-                   <span>삭제</span>
-                  </button>
                  </div>
                 </div>
                </td>
               </tr>
               <tr>
                <td>
-                <div className="inner">
-                 <div className="jobTitWrap">
-                  <span className="infoBx">
-                   <span className="date">
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
                     <span className="date">
-                     공고번호 <span className="tahoma">31938638</span>
-                    </span>
-                    <span className="name">홍차장</span>
-                   </span>
-                  </span>
-
-                  <a href="#" className="tit devLinkExpire" data-pts="-77">
-                   <em className="used">진행중</em> 프로그래머 채용
-                  </a>
-                 </div>
-
-                 <div className="apyStatusBoard">
-                  <div className="tbCol tbDate">
-                   <span className="date">
-                    <span className="tahoma">
-                     2020.06.09 ~ 2020.09.07{" "}
-                     <span className="mday">
-                      <span className="tahoma">06.09</span> 등록
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
                      </span>
+                     <span className="name">유아름</span>
                     </span>
                    </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-success align-top ml-1">
+                     종료
+                    </span>
+                   </a>
                   </div>
 
-                  <div className="tbCol tbStatus">
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
                    <ul className="boardItem">
-                    <li>
-                     <strong className="stepTit">전체 지원자</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -582,42 +561,28 @@ class OrderManage extends Component {
                       1
                      </a>
                     </li>
-
-                    <li className="apyStatusNotRead ">
-                     <strong className="stepTit">미열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-
-                    <li className="on">
+                    <li className="apyStatusNotRead w-25">
                      <strong className="stepTit">열람</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      1
+                      0
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">예비합격</strong>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
                       data-pts="-77"
                      >
-                      0
+                      1
                      </a>
                     </li>
-
-                    <li>
-                     <strong className="stepTit">서류합격</strong>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
                      <a
                       href="#"
                       className="itemNum tahoma devLinkExpire"
@@ -628,24 +593,6 @@ class OrderManage extends Component {
                     </li>
                    </ul>
                   </div>
-                 </div>
-                 <div className="btnFunc">
-                  <a href="#" className="btnMtcTpl_1" target="_blank">
-                   <span>공고 보기</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   <span>수정</span>
-                  </a>
-                  <a href="#" className="btnMtcTpl_1">
-                   복사
-                  </a>
-
-                  <button type="button" className="btnMtcTpl_1">
-                   <span>마감</span>
-                  </button>
-                  <button className="btnMtcTpl_1" type="button">
-                   <span>삭제</span>
-                  </button>
                  </div>
                 </div>
                </td>
@@ -653,54 +600,112 @@ class OrderManage extends Component {
              </tbody>
             </table>
            </div>
-           <div className="tab-pane" id="settings">
-            <table ref="main" names={this.state.names} />
-            <Input
-             onAddClick={(name, nickname) => {
-              this.onAddClick(name, nickname);
-             }}
-            />
+           <div className="tab-pane" id="temp">
             <table className="table">
              <tbody>
               <tr>
                <td>
-                <div className="form-check">
-                 <label className="form-check-label">
-                  <input
-                   className="form-check-input"
-                   type="checkbox"
-                   value=""
-                  />
-                  <span className="form-check-sign">
-                   <span className="check"></span>
-                  </span>
-                 </label>
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
+                    <span className="date">
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
+                     </span>
+                     <span className="name">유아름</span>
+                    </span>
+                   </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-info align-top ml-1">
+                     임시저장
+                    </span>
+                   </a>
+                  </div>
+
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
+                   <ul className="boardItem">
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="apyStatusNotRead w-25">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
                 </div>
                </td>
-               <td>
-                Lines From Great Russian Literature? Or E-mails From My Boss?
-               </td>
-               <td className="td-actions text-right">
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-primary btn-link btn-sm"
-                 data-original-title="Edit Task"
-                >
-                 <i className="material-icons">edit</i>
-                </button>
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-danger btn-link btn-sm"
-                 data-original-title="Remove"
-                >
-                 <i className="material-icons">close</i>
-                </button>
-               </td>
               </tr>
+             </tbody>
+            </table>
+            <table className="table d-none">
+             <tbody>
               <tr>
                <td>
                 <div className="form-check">
@@ -780,6 +785,320 @@ class OrderManage extends Component {
                 >
                  <i className="material-icons">close</i>
                 </button>
+               </td>
+              </tr>
+             </tbody>
+            </table>
+
+            {/*
+            <table ref="main" className="d-none" names={this.state.names} />
+            <Input
+             className="d-none"
+             onAddClick={(name, nickname) => {
+              this.onAddClick(name, nickname);
+             }}
+            />
+             */}
+           </div>
+
+           <div className="tab-pane" id="all">
+            <table className="table">
+             <tbody>
+              <tr>
+               <td>
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
+                    <span className="date">
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
+                     </span>
+                     <span className="name">유아름</span>
+                    </span>
+                   </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-primary align-top ml-1">
+                     진행중
+                    </span>
+                   </a>
+                  </div>
+
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
+                   <ul className="boardItem">
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="apyStatusNotRead w-25">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td>
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
+                    <span className="date">
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
+                     </span>
+                     <span className="name">유아름</span>
+                    </span>
+                   </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-info align-top ml-1">
+                     임시저장
+                    </span>
+                   </a>
+                  </div>
+
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
+                   <ul className="boardItem">
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="apyStatusNotRead w-25">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                </div>
+               </td>
+              </tr>
+              <tr>
+               <td>
+                <div className="inner row">
+                 <div className="col-7">
+                  <div className="jobTitWrap">
+                   <span className="infoBx">
+                    <span className="date">
+                     <span className="date">
+                      T001 <span className="tahoma">TS</span>
+                     </span>
+                     <span className="name">유아름</span>
+                    </span>
+                   </span>
+
+                   <a href="#" className="tit devLinkExpire col-12 row">
+                    <h4 className="h4 d-inline-block">
+                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
+                     월300무제(각 팀 임의 제목)
+                    </h4>
+                    <span className="badge badge-success align-top ml-1">
+                     완료
+                    </span>
+                   </a>
+                  </div>
+
+                  <div className="apyStatusBoard">
+                   <div className="tbCol tbDate">
+                    <span className="date">
+                     <span className="tahoma">
+                      2020.06.09 ~ 2020.09.07{" "}
+                      <span className="mday">
+                       <span className="tahoma">06.09</span> 등록
+                      </span>
+                     </span>
+                    </span>
+                   </div>
+                  </div>
+                 </div>
+                 <div className="col-5 apyStatusBoard ">
+                  <div className="d-flex justify-content-end">
+                   <button type="button" className="btn btn-primary mx-1">
+                    <span>수정</span>
+                   </button>
+                   <button type="button" className="btn btn-success mx-1">
+                    <span>마감</span>
+                   </button>
+                   <button type="button" className="btn btn-danger  ml-1 mr-0">
+                    <span>삭제</span>
+                   </button>
+                  </div>
+
+                  <div className="col-12 mt-3 p-0">
+                   <ul className="boardItem">
+                    <li className="w-25">
+                     <strong className="stepTit">지원자</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="apyStatusNotRead w-25">
+                     <strong className="stepTit">열람</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                    <li className="on w-25">
+                     <strong className="stepTit">연락중</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      1
+                     </a>
+                    </li>
+                    <li className="w-25">
+                     <strong className="stepTit">최종합격</strong>
+                     <a
+                      href="#"
+                      className="itemNum tahoma devLinkExpire"
+                      data-pts="-77"
+                     >
+                      0
+                     </a>
+                    </li>
+                   </ul>
+                  </div>
+                 </div>
+                </div>
                </td>
               </tr>
              </tbody>
