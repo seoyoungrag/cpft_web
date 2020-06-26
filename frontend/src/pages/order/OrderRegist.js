@@ -14,7 +14,15 @@ class OrderRegist extends Component {
    registOrderWorkingAreaEtcMatterToggle: false,
    orderRegistWorkTypeValue: "",
   };
-
+  this._getDaumAddressFinder = (event) => {
+   new daum.Postcode({
+    oncomplete: function (data) {
+     $("#registOrderWorkingArea").val(data.address);
+     // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+     // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+    },
+   }).open();
+  };
   this._setorderRegistWorkType = (event) => {
    console.log(event.target.value);
    switch (event.target.value) {
@@ -46,6 +54,7 @@ class OrderRegist extends Component {
     registOrderWorkingAreaEtcMatterToggle: event.target.checked,
    });
   };
+  /*
   this._onChangeHandler = async (e) => {
    $("#registOrderWorkingArea").siblings("div.awesomplete").show();
    this._searchJusos(e.target.value);
@@ -130,6 +139,7 @@ class OrderRegist extends Component {
    $("#registOrderWorkingArea").val(e.target.innerText);
    $("#registOrderWorkingArea").siblings("div.awesomplete").hide();
   };
+  */
   this._setTimes = (hour, minute) => {
    var mil = false; // use am/pm
 
@@ -160,7 +170,7 @@ class OrderRegist extends Component {
    */
   };
  }
-
+ /*
  get renderJusos() {
   let jusos = <div className="awesomplete"></div>;
   if (this.state.jusos && this.state.jusos.length > 0) {
@@ -195,6 +205,7 @@ class OrderRegist extends Component {
 
   return jusos;
  }
+ */
  componentDidMount() {
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
@@ -350,11 +361,11 @@ class OrderRegist extends Component {
                 운행차량
                </label>
 
-               <div className="col-10 row">
-                <div className="col-6">
+               <div className="col-10 row mx-0 px-0 d-flex justify-content-start">
+                <div className="col-6 ml-0 pl-0">
                  <div className="card">
                   <div className="card-header">차종</div>
-                  <div className="card-body">
+                  <div className="card-body py-0">
                    <div className="col-12 row">
                     <div>
                      <label
@@ -416,10 +427,10 @@ class OrderRegist extends Component {
                   </div>
                  </div>
                 </div>
-                <div className="col-6">
+                <div className="col-6 mr-0 pr-0">
                  <div className="card">
                   <div className="card-header">톤수</div>
-                  <div className="card-body">
+                  <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio">
                      <label
@@ -570,8 +581,9 @@ class OrderRegist extends Component {
                >
                 지역
                </label>
-               <div className="col-10 row">
+               <div className="col-10 row pr-0">
                 <div className="col-12 row">
+                 {/*
                  <input
                   value={this.state.value}
                   onChange={this._onChangeHandler}
@@ -582,8 +594,19 @@ class OrderRegist extends Component {
                   key="registOrderWorkingArea"
                   autoComplete="off"
                  />
-
-                 {this.renderJusos}
+ */}
+                 <input
+                  value={this.state.value}
+                  onClick={this._getDaumAddressFinder}
+                  readOnly
+                  className="form-control col-8"
+                  id="registOrderWorkingArea"
+                  type="text"
+                  placeholder="서이천물류센터"
+                  key="registOrderWorkingArea"
+                  autoComplete="off"
+                 />
+                 {/*this.renderJusos*/}
 
                  <div className="col-3">
                   <label
@@ -601,25 +624,30 @@ class OrderRegist extends Component {
                   </label>
                  </div>
                 </div>
-                {this.state.registOrderWorkingAreaEtcMatterToggle ? (
-                 <div className="form-group row col-12 mt-3">
-                  <label
-                   htmlFor="registOrderWorkingAreaEtcMatter"
-                   className="col-2 col-form-label text-right  border border-dark"
-                  >
-                   기타입력사항
-                  </label>
-                  <input
-                   className="form-control col-10  border border-dark"
-                   id="registOrderWorkingAreaEtcMatter"
-                   type="text"
-                   placeholder="ex) 기타입력사항"
-                   key="registOrderWorkingAreaEtcMatter"
-                  />
-                 </div>
-                ) : null}
                </div>
               </div>
+              {this.state.registOrderWorkingAreaEtcMatterToggle ? (
+               <div className="form-group row">
+                <label
+                 htmlFor="registOrderWorkingArea"
+                 className="col-2 col-form-label"
+                ></label>
+
+                <label
+                 htmlFor="registOrderWorkingAreaEtcMatter"
+                 className="col-2 col-form-label text-right"
+                >
+                 기타입력사항:
+                </label>
+                <input
+                 className="form-control col-8"
+                 id="registOrderWorkingAreaEtcMatter"
+                 type="text"
+                 placeholder="ex) 기타입력사항"
+                 key="registOrderWorkingAreaEtcMatter"
+                />
+               </div>
+              ) : null}
               <div className="form-group row">
                <label
                 htmlFor="exampleFormControlInput5"
@@ -797,7 +825,7 @@ class OrderRegist extends Component {
                ></textarea>
               </div>
               <div className="d-flex flex-row-reverse">
-               <button class="btn btn-primary" type="button">
+               <button className="btn btn-primary" type="button">
                 저장
                </button>
               </div>
