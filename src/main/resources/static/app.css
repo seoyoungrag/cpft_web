@@ -16061,6 +16061,10 @@ a.collapse-item {
  line-height: 1;
 }
 
+.mw-0 {
+ max-width: 0 !important;
+}
+
 html,
 body {
   height: 100%;

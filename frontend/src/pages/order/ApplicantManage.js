@@ -27,11 +27,15 @@ class ApplicantManage extends Component {
   super(props);
   this.state = {
    names: [],
+   orderSelecteButtonValue: "",
   };
  }
+
  componentDidMount() {
+  const reactClass = this;
   $("#orderSelectMenu a").on("click", function () {
    $("#orderSelecteButton").html($(this).html());
+   reactClass.setState({ orderSelecteButtonValue: $(this).data("orderid") });
   });
   $(this.refs.main).DataTable({
    dom: '<"data-table-wrapper"t>',
@@ -95,9 +99,8 @@ class ApplicantManage extends Component {
   }
  };
 
+ /*
  shouldComponentUpdate(nextProps, nextState) {
-  console.log(this.state.names);
-  console.log(nextState.names);
   if (nextState.names.length !== this.state.names.length) {
    this.reloadTableData(nextState.names);
   } else {
@@ -105,6 +108,7 @@ class ApplicantManage extends Component {
   }
   return false;
  }
+  */
 
  onAddClick(name, nickname) {
   let updated = false;
@@ -162,9 +166,9 @@ class ApplicantManage extends Component {
         <div className="row">
          <div className="col-sm-12 col-md-6">
           <div className="col-12 row h-100">
-           <div class="btn-group dropdown col-12 h-100 text-wrap w-auto">
+           <div className="btn-group dropdown col-12 h-100 text-wrap w-auto">
             <button
-             class="btn btn-secondary btn-sm dropdown-toggle text-wrap mh-100"
+             className="btn btn-secondary btn-sm dropdown-toggle text-wrap mh-100"
              type="button"
              data-toggle="dropdown"
              aria-haspopup="true"
@@ -174,11 +178,15 @@ class ApplicantManage extends Component {
              전체
             </button>
             <div
-             class="dropdown-menu w-100"
+             className="dropdown-menu w-100"
              aria-labelledby="orderSelecteButton"
              id="orderSelectMenu"
             >
-             <a class="dropdown-item w-100 text-truncate" href="#">
+             <a
+              className="dropdown-item w-100 text-truncate"
+              href="#"
+              data-orderid="001"
+             >
               001 팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
               개인사업자 차주 모집001 팀프레시 하남 고정 개인사업자 차주 모집001
               팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
@@ -190,69 +198,72 @@ class ApplicantManage extends Component {
               팀프레시 하남 고정 개인사업자 차주 모집001 팀프레시 하남 고정
               개인사업자 차주 모집
              </a>
-             <a class="dropdown-item" href="#">
+             <a className="dropdown-item" href="#" data-orderid="002">
               002 팀프레시 하남 고정 개인사업자 차주 모집
              </a>
 
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#">
+             <div className="dropdown-divider"></div>
+             <a className="dropdown-item" href="#" data-orderid="">
               전체
              </a>
             </div>
            </div>
           </div>
          </div>
-         <div className="col-sm-12 col-md-6 row">
-          <div className="col-4 d-inline-flex">
-           <button className="btn btn-info">
-            <span>공고 수정</span>
-           </button>
+
+         {this.state.orderSelecteButtonValue != "" ? (
+          <div className="col-sm-12 col-md-6 row">
+           <div className="col-4 d-inline-flex">
+            <button className="btn btn-info">
+             <span>공고 수정</span>
+            </button>
+           </div>
+           <div className="col-8 m-0 p-0 apyStatusBoard">
+            <ul className="boardItem">
+             <li className="w-25">
+              <strong className="stepTit">지원자</strong>
+              <a
+               href="#"
+               className="itemNum tahoma devLinkExpire"
+               data-pts="-77"
+              >
+               1
+              </a>
+             </li>
+             <li className="apyStatusNotRead w-25">
+              <strong className="stepTit">열람</strong>
+              <a
+               href="#"
+               className="itemNum tahoma devLinkExpire"
+               data-pts="-77"
+              >
+               0
+              </a>
+             </li>
+             <li className="on w-25">
+              <strong className="stepTit">연락중</strong>
+              <a
+               href="#"
+               className="itemNum tahoma devLinkExpire"
+               data-pts="-77"
+              >
+               1
+              </a>
+             </li>
+             <li className="w-25">
+              <strong className="stepTit">최종합격</strong>
+              <a
+               href="#"
+               className="itemNum tahoma devLinkExpire"
+               data-pts="-77"
+              >
+               0
+              </a>
+             </li>
+            </ul>
+           </div>
           </div>
-          <div className="col-8 m-0 p-0 apyStatusBoard">
-           <ul className="boardItem">
-            <li className="w-25">
-             <strong className="stepTit">지원자</strong>
-             <a
-              href="#"
-              className="itemNum tahoma devLinkExpire"
-              data-pts="-77"
-             >
-              1
-             </a>
-            </li>
-            <li className="apyStatusNotRead w-25">
-             <strong className="stepTit">열람</strong>
-             <a
-              href="#"
-              className="itemNum tahoma devLinkExpire"
-              data-pts="-77"
-             >
-              0
-             </a>
-            </li>
-            <li className="on w-25">
-             <strong className="stepTit">연락중</strong>
-             <a
-              href="#"
-              className="itemNum tahoma devLinkExpire"
-              data-pts="-77"
-             >
-              1
-             </a>
-            </li>
-            <li className="w-25">
-             <strong className="stepTit">최종합격</strong>
-             <a
-              href="#"
-              className="itemNum tahoma devLinkExpire"
-              data-pts="-77"
-             >
-              0
-             </a>
-            </li>
-           </ul>
-          </div>
-         </div>
+         ) : null}
         </div>
         <div className="datatable table-responsive">
          <div
@@ -272,19 +283,6 @@ class ApplicantManage extends Component {
             >
              <thead>
               <tr role="row">
-               <th>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </th>
                <th
                 className="sorting_asc"
                 tabIndex="0"
@@ -293,7 +291,7 @@ class ApplicantManage extends Component {
                 colSpan="1"
                 aria-sort="ascending"
                 aria-label="Name: activate to sort column descending"
-                style={{ width: "152px" }}
+                style={{ width: "60px" }}
                >
                 오더 번호
                 <svg
@@ -319,7 +317,7 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Position: activate to sort column ascending"
-                style={{ width: "230px" }}
+                style={{ width: "60px" }}
                >
                 이름/나이
                 <svg
@@ -345,7 +343,7 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Office: activate to sort column ascending"
-                style={{ width: "107px" }}
+                style={{ width: "70px" }}
                >
                 차량 톤수
                 <svg
@@ -371,7 +369,7 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Age: activate to sort column ascending"
-                style={{ width: "49px" }}
+                style={{ width: "50px" }}
                >
                 경력
                 <svg
@@ -397,7 +395,6 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Start date: activate to sort column ascending"
-                style={{ width: "100px" }}
                >
                 메세지
                 <svg
@@ -423,7 +420,7 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Salary: activate to sort column ascending"
-                style={{ width: "88px" }}
+                style={{ width: "75px" }}
                >
                 지원일
                 <svg
@@ -449,7 +446,7 @@ class ApplicantManage extends Component {
                 rowSpan="1"
                 colSpan="1"
                 aria-label="Status: activate to sort column ascending"
-                style={{ width: "68px" }}
+                style={{ width: "50px" }}
                >
                 열람
                 <svg
@@ -472,7 +469,6 @@ class ApplicantManage extends Component {
              </thead>
              <tfoot>
               <tr>
-               <th rowSpan="1" colSpan="1"></th>
                <th rowSpan="1" colSpan="1">
                 오더 번호
                </th>
@@ -503,24 +499,30 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>1t 냉장</td>
                <td>1년 미만</td>
-               <td>성실함으로 열심히 하겠습니다. 처음이지...</td>
+               <td className="text-truncate mw-0">
+                성실함으로 열심히 하겠습니다. 처음이지...성실함으로 열심히
+                하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...성실함으로 열심히 하겠습니다.
+                처음이지...성실함으로 열심히 하겠습니다. 처음이지...성실함으로
+                열심히 하겠습니다. 처음이지...
+               </td>
                <td>20.06.09</td>
                <td>
                 <div className="badge badge-primary badge-pill">열람</div>
@@ -532,19 +534,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -561,19 +550,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>1t 냉장</td>
@@ -590,19 +566,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -619,19 +582,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -648,19 +598,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -677,19 +614,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>3t 냉장</td>
@@ -706,19 +630,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>1t 냉장</td>
@@ -735,19 +646,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -764,19 +662,6 @@ class ApplicantManage extends Component {
                data-toggle="modal"
                data-target="#exampleModalCenter"
               >
-               <td>
-                <div className="custom-control custom-checkbox">
-                 <input
-                  className="custom-control-input"
-                  id="checkAll"
-                  type="checkbox"
-                 />
-                 <label
-                  className="custom-control-label"
-                  htmlFor="checkAll"
-                 ></label>
-                </div>
-               </td>
                <td className="sorting_1">001</td>
                <td>김차0 30세</td>
                <td>5t 냉장</td>
@@ -938,18 +823,24 @@ class ApplicantManage extends Component {
            <div className="card-body">
             <h5 className="card-title text-primary">김차일 010-1111-1411</h5>
             <div className="card-text row">
-             <div className="col-6">
-              <div>차량: 1t 냉장</div>
-              <div>경력: 1년 미만</div>
-             </div>
-             <div className="col-6">
-              <div>
-               <h4>면허 및 자격</h4>
-              </div>
-              <div>1종 대형</div>
-              <div>화물운송자격증 보유</div>
-              <div>개인사업자</div>
-             </div>
+             <dl className="col-6 row mb-auto">
+              <dt className="col-3 h-25 d-flex justify-content-end">차량:</dt>{" "}
+              <dd className="col-9 h-25 ">1t 냉장</dd>
+              <dt className="col-3 h-25 d-flex justify-content-end">
+               경력:
+              </dt>{" "}
+              <dd className="col-9 h-25 ">1년 미만</dd>
+             </dl>
+             <dl className="col-6">
+              <dt className="mb-3">면허 및 자격</dt>
+              <dd>1종 대형</dd>
+              <dd>화물운송자격증 보유</dd>
+              <dd>개인사업자</dd>
+             </dl>
+             <dl className="col-12 m-auto">
+              <dt className="mb-3">메시지</dt>
+              <dd>성실함으로 열심히 하겠습니다. 처음이지만 적극적으로!</dd>
+             </dl>
             </div>
            </div>
            <a
