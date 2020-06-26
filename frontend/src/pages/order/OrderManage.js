@@ -218,7 +218,7 @@ class OrderManage extends Component {
              </label>
              <select className="form-control col-4" id="orderRegisWorkGroup">
               <option>TS</option>
-              <option>FA</option>
+              <option>LF</option>
              </select>
             </div>
             <table className="table">
@@ -434,7 +434,7 @@ class OrderManage extends Component {
              </label>
              <select className="form-control col-4" id="orderRegisWorkGroup">
               <option>TS</option>
-              <option>FA</option>
+              <option>LF</option>
              </select>
             </div>
             <table className="table">
@@ -626,7 +626,7 @@ class OrderManage extends Component {
              </label>
              <select className="form-control col-4" id="orderRegisWorkGroup">
               <option>TS</option>
-              <option>FA</option>
+              <option>LF</option>
              </select>
             </div>
             <table className="table">
@@ -791,7 +791,7 @@ class OrderManage extends Component {
              </label>
              <select className="form-control col-4" id="orderRegisWorkGroup">
               <option>TS</option>
-              <option>FA</option>
+              <option>LF</option>
              </select>
             </div>
             <table className="table">
