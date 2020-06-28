@@ -28,23 +28,23 @@ class OrderRegist extends Component {
    console.log(event.target.value);
    switch (event.target.value) {
     case "needSelect":
-     $("[id^=orderRegistWorkDayDetail]").prop("checked", false);
-     $("[id^=orderRegistWorkDayDetail]").attr("disabled", true);
-     break;
-    case "sixDay":
-     $("[id^=orderRegistWorkDayDetail]").prop("checked", true);
-     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
-     $("[id=orderRegistWorkDayDetailSat]").prop("checked", false);
-     $("[id=orderRegistWorkDayDetailSun]").prop("checked", false);
+     $("[id^=06]").prop("checked", false);
+     $("[id^=06]").attr("disabled", true);
      break;
     case "fiveDay":
-     $("[id^=orderRegistWorkDayDetail]").prop("checked", true);
-     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
-     $("[id=orderRegistWorkDayDetailSun]").prop("checked", false);
+     $("[id^=06]").prop("checked", true);
+     $("[id^=06]").attr("disabled", false);
+     $("[id=0606]").prop("checked", false);
+     $("[id=0607]").prop("checked", false);
+     break;
+    case "sixDay":
+     $("[id^=06]").prop("checked", true);
+     $("[id^=06]").attr("disabled", false);
+     $("[id=0607]").prop("checked", false);
      break;
     case "directCheck":
-     $("[id^=orderRegistWorkDayDetail]").prop("checked", false);
-     $("[id^=orderRegistWorkDayDetail]").attr("disabled", false);
+     $("[id^=06]").prop("checked", false);
+     $("[id^=06]").attr("disabled", false);
      break;
     default:
      break;
@@ -210,6 +210,7 @@ class OrderRegist extends Component {
  componentDidMount() {
   attachJiraIssueColletor();
 
+  console.log(this.props);
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",
@@ -282,104 +283,74 @@ class OrderRegist extends Component {
               <div className="form-group row">
                <label
                 htmlFor="orderRegisWorkGroup"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 운송그룹
                </label>
                <select
-                className="form-control col-4"
+                className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroup"
-                name="orderRegisWorkGroup"
+                name="workGroup"
                >
-                {this.props.codes
-                 .filter((codeCtgry) =>
-                  codeCtgry.codeCtgryNm.includes("운송그룹")
-                 )
-                 .map((code) => {
-                  console.log(code.codes);
-                  return code.codes;
-                 })
-                 .map((obj) => {
-                  return obj
-                   .filter((obj) => obj.codeUseYn.includes("Y"))
-                   .map((obj, index) => {
-                    return (
-                     <option key={index} value={obj.code}>
-                      {obj.codeDc}
-                     </option>
-                    );
-                   });
-                 })}
+                 {this.props.orderRegisWorkGroupCodes
+                  .map((obj, index) => {
+                     return (
+                      <option key={obj.code} value={obj.code}>
+                       {obj.codeDc}
+                      </option>
+                     );
+                  })}
                </select>
                <label
                 htmlFor="orderRegisWorkGroupManager"
-                className="col-2 text-right pr-5 col-form-label"
+                className="col-12 col-sm-2 text-sm-right pr-5 col-form-label"
                >
                 담당자
                </label>
 
                <input
-                className="form-control col-4"
+                className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroupManager"
-                type="email"
+                type="text"
                 readOnly
                 placeholder="서영락"
                 key="orderRegisWorkGroupManager"
                />
               </div>
               <div className="form-group row">
-               <label htmlFor="customRadio1" className="col-2 col-form-label">
+               <label htmlFor="rcritType" className="col-12 col-sm-2 col-form-label">
                 모집 유형
                </label>
-               <div className="col-4 pl-0">
-                <label
-                 className="col-form-label pr-3 radio-inline"
-                 htmlFor="customRadio1"
-                >
-                 <input
-                  className="radio mr-1"
-                  id="customRadio1"
-                  type="radio"
-                  name="rcritType"
-                  value="fix"
-                 />
-                 고정
-                </label>
-                <label
-                 className="col-form-label pr-3 radio-inline"
-                 htmlFor="customRadio2"
-                >
-                 <input
-                  className="radio mr-1"
-                  id="customRadio2"
-                  type="radio"
-                  name="rcritType"
-                  value="truckOwner"
-                 />
-                 지입차주
-                </label>
-                <label
-                 className="col-form-label pr-3 radio-inline"
-                 htmlFor="customRadio3"
-                >
-                 <input
-                  className="radio mr-1"
-                  id="customRadio3"
-                  type="radio"
-                  name="rcritType"
-                  value="hiredCar"
-                 />
-                 용차
-                </label>
+               <div className="col-12 col-sm-4 pl-sm-0" id="rcritType">
+                 {this.props.rcritTypeCodes
+                  .map((obj, index) => {
+                     return (
+                      <label
+                       className="col-form-label pr-3 radio-inline"
+                       htmlFor={obj.code}
+                       key={obj.code}
+                      >
+                       <input
+                        className="radio mr-1"
+                        type="radio"
+                        name="rcritType"
+                        key={obj.code}
+                        id={obj.code}
+                        value={obj.code}
+                       />
+                       {obj.codeDc}
+                      </label>
+                     );
+                  })}
                </div>
                <label
                 htmlFor="orderRegisWorkRcritMans"
-                className="col-2 text-right pr-5 col-form-label"
+                className="col-12 col-sm-2 text-sm-right pr-5 col-form-label"
                >
                 모집인원
                </label>
                <input
-                className="form-control col-4"
+                className="form-control col-12 col-sm-4"
                 id="orderRegisWorkRcritMans"
                 type="text"
                 placeholder="5"
@@ -389,306 +360,70 @@ class OrderRegist extends Component {
 
               <div className="form-group row">
                <label
-                htmlFor="orderRegistCarType"
-                className="col-2 col-form-label"
+                htmlFor="carType"
+                className="col-12 col-sm-2 col-form-label"
                >
                 운행차량
                </label>
 
-               <div className="col-10 row mx-0 px-0 d-flex justify-content-start">
-                <div className="col-6 ml-0 pl-0">
+               <div className="col-12 col-sm-10 row mx-0 px-0 d-flex justify-content-start">
+                <div className="col-12 col-sm-6 ml-sm-0 pl-sm-0">
                  <div className="card">
                   <div className="card-header">차종(중복 선택 가능)</div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio1"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio1"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      카고
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio2"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio2"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      윙바디
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio3"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio3"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      탑
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio4"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio4"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      냉장
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio5"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio5"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      다마스
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio6"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio6"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      라보
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio7"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio7"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      초장축
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio8"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio8"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      호루
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio9"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio9"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      무진동
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTypeRadio10"
-                     >
-                      <input
-                       className="checkbox mr-1"
-                       id="orderRegistCarTypeRadio10"
-                       type="checkbox"
-                       name="orderRegistCarType"
-                      />
-                      추레라
-                     </label>
+                    <div className="custom-control custom-radio" id="carType">
+                 {this.props.carTypeCodes
+                  .map((obj, index) => {
+                     return (
+                      <label
+                       className="col-form-label pr-3 radio-inline"
+                       htmlFor={obj.code}
+                       key={obj.code}
+                      >
+                       <input
+                        className="checkbox mr-1"
+                        type="checkbox"
+                        name="carType"
+                        key={obj.code}
+                        id={obj.code}
+                        value={obj.code}
+                       />
+                       {obj.codeDc}
+                      </label>
+                     );
+                  })}
                     </div>
                    </div>
                   </div>
                  </div>
                 </div>
-                <div className="col-6 mr-0 pr-0">
+                <div className="col-12 col-sm-6 mr-sm-0 pr-sm-0">
                  <div className="card">
                   <div className="card-header">톤수</div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio1"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio1"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      1t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio2"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio2"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      1.4t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio3"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio3"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      2.5t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio4"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio4"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      3.5t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio5"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio5"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      5t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio6"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio6"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      8t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio7"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio7"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      11t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio8"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio8"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      14t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio9"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio9"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      18t
-                     </label>
-                    </div>
-                    <div className="custom-control custom-radio">
-                     <label
-                      className="col-form-label pr-3 radio-inline"
-                      htmlFor="orderRegistCarTonsRadio10"
-                     >
-                      <input
-                       className="radio mr-1"
-                       id="orderRegistCarTonsRadio10"
-                       type="radio"
-                       name="orderRegistCarTons"
-                      />
-                      25t
-                     </label>
+                 {this.props.tonTypeCodes
+                  .map((obj, index) => {
+                     return (
+                      <label
+                       className="col-form-label pr-3 radio-inline"
+                       htmlFor={obj.code}
+                       key={obj.code}
+                      >
+                       <input
+                        className="radio mr-1"
+                        type="radio"
+                        name="tonType"
+                        key={obj.code}
+                        id={obj.code}
+                        value={obj.code}
+                       />
+                       {obj.codeDc}
+                      </label>
+                     );
+                  })}
                     </div>
                    </div>
                   </div>
@@ -699,12 +434,12 @@ class OrderRegist extends Component {
               <div className="form-group row">
                <label
                 htmlFor="exampleFormControlInput3"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 배송 품목
                </label>
                <input
-                className="form-control col-10"
+                className="form-control col-12 col-sm-10"
                 id="exampleFormControlInput3"
                 type="email"
                 placeholder="ex) 박스 일 40건"
@@ -714,62 +449,56 @@ class OrderRegist extends Component {
               <div className="form-group row">
                <label
                 htmlFor="orderRegistPayAmt"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 급여
                </label>
                <input
-                className="form-control col-4"
+                className="form-control col-12 col-sm-4"
                 id="orderRegistPayAmt"
                 type="email"
                 placeholder="ex) 500만원"
                 key="orderRegistPayAmt"
                />
                <label
-                htmlFor="orderRegistPayFullTrue"
-                className="col-2 text-right pr-5 col-form-label"
+                htmlFor="payFullType"
+                className="col-12 col-sm-2 text-sm-right pr-5 col-form-label"
                >
                 완제/무제
                </label>
-               <div className="col-4 row">
-                <div className="custom-control custom-radio">
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistPayFullTrue"
-                 >
-                  <input
-                   className="radio mr-1"
-                   id="orderRegistPayFullTrue"
-                   type="radio"
-                   name="orderRegistIsFayFull"
-                  />
-                  완제
-                 </label>
-                </div>
-                <div className="custom-control custom-radio">
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistPayFullFalse"
-                 >
-                  <input
-                   className="radio mr-1"
-                   id="orderRegistPayFullFalse"
-                   type="radio"
-                   name="orderRegistIsFayFull"
-                  />
-                  무제
-                 </label>
+               <div className="col-12 col-sm-4 row">
+                <div className="custom-control custom-radio" id="payFullType">
+                 {this.props.payFullTypeCodes
+                  .map((obj, index) => {
+                     return (
+                      <label
+                       className="col-form-label pr-3 radio-inline"
+                       htmlFor={obj.code}
+                       key={obj.code}
+                      >
+                       <input
+                        className="radio mr-1"
+                        type="radio"
+                        name="payFullType"
+                        key={obj.code}
+                        id={obj.code}
+                        value={obj.code}
+                       />
+                       {obj.codeDc}
+                      </label>
+                     );
+                  })}
                 </div>
                </div>
               </div>
               <div className="form-group row">
                <label
                 htmlFor="registOrderWorkingArea"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 지역
                </label>
-               <div className="col-10 row pr-0">
+               <div className="col-12 col-sm-10 row pr-sm-0">
                 <div className="col-12 row">
                  {/*
                  <input
@@ -787,7 +516,7 @@ class OrderRegist extends Component {
                   value={this.state.value}
                   onClick={this._getDaumAddressFinder}
                   readOnly
-                  className="form-control col-8"
+                  className="form-control col-sm-8 col-12"
                   id="registOrderWorkingArea"
                   type="text"
                   placeholder="서이천물류센터"
@@ -796,7 +525,7 @@ class OrderRegist extends Component {
                  />
                  {/*this.renderJusos*/}
 
-                 <div className="col-3">
+                 <div className="col-sm-3 col-12">
                   <label
                    className="col-form-label pr-3 radio-inline"
                    htmlFor="registOrderWorkingAreaEtcMatterToggle"
@@ -818,17 +547,17 @@ class OrderRegist extends Component {
                <div className="form-group row">
                 <label
                  htmlFor="registOrderWorkingArea"
-                 className="col-2 col-form-label"
+                 className="col-12 col-sm-2 col-form-label"
                 ></label>
 
                 <label
                  htmlFor="registOrderWorkingAreaEtcMatter"
-                 className="col-2 col-form-label text-right"
+                 className="col-12 col-sm-2 col-form-label text-sm-right"
                 >
                  기타입력사항:
                 </label>
                 <input
-                 className="form-control col-8"
+                 className="form-control col-12 col-sm-8"
                  id="registOrderWorkingAreaEtcMatter"
                  type="text"
                  placeholder="ex) 기타입력사항"
@@ -839,12 +568,12 @@ class OrderRegist extends Component {
               <div className="form-group row">
                <label
                 htmlFor="exampleFormControlInput5"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 운행구간
                </label>
                <input
-                className="form-control col-10"
+                className="form-control col-12 col-sm-10"
                 id="exampleFormControlInput5"
                 type="email"
                 placeholder="ex) 서울시"
@@ -854,159 +583,91 @@ class OrderRegist extends Component {
               <div className="form-group row">
                <label
                 htmlFor="orderRegistWorkType"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 근무요일
                </label>
                <select
-                className="form-control col-10"
+                className="form-control col-12 col-sm-10"
                 id="orderRegistWorkType"
                 onChange={this._setorderRegistWorkType}
                >
                 <option value="needSelect">선택</option>
-                <option value="sixDay">주6일</option>
                 <option value="fiveDay">주5일</option>
+                <option value="sixDay">주6일</option>
                 <option value="directCheck">직접입력</option>
                </select>
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegistWorkDayDetail"
-                className="col-2 col-form-label"
+                htmlFor="workDays"
+                className="col-12 col-sm-2 col-form-label"
                >
                 상세요일 선택
                </label>
-               <div className="col-10 row">
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailMon"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailMon"
-                   type="checkbox"
-                  />
-                  월
-                 </label>
-                </div>
-
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailTue"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailTue"
-                   type="checkbox"
-                  />
-                  화
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailWed"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailWed"
-                   type="checkbox"
-                  />
-                  수
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailThu"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailThu"
-                   type="checkbox"
-                  />
-                  목
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailFri"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailFri"
-                   type="checkbox"
-                  />
-                  금
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailSat"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailSat"
-                   type="checkbox"
-                  />
-                  토
-                 </label>
-                </div>
-                <div>
-                 <label
-                  className="col-form-label pr-3 radio-inline"
-                  htmlFor="orderRegistWorkDayDetailSun"
-                 >
-                  <input
-                   className="checkbox mr-1"
-                   id="orderRegistWorkDayDetailSun"
-                   type="checkbox"
-                  />
-                  일
-                 </label>
-                </div>
+               <div className="col-12 col-sm-10 row" id="workDays">
+                
+               {this.props.workDayCodes
+                  .map((obj, index) => {
+                     return (
+                      <label
+                       className="col-form-label pr-3 radio-inline"
+                       htmlFor={obj.code}
+                       key={obj.code}
+                      >
+                       <input
+                        className="checkbox mr-1"
+                        type="checkbox"
+                        name="workDay"
+                        key={obj.code}
+                        id={obj.code}
+                        value={obj.code}
+                        disabled
+                       />
+                       {obj.codeDc}
+                      </label>
+                     );
+                  })}
                </div>
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegisWorkTime"
-                className="col-2 col-form-label"
+                htmlFor="orderRegisWorkHourStart"
+                className="col-12 col-sm-2 col-form-label"
                >
                 근무시간
                </label>
+               <div className="col-12 col-sm-10 row">
                <select
-                className="form-control col-1"
+                className="form-control col-sm-1 col-4"
                 id="orderRegisWorkHourStart"
                ></select>
                <label className="col-form-label ml-3 mr-3">:</label>
                <select
-                className="form-control col-1"
+                className="form-control col-sm-1 col-4"
                 id="orderRegisWorkMinuteStart"
                ></select>
                <label className="col-form-label ml-3 mr-3">~</label>
                <select
-                className="form-control col-1"
+                className="form-control col-sm-1 col-4"
                 id="orderRegisWorkHourEnd"
                ></select>
                <label className="col-form-label ml-3 mr-3">:</label>
                <select
-                className="form-control col-1"
+                className="form-control col-sm-1 col-4"
                 id="orderRegisWorkMinuteEnd"
                ></select>
+               </div>
               </div>
               <div className="form-group row">
                <label
                 htmlFor="orderRegistDetailMatter"
-                className="col-2 col-form-label"
+                className="col-12 col-sm-2 col-form-label"
                >
                 상세 사항
                </label>
                <textarea
-                className="form-control col-10"
+                className="form-control col-12 col-sm-10"
                 id="orderRegistDetailMatter"
                 rows="3"
                 placeholder="ex) 연락주세요. 02-xxx-xxxx "
@@ -1041,6 +702,12 @@ class OrderRegist extends Component {
 
 const mapStateToProps = (state) => ({
  codes: state.codes.codes,
+ orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
+ rcritTypeCodes: state.codes.rcritTypeCodes,
+ carTypeCodes: state.codes.carTypeCodes,
+ tonTypeCodes: state.codes.tonTypeCodes,
+ payFullTypeCodes: state.codes.payFullTypeCodes,
+ workDayCodes: state.codes.workDayCodes
 });
 
 export default connect(mapStateToProps)(OrderRegist);

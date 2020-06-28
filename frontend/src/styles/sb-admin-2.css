@@ -11590,3 +11590,21 @@ a.nav-link.active {
  border-bottom-color: #dddfeb;
  border-bottom-style: solid;
 }
+
+@media (min-width: 576px) {
+  .text-sm-right { text-align: right !important; }
+  .ml-sm-0 {
+   margin-left: 0 !important;
+  }
+  .pl-sm-0 {
+   padding-left: 0 !important;
+  }
+  .mr-sm-0 {
+   margin-right: 0 !important;
+  }
+  
+  .pr-sm-0 {
+   padding-right: 0 !important;
+  }
+}
+
