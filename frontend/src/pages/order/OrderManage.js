@@ -30,6 +30,7 @@ class OrderManage extends Component {
   };
  }
  componentDidMount() {
+  attachJiraIssueColletor();
   /*
   $(this.refs.main).DataTable({
    dom: '<"data-table-wrapper"t>',

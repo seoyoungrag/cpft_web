@@ -6,6 +6,7 @@ import * as authActions from "store/modules/auth";
 
 export class AuthContainer extends Component {
  componentDidMount() {
+  attachJiraIssueColletor();
   console.log("authcontainer mount");
   this.initialize();
  }

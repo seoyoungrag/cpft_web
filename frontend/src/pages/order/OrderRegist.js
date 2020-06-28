@@ -207,6 +207,8 @@ class OrderRegist extends Component {
  }
  */
  componentDidMount() {
+  attachJiraIssueColletor();
+
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",
@@ -275,7 +277,7 @@ class OrderRegist extends Component {
           <div className="card-body">
            <div className="sbp-preview">
             <div className="sbp-preview-content">
-             <form role="form">
+             <form role="form" id="orderRegistForm">
               <div className="form-group row">
                <label
                 htmlFor="orderRegisWorkGroup"
@@ -283,9 +285,17 @@ class OrderRegist extends Component {
                >
                 운송그룹
                </label>
-               <select className="form-control col-4" id="orderRegisWorkGroup">
-                <option>TS</option>
-                <option>LF</option>
+               <select
+                className="form-control col-4"
+                id="orderRegisWorkGroup"
+                name="orderRegisWorkGroup"
+               >
+                <option value="TS" data-manager="서영락">
+                 TS
+                </option>
+                <option value="LF" data-manager="유아름">
+                 LF
+                </option>
                </select>
                <label
                 htmlFor="orderRegisWorkGroupManager"
@@ -316,7 +326,8 @@ class OrderRegist extends Component {
                   className="radio mr-1"
                   id="customRadio1"
                   type="radio"
-                  name="customRadio"
+                  name="rcritType"
+                  value="fix"
                  />
                  고정
                 </label>
@@ -328,7 +339,8 @@ class OrderRegist extends Component {
                   className="radio mr-1"
                   id="customRadio2"
                   type="radio"
-                  name="customRadio"
+                  name="rcritType"
+                  value="truckOwner"
                  />
                  지입차주
                 </label>
@@ -340,7 +352,8 @@ class OrderRegist extends Component {
                   className="radio mr-1"
                   id="customRadio3"
                   type="radio"
-                  name="customRadio"
+                  name="rcritType"
+                  value="hiredCar"
                  />
                  용차
                 </label>

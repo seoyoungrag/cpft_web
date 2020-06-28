@@ -32,6 +32,7 @@ class ApplicantManage extends Component {
  }
 
  componentDidMount() {
+  attachJiraIssueColletor();
   const reactClass = this;
   $("#orderSelectMenu a").on("click", function () {
    $("#orderSelecteButton").html($(this).html());

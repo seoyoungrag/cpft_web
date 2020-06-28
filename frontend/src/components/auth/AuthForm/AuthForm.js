@@ -185,16 +185,19 @@ const AuthForm = ({
         </ul>
         <div className="form-group">
          <div className="custom-control custom-checkbox">
-          <input
-           className="custom-control-input"
-           id="rememberMe"
-           name="rememberMe"
-           type="checkbox"
-           useref="rememberMe"
-           onChange={toggleRememberMe}
-           defaultChecked={rememberMe}
-          />
-          <label className="custom-control-label" htmlFor="rememberMe">
+          <label
+           className="col-form-label pr-3 radio-inline"
+           htmlFor="rememberMe"
+          >
+           <input
+            className="checkbox mr-3"
+            id="rememberMe"
+            name="rememberMe"
+            type="checkbox"
+            useref="rememberMe"
+            onChange={toggleRememberMe}
+            defaultChecked={rememberMe}
+           />
            로그인 유지하기
           </label>
          </div>

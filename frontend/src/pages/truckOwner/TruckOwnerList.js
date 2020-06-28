@@ -29,6 +29,7 @@ class TruckOwnerList extends Component {
   };
  }
  componentDidMount() {
+  attachJiraIssueColletor();
   $(this.refs.main).DataTable({
    dom: '<"data-table-wrapper"t>',
    data: this.props.names,
