@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as codeActions from "../store/modules/codes";
 import * as authActions from "../store/modules/auth";
 import { withRouter } from "react-router-dom";
 
@@ -7,6 +8,7 @@ export class BaseContainer extends React.Component {
  componentDidMount() {
   /*console.log("base mounted");*/
   this.checkUser();
+  this.getCodes();
  }
  componentDidUpdate(prevProps, prevState) {
   /*
@@ -22,6 +24,11 @@ export class BaseContainer extends React.Component {
   }
  }
 
+ getCodes = () => {
+  const { getCodes } = this.props;
+  getCodes();
+  return;
+ };
  checkUser = () => {
   const { checkUser, setUserTemp, history } = this.props;
 
@@ -71,10 +78,14 @@ export class BaseContainer extends React.Component {
 const mapStateToProps = (state) => ({
  logged: state.auth.logged,
  userInfo: state.auth.userInfo,
+ codes: state.codes.codes,
 });
 
 const mapDispatchToProps = (dispatch) => {
  return {
+  getCodes: () => {
+   dispatch(codeActions.getCodes());
+  },
   checkUser: () => {
    dispatch(authActions.checkUser());
   },

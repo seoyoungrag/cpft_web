@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
 import BaseContainer from "containers/BaseContainer";
@@ -36,7 +36,6 @@ import ReactStore from "ReactStore";
 class App extends React.Component {
  static contextType = ReactStore;
  componentDidUpdate = () => {
-  console.log("app update");
   this.props.initNav();
  };
  render() {

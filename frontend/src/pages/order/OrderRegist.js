@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import MainStructure from "components/structure/MainStructure";
 import "./OrderRegist.css";
 import $ from "jquery";
@@ -290,12 +291,25 @@ class OrderRegist extends Component {
                 id="orderRegisWorkGroup"
                 name="orderRegisWorkGroup"
                >
-                <option value="TS" data-manager="서영락">
-                 TS
-                </option>
-                <option value="LF" data-manager="유아름">
-                 LF
-                </option>
+                {this.props.codes
+                 .filter((codeCtgry) =>
+                  codeCtgry.codeCtgryNm.includes("운송그룹")
+                 )
+                 .map((code) => {
+                  console.log(code.codes);
+                  return code.codes;
+                 })
+                 .map((obj) => {
+                  return obj
+                   .filter((obj) => obj.codeUseYn.includes("Y"))
+                   .map((obj, index) => {
+                    return (
+                     <option key={index} value={obj.code}>
+                      {obj.codeDc}
+                     </option>
+                    );
+                   });
+                 })}
                </select>
                <label
                 htmlFor="orderRegisWorkGroupManager"
@@ -1025,4 +1039,8 @@ class OrderRegist extends Component {
  }
 }
 
-export default OrderRegist;
+const mapStateToProps = (state) => ({
+ codes: state.codes.codes,
+});
+
+export default connect(mapStateToProps)(OrderRegist);
