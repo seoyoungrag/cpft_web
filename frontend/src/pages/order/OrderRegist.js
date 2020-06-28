@@ -2,9 +2,73 @@ import React from "react";
 import { connect } from "react-redux";
 import MainStructure from "components/structure/MainStructure";
 import "./OrderRegist.css";
-import $ from "jquery";
 import { Component } from "react";
 import axios from "axios";
+import "util/Common";
+
+export const VALIDATION_ORDER_REGIST_FORM = {
+  rules: {
+      "rcritMans" : {
+          required: true
+      },
+      "dlvyPrdlst" : {
+          required: true
+      },
+      "payAmt" : {
+          required: true
+      },
+      "opratSctn" : {
+          required: true
+      },
+      "workingDaysType" : {
+          required: true
+      },
+      "detailMatter" : {
+          required: true
+      },
+      "rcritType": {
+        required: true
+      },
+      "workDay": {
+        required: true
+      },
+      "tonType": {
+        required: true
+      }
+  },
+  submitHandler: function (form) { 
+    console.log(form);
+      alert('valid form submitted'); 
+      return false; 
+  },
+  errorPlacement: function(error,element){ 
+    var label = $("label[for='" + $(element).attr('name') + "']");
+    
+    $(error).addClass('col-12');
+    $(error).addClass('row');
+    if($(label).hasClass('text-sm-right')){
+      $(error).addClass('float-right');
+    }
+    label.append(error);
+    
+    //$(error).wrapInner('<div class="col-12"/>');
+
+    /*
+    var lastError = $(element).data('lastError'),
+        newError = $(error).text();
+    
+    $(element).data('lastError', newError);
+                    
+    if(newError !== '' && newError !== lastError){
+        $(element).tooltipster('content', newError);
+        $(element).tooltipster('show');
+    } 
+    */
+ },
+ success: function (label, element) {
+     /*$(element).tooltipster('hide');*/
+ },
+}
 
 class OrderRegist extends Component {
  constructor(props) {
@@ -15,19 +79,47 @@ class OrderRegist extends Component {
    registOrderWorkingAreaEtcMatterToggle: false,
    orderRegistWorkTypeValue: "",
   };
+  this._saveCompleteOrderRegist = (e) => {
+    const formObj = $("#orderRegistForm").serializeObject();
+    axios.post("/v1/order", formObj).then((res) => {
+     if (res.status == 200) {
+      console.log(res);
+     }
+    });
+  }
+  this._validateOrderRegistForm = (e) => {
+    
+    /*
+    $('#orderRegistForm input').tooltipster({
+      theme: 'tooltipster-shadow',
+        trigger: 'custom',
+        onlyOne: false,
+        position: 'right'
+    });
+    */
+   
+$("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
+var valid = $("#orderRegistForm").valid();
+if(valid){
+  $("#saveModalPopup").modal();
+}
+  }
+  this._saveTempOrderRegist = (e) => {
+
+  }
   this._getDaumAddressFinder = (event) => {
    new daum.Postcode({
     oncomplete: function (data) {
-     $("#registOrderWorkingArea").val(data.address);
+     $("#workingArea").val(data.address);
      // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
      // 예제를 참고하여 다양한 활용법을 확인해 보세요.
     },
    }).open();
   };
   this._setorderRegistWorkType = (event) => {
-   console.log(event.target.value);
+   
    switch (event.target.value) {
-    case "needSelect":
+    case "":
      $("[id^=06]").prop("checked", false);
      $("[id^=06]").attr("disabled", true);
      break;
@@ -210,7 +302,7 @@ class OrderRegist extends Component {
  componentDidMount() {
   attachJiraIssueColletor();
 
-  console.log(this.props);
+  
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",
@@ -235,8 +327,8 @@ class OrderRegist extends Component {
     }
    }
   });
-  this._setTimes("orderRegisWorkHourStart", "orderRegisWorkMinuteStart");
-  this._setTimes("orderRegisWorkHourEnd", "orderRegisWorkMinuteEnd");
+  this._setTimes("workHourStart", "workMinuteStart");
+  this._setTimes("workHourEnd", "workMinuteEnd");
  }
 
  render() {
@@ -302,7 +394,7 @@ class OrderRegist extends Component {
                   })}
                </select>
                <label
-                htmlFor="orderRegisWorkGroupManager"
+                htmlFor="workGroupManager"
                 className="col-12 col-sm-2 text-sm-right pr-5 col-form-label"
                >
                 담당자
@@ -310,11 +402,12 @@ class OrderRegist extends Component {
 
                <input
                 className="form-control col-12 col-sm-4"
-                id="orderRegisWorkGroupManager"
+                id="workGroupManager"
+                name="workGroupManager"
                 type="text"
                 readOnly
                 placeholder="서영락"
-                key="orderRegisWorkGroupManager"
+                key="workGroupManager"
                />
               </div>
               <div className="form-group row">
@@ -337,6 +430,7 @@ class OrderRegist extends Component {
                         key={obj.code}
                         id={obj.code}
                         value={obj.code}
+                        required
                        />
                        {obj.codeDc}
                       </label>
@@ -344,32 +438,37 @@ class OrderRegist extends Component {
                   })}
                </div>
                <label
-                htmlFor="orderRegisWorkRcritMans"
+                htmlFor="rcritMans"
                 className="col-12 col-sm-2 text-sm-right pr-5 col-form-label"
                >
                 모집인원
                </label>
                <input
                 className="form-control col-12 col-sm-4"
-                id="orderRegisWorkRcritMans"
-                type="text"
+                id="rcritMans"
+                type="number"
                 placeholder="5"
-                key="orderRegisWorkRcritMans"
+                key="rcritMans"
+                name="rcritMans"
+                required
                />
               </div>
 
               <div className="form-group row">
                <label
-                htmlFor="carType"
                 className="col-12 col-sm-2 col-form-label"
                >
                 운행차량
                </label>
-
                <div className="col-12 col-sm-10 row mx-0 px-0 d-flex justify-content-start">
                 <div className="col-12 col-sm-6 ml-sm-0 pl-sm-0">
                  <div className="card">
-                  <div className="card-header">차종(중복 선택 가능)</div>
+                  <div className="card-header">
+               <label
+                htmlFor="carType"
+                className="mb-0 col-12"
+               >차종(중복 선택 가능)
+               </label></div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio" id="carType">
@@ -388,6 +487,7 @@ class OrderRegist extends Component {
                         key={obj.code}
                         id={obj.code}
                         value={obj.code}
+                        required
                        />
                        {obj.codeDc}
                       </label>
@@ -400,7 +500,12 @@ class OrderRegist extends Component {
                 </div>
                 <div className="col-12 col-sm-6 mr-sm-0 pr-sm-0">
                  <div className="card">
-                  <div className="card-header">톤수</div>
+                  <div className="card-header">
+               <label
+               className="mb-0 col-12"
+                htmlFor="tonType"
+               >톤수
+               </label></div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio">
@@ -419,6 +524,7 @@ class OrderRegist extends Component {
                         key={obj.code}
                         id={obj.code}
                         value={obj.code}
+                        required
                        />
                        {obj.codeDc}
                       </label>
@@ -433,32 +539,36 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="exampleFormControlInput3"
+                htmlFor="dlvyPrdlst"
                 className="col-12 col-sm-2 col-form-label"
                >
                 배송 품목
                </label>
                <input
                 className="form-control col-12 col-sm-10"
-                id="exampleFormControlInput3"
-                type="email"
+                id="dlvyPrdlst"
+                type="text"
                 placeholder="ex) 박스 일 40건"
-                key="exampleFormControlInput3"
+                key="dlvyPrdlst"
+                name="dlvyPrdlst"
+                required
                />
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegistPayAmt"
+                htmlFor="payAmt"
                 className="col-12 col-sm-2 col-form-label"
                >
                 급여
                </label>
                <input
                 className="form-control col-12 col-sm-4"
-                id="orderRegistPayAmt"
-                type="email"
+                id="payAmt"
+                type="text"
                 placeholder="ex) 500만원"
-                key="orderRegistPayAmt"
+                key="payAmt"
+                name="payAmt"
+                required
                />
                <label
                 htmlFor="payFullType"
@@ -483,6 +593,7 @@ class OrderRegist extends Component {
                         key={obj.code}
                         id={obj.code}
                         value={obj.code}
+                        required
                        />
                        {obj.codeDc}
                       </label>
@@ -493,7 +604,7 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="registOrderWorkingArea"
+                htmlFor="workingArea"
                 className="col-12 col-sm-2 col-form-label"
                >
                 지역
@@ -517,11 +628,13 @@ class OrderRegist extends Component {
                   onClick={this._getDaumAddressFinder}
                   readOnly
                   className="form-control col-sm-8 col-12"
-                  id="registOrderWorkingArea"
+                  id="workingArea"
+                  name="workingArea"
                   type="text"
                   placeholder="서이천물류센터"
-                  key="registOrderWorkingArea"
+                  key="workingArea"
                   autoComplete="off"
+                  required
                  />
                  {/*this.renderJusos*/}
 
@@ -533,6 +646,7 @@ class OrderRegist extends Component {
                    <input
                     className="checkbox mr-1"
                     id="registOrderWorkingAreaEtcMatterToggle"
+                    name="registOrderWorkingAreaEtcMatterToggle"
                     type="checkbox"
                     onChange={this._setRegistOrderWorkingAreaEtcMatterToggle}
                     checked={this.state.registOrderWorkingAreaEtcMatterToggle}
@@ -546,53 +660,58 @@ class OrderRegist extends Component {
               {this.state.registOrderWorkingAreaEtcMatterToggle ? (
                <div className="form-group row">
                 <label
-                 htmlFor="registOrderWorkingArea"
+                 htmlFor="workingAreaEtc"
                  className="col-12 col-sm-2 col-form-label"
                 ></label>
 
                 <label
-                 htmlFor="registOrderWorkingAreaEtcMatter"
+                 htmlFor="workingAreaEtc"
                  className="col-12 col-sm-2 col-form-label text-sm-right"
                 >
                  기타입력사항:
                 </label>
                 <input
                  className="form-control col-12 col-sm-8"
-                 id="registOrderWorkingAreaEtcMatter"
+                 id="workingAreaEtc"
                  type="text"
                  placeholder="ex) 기타입력사항"
-                 key="registOrderWorkingAreaEtcMatter"
+                 key="workingAreaEtc"
+                 name="workingAreaEtc"
                 />
                </div>
               ) : null}
               <div className="form-group row">
                <label
-                htmlFor="exampleFormControlInput5"
+                htmlFor="opratSctn"
                 className="col-12 col-sm-2 col-form-label"
                >
                 운행구간
                </label>
                <input
                 className="form-control col-12 col-sm-10"
-                id="exampleFormControlInput5"
-                type="email"
+                id="opratSctn"
+                name="opratSctn"
+                type="text"
                 placeholder="ex) 서울시"
-                key="exampleFormControlInput5"
+                key="opratSctn"
+                required
                />
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegistWorkType"
+                htmlFor="workingDaysType"
                 className="col-12 col-sm-2 col-form-label"
                >
                 근무요일
                </label>
                <select
                 className="form-control col-12 col-sm-10"
-                id="orderRegistWorkType"
+                id="workingDaysType"
                 onChange={this._setorderRegistWorkType}
+                name="workingDaysType"
+                required
                >
-                <option value="needSelect">선택</option>
+                <option value="">선택</option>
                 <option value="fiveDay">주5일</option>
                 <option value="sixDay">주6일</option>
                 <option value="directCheck">직접입력</option>
@@ -600,13 +719,12 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="workDays"
+                htmlFor="workDay"
                 className="col-12 col-sm-2 col-form-label"
                >
                 상세요일 선택
                </label>
                <div className="col-12 col-sm-10 row" id="workDays">
-                
                {this.props.workDayCodes
                   .map((obj, index) => {
                      return (
@@ -623,6 +741,7 @@ class OrderRegist extends Component {
                         id={obj.code}
                         value={obj.code}
                         disabled
+                        required
                        />
                        {obj.codeDc}
                       </label>
@@ -632,7 +751,7 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegisWorkHourStart"
+                htmlFor="workHourStart"
                 className="col-12 col-sm-2 col-form-label"
                >
                 근무시간
@@ -640,52 +759,57 @@ class OrderRegist extends Component {
                <div className="col-12 col-sm-10 row">
                <select
                 className="form-control col-sm-1 col-4"
-                id="orderRegisWorkHourStart"
+                id="workHourStart"
+                name="workHourStart"
                ></select>
                <label className="col-form-label ml-3 mr-3">:</label>
                <select
                 className="form-control col-sm-1 col-4"
-                id="orderRegisWorkMinuteStart"
+                id="workMinuteStart"
+                name="workMinuteStart"
                ></select>
                <label className="col-form-label ml-3 mr-3">~</label>
                <select
                 className="form-control col-sm-1 col-4"
-                id="orderRegisWorkHourEnd"
+                id="workHourEnd"
+                name="workHourEnd"
                ></select>
                <label className="col-form-label ml-3 mr-3">:</label>
                <select
                 className="form-control col-sm-1 col-4"
-                id="orderRegisWorkMinuteEnd"
+                id="workMinuteEnd"
+                name="workMinuteEnd"
                ></select>
                </div>
               </div>
               <div className="form-group row">
                <label
-                htmlFor="orderRegistDetailMatter"
+                htmlFor="detailMatter"
                 className="col-12 col-sm-2 col-form-label"
                >
                 상세 사항
                </label>
                <textarea
                 className="form-control col-12 col-sm-10"
-                id="orderRegistDetailMatter"
+                id="detailMatter"
+                name="detailMatter"
                 rows="3"
                 placeholder="ex) 연락주세요. 02-xxx-xxxx "
+                required
                ></textarea>
               </div>
               <div className="d-flex flex-row-reverse">
-               <button className="btn btn-primary" type="button">
+               <button className="btn btn-primary" type="button" onClick={e=>this._validateOrderRegistForm(e)}>
                 등록 완료
                </button>
-               <button className="btn btn-secondary mr-3" type="button">
+               <button className="btn btn-secondary mr-3" type="button" onClick={e=>this._validateOrderRegistForm(e)}>
                 임시저장
                </button>
               </div>
              </form>
             </div>
             <div className="sbp-preview-text">
-             위 정보 입력한 그대로 차주 앱에서 표시 됩니다. 추가로 근무 조건을
-             입력해 주세요.
+             저장한 오더는 오더관리 메뉴에서 확인할 수 있습니다. 진행중 상태와 임시저장 상태로 구분됩니다.
             </div>
            </div>
           </div>
@@ -694,6 +818,44 @@ class OrderRegist extends Component {
        </div>
       </div>
      </div>
+      <div
+       className="modal fade"
+       id="saveModalPopup"
+       tabIndex="-1"
+       role="dialog"
+       aria-labelledby="saveModalPopup"
+       aria-hidden="true"
+      >
+       <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+         <div className="modal-header">
+          <h5 className="modal-title">
+           저장하시겠습니까?
+          </h5>
+          <button
+           className="close"
+           type="button"
+           data-dismiss="modal"
+           aria-label="Close"
+          >
+           <span aria-hidden="true">×</span>
+          </button>
+         </div>
+         <div className="modal-footer">
+          <button
+           className="btn btn-secondary"
+           type="button"
+           data-dismiss="modal"
+          >
+           아니오
+          </button>
+          <button className="btn btn-primary" type="button" onClick={(e)=>this._saveCompleteOrderRegist(e)}>
+           네
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
     </main>
    </MainStructure>
   );

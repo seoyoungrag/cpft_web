@@ -25,6 +25,7 @@
   "include-media": "^1.4.9",
   "jquery": "^3.5.1",
   "jquery-ui": "^1.12.1",
+  "jquery-validation": "^1.19.2",
   "jwt-decode": "^2.2.0",
   "moment": "^2.27.0",
   "node-sass": "4.13.1",

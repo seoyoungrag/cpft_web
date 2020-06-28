@@ -2,7 +2,9 @@ package kr.co.teamfresh.cpft.capi.entity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
@@ -20,9 +23,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
+import kr.co.teamfresh.cpft.capi.entity.order.Order;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,6 +56,10 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
 
 	@Column(nullable = false, length = 100)
 	private String userEmail;
+
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Order> orders = new HashSet<Order>(0);
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Builder.Default

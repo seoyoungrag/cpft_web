@@ -11608,3 +11608,23 @@ a.nav-link.active {
   }
 }
 
+
+input.error {
+  border: 1px solid red;
+}
+
+label.error {
+  font-weight: 900;
+  color: red;
+  font-size: unset;
+  position: unset;
+  line-height: unset;
+  width: unset;
+}
+.error {
+  color: unset;
+  font-size: unset;
+  position: unset;
+  line-height: unset;
+  width: unset;
+}
