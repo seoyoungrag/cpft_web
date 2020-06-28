@@ -2,6 +2,7 @@ import React from "react";
 import MainStructure from "components/structure/MainStructure";
 
 import { Component } from "react";
+import axios from "axios";
 
 import "util/Common";
 const columns = [
