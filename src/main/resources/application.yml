@@ -11,8 +11,6 @@ spring:
         auth: true
         starttls.enable: true
         ssl.enable: true
-  profiles:
-    active: @spring.profiles.active@
   messages:
     basename: i18n/exception
     encoding: UTF-8
