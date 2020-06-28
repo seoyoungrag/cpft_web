@@ -61,7 +61,7 @@ module.exports = {
    template: "./public/index.html",
    path: path.resolve(__dirname, "../src/main/resources/static/"),
    filename: "./index.html",
-   //favicon: "public/favicon.ico",
+   favicon: "public/favicon.ico",
    publicPath: "/",
   }),
   new MiniCssExtractPlugin({
