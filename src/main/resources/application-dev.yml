@@ -32,4 +32,9 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     showSql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        

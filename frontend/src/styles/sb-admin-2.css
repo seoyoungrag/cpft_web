@@ -11592,39 +11592,50 @@ a.nav-link.active {
 }
 
 @media (min-width: 576px) {
-  .text-sm-right { text-align: right !important; }
-  .ml-sm-0 {
-   margin-left: 0 !important;
-  }
-  .pl-sm-0 {
-   padding-left: 0 !important;
-  }
-  .mr-sm-0 {
-   margin-right: 0 !important;
-  }
-  
-  .pr-sm-0 {
-   padding-right: 0 !important;
-  }
+ .text-sm-right {
+  text-align: right !important;
+ }
+ .ml-sm-0 {
+  margin-left: 0 !important;
+ }
+ .pl-sm-0 {
+  padding-left: 0 !important;
+ }
+ .mr-sm-0 {
+  margin-right: 0 !important;
+ }
+
+ .pr-sm-0 {
+  padding-right: 0 !important;
+ }
+
+ .float-sm-right {
+  float: right !important;
+ }
+
+ .align-items-sm-end {
+  align-items: flex-end !important;
+  flex-direction: column !important;
+  display: flex !important;
+ }
 }
 
-
 input.error {
-  border: 1px solid red;
+ border: 1px solid red;
 }
 
 label.error {
-  font-weight: 900;
-  color: red;
-  font-size: unset;
-  position: unset;
-  line-height: unset;
-  width: unset;
+ font-weight: 900;
+ color: red;
+ font-size: unset;
+ position: unset;
+ line-height: unset;
+ width: unset;
 }
 .error {
-  color: unset;
-  font-size: unset;
-  position: unset;
-  line-height: unset;
-  width: unset;
+ color: unset;
+ font-size: unset;
+ position: unset;
+ line-height: unset;
+ width: unset;
 }

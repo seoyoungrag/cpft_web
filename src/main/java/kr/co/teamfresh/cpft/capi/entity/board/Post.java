@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
@@ -17,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name="POST")
 @Getter
 @NoArgsConstructor
 public class Post extends CommonDateEntity implements Serializable {

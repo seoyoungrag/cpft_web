@@ -62,7 +62,7 @@ public class UserController {
 			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
 	@ApiOperation(value = "회원 수정", notes = "회원정보를 수정한다")
 	@PutMapping(value = "/user")
-	public SingleResult<User> modify(@ApiParam(value = "회원번호", required = true) @RequestParam int msrl,
+	public SingleResult<User> modify(@ApiParam(value = "회원번호", required = true) @RequestParam String msrl,
 			@ApiParam(value = "회원이름", required = true) @RequestParam String name) {
 		User user = User.builder().userSeq(msrl).userNm(name).build();
 		return responseService.getSingleResult(userJpaRepo.save(user));
@@ -72,7 +72,7 @@ public class UserController {
 			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
 	@ApiOperation(value = "회원 삭제", notes = "userId로 회원정보를 삭제한다")
 	@DeleteMapping(value = "/user/{msrl}")
-	public CommonResult delete(@ApiParam(value = "회원번호", required = true) @PathVariable long msrl) {
+	public CommonResult delete(@ApiParam(value = "회원번호", required = true) @PathVariable String msrl) {
 		userJpaRepo.deleteById(msrl);
 // 성공 결과 정보만 필요한경우 getSuccessResult()를 이용하여 결과를 출력한다.
 		return responseService.getSuccessResult();

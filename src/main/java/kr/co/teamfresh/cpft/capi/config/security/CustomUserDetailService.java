@@ -18,6 +18,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
 	@Cacheable(value = CacheKey.USER, key = "#userPk", unless = "#result == null")
 	public UserDetails loadUserByUsername(String userPk) {
-		return userJpaRepo.findById(Long.valueOf(userPk)).orElseThrow(CUserNotFoundException::new);
+		return userJpaRepo.findById(userPk).orElseThrow(CUserNotFoundException::new);
 	}
 }

@@ -4,9 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.text.ParseException;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,7 +29,7 @@ import kr.co.teamfresh.cpft.capi.advice.exception.CUserLoginIdDuplicatedExceptio
 import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
 import kr.co.teamfresh.cpft.capi.config.security.JwtTokenProvider;
 import kr.co.teamfresh.cpft.capi.entity.User;
-import kr.co.teamfresh.cpft.capi.entity.User_;
+//import kr.co.teamfresh.cpft.capi.entity.User_;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
 import kr.co.teamfresh.cpft.capi.model.response.SingleResult;
 import kr.co.teamfresh.cpft.capi.repo.UserJpaRepo;
@@ -83,6 +81,7 @@ public class SignController {
 		userJpaRepo.save(User.builder().userLoginId(id).userLoginPw(passwordEncoder.encode(password)).userNm(name).userEmail(email)
 				//.roles(Collections.singletonList("ROLE_USER")).build());
 				.roles(Arrays.asList(new String[]{"ROLE_USER", "CARRIER_USER"})).build());
+				//.roles(Arrays.asList(new UserRole[]{new UserRole() {{ setUserRolePK(new UserRolePK() {{setRole("ROLE_USER")}} }}null, "ROLE_USER"), new UserRole(null, "CARRIER_USER")})).build());
 
 		User user = userJpaRepo.findByUserLoginId(id).orElseThrow(CPasswordNotMatchedException::new);
 		return responseService.getSingleResult(jwtTokenProvider.createToken(String.valueOf(user.getUserSeq()), user));
@@ -104,8 +103,8 @@ public class SignController {
 			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 			CriteriaUpdate<User> cq = cb.createCriteriaUpdate(User.class);
 			Root<User> user = cq.from(User.class);
-			cq.set(user.get(User_.userLoginPw), encodedPwd);
-			cq.where(cb.equal(user.get(User_.userSeq), userEmailCheck.get().getUserSeq()));
+			//cq.set(user.get(User_.userLoginPw), encodedPwd);
+			//cq.where(cb.equal(user.get(User_.userSeq), userEmailCheck.get().getUserSeq()));
 			entityManager.createQuery(cq).executeUpdate();
 			Map<String, Object> inOutMap = new HashMap<String, Object>();
 			inOutMap.put("userLoginId",userEmailCheck.get().getUserLoginId());

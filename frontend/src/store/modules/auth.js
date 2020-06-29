@@ -124,7 +124,6 @@ const logoutEpic = (action$, state$) => {
   ofType(LOGOUT),
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
-   console.log("logout!");
    const token = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo")).token
     : null;
@@ -197,7 +196,6 @@ const registerEpic = (action$, state$) => {
     rememberMe,
    } = state.auth.form;
 
-   console.log(state.auth.form);
    return ajax
     .post(`/v1/signup/`, {
      id: userLoginId,
@@ -209,7 +207,7 @@ const registerEpic = (action$, state$) => {
      map((response) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
-      console.log(user);
+
       return registerSuccess({ user, data, rememberMe });
      }),
      catchError((error) =>
@@ -230,16 +228,15 @@ const loginEpic = (action$, state$) => {
   withLatestFrom(state$),
   mergeMap(([action, state]) => {
    const { userLoginId, userLoginPw, rememberMe } = state.auth.form;
-
-   console.log(state.auth.form);
    return ajax
     .post(`/v1/signin/`, { id: userLoginId, password: userLoginPw })
     .pipe(
      map((response) => {
       const { data } = response.response;
       const user = jwt(data); // decode your token here
-      console.log(user);
-      return loginSuccess({ user, data, rememberMe });
+      const token = data;
+
+      return loginSuccess({ user, token, rememberMe });
      }),
      catchError((error) =>
       of({

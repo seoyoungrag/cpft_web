@@ -38,14 +38,17 @@ export class BaseContainer extends React.Component {
   // 이를 하는 이유는 새로고침 했을시, state가 초기화 되어 logged값도 false로 바뀌는데, 새로고침 했을시
   // 로그인을 유지하기 위함.
 
+  //console.log(this.props.userInfo);
   if (
    localStorage.getItem("userInfo") &&
    JSON.parse(localStorage.getItem("userInfo")).userLoginId
   ) {
    /*console.log("checkUser middle");*/
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-   /*console.log("BaseContainer:25");
-   console.log(userInfo);*/
+   /*
+   console.log("BaseContainer:25");
+   console.log(userInfo);
+   */
    setUserTemp({
     userLoginId: userInfo.userLoginId,
     userNm: userInfo.userNm,

@@ -4,56 +4,58 @@ import MainStructure from "components/structure/MainStructure";
 import "./OrderRegist.css";
 import { Component } from "react";
 import axios from "axios";
+import $ from "jquery";
 import "util/Common";
+$.validate = require("jquery-validation");
 
 export const VALIDATION_ORDER_REGIST_FORM = {
-  rules: {
-      "rcritMans" : {
-          required: true
-      },
-      "dlvyPrdlst" : {
-          required: true
-      },
-      "payAmt" : {
-          required: true
-      },
-      "opratSctn" : {
-          required: true
-      },
-      "workingDaysType" : {
-          required: true
-      },
-      "detailMatter" : {
-          required: true
-      },
-      "rcritType": {
-        required: true
-      },
-      "workDay": {
-        required: true
-      },
-      "tonType": {
-        required: true
-      }
+ rules: {
+  rcritMans: {
+   required: true,
   },
-  submitHandler: function (form) { 
-    console.log(form);
-      alert('valid form submitted'); 
-      return false; 
+  dlvyPrdlst: {
+   required: true,
   },
-  errorPlacement: function(error,element){ 
-    var label = $("label[for='" + $(element).attr('name') + "']");
-    
-    $(error).addClass('col-12');
-    $(error).addClass('row');
-    if($(label).hasClass('text-sm-right')){
-      $(error).addClass('float-right');
-    }
-    label.append(error);
-    
-    //$(error).wrapInner('<div class="col-12"/>');
+  payAmt: {
+   required: true,
+  },
+  opratSctn: {
+   required: true,
+  },
+  workingDaysType: {
+   required: true,
+  },
+  detailMatter: {
+   required: true,
+  },
+  rcritType: {
+   required: true,
+  },
+  workDay: {
+   required: true,
+  },
+  tonType: {
+   required: true,
+  },
+ },
+ submitHandler: function (form) {
+  console.log(form);
+  alert("valid form submitted");
+  return false;
+ },
+ errorPlacement: function (error, element) {
+  var label = $("label[for='" + $(element).attr("name") + "']");
 
-    /*
+  $(error).addClass("col-12");
+  $(error).addClass("row");
+  if ($(label).hasClass("text-sm-right")) {
+   $(label).addClass("align-items-sm-end");
+  }
+  label.append(error);
+
+  //$(error).wrapInner('<div class="col-12"/>');
+
+  /*
     var lastError = $(element).data('lastError'),
         newError = $(error).text();
     
@@ -66,9 +68,9 @@ export const VALIDATION_ORDER_REGIST_FORM = {
     */
  },
  success: function (label, element) {
-     /*$(element).tooltipster('hide');*/
+  /*$(element).tooltipster('hide');*/
  },
-}
+};
 
 class OrderRegist extends Component {
  constructor(props) {
@@ -78,18 +80,19 @@ class OrderRegist extends Component {
    loading: false,
    registOrderWorkingAreaEtcMatterToggle: false,
    orderRegistWorkTypeValue: "",
+   workGroups: [],
   };
+  this.orderRegisWorkGroupRef = React.createRef();
   this._saveCompleteOrderRegist = (e) => {
-    const formObj = $("#orderRegistForm").serializeObject();
-    axios.post("/v1/order", formObj).then((res) => {
-     if (res.status == 200) {
-      console.log(res);
-     }
-    });
-  }
+   const formObj = $("#orderRegistForm").serializeObject();
+   axios.post("/v1/order", formObj).then((res) => {
+    if (res.status == 200) {
+     console.log(res);
+    }
+   });
+  };
   this._validateOrderRegistForm = (e) => {
-    
-    /*
+   /*
     $('#orderRegistForm input').tooltipster({
       theme: 'tooltipster-shadow',
         trigger: 'custom',
@@ -97,16 +100,17 @@ class OrderRegist extends Component {
         position: 'right'
     });
     */
-   
-$("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
-var valid = $("#orderRegistForm").valid();
-if(valid){
-  $("#saveModalPopup").modal();
-}
-  }
-  this._saveTempOrderRegist = (e) => {
 
-  }
+   $("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
+   var valid = $("#orderRegistForm").valid();
+   if (valid) {
+    $("#saveModalPopup").modal();
+   }
+  };
+  this._changeWorkGroup = (e) => {
+   $("#workGroupManager").val($("option:selected", e.target).data("manager"));
+  };
+  this._saveTempOrderRegist = (e) => {};
   this._getDaumAddressFinder = (event) => {
    new daum.Postcode({
     oncomplete: function (data) {
@@ -117,7 +121,6 @@ if(valid){
    }).open();
   };
   this._setorderRegistWorkType = (event) => {
-   
    switch (event.target.value) {
     case "":
      $("[id^=06]").prop("checked", false);
@@ -299,10 +302,26 @@ if(valid){
   return jusos;
  }
  */
- componentDidMount() {
+ async componentDidMount() {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  //console.log(userInfo.token);
+  //console.log(this.props.token);
+  let { data } = await axios.get("/v1/carrier", {
+   headers: {
+    "Content-Type": "application/json",
+    "X-AUTH-TOKEN": userInfo.token,
+   },
+  });
+  if (data.data.workGroups) {
+   this.setState({ workGroups: data.data.workGroups });
+  }
+
+  $("#workGroupManager").val(
+   $("option:selected", this.orderRegisWorkGroupRef.current).data("manager")
+  );
+
   attachJiraIssueColletor();
 
-  
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",
@@ -332,6 +351,7 @@ if(valid){
  }
 
  render() {
+  const { workGroups } = this.state;
   return (
    <MainStructure>
     <main>
@@ -383,15 +403,22 @@ if(valid){
                 className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroup"
                 name="workGroup"
+                onChange={this._changeWorkGroup}
+                ref={this.orderRegisWorkGroupRef}
                >
-                 {this.props.orderRegisWorkGroupCodes
-                  .map((obj, index) => {
-                     return (
-                      <option key={obj.code} value={obj.code}>
-                       {obj.codeDc}
-                      </option>
-                     );
-                  })}
+                {workGroups.length > 0
+                 ? workGroups.map((obj, index) => {
+                    return (
+                     <option
+                      key={obj.workGroupPk.workGroupNm}
+                      value={obj.workGroupPk.workGroupNm}
+                      data-manager={obj.workGroupManager}
+                     >
+                      {obj.workGroupPk.workGroupNm}
+                     </option>
+                    );
+                   })
+                 : null}
                </select>
                <label
                 htmlFor="workGroupManager"
@@ -411,31 +438,33 @@ if(valid){
                />
               </div>
               <div className="form-group row">
-               <label htmlFor="rcritType" className="col-12 col-sm-2 col-form-label">
+               <label
+                htmlFor="rcritType"
+                className="col-12 col-sm-2 col-form-label"
+               >
                 모집 유형
                </label>
                <div className="col-12 col-sm-4 pl-sm-0" id="rcritType">
-                 {this.props.rcritTypeCodes
-                  .map((obj, index) => {
-                     return (
-                      <label
-                       className="col-form-label pr-3 radio-inline"
-                       htmlFor={obj.code}
-                       key={obj.code}
-                      >
-                       <input
-                        className="radio mr-1"
-                        type="radio"
-                        name="rcritType"
-                        key={obj.code}
-                        id={obj.code}
-                        value={obj.code}
-                        required
-                       />
-                       {obj.codeDc}
-                      </label>
-                     );
-                  })}
+                {this.props.rcritTypeCodes.map((obj, index) => {
+                 return (
+                  <label
+                   className="col-form-label pr-3 radio-inline"
+                   htmlFor={obj.code}
+                   key={obj.code}
+                  >
+                   <input
+                    className="radio mr-1"
+                    type="radio"
+                    name="rcritType"
+                    key={obj.code}
+                    id={obj.code}
+                    value={obj.code}
+                    required
+                   />
+                   {obj.codeDc}
+                  </label>
+                 );
+                })}
                </div>
                <label
                 htmlFor="rcritMans"
@@ -455,44 +484,40 @@ if(valid){
               </div>
 
               <div className="form-group row">
-               <label
-                className="col-12 col-sm-2 col-form-label"
-               >
+               <label className="col-12 col-sm-2 col-form-label">
                 운행차량
                </label>
                <div className="col-12 col-sm-10 row mx-0 px-0 d-flex justify-content-start">
                 <div className="col-12 col-sm-6 ml-sm-0 pl-sm-0">
                  <div className="card">
                   <div className="card-header">
-               <label
-                htmlFor="carType"
-                className="mb-0 col-12"
-               >차종(중복 선택 가능)
-               </label></div>
+                   <label htmlFor="carType" className="mb-0 col-12">
+                    차종(중복 선택 가능)
+                   </label>
+                  </div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio" id="carType">
-                 {this.props.carTypeCodes
-                  .map((obj, index) => {
-                     return (
-                      <label
-                       className="col-form-label pr-3 radio-inline"
-                       htmlFor={obj.code}
-                       key={obj.code}
-                      >
-                       <input
-                        className="checkbox mr-1"
-                        type="checkbox"
-                        name="carType"
+                     {this.props.carTypeCodes.map((obj, index) => {
+                      return (
+                       <label
+                        className="col-form-label pr-3 radio-inline"
+                        htmlFor={obj.code}
                         key={obj.code}
-                        id={obj.code}
-                        value={obj.code}
-                        required
-                       />
-                       {obj.codeDc}
-                      </label>
-                     );
-                  })}
+                       >
+                        <input
+                         className="checkbox mr-1"
+                         type="checkbox"
+                         name="carType"
+                         key={obj.code}
+                         id={obj.code}
+                         value={obj.code}
+                         required
+                        />
+                        {obj.codeDc}
+                       </label>
+                      );
+                     })}
                     </div>
                    </div>
                   </div>
@@ -501,35 +526,33 @@ if(valid){
                 <div className="col-12 col-sm-6 mr-sm-0 pr-sm-0">
                  <div className="card">
                   <div className="card-header">
-               <label
-               className="mb-0 col-12"
-                htmlFor="tonType"
-               >톤수
-               </label></div>
+                   <label className="mb-0 col-12" htmlFor="tonType">
+                    톤수
+                   </label>
+                  </div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
                     <div className="custom-control custom-radio">
-                 {this.props.tonTypeCodes
-                  .map((obj, index) => {
-                     return (
-                      <label
-                       className="col-form-label pr-3 radio-inline"
-                       htmlFor={obj.code}
-                       key={obj.code}
-                      >
-                       <input
-                        className="radio mr-1"
-                        type="radio"
-                        name="tonType"
+                     {this.props.tonTypeCodes.map((obj, index) => {
+                      return (
+                       <label
+                        className="col-form-label pr-3 radio-inline"
+                        htmlFor={obj.code}
                         key={obj.code}
-                        id={obj.code}
-                        value={obj.code}
-                        required
-                       />
-                       {obj.codeDc}
-                      </label>
-                     );
-                  })}
+                       >
+                        <input
+                         className="radio mr-1"
+                         type="radio"
+                         name="tonType"
+                         key={obj.code}
+                         id={obj.code}
+                         value={obj.code}
+                         required
+                        />
+                        {obj.codeDc}
+                       </label>
+                      );
+                     })}
                     </div>
                    </div>
                   </div>
@@ -578,27 +601,26 @@ if(valid){
                </label>
                <div className="col-12 col-sm-4 row">
                 <div className="custom-control custom-radio" id="payFullType">
-                 {this.props.payFullTypeCodes
-                  .map((obj, index) => {
-                     return (
-                      <label
-                       className="col-form-label pr-3 radio-inline"
-                       htmlFor={obj.code}
-                       key={obj.code}
-                      >
-                       <input
-                        className="radio mr-1"
-                        type="radio"
-                        name="payFullType"
-                        key={obj.code}
-                        id={obj.code}
-                        value={obj.code}
-                        required
-                       />
-                       {obj.codeDc}
-                      </label>
-                     );
-                  })}
+                 {this.props.payFullTypeCodes.map((obj, index) => {
+                  return (
+                   <label
+                    className="col-form-label pr-3 radio-inline"
+                    htmlFor={obj.code}
+                    key={obj.code}
+                   >
+                    <input
+                     className="radio mr-1"
+                     type="radio"
+                     name="payFullType"
+                     key={obj.code}
+                     id={obj.code}
+                     value={obj.code}
+                     required
+                    />
+                    {obj.codeDc}
+                   </label>
+                  );
+                 })}
                 </div>
                </div>
               </div>
@@ -725,28 +747,27 @@ if(valid){
                 상세요일 선택
                </label>
                <div className="col-12 col-sm-10 row" id="workDays">
-               {this.props.workDayCodes
-                  .map((obj, index) => {
-                     return (
-                      <label
-                       className="col-form-label pr-3 radio-inline"
-                       htmlFor={obj.code}
-                       key={obj.code}
-                      >
-                       <input
-                        className="checkbox mr-1"
-                        type="checkbox"
-                        name="workDay"
-                        key={obj.code}
-                        id={obj.code}
-                        value={obj.code}
-                        disabled
-                        required
-                       />
-                       {obj.codeDc}
-                      </label>
-                     );
-                  })}
+                {this.props.workDayCodes.map((obj, index) => {
+                 return (
+                  <label
+                   className="col-form-label pr-3 radio-inline"
+                   htmlFor={obj.code}
+                   key={obj.code}
+                  >
+                   <input
+                    className="checkbox mr-1"
+                    type="checkbox"
+                    name="workDay"
+                    key={obj.code}
+                    id={obj.code}
+                    value={obj.code}
+                    disabled
+                    required
+                   />
+                   {obj.codeDc}
+                  </label>
+                 );
+                })}
                </div>
               </div>
               <div className="form-group row">
@@ -757,29 +778,29 @@ if(valid){
                 근무시간
                </label>
                <div className="col-12 col-sm-10 row">
-               <select
-                className="form-control col-sm-1 col-4"
-                id="workHourStart"
-                name="workHourStart"
-               ></select>
-               <label className="col-form-label ml-3 mr-3">:</label>
-               <select
-                className="form-control col-sm-1 col-4"
-                id="workMinuteStart"
-                name="workMinuteStart"
-               ></select>
-               <label className="col-form-label ml-3 mr-3">~</label>
-               <select
-                className="form-control col-sm-1 col-4"
-                id="workHourEnd"
-                name="workHourEnd"
-               ></select>
-               <label className="col-form-label ml-3 mr-3">:</label>
-               <select
-                className="form-control col-sm-1 col-4"
-                id="workMinuteEnd"
-                name="workMinuteEnd"
-               ></select>
+                <select
+                 className="form-control col-sm-1 col-4"
+                 id="workHourStart"
+                 name="workHourStart"
+                ></select>
+                <label className="col-form-label ml-3 mr-3">:</label>
+                <select
+                 className="form-control col-sm-1 col-4"
+                 id="workMinuteStart"
+                 name="workMinuteStart"
+                ></select>
+                <label className="col-form-label ml-3 mr-3">~</label>
+                <select
+                 className="form-control col-sm-1 col-4"
+                 id="workHourEnd"
+                 name="workHourEnd"
+                ></select>
+                <label className="col-form-label ml-3 mr-3">:</label>
+                <select
+                 className="form-control col-sm-1 col-4"
+                 id="workMinuteEnd"
+                 name="workMinuteEnd"
+                ></select>
                </div>
               </div>
               <div className="form-group row">
@@ -799,17 +820,26 @@ if(valid){
                ></textarea>
               </div>
               <div className="d-flex flex-row-reverse">
-               <button className="btn btn-primary" type="button" onClick={e=>this._validateOrderRegistForm(e)}>
+               <button
+                className="btn btn-primary"
+                type="button"
+                onClick={(e) => this._validateOrderRegistForm(e)}
+               >
                 등록 완료
                </button>
-               <button className="btn btn-secondary mr-3" type="button" onClick={e=>this._validateOrderRegistForm(e)}>
+               <button
+                className="btn btn-secondary mr-3"
+                type="button"
+                onClick={(e) => this._validateOrderRegistForm(e)}
+               >
                 임시저장
                </button>
               </div>
              </form>
             </div>
             <div className="sbp-preview-text">
-             저장한 오더는 오더관리 메뉴에서 확인할 수 있습니다. 진행중 상태와 임시저장 상태로 구분됩니다.
+             저장한 오더는 오더관리 메뉴에서 확인할 수 있습니다. 진행중 상태와
+             임시저장 상태로 구분됩니다.
             </div>
            </div>
           </div>
@@ -818,44 +848,46 @@ if(valid){
        </div>
       </div>
      </div>
-      <div
-       className="modal fade"
-       id="saveModalPopup"
-       tabIndex="-1"
-       role="dialog"
-       aria-labelledby="saveModalPopup"
-       aria-hidden="true"
-      >
-       <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
-         <div className="modal-header">
-          <h5 className="modal-title">
-           저장하시겠습니까?
-          </h5>
-          <button
-           className="close"
-           type="button"
-           data-dismiss="modal"
-           aria-label="Close"
-          >
-           <span aria-hidden="true">×</span>
-          </button>
-         </div>
-         <div className="modal-footer">
-          <button
-           className="btn btn-secondary"
-           type="button"
-           data-dismiss="modal"
-          >
-           아니오
-          </button>
-          <button className="btn btn-primary" type="button" onClick={(e)=>this._saveCompleteOrderRegist(e)}>
-           네
-          </button>
-         </div>
+     <div
+      className="modal fade"
+      id="saveModalPopup"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="saveModalPopup"
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">저장하시겠습니까?</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <div className="modal-footer">
+         <button
+          className="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+         >
+          아니오
+         </button>
+         <button
+          className="btn btn-primary"
+          type="button"
+          onClick={(e) => this._saveCompleteOrderRegist(e)}
+         >
+          네
+         </button>
         </div>
        </div>
       </div>
+     </div>
     </main>
    </MainStructure>
   );
@@ -869,7 +901,8 @@ const mapStateToProps = (state) => ({
  carTypeCodes: state.codes.carTypeCodes,
  tonTypeCodes: state.codes.tonTypeCodes,
  payFullTypeCodes: state.codes.payFullTypeCodes,
- workDayCodes: state.codes.workDayCodes
+ workDayCodes: state.codes.workDayCodes,
+ token: state.auth.userInfo.token,
 });
 
 export default connect(mapStateToProps)(OrderRegist);

@@ -2,7 +2,8 @@ package kr.co.teamfresh.cpft.capi.config.security;
 
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +46,7 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 		claims.put("userSeq", user.getUserSeq());
 		claims.put("userEmail", user.getUserEmail());
 		claims.put("roles", user.getRoles());
+		claims.put("carrier", user.getCarrier());
 		Date now = new Date();
 		return Jwts.builder().setClaims(claims) // 데이터
 				.setIssuedAt(now) // 토큰 발행일자
@@ -64,6 +66,9 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
 	}
 
+	public Map getCarrier(String token) {
+		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("carrier", HashMap.class);
+	}
 // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
 	public String resolveToken(HttpServletRequest req) {
 		return req.getHeader("X-AUTH-TOKEN");

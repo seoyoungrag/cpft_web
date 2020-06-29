@@ -183,7 +183,7 @@ const AuthForm = ({
         <ul className="errorsList">
          {error.triggered && <li>{error.message}</li>}
         </ul>
-        <div className="form-group">
+        {/*<div className="form-group">
          <div className="custom-control custom-checkbox">
           <label
            className="col-form-label pr-3 radio-inline"
@@ -202,6 +202,7 @@ const AuthForm = ({
           </label>
          </div>
         </div>
+          */}
         <div className="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
          <Link className="small" to="/auth/passwordRecovery">
           비밀번호를 잊으셨나요?

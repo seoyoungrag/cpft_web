@@ -13,29 +13,30 @@ export class AuthContainer extends Component {
 
  componentDidUpdate(prevProps, prevState) {
   // 하단에 AuthContainer를 withRouter로 감쌌기 때문에, history를 props로 이용할수 있습니다.
-  console.log("authcontainer componentDidUpdate");
+  //console.log("authcontainer componentDidUpdate");
   const { history } = this.props;
-  console.log("authcontainer " + prevProps.kind + " vs " + this.props.kind);
+  //console.log("authcontainer " + prevProps.kind + " vs " + this.props.kind);
   if (prevProps.kind !== this.props.kind) {
    this.initialize();
   }
 
-  console.log("authcontainer " + prevProps.logged + " vs " + this.props.logged);
+  //console.log("authcontainer " + prevProps.logged + " vs " + this.props.logged);
   if (prevProps.logged !== this.props.logged && this.props.logged) {
    // logged가 true가 되면 localStorage에 값을 저장합니다.
-   console.log("rememberMe");
-   console.log(this.props.rememberMe);
-   if (this.props.rememberMe == true) {
-    localStorage.setItem(
-     "userInfo",
-     JSON.stringify({
-      userLoginId: this.props.userInfo.userLoginId,
-      userNm: this.props.userInfo.userNm,
-      userSeq: this.props.userInfo.userSeq,
-      token: this.props.userInfo.token,
-     })
-    );
-   }
+   //console.log("rememberMe");
+   //console.log(this.props.rememberMe);
+   //if (this.props.rememberMe == true) {
+   console.log(this.props.userInfo.token);
+   localStorage.setItem(
+    "userInfo",
+    JSON.stringify({
+     userLoginId: this.props.userInfo.userLoginId,
+     userNm: this.props.userInfo.userNm,
+     userSeq: this.props.userInfo.userSeq,
+     token: this.props.userInfo.token,
+    })
+   );
+   //}
    // 값을 저장후, main페이지로 이동시켜줍니다.
    history.push("/");
   }

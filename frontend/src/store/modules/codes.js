@@ -38,18 +38,24 @@ const getCodesEpic = (action$, state$) => {
     .pipe(
      map((response) => {
       const codes = response.response.list;
-     console.log(codes);
-     const test = (function () { return function () {var rtn; var ctgry=codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("운송그룹")
-      });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-      }else{
-        rtn = [];
-      }
-      return rtn; }()
-    })()
-      console.log(test);
+      /*
+      const test = (function () {
+       return (function () {
+        var rtn;
+        var ctgry = codes.filter((codeCtgry) => {
+         return codeCtgry.codeCtgryNm.includes("운송그룹");
+        });
+        if (ctgry && ctgry.length > 0) {
+         rtn = ctgry[0].codes.filter((code) => {
+          return code.codeUseYn.includes("Y");
+         });
+        } else {
+         rtn = [];
+        }
+        return rtn;
+       })();
+      })();
+*/
       return getCodesSuccess({ codes });
      }),
      catchError((error) =>
@@ -84,101 +90,137 @@ export const codes = (state = initialState, action) => {
    return {
     ...state,
     codes: action.payload.codes,
-    orderRegisWorkGroupCodes: 
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("운송그룹")
+    orderRegisWorkGroupCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("운송그룹");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
-    rcritTypeCodes: 
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("모집유형")
+    rcritTypeCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("모집유형");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
-    carTypeCodes: 
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("차종")
+    carTypeCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("차종");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
-    tonTypeCodes: 
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("톤수")
+    tonTypeCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("톤수");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
-    payFullTypeCodes: 
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("완제/무제")
+    payFullTypeCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("완제/무제");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
-    workDayCodes:
-    (function () { return function () {var rtn; var ctgry=action.payload.codes.filter((codeCtgry) => {
-      return codeCtgry.codeCtgryNm.includes("요일")
+    workDayCodes: (function () {
+     return (function () {
+      var rtn;
+      var ctgry = action.payload.codes.filter((codeCtgry) => {
+       return codeCtgry.codeCtgryNm.includes("요일");
       });
-      if(ctgry && ctgry.length >0 ){
-        rtn = ctgry[0].codes.filter((code)=>{return code.codeUseYn.includes('Y')});
-        if(rtn && rtn.length > 0){
-          rtn.sort(function(a, b) { // 오름차순
-              return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
-          });
-        }
-      }else{
-        rtn = [];
+      if (ctgry && ctgry.length > 0) {
+       rtn = ctgry[0].codes.filter((code) => {
+        return code.codeUseYn.includes("Y");
+       });
+       if (rtn && rtn.length > 0) {
+        rtn.sort(function (a, b) {
+         // 오름차순
+         return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
+        });
+       }
+      } else {
+       rtn = [];
       }
-      return rtn; }()
+      return rtn;
+     })();
     })(),
    };
   case GET_CODES_FAILURE:

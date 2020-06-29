@@ -3,8 +3,10 @@ import MainStructure from "components/structure/MainStructure";
 
 import { Component } from "react";
 import axios from "axios";
-
 import "util/Common";
+import $ from "jquery";
+$.datepicker = require("bootstrap-datepicker");
+import "styles/bootstrap-datepicker3.standalone.css";
 const columns = [
  {
   title: "Name",

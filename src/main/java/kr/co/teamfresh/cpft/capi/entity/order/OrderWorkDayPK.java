@@ -2,17 +2,16 @@ package kr.co.teamfresh.cpft.capi.entity.order;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
 import lombok.Data;
 
 @Data
+@Embeddable
 public class OrderWorkDayPK implements Serializable {
+    @Column(name = "ORDER_SEQ")
 	private String orderSeq;
+    @Column(name = "WORK_DAY")
 	private String workDay;
-
-    public OrderWorkDayPK() {}
-
-    public OrderWorkDayPK(String orderSeq, String workDay) {
-        this.orderSeq = orderSeq;
-        this.workDay = workDay;
-    }
 }
