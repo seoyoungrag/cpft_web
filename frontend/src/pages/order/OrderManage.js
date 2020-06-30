@@ -8,7 +8,7 @@ import $ from "jquery";
 $.DataTable = require("datatables.net");
 import "datatables.net-dt";
 import { Component } from "react";
-import Input from "./Input";
+import OrderManageItem from "./OrderManageItem";
 
 const columns = [
  {
@@ -33,40 +33,66 @@ class OrderManage extends Component {
    orderList703: [],
    orderList: [],
    workGroups: [],
+   changeWorkGroup: "all",
+   changeWorkGroup701: "all",
+   changeWorkGroup702: "all",
+   changeWorkGroup703: "all",
+  };
+
+  this._changeWorkGroup = (e) => {
+   this.setState({
+    changeWorkGroup: $(e.target).val(),
+   });
+  };
+  this._changeWorkGroup701 = (e) => {
+   this.setState({
+    changeWorkGroup701: $(e.target).val(),
+   });
+  };
+  this._changeWorkGroup702 = (e) => {
+   this.setState({
+    changeWorkGroup702: $(e.target).val(),
+   });
+  };
+  this._changeWorkGroup703 = (e) => {
+   this.setState({
+    changeWorkGroup703: $(e.target).val(),
+   });
   };
  }
+
  async componentDidMount() {
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  let { data }  = await axios.get("/v1/order/carrier/"+userInfo.carrierSeq, {
+  let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq, {
    headers: {
     "Content-Type": "application/json",
     "X-AUTH-TOKEN": userInfo.token,
    },
   });
-  if (data.list.length>0) {
-    let orderList701 = data.list.filter((n) => {
-     return n.status == '0701';
-    });
-    let orderList702 = data.list.filter((n) => {
-      return n.status == '0702';
-     });
-    let orderList703 = data.list.filter((n) => {
-      return n.status == '0703';
-     });
-    let orderList = data.list;
+  if (data.list.length > 0) {
+   let orderList701 = data.list.filter((n) => {
+    return n.status == "0701";
+   });
+   let orderList702 = data.list.filter((n) => {
+    return n.status == "0702";
+   });
+   let orderList703 = data.list.filter((n) => {
+    return n.status == "0703";
+   });
+   let orderList = data.list;
    this.setState({ orderList701, orderList702, orderList703, orderList });
   }
-  
+
   let data2 = await axios.get("/v1/carrier", {
-    headers: {
-     "Content-Type": "application/json",
-     "X-AUTH-TOKEN": userInfo.token,
-    },
-   });
-   
-   if (data2.data.data.workGroups) {
-    this.setState({ workGroups: data2.data.data.workGroups });
-   }
+   headers: {
+    "Content-Type": "application/json",
+    "X-AUTH-TOKEN": userInfo.token,
+   },
+  });
+
+  if (data2.data.data.workGroups) {
+   this.setState({ workGroups: data2.data.data.workGroups });
+  }
 
   attachJiraIssueColletor();
   /*
@@ -131,7 +157,7 @@ class OrderManage extends Component {
    table.draw();
   }
  };
-/*
+ /*
  shouldComponentUpdate(nextProps, nextState) {
    
   if (nextState.names.length !== this.state.names.length) {
@@ -177,7 +203,17 @@ class OrderManage extends Component {
  }
 
  render() {
-  const { workGroups, orderList701, orderList702, orderList703, orderList } = this.state;
+  const {
+   workGroups,
+   orderList701,
+   orderList702,
+   orderList703,
+   orderList,
+   changeWorkGroup,
+   changeWorkGroup701,
+   changeWorkGroup702,
+   changeWorkGroup703,
+  } = this.state;
   return (
    <MainStructure>
     <main>
@@ -271,368 +307,49 @@ class OrderManage extends Component {
              >
               운송그룹
              </label>
-             <select className="form-control col-4" id="orderRegisWorkGroup">
-              
-             {workGroups.length > 0
-                 ? workGroups.map((obj, index) => {
-                    return (
-                     <option
-                      key={obj.workGroupPk.workGroupNm}
-                      value={obj.workGroupPk.workGroupNm}
-                      data-manager={obj.workGroupManager}
-                     >
-                      {obj.workGroupPk.workGroupNm}
-                     </option>
-                    );
-                   })
-                 : null}
+             <select
+              className="form-control col-4"
+              id="orderRegisWorkGroup"
+              onChange={this._changeWorkGroup701}
+             >
+              <option value="all">전체보기</option>
+              {workGroups.length > 0
+               ? workGroups.map((obj, index) => {
+                  return (
+                   <option
+                    key={obj.workGroupPk.workGroupNm}
+                    value={obj.workGroupPk.workGroupNm}
+                    data-manager={obj.workGroupManager}
+                   >
+                    {obj.workGroupPk.workGroupNm}
+                   </option>
+                  );
+                 })
+               : null}
              </select>
             </div>
             <table className="table">
              <tbody>
-             {orderList701.length>0?orderList701.map((obj, index) => {
-               return (
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-primary align-top mr-1">
-                     {obj.status=='0701' ? '진행중' : (obj.status=='0702' ? '종료': '임시저장')}
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
-                     </span>
-                     <span className="name">작성자: {obj.userNm}</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     &nbsp;{obj.payAmt} {obj.detailMatter}
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                       {obj.workingArea} {"->"} {obj.opratSctn}
-                      <span className="mday">
-                       <span className="tahoma">{obj.createdAt}</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   
-                   {obj.status=='0701' ? (<ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>) : (obj.status=='0702' ? (
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>): null)}
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>)
-             }): null}
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-primary align-top mr-1">
-                     진행중
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-primary align-top mr-1">
-                     진행중
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
+              {orderList701.length > 0
+               ? orderList701.map((obj, index) => {
+                  return (
+                   <OrderManageItem
+                    obj={obj}
+                    key={obj.orderSeq}
+                    rcritTypeCodes={this.props.rcritTypeCodes}
+                    tonTypeCodes={this.props.tonTypeCodes}
+                    carTypeCodes={this.props.carTypeCodes}
+                    changeWorkGroup={changeWorkGroup701}
+                    display={
+                     changeWorkGroup701 == obj.workGroupNm ||
+                     changeWorkGroup701 == "all"
+                      ? "table-row"
+                      : "none"
+                    }
+                   />
+                  );
+                 })
+               : null}
              </tbody>
             </table>
            </div>
@@ -644,331 +361,48 @@ class OrderManage extends Component {
              >
               운송그룹
              </label>
-             <select className="form-control col-4" id="orderRegisWorkGroup">
-              
-             {workGroups.length > 0
-                 ? workGroups.map((obj, index) => {
-                    return (
-                     <option
-                      key={obj.workGroupPk.workGroupNm}
-                      value={obj.workGroupPk.workGroupNm}
-                      data-manager={obj.workGroupManager}
-                     >
-                      {obj.workGroupPk.workGroupNm}
-                     </option>
-                    );
-                   })
-                 : null}
+             <select
+              className="form-control col-4"
+              id="orderRegisWorkGroup"
+              onChange={this._changeWorkGroup702}
+             >
+              <option value="all">전체보기</option>
+              {workGroups.length > 0
+               ? workGroups.map((obj, index) => {
+                  return (
+                   <option
+                    key={obj.workGroupPk.workGroupNm}
+                    value={obj.workGroupPk.workGroupNm}
+                    data-manager={obj.workGroupManager}
+                   >
+                    {obj.workGroupPk.workGroupNm}
+                   </option>
+                  );
+                 })
+               : null}
              </select>
             </div>
             <table className="table">
-             <tbody>{orderList702.length>0?orderList702.map((obj, index) => {
-               return (
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-success align-top mr-1">
-                     {obj.status=='0701' ? '진행중' : (obj.status=='0702' ? '종료': '임시저장')}
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
-                     </span>
-                     <span className="name">작성자: {obj.userNm}</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     &nbsp;{obj.payAmt} {obj.detailMatter}
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                       {obj.workingArea} {"->"} {obj.opratSctn}
-                      <span className="mday">
-                       <span className="tahoma">{obj.createdAt}</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="col-12 mt-3 p-0">
-                    
-                  {obj.status=='0701' ? (<ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>) : (obj.status=='0702' ? (
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>): null)}
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>)
-             }): null}
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-success align-top mr-1">
-                     종료
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-success align-top mr-1">
-                     종료
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
+             <tbody>
+              {orderList702.length > 0
+               ? orderList702.map((obj, index) => {
+                  return (
+                   <OrderManageItem
+                    obj={obj}
+                    key={obj.orderSeq}
+                    rcritTypeCodes={this.props.rcritTypeCodes}
+                    tonTypeCodes={this.props.tonTypeCodes}
+                    carTypeCodes={this.props.carTypeCodes}
+                    display={
+                     changeWorkGroup702 == obj.workGroupNm ||
+                     changeWorkGroup702 == "all"
+                      ? "table-row"
+                      : "none"
+                    }
+                   />
+                  );
+                 })
+               : null}
              </tbody>
             </table>
            </div>
@@ -980,329 +414,48 @@ class OrderManage extends Component {
              >
               운송그룹
              </label>
-             <select className="form-control col-4" id="orderRegisWorkGroup">
-              
-             {workGroups.length > 0
-                 ? workGroups.map((obj, index) => {
-                    return (
-                     <option
-                      key={obj.workGroupPk.workGroupNm}
-                      value={obj.workGroupPk.workGroupNm}
-                      data-manager={obj.workGroupManager}
-                     >
-                      {obj.workGroupPk.workGroupNm}
-                     </option>
-                    );
-                   })
-                 : null}
+             <select
+              className="form-control col-4"
+              id="orderRegisWorkGroup"
+              onChange={this._changeWorkGroup703}
+             >
+              <option value="all">전체보기</option>
+              {workGroups.length > 0
+               ? workGroups.map((obj, index) => {
+                  return (
+                   <option
+                    key={obj.workGroupPk.workGroupNm}
+                    value={obj.workGroupPk.workGroupNm}
+                    data-manager={obj.workGroupManager}
+                   >
+                    {obj.workGroupPk.workGroupNm}
+                   </option>
+                  );
+                 })
+               : null}
              </select>
             </div>
             <table className="table">
              <tbody>
-               {orderList703.length>0?orderList703.map((obj, index) => {
-               return (
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">{obj.status=='0701' ? (
-                    <span className="badge badge-primary align-top mr-1">
-                     진행중
-                    </span>) : (obj.status=='0702' ? (<span className="badge badge-success align-top mr-1">
-                     종료
-                    </span>): (
-                    <span className="badge badge-info align-top mr-1">
-                     임시저장
-                    </span>))}
-                    <span className="date">
-                     <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
-                     </span>
-                     <span className="name">작성자: {obj.userNm}</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     &nbsp;{obj.payAmt} {obj.detailMatter}
-                    </h4>
-                    
-                     
-                    
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                       {obj.workingArea} {"->"} {obj.opratSctn}
-                      <span className="mday">
-                       <span className="tahoma">{obj.createdAt}</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 {obj.status=='0701' ? (
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>) : (obj.status=='0702' ? 
-                 (<div className="col-5 apyStatusBoard ">
-                   <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                  </div>): (
-                    <div className="col-5 apyStatusBoard ">
-                    <div className="d-flex justify-content-end">
-                    <button type="button" className="btn btn-primary mx-1">
-                     <span>수정</span>
-                    </button>
-                    <button type="button" className="btn btn-danger  ml-1 mr-0">
-                     <span>삭제</span>
-                    </button>
-                   </div>
-                   </div>))}
-                </div>
-               </td>
-              </tr>)
-             }): null}
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-info align-top mr-1">
-                     임시저장
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
-             </tbody>
-            </table>
-            <table className="table d-none">
-             <tbody>
-              <tr>
-               <td>
-                <div className="form-check">
-                 <label className="form-check-label">
-                  <input
-                   className="form-check-input"
-                   type="checkbox"
-                   value=""
-                   checked
-                  />
-                  <span className="form-check-sign">
-                   <span className="check"></span>
-                  </span>
-                 </label>
-                </div>
-               </td>
-               <td>
-                Flooded: One year later, assessing what was lost and what was
-                found when a ravaging rain swept through metro Detroit
-               </td>
-               <td className="td-actions text-right">
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-primary btn-link btn-sm"
-                 data-original-title="Edit Task"
-                >
-                 <i className="material-icons">edit</i>
-                </button>
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-danger btn-link btn-sm"
-                 data-original-title="Remove"
-                >
-                 <i className="material-icons">close</i>
-                </button>
-               </td>
-              </tr>
-              <tr>
-               <td>
-                <div className="form-check">
-                 <label className="form-check-label">
-                  <input
-                   className="form-check-input"
-                   type="checkbox"
-                   value=""
-                   checked
-                  />
-                  <span className="form-check-sign">
-                   <span className="check"></span>
-                  </span>
-                 </label>
-                </div>
-               </td>
-               <td>
-                Sign contract for "What are conference organizers afraid of?"
-               </td>
-               <td className="td-actions text-right">
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-primary btn-link btn-sm"
-                 data-original-title="Edit Task"
-                >
-                 <i className="material-icons">edit</i>
-                </button>
-                <button
-                 type="button"
-                 rel="tooltip"
-                 title=""
-                 className="btn btn-danger btn-link btn-sm"
-                 data-original-title="Remove"
-                >
-                 <i className="material-icons">close</i>
-                </button>
-               </td>
-              </tr>
+              {orderList703.length > 0
+               ? orderList703.map((obj, index) => {
+                  return (
+                   <OrderManageItem
+                    obj={obj}
+                    key={obj.orderSeq}
+                    rcritTypeCodes={this.props.rcritTypeCodes}
+                    tonTypeCodes={this.props.tonTypeCodes}
+                    carTypeCodes={this.props.carTypeCodes}
+                    display={
+                     changeWorkGroup703 == obj.workGroupNm ||
+                     changeWorkGroup703 == "all"
+                      ? "table-row"
+                      : "none"
+                    }
+                   />
+                  );
+                 })
+               : null}
              </tbody>
             </table>
 
@@ -1325,430 +478,48 @@ class OrderManage extends Component {
              >
               운송그룹
              </label>
-             <select className="form-control col-4" id="orderRegisWorkGroup">
-              
-             {workGroups.length > 0
-                 ? workGroups.map((obj, index) => {
-                    return (
-                     <option
-                      key={obj.workGroupPk.workGroupNm}
-                      value={obj.workGroupPk.workGroupNm}
-                      data-manager={obj.workGroupManager}
-                     >
-                      {obj.workGroupPk.workGroupNm}
-                     </option>
-                    );
-                   })
-                 : null}
+             <select
+              className="form-control col-4"
+              id="orderRegisWorkGroup"
+              onChange={this._changeWorkGroup}
+             >
+              <option value="all">전체보기</option>
+              {workGroups.length > 0
+               ? workGroups.map((obj, index) => {
+                  return (
+                   <option
+                    key={obj.workGroupPk.workGroupNm}
+                    value={obj.workGroupPk.workGroupNm}
+                    data-manager={obj.workGroupManager}
+                   >
+                    {obj.workGroupPk.workGroupNm}
+                   </option>
+                  );
+                 })
+               : null}
              </select>
             </div>
             <table className="table">
              <tbody>
-               {orderList.length>0?orderList.map((obj, index) => {
-               return (
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                     {obj.status=='0701' ? (
-                    <span className="badge badge-primary align-top mr-1">
-                     진행중
-                    </span>) : (obj.status=='0702' ? (<span className="badge badge-success align-top mr-1">
-                     종료
-                    </span>): (
-                    <span className="badge badge-info align-top mr-1">
-                     임시저장
-                    </span>))}
-                    <span className="date">
-                     <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
-                     </span>
-                     <span className="name">작성자: {obj.userNm}</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     &nbsp;{obj.payAmt} {obj.detailMatter}
-                    </h4>
-                    
-                    
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                       {obj.workingArea} {"->"} {obj.opratSctn}
-                      <span className="mday">
-                       <span className="tahoma">{obj.createdAt}</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 {obj.status=='0701' ? (
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>) : (obj.status=='0702' ? 
-                 (<div className="col-5 apyStatusBoard ">
-                   <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                  </div>): (
-                    <div className="col-5 apyStatusBoard ">
-                    <div className="d-flex justify-content-end">
-                    <button type="button" className="btn btn-primary mx-1">
-                     <span>수정</span>
-                    </button>
-                    <button type="button" className="btn btn-danger  ml-1 mr-0">
-                     <span>삭제</span>
-                    </button>
-                   </div>
-                   </div>))}
-                </div>
-               </td>
-              </tr>)
-             }): null}
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-primary align-top mr-1">
-                     진행중
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-success mx-1">
-                    <span>마감</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-info align-top mr-1">
-                     임시저장
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="d-flex justify-content-end">
-                   <button type="button" className="btn btn-primary mx-1">
-                    <span>수정</span>
-                   </button>
-                   <button type="button" className="btn btn-danger  ml-1 mr-0">
-                    <span>삭제</span>
-                   </button>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
-              <tr>
-               <td>
-                <div className="inner row">
-                 <div className="col-7">
-                  <div className="jobTitWrap">
-                   <span className="infoBx">
-                    <span className="badge badge-success align-top mr-1">
-                     완료
-                    </span>
-                    <span className="date">
-                     <span className="date">
-                      T001 <span className="tahoma">TS</span>
-                     </span>
-                     <span className="name">유아름</span>
-                    </span>
-                   </span>
-
-                   <a href="#" className="tit devLinkExpire col-12 row">
-                    <h4 className="h4 d-inline-block">
-                     <em className="used">고정</em> 이디야 1t 냉탑 주6일
-                     월300무제(각 팀 임의 제목)
-                    </h4>
-                   </a>
-                  </div>
-
-                  <div className="apyStatusBoard">
-                   <div className="tbCol tbDate">
-                    <span className="date">
-                     <span className="tahoma">
-                      2020.06.09 ~ 2020.09.07{" "}
-                      <span className="mday">
-                       <span className="tahoma">06.09</span> 등록
-                      </span>
-                     </span>
-                    </span>
-                   </div>
-                  </div>
-                 </div>
-                 <div className="col-5 apyStatusBoard ">
-                  <div className="col-12 mt-3 p-0">
-                   <ul className="boardItem">
-                    <li className="w-25">
-                     <strong className="stepTit">지원자</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="apyStatusNotRead w-25">
-                     <strong className="stepTit">열람</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                    <li className="on w-25">
-                     <strong className="stepTit">연락중</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      1
-                     </a>
-                    </li>
-                    <li className="w-25">
-                     <strong className="stepTit">최종합격</strong>
-                     <a
-                      href="#"
-                      className="itemNum tahoma devLinkExpire"
-                      data-pts="-77"
-                     >
-                      0
-                     </a>
-                    </li>
-                   </ul>
-                  </div>
-                 </div>
-                </div>
-               </td>
-              </tr>
+              {orderList.length > 0
+               ? orderList.map((obj, index) => {
+                  return (
+                   <OrderManageItem
+                    obj={obj}
+                    key={obj.orderSeq}
+                    rcritTypeCodes={this.props.rcritTypeCodes}
+                    tonTypeCodes={this.props.tonTypeCodes}
+                    carTypeCodes={this.props.carTypeCodes}
+                    display={
+                     changeWorkGroup == obj.workGroupNm ||
+                     changeWorkGroup == "all"
+                      ? "table-row"
+                      : "none"
+                    }
+                   />
+                  );
+                 })
+               : null}
              </tbody>
             </table>
            </div>
@@ -1765,17 +536,16 @@ class OrderManage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  codes: state.codes.codes,
-  orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
-  rcritTypeCodes: state.codes.rcritTypeCodes,
-  carTypeCodes: state.codes.carTypeCodes,
-  tonTypeCodes: state.codes.tonTypeCodes,
-  payFullTypeCodes: state.codes.payFullTypeCodes,
-  workDayCodes: state.codes.workDayCodes,
-  token: state.auth.userInfo.token,
-  carrierSeq: state.auth.userInfo.carrierSeq,
-  userSeq: state.auth.userInfo.userSeq
- });
- 
- export default connect(mapStateToProps)(OrderManage);
+ codes: state.codes.codes,
+ orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
+ rcritTypeCodes: state.codes.rcritTypeCodes,
+ carTypeCodes: state.codes.carTypeCodes,
+ tonTypeCodes: state.codes.tonTypeCodes,
+ payFullTypeCodes: state.codes.payFullTypeCodes,
+ workDayCodes: state.codes.workDayCodes,
+ token: state.auth.userInfo.token,
+ carrierSeq: state.auth.userInfo.carrierSeq,
+ userSeq: state.auth.userInfo.userSeq,
+});
 
+export default connect(mapStateToProps)(OrderManage);
