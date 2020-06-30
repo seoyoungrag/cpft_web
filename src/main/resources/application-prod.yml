@@ -3,7 +3,7 @@ logging:
     max-history: 7
     path: \\logs\\cadmin
   level:
-    root: debug
+    root: warn
     kr.co.teamfresh.cpft.capi: debug
     org.hibernate:
       sql: debug
