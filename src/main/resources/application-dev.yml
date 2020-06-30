@@ -1,6 +1,6 @@
 logging:
   level:
-    root: WARN
+    root: warn
     kr.co.teamfresh.cpft.capi: debug
     org.hibernate:
       sql: debug
@@ -12,6 +12,9 @@ logging:
     org.springframework.ws: trace
     org.springframework.cache: trace
     com.sun.xml.ws.transport.http.client.HttpTransportPipe: debug
+    org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod: debug
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: debug
+    
 spring:
   profiles: dev
   redis:

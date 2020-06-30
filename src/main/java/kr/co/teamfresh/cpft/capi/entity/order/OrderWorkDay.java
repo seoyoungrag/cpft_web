@@ -18,13 +18,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/*
 @Entity
 @Table(name = "ORDER_WORK_DAY")
 @Getter
 @Setter
 @NoArgsConstructor
+*/
 public class OrderWorkDay implements Serializable {
-
+/*
 	@EmbeddedId
 	private OrderWorkDayPK orderWorkDayPK;
 
@@ -33,4 +35,5 @@ public class OrderWorkDay implements Serializable {
 	//@JoinColumn(name = "ORDER_SEQ", insertable = false, updatable = false)
 	@JsonBackReference
 	private Order order;
+	*/
 }

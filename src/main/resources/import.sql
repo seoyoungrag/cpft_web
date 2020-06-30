@@ -10,6 +10,7 @@ INSERT into CODE_CTGRY values('차종');
 INSERT into CODE_CTGRY values('톤수');
 INSERT into CODE_CTGRY values('완제/무제');
 INSERT into CODE_CTGRY values('요일');
+INSERT into CODE_CTGRY values('오더진행상태');
 insert into code values('0100',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','운송그룹','N','운송그룹');
 insert into code values('0101',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','TS','Y','TS');
 insert into code values('0102',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','LF','Y','LF');
@@ -48,4 +49,8 @@ insert into code values('0603',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일',
 insert into code values('0604',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일','목','Y','목');
 insert into code values('0605',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일','금','Y','금');
 insert into code values('0606',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일','토','Y','토');
-insert into code values('0607',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일','일','Y','일');;
+insert into code values('0607',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'요일','일','Y','일');
+insert into code values('0700',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','오더진행상태','N','오더진행상태');
+insert into code values('0701',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','진행중','Y','진행중');
+insert into code values('0702',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','채용종료','Y','채용종료');
+insert into code values('0703',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','임시저장','Y','임시저장');

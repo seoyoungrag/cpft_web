@@ -83,13 +83,54 @@ class OrderRegist extends Component {
    workGroups: [],
   };
   this.orderRegisWorkGroupRef = React.createRef();
-  this._saveCompleteOrderRegist = (e) => {
+  this._saveTempOrderRegist = (e) => {
+   $("#saveTempModalPopup").modal("hide");
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
    const formObj = $("#orderRegistForm").serializeObject();
-   axios.post("/v1/order", formObj).then((res) => {
-    if (res.status == 200) {
-     console.log(res);
-    }
-   });
+   formObj.status = "0703";
+   axios
+    .post("/v1/order", formObj, {
+     headers: {
+      "Content-Type": "application/json",
+      "X-AUTH-TOKEN": userInfo.token,
+     },
+    })
+    .then((res) => {
+     if (res.status == 200) {
+      console.log(res.data.data.orderSeq);
+      if (res.data.data.orderSeq > 0) {
+       $("#saveCompleteModalPopup").modal();
+      }
+     } else {
+      $("#saveFailModalPopup").modal();
+     }
+    });
+  };
+  this._saveCompleteOrderRegist = (e) => {
+   $("#saveModalPopup").modal("hide");
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   const formObj = $("#orderRegistForm").serializeObject();
+   formObj.status = "0701";
+   axios
+    .post("/v1/order", formObj, {
+     headers: {
+      "Content-Type": "application/json",
+      "X-AUTH-TOKEN": userInfo.token,
+     },
+    })
+    .then((res) => {
+     if (res.status == 200) {
+      console.log(res.data.data.orderSeq);
+      if (res.data.data.orderSeq > 0) {
+       $("#saveCompleteModalPopup").modal();
+      }
+     } else {
+      $("#saveFailModalPopup").modal();
+     }
+    });
+  };
+  this._noValidateOrderRegistForm = (e) => {
+   $("#saveTempModalPopup").modal();
   };
   this._validateOrderRegistForm = (e) => {
    /*
@@ -110,7 +151,6 @@ class OrderRegist extends Component {
   this._changeWorkGroup = (e) => {
    $("#workGroupManager").val($("option:selected", e.target).data("manager"));
   };
-  this._saveTempOrderRegist = (e) => {};
   this._getDaumAddressFinder = (event) => {
    new daum.Postcode({
     oncomplete: function (data) {
@@ -399,10 +439,15 @@ class OrderRegist extends Component {
                >
                 운송그룹
                </label>
+               <input
+                type="hidden"
+                value={this.props.carrierSeq}
+                name="carrierSeq"
+               />
                <select
                 className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroup"
-                name="workGroup"
+                name="workGroupNm"
                 onChange={this._changeWorkGroup}
                 ref={this.orderRegisWorkGroupRef}
                >
@@ -491,13 +536,13 @@ class OrderRegist extends Component {
                 <div className="col-12 col-sm-6 ml-sm-0 pl-sm-0">
                  <div className="card">
                   <div className="card-header">
-                   <label htmlFor="carType" className="mb-0 col-12">
+                   <label htmlFor="carTypes" className="mb-0 col-12">
                     차종(중복 선택 가능)
                    </label>
                   </div>
                   <div className="card-body py-0">
                    <div className="col-12 row">
-                    <div className="custom-control custom-radio" id="carType">
+                    <div className="custom-control custom-radio" id="carTypes">
                      {this.props.carTypeCodes.map((obj, index) => {
                       return (
                        <label
@@ -508,7 +553,7 @@ class OrderRegist extends Component {
                         <input
                          className="checkbox mr-1"
                          type="checkbox"
-                         name="carType"
+                         name="carTypes"
                          key={obj.code}
                          id={obj.code}
                          value={obj.code}
@@ -741,7 +786,7 @@ class OrderRegist extends Component {
               </div>
               <div className="form-group row">
                <label
-                htmlFor="workDay"
+                htmlFor="workDays"
                 className="col-12 col-sm-2 col-form-label"
                >
                 상세요일 선택
@@ -757,7 +802,7 @@ class OrderRegist extends Component {
                    <input
                     className="checkbox mr-1"
                     type="checkbox"
-                    name="workDay"
+                    name="workDays"
                     key={obj.code}
                     id={obj.code}
                     value={obj.code}
@@ -830,7 +875,7 @@ class OrderRegist extends Component {
                <button
                 className="btn btn-secondary mr-3"
                 type="button"
-                onClick={(e) => this._validateOrderRegistForm(e)}
+                onClick={(e) => this._noValidateOrderRegistForm(e)}
                >
                 임시저장
                </button>
@@ -888,6 +933,70 @@ class OrderRegist extends Component {
        </div>
       </div>
      </div>
+     <div
+      className="modal fade"
+      id="saveTempModalPopup"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="saveTempModalPopup"
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">임시저장하시겠습니까?</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <div className="modal-footer">
+         <button
+          className="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+         >
+          아니오
+         </button>
+         <button
+          className="btn btn-primary"
+          type="button"
+          onClick={(e) => this._saveTempOrderRegist(e)}
+         >
+          네
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div
+      className="modal fade"
+      id="saveCompleteModalPopup"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="saveCompleteModalPopup"
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">저장이 완료되었습니다.</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
     </main>
    </MainStructure>
   );
@@ -903,6 +1012,7 @@ const mapStateToProps = (state) => ({
  payFullTypeCodes: state.codes.payFullTypeCodes,
  workDayCodes: state.codes.workDayCodes,
  token: state.auth.userInfo.token,
+ carrierSeq: state.auth.userInfo.carrierSeq,
 });
 
 export default connect(mapStateToProps)(OrderRegist);

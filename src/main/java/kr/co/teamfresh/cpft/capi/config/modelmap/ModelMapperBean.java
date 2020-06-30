@@ -8,6 +8,9 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import kr.co.teamfresh.cpft.capi.config.modelmap.converter.OrderDtoToOrderEnCv;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderDtoToEnMap;
+
 @Configuration
 public class ModelMapperBean {
 	
@@ -30,7 +33,8 @@ public class ModelMapperBean {
   	    	  //return !(context.getSource() instanceof PersistentCollection);
   	      }
     	});
-    	//m.addMappings(new CodeDTOMap());
+    	//m.addMappings(new OrderDtoToEnMap());
+    	m.addConverter(new OrderDtoToOrderEnCv());
         return m;
     }
 

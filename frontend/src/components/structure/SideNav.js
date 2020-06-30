@@ -108,20 +108,22 @@ class SideNav extends Component {
        >
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">오더, 지원자 관리</h6>
-         <Link to="/order/regist" className="collapse-item">
-          오더 등록
-         </Link>
-         <Link to="/order/manage" className="collapse-item">
-          오더 관리
-         </Link>
-         <Link to="/order/applicant/manage" className="collapse-item">
-          지원자 관리
-         </Link>
-         {/*
+         <div className="forMobileMenu">
+          <Link to="/order/regist" className="collapse-item">
+           오더 등록
+          </Link>
+          <Link to="/order/manage" className="collapse-item">
+           오더 관리
+          </Link>
+          <Link to="/order/applicant/manage" className="collapse-item">
+           지원자 관리
+          </Link>
+          {/*
          <Link to="/order/black/list" className="collapse-item">
           차단 내역
          </Link>
           */}
+         </div>
         </div>
        </div>
       </li>
@@ -146,18 +148,20 @@ class SideNav extends Component {
        >
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">근무 차주 관리</h6>
-         <Link to="/truckOwner/list" className="collapse-item">
-          전체 차주 리스트
-         </Link>
-         {/*
+         <div className="forMobileMenu">
+          <Link to="/truckOwner/list" className="collapse-item">
+           전체 차주 리스트
+          </Link>
+          {/*
          <a className="collapse-item">차주 근태(수기)</a>
          <a className="collapse-item">차주 정산(수기)</a>
 
          <a className="collapse-item">차주 정산 완료 내역</a>
           */}
-         <Link to="/dtStmn/list" className="collapse-item">
-          명세서
-         </Link>
+          <Link to="/dtStmn/list" className="collapse-item">
+           명세서
+          </Link>
+         </div>
         </div>
        </div>
       </li>
@@ -184,9 +188,11 @@ class SideNav extends Component {
         <div className="bg-white py-2 collapse-inner rounded">
          <h6 className="collapse-header">전자세금계산서</h6>
 
-         <Link className="collapse-item" to="/elctrnTaxBill/list">
-          전자세금계산서
-         </Link>
+         <div className="forMobileMenu">
+          <Link className="collapse-item" to="/elctrnTaxBill/list">
+           전자세금계산서
+          </Link>
+         </div>
         </div>
        </div>
       </li>

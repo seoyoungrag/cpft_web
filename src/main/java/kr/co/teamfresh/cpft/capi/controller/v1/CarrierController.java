@@ -13,6 +13,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import kr.co.teamfresh.cpft.capi.advice.exception.CAuthenticationEntryPointException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CResourceNotExistException;
 import kr.co.teamfresh.cpft.capi.config.dto.carrier.CarrierDTO;
@@ -34,13 +35,15 @@ public class CarrierController {
 
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
+	@ApiOperation(value = "운송사 정보 조회", notes = "로그인 사용자의 운송사 정보를 조회한다.")
 	@GetMapping
 	public SingleResult<CarrierDTO> findCarrier(@RequestHeader("X-AUTH-TOKEN") String token) {
 		try {
-			Map carrier = jwtTokenProvider.getCarrier(token);
+			//Map carrier = jwtTokenProvider.getCarrier(token);
+			String carrier = jwtTokenProvider.getCarrierSeq(token);
 			if (carrier != null) {
 
-				return responseService.getSingleResult(carrierService.findCarrier(String.valueOf(carrier.get("carrierSeq"))));
+				return responseService.getSingleResult(carrierService.findCarrier(carrier));
 			} else {
 				logger.info("인증 토큰이 유효하지 않습니다." + token);
 				throw new CAuthenticationEntryPointException("인증 토큰이 유효하지 않습니다.");
@@ -57,15 +60,5 @@ public class CarrierController {
 			logger.error("오류가 발생했습니다." + token);
 			throw e;
 		}
-		/*
-		 * Authentication authentication = jwtTokenProvider.getAuthentication(token);
-		 * 
-		 * 
-		 * if (!(authentication instanceof AnonymousAuthenticationToken)) { return
-		 * responseService.getSingleResult(carrierService.findCarrier(((User)
-		 * authentication.getPrincipal()).getCarrier().getCarrierSeq())); }else {
-		 * logger.error("인증 토큰이 유효하지 않습니다." +token); throw new
-		 * CAuthenticationEntryPointException("인증 토큰이 유효하지 않습니다."); }
-		 */
 	}
 }

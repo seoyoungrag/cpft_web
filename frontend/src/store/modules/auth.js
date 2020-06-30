@@ -54,9 +54,18 @@ export const checkUserFailure = (error) => ({
  },
 });
 
-export const setUserTemp = ({ userLoginId, userNm, userEmail, token }) => ({
+export const setUserTemp = ({
+ carrierSeq,
+ userSeq,
+ userLoginId,
+ userNm,
+ userEmail,
+ token,
+}) => ({
  type: SET_USER_TEMP,
  payload: {
+  carrierSeq,
+  userSeq,
   userLoginId,
   userNm,
   userEmail,
@@ -236,6 +245,7 @@ const loginEpic = (action$, state$) => {
       const user = jwt(data); // decode your token here
       const token = data;
 
+      console.log(user);
       return loginSuccess({ user, token, rememberMe });
      }),
      catchError((error) =>
@@ -261,6 +271,7 @@ const initialState = {
  },
  logged: false,
  userInfo: {
+  carrierSeq: null,
   userSeq: null,
   userLoginId: "",
   userNm: "",
@@ -302,6 +313,7 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: true,
     userInfo: {
+     carrierSeq: action.payload.user.carrierSeq,
      userLoginId: action.payload.user.userLoginId,
      userNm: action.payload.user.userNm,
      userEmail: action.payload.user.userEmail,
@@ -367,6 +379,7 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: true,
     userInfo: {
+     carrierSeq: action.payload.carrierSeq,
      userLoginId: action.payload.userLoginId,
      userNm: action.payload.userNm,
      userEmail: action.payload.userEmail,
@@ -379,6 +392,7 @@ export const auth = (state = initialState, action) => {
     ...state,
     logged: false,
     userInfo: {
+     carrierSeq: null,
      userSeq: null,
      userLoginId: "",
      userNm: "",

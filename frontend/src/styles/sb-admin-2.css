@@ -11639,3 +11639,16 @@ label.error {
  line-height: unset;
  width: unset;
 }
+
+@media (max-width: 576px) {
+ a#atlwdg-trigger {
+  left: 0;
+  z-index: 9999999999;
+ }
+ div#atlwdg-container {
+  width: 100%;
+ }
+ div.forMobileMenu {
+  display: flex;
+ }
+}

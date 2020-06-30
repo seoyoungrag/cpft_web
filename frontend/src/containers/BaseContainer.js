@@ -48,8 +48,9 @@ export class BaseContainer extends React.Component {
    /*
    console.log("BaseContainer:25");
    console.log(userInfo);
-   */
+*/
    setUserTemp({
+    carrierSeq: userInfo.carrierSeq,
     userLoginId: userInfo.userLoginId,
     userNm: userInfo.userNm,
     userEmail: userInfo.userEmail,
@@ -92,9 +93,23 @@ const mapDispatchToProps = (dispatch) => {
   checkUser: () => {
    dispatch(authActions.checkUser());
   },
-  setUserTemp: ({ userLoginId, userNm, userEmail, userSeq, token }) => {
+  setUserTemp: ({
+   carrierSeq,
+   userLoginId,
+   userNm,
+   userEmail,
+   userSeq,
+   token,
+  }) => {
    dispatch(
-    authActions.setUserTemp({ userLoginId, userNm, userEmail, userSeq, token })
+    authActions.setUserTemp({
+     carrierSeq,
+     userLoginId,
+     userNm,
+     userEmail,
+     userSeq,
+     token,
+    })
    );
   },
  };

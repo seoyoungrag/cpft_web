@@ -26,13 +26,16 @@ export class AuthContainer extends Component {
    //console.log("rememberMe");
    //console.log(this.props.rememberMe);
    //if (this.props.rememberMe == true) {
-   console.log(this.props.userInfo.token);
+   //console.log(this.props.userInfo.token);
+   console.log(this.props);
    localStorage.setItem(
     "userInfo",
     JSON.stringify({
+     carrierSeq: this.props.userInfo.carrierSeq,
+     userSeq: this.props.userInfo.userSeq,
      userLoginId: this.props.userInfo.userLoginId,
      userNm: this.props.userInfo.userNm,
-     userSeq: this.props.userInfo.userSeq,
+     userEmail: this.props.userInfo.userEmail,
      token: this.props.userInfo.token,
     })
    );
