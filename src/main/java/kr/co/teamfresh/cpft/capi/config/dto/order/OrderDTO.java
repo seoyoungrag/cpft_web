@@ -3,11 +3,11 @@ package kr.co.teamfresh.cpft.capi.config.dto.order;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.teamfresh.cpft.capi.config.dto.user.UserDTO;
+import kr.co.teamfresh.cpft.capi.entity.common.CommonDate;
 import lombok.Data;
 
 @Data
-public class OrderDTO {
+public class OrderDTO extends CommonDate {
 	private String carrierSeq;
 	private String carrierNm;
 	private String userSeq;

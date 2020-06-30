@@ -1,5 +1,10 @@
 package kr.co.teamfresh.cpft.capi.config.modelmap.mapper;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+
 import org.modelmapper.PropertyMap;
 
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
@@ -13,5 +18,11 @@ public class OrderEnToDtoMap extends PropertyMap<Order, OrderDTO> {
 		map().setUserSeq(source.getUser().getUserSeq());
 		map().setUserNm(source.getUser().getUserNm());
 		map().setWorkGroupNm(source.getWorkGroup().getWorkGroupPk().getWorkGroupNm());
+		using(ctx -> generateDate( ((Order)ctx.getSource()).getCreatedAt() )).map(source, destination.getCreatedAt());
+		using(ctx -> generateDate( ((Order)ctx.getSource()).getModifiedAt() )).map(source, destination.getModifiedAt());
+	}
+
+	private LocalDate generateDate(LocalDateTime createdAt) {
+		return createdAt.toInstant(ZoneOffset.UTC).atZone(ZoneId.of("Asia/Seoul")).toLocalDate();
 	}
 }

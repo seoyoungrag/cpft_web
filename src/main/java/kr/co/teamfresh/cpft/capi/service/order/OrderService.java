@@ -27,13 +27,17 @@ public class OrderService {
 	private final OrderJpaRepo orderJpaRepo;
 	private final CarrierJpaRepo carrierJpaRepo;
 	
-	public Order saveOrder(Order order, String uid) {
+	public Order saveOrder(Order order) {
 		//User user = userJpaRepo.findById(uid).orElseThrow(CUserNotFoundException::new);		map().getWorkGroup().getOrders().add(destination);
 		return orderJpaRepo.save(order);
 	}
 
-	public List findAllOrders() {
+	public List<OrderDTO> findAllOrders() {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAll(), OrderDTO.class);
+	}
+
+	public List<OrderDTO> findAllByCarrierSeq(String carrierSeq) {
+		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByCarrierCarrierSeq(carrierSeq), OrderDTO.class);
 	}
 
 }

@@ -82,7 +82,7 @@ class OrderRegist extends Component {
    orderRegistWorkTypeValue: "",
    workGroups: [],
   };
-  this.orderRegisWorkGroupRef = React.createRef();
+  this.orderRegistWorkGroupRef = React.createRef();
   this._saveTempOrderRegist = (e) => {
    $("#saveTempModalPopup").modal("hide");
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -132,7 +132,11 @@ class OrderRegist extends Component {
     });
   };
   this._noValidateOrderRegistForm = (e) => {
-   $("#saveTempModalPopup").modal();
+    $("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
+    var valid = $("#orderRegistForm").valid();
+    if (valid) {
+      $("#saveTempModalPopup").modal();
+    }
   };
   this._validateOrderRegistForm = (e) => {
    /*
@@ -359,7 +363,7 @@ class OrderRegist extends Component {
   }
 
   $("#workGroupManager").val(
-   $("option:selected", this.orderRegisWorkGroupRef.current).data("manager")
+   $("option:selected", this.orderRegistWorkGroupRef.current).data("manager")
   );
 
   attachJiraIssueColletor();
@@ -456,7 +460,7 @@ class OrderRegist extends Component {
                 id="orderRegisWorkGroup"
                 name="workGroupNm"
                 onChange={this._changeWorkGroup}
-                ref={this.orderRegisWorkGroupRef}
+                ref={this.orderRegistWorkGroupRef}
                >
                 {workGroups.length > 0
                  ? workGroups.map((obj, index) => {

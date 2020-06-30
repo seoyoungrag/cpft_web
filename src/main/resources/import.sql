@@ -55,7 +55,7 @@ insert into code values('0701',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더�
 insert into code values('0702',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','채용종료','Y','채용종료');
 insert into code values('0703',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'오더진행상태','임시저장','Y','임시저장');
 
-insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('1', null, null, '연락주세요 02-1234-1234', '박스 일 40건', '서울시', '500만원', '0501', '11', '0201', '0701', '0401', '1', '02', '00', '08', '00', '제주특별자치도 제주시 첨단로 242', 'fiveDay','1','TS');
+insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('1', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), '연락. 02-1234-1234', '박스 일 40건', '서울시', '월500만원', '0501', '11', '0201', '0701', '0401', '1', '02', '00', '08', '00', '경기 이천시 마장면 덕이로 2', 'fiveDay','1','TS');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('1', '0306');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('1', '0307');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('1', '0308');
@@ -65,7 +65,7 @@ insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('1', '0603')
 insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('1', '0604')
 insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('1', '0605')
 
-insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('2', null, null, '연락주세요 02-1234-1234', '박스 일 40건', '서울시', '500만원', '0501', '11', '0201', '0702', '0401', '1', '02', '00', '08', '00', '제주특별자치도 제주시 첨단로 242', 'fiveDay','1','TS');
+insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('2', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), '연락주세요. 02-1234-1234', '박스 일 40건', '서울시', '월400만원', '0501', '11', '0201', '0702', '0401', '1', '02', '00', '08', '00', '경기 이천시 마장면 덕이로 2', 'fiveDay','1','TS');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('2', '0306');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('2', '0307');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('2', '0308');
@@ -75,7 +75,7 @@ insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('2', '0603')
 insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('2', '0604')
 insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('2', '0605')
 
-insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('3', null, null, '연락주세요 02-1234-1234', '박스 일 40건', '서울시', '500만원', '0501', '11', '0201', '0703', '0401', '1', '02', '00', '08', '00', '제주특별자치도 제주시 첨단로 242', 'fiveDay','1','TS');
+insert into "ORDER" ("ORDER_SEQ", "CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM") values ('3', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), '연락바랍니다. 02-1234-1234', '박스 일 40건', '서울시', '월400만원', '0501', '11', '0201', '0703', '0401', '1', '02', '00', '08', '00', '경기 이천시 마장면 덕이로 2', 'fiveDay','1','TS');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('3', '0306');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('3', '0307');
 insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('3', '0308');

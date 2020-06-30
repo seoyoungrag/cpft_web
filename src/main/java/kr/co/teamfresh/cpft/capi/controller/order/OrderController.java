@@ -3,6 +3,7 @@ package kr.co.teamfresh.cpft.capi.controller.order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -45,28 +46,14 @@ public class OrderController {
 	@ApiOperation(value = "오더 저장", notes = "오더를 저장한다.")
 	@PostMapping
 	public SingleResult<Order> saveOrder(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody OrderDTO order) {
-		try {
-			String userPk = jwtTokenProvider.getUserPk(token);
-			return responseService.getSingleResult(orderService.saveOrder(ObjectMapperUtils.map(order, Order.class), userPk));
-		} catch (CResourceNotExistException e) {
-			throw e;
-		} catch (ExpiredJwtException e) {
-			logger.error(e.getMessage());
-			logger.error("인증 토큰이 유효하지 않습니다." + token);
-			throw new CAuthenticationEntryPointException("인증 토큰이 유효하지 않습니다.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			logger.error("오류가 발생했습니다." + token);
-			throw e;
-		}
+		return responseService.getSingleResult(orderService.saveOrder(ObjectMapperUtils.map(order, Order.class)));
 	}
 	
 
-	@ApiOperation(value = "모든 오더 조회", notes = "모든 오더를 조회한다.")
-	@GetMapping
-	public ListResult<OrderDTO> codes() {
-		return responseService.getListResult(orderService.findAllOrders());
+	@ApiOperation(value = "오더 조회", notes = "사용자 운송사의 오더를 조회한다.")
+	@GetMapping("/carrier/{carrierSeq}")
+	public ListResult<OrderDTO> listOrderByCarrierId(@RequestHeader("X-AUTH-TOKEN") String token, @PathVariable String carrierSeq) {
+		return responseService.getListResult(orderService.findAllByCarrierSeq(carrierSeq));
 	}
 
 }
