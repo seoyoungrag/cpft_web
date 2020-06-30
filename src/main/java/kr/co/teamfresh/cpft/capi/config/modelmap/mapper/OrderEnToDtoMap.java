@@ -18,6 +18,7 @@ public class OrderEnToDtoMap extends PropertyMap<Order, OrderDTO> {
 		map().setUserSeq(source.getUser().getUserSeq());
 		map().setUserNm(source.getUser().getUserNm());
 		map().setWorkGroupNm(source.getWorkGroup().getWorkGroupPk().getWorkGroupNm());
+		map().setWorkGroupManager(source.getWorkGroup().getWorkGroupManager());
 		using(ctx -> generateDate( ((Order)ctx.getSource()).getCreatedAt() )).map(source, destination.getCreatedAt());
 		using(ctx -> generateDate( ((Order)ctx.getSource()).getModifiedAt() )).map(source, destination.getModifiedAt());
 	}

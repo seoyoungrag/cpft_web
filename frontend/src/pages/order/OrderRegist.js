@@ -87,6 +87,12 @@ class OrderRegist extends Component {
    $("#saveTempModalPopup").modal("hide");
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
    const formObj = $("#orderRegistForm").serializeObject();
+   if(!Array.isArray(formObj.carTypes)){
+    formObj.carTypes = [formObj.carTypes];
+   }
+   if(!Array.isArray(formObj.workDays)){
+    formObj.workDays = [formObj.workDays];
+   }
    formObj.status = "0703";
    axios
     .post("/v1/order", formObj, {

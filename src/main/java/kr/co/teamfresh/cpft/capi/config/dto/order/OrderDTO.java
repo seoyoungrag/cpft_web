@@ -14,6 +14,7 @@ public class OrderDTO extends CommonDate {
 	private String userNm;
 	private String orderSeq;
 	private String workGroupNm;
+	private String workGroupManager;
 	private String rcritType;
 	private String rcritMans;
 	private List<String> carTypes = new ArrayList<>();

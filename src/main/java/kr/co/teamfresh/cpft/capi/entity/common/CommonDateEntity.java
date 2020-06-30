@@ -11,15 +11,16 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class CommonDateEntity { // 날짜 필드 상속 처리
 	@CreatedDate // Entity 생성시 자동으로 날짜세팅
-	@Column(name="CREATED_AT")
+    @Column(name="CREATED_AT",nullable=false,updatable=false)
 	private LocalDateTime createdAt;
 	@LastModifiedDate // Entity 수정시 자동으로 날짜세팅
-	@Column(name="MODIFIED_AT")
+	@Column(name="MODIFIED_AT",nullable=false)
 	private LocalDateTime modifiedAt;
 }

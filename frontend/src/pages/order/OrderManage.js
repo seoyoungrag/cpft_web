@@ -303,16 +303,16 @@ class OrderManage extends Component {
                     </span>
                     <span className="date">
                      <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm}</span>
+                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
                      </span>
-                     <span className="name">{obj.userNm}</span>
+                     <span className="name">작성자: {obj.userNm}</span>
                     </span>
                    </span>
 
                    <a href="#" className="tit devLinkExpire col-12 row">
                     <h4 className="h4 d-inline-block">
                      <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     {obj.payAmt} {obj.detailMatter}
+                     &nbsp;{obj.payAmt} {obj.detailMatter}
                     </h4>
                    </a>
                   </div>
@@ -675,16 +675,16 @@ class OrderManage extends Component {
                     </span>
                     <span className="date">
                      <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm}</span>
+                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
                      </span>
-                     <span className="name">{obj.userNm}</span>
+                     <span className="name">작성자: {obj.userNm}</span>
                     </span>
                    </span>
 
                    <a href="#" className="tit devLinkExpire col-12 row">
                     <h4 className="h4 d-inline-block">
                      <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     {obj.payAmt} {obj.detailMatter}
+                     &nbsp;{obj.payAmt} {obj.detailMatter}
                     </h4>
                    </a>
                   </div>
@@ -1017,16 +1017,16 @@ class OrderManage extends Component {
                     </span>))}
                     <span className="date">
                      <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm}</span>
+                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
                      </span>
-                     <span className="name">{obj.userNm}</span>
+                     <span className="name">작성자: {obj.userNm}</span>
                     </span>
                    </span>
 
                    <a href="#" className="tit devLinkExpire col-12 row">
                     <h4 className="h4 d-inline-block">
                      <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     {obj.payAmt} {obj.detailMatter}
+                     &nbsp;{obj.payAmt} {obj.detailMatter}
                     </h4>
                     
                      
@@ -1363,16 +1363,16 @@ class OrderManage extends Component {
                     </span>))}
                     <span className="date">
                      <span className="date">
-                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm}</span>
+                     W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq} <span className="tahoma">{obj.workGroupNm} {obj.workGroupManager}</span>
                      </span>
-                     <span className="name">{obj.userNm}</span>
+                     <span className="name">작성자: {obj.userNm}</span>
                     </span>
                    </span>
 
                    <a href="#" className="tit devLinkExpire col-12 row">
                     <h4 className="h4 d-inline-block">
                      <em className="used">{this.props.rcritTypeCodes.filter((e) => {return e.code==obj.rcritType}).map((r)=>{return r.codeValue})}</em> {obj.carrierNm} {this.props.tonTypeCodes.filter((e) => {return e.code==obj.tonType}).map((r)=>{return r.codeValue})} {this.props.carTypeCodes.filter((e) => {return e.code==obj.carType}).map((r)=>{return r.codeValue})} {obj.workingDaysType=='fiveDay' ? "주5일" : (obj.workingDaysType=='sixDay'?  "주6일": null)}
-                     {obj.payAmt} {obj.detailMatter}
+                     &nbsp;{obj.payAmt} {obj.detailMatter}
                     </h4>
                     
                     
