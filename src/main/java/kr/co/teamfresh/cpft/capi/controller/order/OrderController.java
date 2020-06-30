@@ -2,6 +2,7 @@ package kr.co.teamfresh.cpft.capi.controller.order;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -15,10 +16,12 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import kr.co.teamfresh.cpft.capi.advice.exception.CAuthenticationEntryPointException;
 import kr.co.teamfresh.cpft.capi.advice.exception.CResourceNotExistException;
+import kr.co.teamfresh.cpft.capi.config.dto.code.CodeCtgryDTO;
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
 import kr.co.teamfresh.cpft.capi.config.security.JwtTokenProvider;
 import kr.co.teamfresh.cpft.capi.controller.v1.CarrierController;
 import kr.co.teamfresh.cpft.capi.entity.order.Order;
+import kr.co.teamfresh.cpft.capi.model.response.ListResult;
 import kr.co.teamfresh.cpft.capi.model.response.SingleResult;
 import kr.co.teamfresh.cpft.capi.service.ResponseService;
 import kr.co.teamfresh.cpft.capi.service.order.OrderService;
@@ -58,4 +61,12 @@ public class OrderController {
 			throw e;
 		}
 	}
+	
+
+	@ApiOperation(value = "모든 오더 조회", notes = "모든 오더를 조회한다.")
+	@GetMapping
+	public ListResult<OrderDTO> codes() {
+		return responseService.getListResult(orderService.findAllOrders());
+	}
+
 }

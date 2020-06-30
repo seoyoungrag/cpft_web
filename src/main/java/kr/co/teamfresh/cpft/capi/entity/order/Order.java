@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinFormula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -28,9 +31,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import kr.co.teamfresh.cpft.capi.entity.Carrier;
 import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroup;
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
+
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
+import kr.co.teamfresh.cpft.capi.entity.Carrier;
+import kr.co.teamfresh.cpft.capi.entity.User;
+import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroup;
+import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroupPK;
+import kr.co.teamfresh.cpft.capi.entity.order.Order;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,8 +63,8 @@ public class Order extends CommonDateEntity implements Serializable {
 	private String orderSeq;
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name = "WORK_GROUP_NM", insertable = false, updatable = false, referencedColumnName = "WORK_GROUP_NM")
-	@JoinColumn(name = "CARRIER_SEQ", insertable = false, updatable = false, referencedColumnName = "CARRIER_SEQ")
+	@JoinColumn(name = "WORK_GROUP_NM", referencedColumnName = "WORK_GROUP_NM", nullable = false)
+	@JoinColumn(name = "CARRIER_SEQ", referencedColumnName = "CARRIER_SEQ", nullable = false)
 	private WorkGroup workGroup;
 	@Column(nullable = false, length = 100, name="RCRIT_TYPE")
 	private String rcritType;
@@ -105,9 +117,13 @@ public class Order extends CommonDateEntity implements Serializable {
 	@Column(nullable = false, length = 100, name="DETAIL_MATTER")
 	private String detailMatter;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_SEQ")
+	@JoinColumn(name = "USER_SEQ", nullable = false)
 	@JsonProperty(access = Access.READ_ONLY)
 	private User user; // 오더 - 회원의 관계 - N:1
 	@Column(nullable = false, length = 100, name="STATUS")
 	private String status;
+	@ManyToOne
+	@JoinColumn(name = "CARRIER_SEQ", insertable = false, updatable = false, nullable = false)
+	@JsonManagedReference
+	private Carrier carrier;
 }

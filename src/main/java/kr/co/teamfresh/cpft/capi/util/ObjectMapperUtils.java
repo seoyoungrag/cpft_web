@@ -13,6 +13,7 @@ import org.modelmapper.spi.MappingContext;
 
 import kr.co.teamfresh.cpft.capi.config.modelmap.converter.OrderDtoToOrderEnCv;
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderDtoToEnMap;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderEnToDtoMap;
 
 public class ObjectMapperUtils {
 
@@ -42,6 +43,7 @@ public class ObjectMapperUtils {
   	      }
     	});
 		modelMapper.addMappings(new OrderDtoToEnMap());
+		modelMapper.addMappings(new OrderEnToDtoMap());
 		//modelMapper.addConverter(new OrderDtoToOrderEnCv());
 	}
 

@@ -9,6 +9,9 @@ import lombok.Data;
 @Data
 public class OrderDTO {
 	private String carrierSeq;
+	private String carrierNm;
+	private String userSeq;
+	private String userNm;
 	private String orderSeq;
 	private String workGroupNm;
 	private String rcritType;

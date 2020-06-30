@@ -14,10 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroup;
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
+import kr.co.teamfresh.cpft.capi.entity.order.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,6 +45,10 @@ public class Carrier extends CommonDateEntity  implements Serializable {
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "carrier")
 	private Set<WorkGroup> workGroups = new HashSet<WorkGroup>(0);
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@JsonIgnore
+	private Set<Order> orders = new HashSet<Order>(0);
 }
 
 		

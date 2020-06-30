@@ -446,6 +446,11 @@ class OrderRegist extends Component {
                 value={this.props.carrierSeq}
                 name="carrierSeq"
                />
+               <input
+                type="hidden"
+                value={this.props.userSeq}
+                name="userSeq"
+               />
                <select
                 className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroup"
@@ -1015,6 +1020,7 @@ const mapStateToProps = (state) => ({
  workDayCodes: state.codes.workDayCodes,
  token: state.auth.userInfo.token,
  carrierSeq: state.auth.userInfo.carrierSeq,
+ userSeq: state.auth.userInfo.userSeq
 });
 
 export default connect(mapStateToProps)(OrderRegist);
