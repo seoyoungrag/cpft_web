@@ -227,3 +227,7 @@ typings/
 
 # dotenv environment variables file
 .env
+src/main/resources/static/app.css
+src/main/resources/static/app.css.map
+src/main/resources/static/index.html
+bundle.#.js
