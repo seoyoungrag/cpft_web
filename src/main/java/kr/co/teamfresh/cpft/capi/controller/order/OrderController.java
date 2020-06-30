@@ -1,12 +1,7 @@
 package kr.co.teamfresh.cpft.capi.controller.order;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,7 +21,6 @@ import kr.co.teamfresh.cpft.capi.controller.v1.CarrierController;
 import kr.co.teamfresh.cpft.capi.entity.order.Order;
 import kr.co.teamfresh.cpft.capi.model.response.SingleResult;
 import kr.co.teamfresh.cpft.capi.service.ResponseService;
-import kr.co.teamfresh.cpft.capi.service.carrier.CarrierService;
 import kr.co.teamfresh.cpft.capi.service.order.OrderService;
 import kr.co.teamfresh.cpft.capi.util.ObjectMapperUtils;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +39,7 @@ public class OrderController {
 
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
-	@ApiOperation(value = "모든 코드 조회", notes = "모든 코드를 조회한다.")
+	@ApiOperation(value = "오더 저장", notes = "오더를 저장한다.")
 	@PostMapping
 	public SingleResult<Order> saveOrder(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody OrderDTO order) {
 		try {
