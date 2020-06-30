@@ -99,6 +99,7 @@ class OrderRegist extends Component {
      if (res.status == 200) {
       console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
+       document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
       }
      } else {
@@ -122,6 +123,7 @@ class OrderRegist extends Component {
      if (res.status == 200) {
       console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
+       document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
       }
      } else {
