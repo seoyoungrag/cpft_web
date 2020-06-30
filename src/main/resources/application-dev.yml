@@ -10,6 +10,7 @@ logging:
     javax.jws: trace
     org.springframework.ws.server.MessageTracing: trace
     org.springframework.ws: trace
+    org.springframework.cache: trace
     com.sun.xml.ws.transport.http.client.HttpTransportPipe: debug
 spring:
   profiles: dev
