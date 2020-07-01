@@ -318,7 +318,7 @@ class OrderManage extends Component {
               운송그룹
              </label>*/}
              <select
-              className="form-control col-6 col-sm-4"
+              className="form-control col-12"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup701}
              >
@@ -375,7 +375,7 @@ class OrderManage extends Component {
               운송그룹
              </label>*/}
              <select
-              className="form-control col-6 col-sm-4"
+              className="form-control col-12"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup702}
              >
@@ -498,7 +498,7 @@ class OrderManage extends Component {
               운송그룹
              </label>*/}
              <select
-              className="form-control col-6 col-sm-4"
+              className="form-control col-12"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup}
              >
