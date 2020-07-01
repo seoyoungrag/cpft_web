@@ -11643,7 +11643,7 @@ label.error {
 @media (max-width: 576px) {
  a#atlwdg-trigger {
   left: 0;
-  z-index: 9999999999;
+  z-index: 999999;
  }
  div#atlwdg-container {
   width: 100%;
