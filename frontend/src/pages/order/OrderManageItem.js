@@ -63,10 +63,10 @@ class OrderManageItem extends Component {
     });
   };
   return (
-   <tr style={{ display: this.props.display }}>
-    <td>
-     <div className="inner row">
-      <div className="col-7">
+   <tr style={{ display: this.props.display }} className="col-12">
+    <td className="col-12">
+     <div className="inner row col-sm-12 col-12">
+      <div className="col-12 col-sm-7">
        <div className="jobTitWrap">
         <span className="infoBx">
          {obj.status == "0701" ? (
@@ -137,7 +137,7 @@ class OrderManageItem extends Component {
        </div>
       </div>
       {obj.status == "0701" ? (
-       <div className="col-5 apyStatusBoard ">
+       <div className="col-12 col-sm-5 apyStatusBoard ">
         <div className="d-flex justify-content-end">
          <button
           type="button"
@@ -195,7 +195,7 @@ class OrderManageItem extends Component {
         </div>
        </div>
       ) : obj.status == "0702" ? (
-       <div className="col-5 apyStatusBoard ">
+       <div className="col-12 col-sm-5 apyStatusBoard ">
         <div className="col-12 mt-3 p-0">
          <ul className="boardItem">
           <li className="w-25">
@@ -226,7 +226,7 @@ class OrderManageItem extends Component {
         </div>
        </div>
       ) : (
-       <div className="col-5 apyStatusBoard ">
+       <div className="col-12 col-sm-5 apyStatusBoard ">
         <div className="d-flex justify-content-end">
          <button
           type="button"

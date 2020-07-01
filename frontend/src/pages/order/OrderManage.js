@@ -264,7 +264,8 @@ class OrderManage extends Component {
                href="#ing"
                data-toggle="tab"
               >
-               <i className="fas fa-fw fa-hourglass-start"></i> 진행중
+               <i className="fas fa-fw fa-hourglass-start"></i>{" "}
+               <span className="sm-display-none">진행중</span>
                <div className="ripple-container"></div>
               </a>
              </li>
@@ -274,7 +275,8 @@ class OrderManage extends Component {
                href="#complete"
                data-toggle="tab"
               >
-               <i className="fa fa-fw fa-hourglass-half"></i> 채용종료
+               <i className="fa fa-fw fa-hourglass-half"></i>{" "}
+               <span className="sm-display-none">채용종료</span>
                <div className="ripple-container"></div>
               </a>
              </li>
@@ -284,7 +286,8 @@ class OrderManage extends Component {
                href="#temp"
                data-toggle="tab"
               >
-               <i className="fa fa-fw fa-hourglass-end"></i> 임시저장
+               <i className="fa fa-fw fa-hourglass-end"></i>{" "}
+               <span className="sm-display-none">임시저장</span>
                <div className="ripple-container"></div>
               </a>
              </li>
@@ -294,7 +297,8 @@ class OrderManage extends Component {
                href="#all"
                data-toggle="tab"
               >
-               <i className="fa fa-fw fa-hourglass"></i> 전체
+               <i className="fa fa-fw fa-hourglass"></i>{" "}
+               <span className="sm-display-none">전체</span>
                <div className="ripple-container"></div>
               </a>
              </li>
@@ -304,16 +308,16 @@ class OrderManage extends Component {
          </div>
          <div className="card-body">
           <div className="tab-content">
-           <div className="tab-pane active" id="ing">
-            <div className="form-group col-6 row">
+           <div className="tab-pane col-12 active" id="ing">
+            <div className="form-group col-12 col-sm-6 row">
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-2 col-form-label"
+              className="col-6 col-sm-2 col-form-label"
              >
               운송그룹
              </label>
              <select
-              className="form-control col-4"
+              className="form-control col-6 col-sm-10"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup701}
              >
@@ -333,8 +337,8 @@ class OrderManage extends Component {
                : null}
              </select>
             </div>
-            <table className="table">
-             <tbody>
+            <table className="table col-12">
+             <tbody className="col-12">
               {orderList701.length > 0
                ? orderList701.map((obj, index) => {
                   return (
@@ -360,16 +364,16 @@ class OrderManage extends Component {
              </tbody>
             </table>
            </div>
-           <div className="tab-pane" id="complete">
-            <div className="form-group col-6 row">
+           <div className="tab-pane col-12" id="complete">
+            <div className="form-group col-12 col-sm-6 row">
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-2 col-form-label"
+              className="col-6 col-sm-2 col-form-label"
              >
               운송그룹
              </label>
              <select
-              className="form-control col-4"
+              className="form-control col-6 col-sm-10"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup702}
              >
@@ -389,8 +393,8 @@ class OrderManage extends Component {
                : null}
              </select>
             </div>
-            <table className="table">
-             <tbody>
+            <table className="table col-12">
+             <tbody className="col-12">
               {orderList702.length > 0
                ? orderList702.map((obj, index) => {
                   return (
@@ -415,16 +419,16 @@ class OrderManage extends Component {
              </tbody>
             </table>
            </div>
-           <div className="tab-pane" id="temp">
-            <div className="form-group col-6 row">
+           <div className="tab-pane col-12" id="temp">
+            <div className="form-group col-12 col-sm-6 row">
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-2 col-form-label"
+              className="col-6 col-sm-2 col-form-label"
              >
               운송그룹
              </label>
              <select
-              className="form-control col-4"
+              className="form-control col-6 col-sm-10"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup703}
              >
@@ -444,8 +448,8 @@ class OrderManage extends Component {
                : null}
              </select>
             </div>
-            <table className="table">
-             <tbody>
+            <table className="table col-12">
+             <tbody className="col-12">
               {orderList703.length > 0
                ? orderList703.map((obj, index) => {
                   return (
@@ -481,16 +485,16 @@ class OrderManage extends Component {
              */}
            </div>
 
-           <div className="tab-pane" id="all">
-            <div className="form-group col-6 row">
+           <div className="tab-pane col-12" id="all">
+            <div className="form-group col-12 col-sm-6 row">
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-2 col-form-label"
+              className="col-6 col-sm-2 col-form-label"
              >
               운송그룹
              </label>
              <select
-              className="form-control col-4"
+              className="form-control col-6 col-sm-10"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup}
              >
@@ -510,8 +514,8 @@ class OrderManage extends Component {
                : null}
              </select>
             </div>
-            <table className="table">
-             <tbody>
+            <table className="table col-12">
+             <tbody className="col-12">
               {orderList.length > 0
                ? orderList.map((obj, index) => {
                   return (

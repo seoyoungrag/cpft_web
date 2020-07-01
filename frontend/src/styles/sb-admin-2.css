@@ -11651,4 +11651,10 @@ label.error {
  div.forMobileMenu {
   display: flex;
  }
+ .sm-display-none {
+  display: none;
+ }
+ .jobTitWrap .tit {
+  white-space: unset !important;
+ }
 }

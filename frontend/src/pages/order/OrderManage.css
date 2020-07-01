@@ -665,9 +665,9 @@ button {
 }
 
 .jobTitWrap {
- position: relative;
+ /*position: relative;
  vertical-align: middle;
- padding: 0 20px;
+ padding: 0 20px;*/
 }
 .jobTitWrap .infoBx {
  display: block;
