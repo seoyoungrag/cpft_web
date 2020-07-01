@@ -309,15 +309,16 @@ class OrderManage extends Component {
          <div className="card-body">
           <div className="tab-content">
            <div className="tab-pane col-12 active" id="ing">
-            <div className="form-group col-12 col-sm-6 row">
+            <div className="form-row my-2 mb-3">
+             {/*
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-6 col-sm-2 col-form-label"
+              className="col-form-label col-2"
              >
               운송그룹
-             </label>
+             </label>*/}
              <select
-              className="form-control col-6 col-sm-10"
+              className="form-control col-6 col-sm-4"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup701}
              >
@@ -365,15 +366,16 @@ class OrderManage extends Component {
             </table>
            </div>
            <div className="tab-pane col-12" id="complete">
-            <div className="form-group col-12 col-sm-6 row">
+            <div className="form-row my-2 mb-3">
+             {/*
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-6 col-sm-2 col-form-label"
+              className="col-form-label col-2"
              >
               운송그룹
-             </label>
+             </label>*/}
              <select
-              className="form-control col-6 col-sm-10"
+              className="form-control col-6 col-sm-4"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup702}
              >
@@ -420,15 +422,16 @@ class OrderManage extends Component {
             </table>
            </div>
            <div className="tab-pane col-12" id="temp">
-            <div className="form-group col-12 col-sm-6 row">
+            <div className="form-row my-2 mb-3">
+             {/*
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-6 col-sm-2 col-form-label"
+              className="col-form-label col-2"
              >
               운송그룹
-             </label>
+             </label>*/}
              <select
-              className="form-control col-6 col-sm-10"
+              className="form-control col-12"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup703}
              >
@@ -486,15 +489,16 @@ class OrderManage extends Component {
            </div>
 
            <div className="tab-pane col-12" id="all">
-            <div className="form-group col-12 col-sm-6 row">
+            <div className="form-row my-2 mb-3">
+             {/*
              <label
               htmlFor="orderRegisWorkGroup"
-              className="col-6 col-sm-2 col-form-label"
+              className="col-form-label col-2"
              >
               운송그룹
-             </label>
+             </label>*/}
              <select
-              className="form-control col-6 col-sm-10"
+              className="form-control col-6 col-sm-4"
               id="orderRegisWorkGroup"
               onChange={this._changeWorkGroup}
              >
