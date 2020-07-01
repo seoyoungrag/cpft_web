@@ -81,16 +81,17 @@ class OrderRegist extends Component {
    registOrderWorkingAreaEtcMatterToggle: false,
    orderRegistWorkTypeValue: "",
    workGroups: [],
+   order: null,
   };
   this.orderRegistWorkGroupRef = React.createRef();
   this._saveTempOrderRegist = (e) => {
    $("#saveTempModalPopup").modal("hide");
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
    const formObj = $("#orderRegistForm").serializeObject();
-   if(!Array.isArray(formObj.carTypes)){
+   if (!Array.isArray(formObj.carTypes)) {
     formObj.carTypes = [formObj.carTypes];
    }
-   if(!Array.isArray(formObj.workDays)){
+   if (!Array.isArray(formObj.workDays)) {
     formObj.workDays = [formObj.workDays];
    }
    formObj.status = "0703";
@@ -103,7 +104,7 @@ class OrderRegist extends Component {
     })
     .then((res) => {
      if (res.status == 200) {
-      console.log(res.data.data.orderSeq);
+      //console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
        document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
@@ -117,6 +118,12 @@ class OrderRegist extends Component {
    $("#saveModalPopup").modal("hide");
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
    const formObj = $("#orderRegistForm").serializeObject();
+   if (!Array.isArray(formObj.carTypes)) {
+    formObj.carTypes = [formObj.carTypes];
+   }
+   if (!Array.isArray(formObj.workDays)) {
+    formObj.workDays = [formObj.workDays];
+   }
    formObj.status = "0701";
    axios
     .post("/v1/order", formObj, {
@@ -127,7 +134,7 @@ class OrderRegist extends Component {
     })
     .then((res) => {
      if (res.status == 200) {
-      console.log(res.data.data.orderSeq);
+      //console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
        document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
@@ -138,11 +145,11 @@ class OrderRegist extends Component {
     });
   };
   this._noValidateOrderRegistForm = (e) => {
-    $("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
-    var valid = $("#orderRegistForm").valid();
-    if (valid) {
-      $("#saveTempModalPopup").modal();
-    }
+   $("#orderRegistForm").validate(VALIDATION_ORDER_REGIST_FORM);
+   var valid = $("#orderRegistForm").valid();
+   if (valid) {
+    $("#saveTempModalPopup").modal();
+   }
   };
   this._validateOrderRegistForm = (e) => {
    /*
@@ -296,7 +303,7 @@ class OrderRegist extends Component {
 
    for (var i = 0; i < 24; i++) {
     var val = i < 10 && mil ? "0" + i : i;
-    if (!mil && val > 12) val -= 12;
+    //if (!mil && val > 12) val -= 12;
     hour.options[i] = new Option(val, i);
    }
    for (var i = 0; i < 60; i++) {
@@ -400,10 +407,73 @@ class OrderRegist extends Component {
   });
   this._setTimes("workHourStart", "workMinuteStart");
   this._setTimes("workHourEnd", "workMinuteEnd");
+
+  const order =
+   this.props.location &&
+   this.props.location.state &&
+   this.props.location.state.order
+    ? this.props.location.state.order
+    : null;
+  console.log(order);
+  if (order) {
+   $("#orderSeq").val(order.orderSeq);
+   $("#carrierSeq").val(order.carrierSeq);
+   $("#userSeq").val(order.userSeq);
+   $("#orderRegisWorkGroup").val(order.workGroupNm);
+   $("input:radio[name=rcritType]:input[value=" + order.rcritType + "]").attr(
+    "checked",
+    true
+   );
+   $("#rcritMans").val(order.rcritMans);
+   order.carTypes.map((e) => {
+    $("input:checkbox[name=carTypes]:input[value=" + e + "]").attr(
+     "checked",
+     true
+    );
+   });
+   $("input:radio[name=tonType]:input[value=" + order.tonType + "]").attr(
+    "checked",
+    true
+   );
+   $("#dlvyPrdlst").val(order.dlvyPrdlst);
+   $("#payAmt").val(order.payAmt);
+   $(
+    "input:radio[name=payFullType]:input[value=" + order.payFullType + "]"
+   ).attr("checked", true);
+   $("#workingArea").val(order.workingArea);
+   $("#opratSctn").val(order.opratSctn);
+   $("#workingDaysType").val(order.workingDaysType);
+   this._setorderRegistWorkType({
+    target: { value: document.getElementById("workingDaysType").value },
+   });
+   order.workDays.map((e) => {
+    $("input:checkbox[name=workDays]:input[value=" + e + "]").attr(
+     "checked",
+     true
+    );
+   });
+   $("#workHourStart").val(order.workHourStart);
+   $("#workMinuteStart").val(order.workMinuteStart);
+   $("#workHourEnd").val(order.workHourEnd);
+   $("#workMinuteEnd").val(order.workMinuteEnd);
+   $("#detailMatter").val(order.detailMatter);
+   if (order.workingAreaEtc) {
+    this.setState({
+     registOrderWorkingAreaEtcMatterToggle: true,
+    });
+    $("#workingAreaEtc").val(order.workingAreaEtc);
+   }
+  }
  }
 
  render() {
   const { workGroups } = this.state;
+  const order =
+   this.props.location &&
+   this.props.location.state &&
+   this.props.location.state.order
+    ? this.props.location.state.order
+    : null;
   return (
    <MainStructure>
     <main>
@@ -428,9 +498,11 @@ class OrderRegist extends Component {
            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
           </svg>
          </div>
-         <span>오더 등록</span>
+         <span>{order ? "오더 수정" : "오더 등록"}</span>
         </h1>
-        <div className="page-header-subtitle">오더를 등록합니다.</div>
+        <div className="page-header-subtitle">
+         오더를 {order ? "수정" : "등록"}합니다.
+        </div>
        </div>
       </div>
      </div>
@@ -439,11 +511,33 @@ class OrderRegist extends Component {
        <div className="col-lg-12">
         <div id="default">
          <div className="card mb-4">
-          <div className="card-header">오더 등록</div>
+          <div className="card-header">{order ? "오더 수정" : "오더 등록"}</div>
           <div className="card-body">
            <div className="sbp-preview">
             <div className="sbp-preview-content">
              <form role="form" id="orderRegistForm">
+              {order ? (
+               <div className="form-group row">
+                <label
+                 htmlFor="orderSeqDp"
+                 className="col-12 col-sm-2 col-form-label"
+                >
+                 오더번호
+                </label>
+                <input type="hidden" id="orderSeq" name="orderSeq" />
+                <input
+                 value={`W${order.workGroupNm}C${order.carrierSeq}U${order.userSeq}O${order.orderSeq}`}
+                 readOnly
+                 className="form-control col-12 col-sm-10"
+                 id="orderSeqDp"
+                 name="orderSeqDp"
+                 type="text"
+                 key="orderSeqDp"
+                 autoComplete="off"
+                 required
+                />
+               </div>
+              ) : null}
               <div className="form-group row">
                <label
                 htmlFor="orderRegisWorkGroup"
@@ -456,11 +550,7 @@ class OrderRegist extends Component {
                 value={this.props.carrierSeq}
                 name="carrierSeq"
                />
-               <input
-                type="hidden"
-                value={this.props.userSeq}
-                name="userSeq"
-               />
+               <input type="hidden" value={this.props.userSeq} name="userSeq" />
                <select
                 className="form-control col-12 col-sm-4"
                 id="orderRegisWorkGroup"
@@ -889,13 +979,15 @@ class OrderRegist extends Component {
                >
                 등록 완료
                </button>
-               <button
-                className="btn btn-secondary mr-3"
-                type="button"
-                onClick={(e) => this._noValidateOrderRegistForm(e)}
-               >
-                임시저장
-               </button>
+               {!order || (order && order.status == "0703") ? (
+                <button
+                 className="btn btn-secondary mr-3"
+                 type="button"
+                 onClick={(e) => this._noValidateOrderRegistForm(e)}
+                >
+                 임시저장
+                </button>
+               ) : null}
               </div>
              </form>
             </div>
@@ -921,7 +1013,9 @@ class OrderRegist extends Component {
       <div className="modal-dialog modal-dialog-centered" role="document">
        <div className="modal-content">
         <div className="modal-header">
-         <h5 className="modal-title">저장하시겠습니까?</h5>
+         <h5 className="modal-title">
+          저장{order ? "(수정)" : null} 하시겠습니까?
+         </h5>
          <button
           className="close"
           type="button"
@@ -930,6 +1024,11 @@ class OrderRegist extends Component {
          >
           <span aria-hidden="true">×</span>
          </button>
+        </div>
+        <div className="modal-body">
+         {order
+          ? "진행 중인 오더 공고 내용을 변경합니다."
+          : "저장하면 오더 공고가 시작됩니다."}
         </div>
         <div className="modal-footer">
          <button
@@ -961,7 +1060,9 @@ class OrderRegist extends Component {
       <div className="modal-dialog modal-dialog-centered" role="document">
        <div className="modal-content">
         <div className="modal-header">
-         <h5 className="modal-title">임시저장하시겠습니까?</h5>
+         <h5 className="modal-title">
+          임시저장{order ? "(수정)" : null} 하시겠습니까?
+         </h5>
          <button
           className="close"
           type="button"
@@ -1001,7 +1102,9 @@ class OrderRegist extends Component {
       <div className="modal-dialog modal-dialog-centered" role="document">
        <div className="modal-content">
         <div className="modal-header">
-         <h5 className="modal-title">저장이 완료되었습니다.</h5>
+         <h5 className="modal-title">
+          {order ? "수정" : "등록"}이 완료되었습니다.
+         </h5>
          <button
           className="close"
           type="button"
@@ -1030,7 +1133,7 @@ const mapStateToProps = (state) => ({
  workDayCodes: state.codes.workDayCodes,
  token: state.auth.userInfo.token,
  carrierSeq: state.auth.userInfo.carrierSeq,
- userSeq: state.auth.userInfo.userSeq
+ userSeq: state.auth.userInfo.userSeq,
 });
 
 export default connect(mapStateToProps)(OrderRegist);

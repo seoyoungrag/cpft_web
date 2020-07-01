@@ -32,4 +32,5 @@ public class OrderDTO extends CommonDate {
 	private int workMinuteEnd;
 	private String detailMatter;
 	private String status;
+	private String workingAreaEtc;
 }

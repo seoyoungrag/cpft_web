@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import $ from "jquery";
 
 class OrderManageItem extends Component {
  constructor() {
@@ -6,7 +9,59 @@ class OrderManageItem extends Component {
  }
 
  render() {
-  const { obj } = this.props;
+  const { obj, tabType, getCarrierOrders } = this.props;
+  this.modalClickUpdate = (obj, tabType) => {
+   console.log("#updateModalPopup" + obj.orderSeq + tabType);
+   $("#updateModalPopup" + obj.orderSeq + tabType).modal("hide");
+  };
+  this.modalClickComplete = (obj, tabType) => {
+   console.log("#completeModalPopup" + obj.orderSeq + tabType);
+   $("#completeModalPopup" + obj.orderSeq + tabType).modal("hide");
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   obj.status = "0702";
+   axios
+    .post("/v1/order", obj, {
+     headers: {
+      "Content-Type": "application/json",
+      "X-AUTH-TOKEN": userInfo.token,
+     },
+    })
+    .then((res) => {
+     if (res.status == 200) {
+      //console.log(res.data.data.orderSeq);
+      if (res.data.data.orderSeq > 0) {
+       getCarrierOrders();
+       $("#saveCompleteModalPopup").modal();
+      }
+     } else {
+      $("#saveFailModalPopup").modal();
+     }
+    });
+  };
+  this.modalClickDelete = (obj, tabType) => {
+   console.log("#deleteModalPopup" + obj.orderSeq + tabType);
+   $("#deleteModalPopup" + obj.orderSeq + tabType).modal("hide");
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   obj.status = "0704";
+   axios
+    .post("/v1/order", obj, {
+     headers: {
+      "Content-Type": "application/json",
+      "X-AUTH-TOKEN": userInfo.token,
+     },
+    })
+    .then((res) => {
+     if (res.status == 200) {
+      //console.log(res.data.data.orderSeq);
+      if (res.data.data.orderSeq > 0) {
+       getCarrierOrders();
+       $("#deleteCompleteModalPopup").modal();
+      }
+     } else {
+      $("#saveFailModalPopup").modal();
+     }
+    });
+  };
   return (
    <tr style={{ display: this.props.display }}>
     <td>
@@ -84,13 +139,28 @@ class OrderManageItem extends Component {
       {obj.status == "0701" ? (
        <div className="col-5 apyStatusBoard ">
         <div className="d-flex justify-content-end">
-         <button type="button" className="btn btn-primary mx-1">
-          <span>수정</span>
+         <button
+          type="button"
+          className="btn btn-primary mx-1"
+          data-toggle="modal"
+          data-target={`#updateModalPopup${obj.orderSeq}${tabType}`}
+         >
+          수정
          </button>
-         <button type="button" className="btn btn-success mx-1">
+         <button
+          type="button"
+          data-toggle="modal"
+          data-target={`#completeModalPopup${obj.orderSeq}${tabType}`}
+          className="btn btn-success mx-1"
+         >
           <span>마감</span>
          </button>
-         <button type="button" className="btn btn-danger  ml-1 mr-0">
+         <button
+          type="button"
+          data-toggle="modal"
+          data-target={`#deleteModalPopup${obj.orderSeq}${tabType}`}
+          className="btn btn-danger  ml-1 mr-0"
+         >
           <span>삭제</span>
          </button>
         </div>
@@ -158,15 +228,149 @@ class OrderManageItem extends Component {
       ) : (
        <div className="col-5 apyStatusBoard ">
         <div className="d-flex justify-content-end">
-         <button type="button" className="btn btn-primary mx-1">
-          <span>수정</span>
+         <button
+          type="button"
+          className="btn btn-primary mx-1"
+          data-toggle="modal"
+          data-target={`#updateModalPopup${obj.orderSeq}${tabType}`}
+         >
+          수정
          </button>
-         <button type="button" className="btn btn-danger  ml-1 mr-0">
+         <button
+          type="button"
+          data-toggle="modal"
+          data-target={`#deleteModalPopup${obj.orderSeq}${tabType}`}
+          className="btn btn-danger  ml-1 mr-0"
+         >
           <span>삭제</span>
          </button>
         </div>
        </div>
       )}
+     </div>
+     <div
+      className="modal fade"
+      id={`updateModalPopup${obj.orderSeq}${tabType}`}
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby={`updateModalPopup${obj.orderSeq}${tabType}`}
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">수정 하시겠습니까?</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <div className="modal-body">수정 페이지로 이동합니다.</div>
+        <div className="modal-footer">
+         <button
+          className="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+         >
+          아니오
+         </button>
+         <Link
+          to={{ pathname: `/order/regist`, state: { order: obj } }}
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => this.modalClickUpdate(obj, tabType)}
+         >
+          네
+         </Link>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div
+      className="modal fade"
+      id={`completeModalPopup${obj.orderSeq}${tabType}`}
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby={`completeModalPopup${obj.orderSeq}${tabType}`}
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">공고를 마감 하시겠습니까?</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <div className="modal-body">마감 후 복원할 수 없습니다.</div>
+        <div className="modal-footer">
+         <button
+          className="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+         >
+          아니오
+         </button>
+         <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => this.modalClickComplete(obj, tabType)}
+         >
+          네
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div
+      className="modal fade"
+      id={`deleteModalPopup${obj.orderSeq}${tabType}`}
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby={`deleteModalPopup${obj.orderSeq}${tabType}`}
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">공고를 삭제 하시겠습니까?</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+        <div className="modal-body">삭제 후 복원할 수 없습니다.</div>
+        <div className="modal-footer">
+         <button
+          className="btn btn-secondary"
+          type="button"
+          data-dismiss="modal"
+         >
+          아니오
+         </button>
+         <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => this.modalClickDelete(obj, tabType)}
+         >
+          네
+         </button>
+        </div>
+       </div>
+      </div>
      </div>
     </td>
    </tr>

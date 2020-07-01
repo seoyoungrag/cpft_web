@@ -66,9 +66,9 @@ public class Order extends CommonDateEntity implements Serializable {
 	@JoinColumn(name = "WORK_GROUP_NM", referencedColumnName = "WORK_GROUP_NM", nullable = false)
 	@JoinColumn(name = "CARRIER_SEQ", referencedColumnName = "CARRIER_SEQ", nullable = false)
 	private WorkGroup workGroup;
-	@Column(nullable = false, length = 100, name="RCRIT_TYPE")
+	@Column(nullable = false, length = 200, name="RCRIT_TYPE")
 	private String rcritType;
-	@Column(nullable = false, length = 100, name="RCRIT_MANS")
+	@Column(nullable = false, length = 200, name="RCRIT_MANS")
 	private String rcritMans;
 	
 	@ElementCollection
@@ -81,19 +81,21 @@ public class Order extends CommonDateEntity implements Serializable {
 	@Builder.Default
 	private List<String> carTypes = new ArrayList<>();
 	
-	@Column(nullable = false, length = 100, name="TON_TYPE")
+	@Column(nullable = false, length = 200, name="TON_TYPE")
 	private String tonType;
-	@Column(nullable = false, length = 100, name="DLVY_PRDLST")
+	@Column(nullable = false, length = 200, name="DLVY_PRDLST")
 	private String dlvyPrdlst;
-	@Column(nullable = false, length = 100, name="PAY_AMT")
+	@Column(nullable = false, length = 200, name="PAY_AMT")
 	private String payAmt;
-	@Column(nullable = false, length = 100, name="PAY_FULL_TYPE")
+	@Column(nullable = false, length = 200, name="PAY_FULL_TYPE")
 	private String payFullType;
-	@Column(nullable = false, length = 100, name="WORKING_AREA")
+	@Column(nullable = false, length = 200, name="WORKING_AREA")
 	private String workingArea;
-	@Column(nullable = false, length = 100, name="OPRAT_SCTN")
+	@Column(nullable = true, length = 200, name="WORKING_AREA_ETC")
+	private String workingAreaEtc;
+	@Column(nullable = false, length = 200, name="OPRAT_SCTN")
 	private String opratSctn;
-	@Column(nullable = false, length = 100, name="WORKING_DAYS_TYPE")
+	@Column(nullable = false, length = 200, name="WORKING_DAYS_TYPE")
 	private String workingDaysType;
 
 	@ElementCollection
@@ -114,7 +116,7 @@ public class Order extends CommonDateEntity implements Serializable {
 	private int workHourEnd;
 	@Column(nullable = false, length = 100, name="WORK_MINUTE_END")
 	private int workMinuteEnd;
-	@Column(nullable = false, length = 100, name="DETAIL_MATTER")
+	@Column(nullable = false, length = 1000, name="DETAIL_MATTER")
 	private String detailMatter;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_SEQ", nullable = false)

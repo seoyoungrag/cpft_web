@@ -45,7 +45,7 @@ public class OrderController {
 			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
 	@ApiOperation(value = "오더 저장", notes = "오더를 저장한다.")
 	@PostMapping
-	public SingleResult<Order> saveOrder(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody OrderDTO order) {
+	public SingleResult<OrderDTO> saveOrder(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody OrderDTO order) {
 		return responseService.getSingleResult(orderService.saveOrder(ObjectMapperUtils.map(order, Order.class)));
 	}
 	

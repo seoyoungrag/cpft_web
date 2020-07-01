@@ -59,41 +59,46 @@ class OrderManage extends Component {
     changeWorkGroup703: $(e.target).val(),
    });
   };
+
+  this._getCarrierOrders = async () => {
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq, {
+    headers: {
+     "Content-Type": "application/json",
+     "X-AUTH-TOKEN": userInfo.token,
+    },
+   });
+   if (data.list.length > 0) {
+    let orderList701 = data.list.filter((n) => {
+     return n.status == "0701";
+    });
+    let orderList702 = data.list.filter((n) => {
+     return n.status == "0702";
+    });
+    let orderList703 = data.list.filter((n) => {
+     return n.status == "0703";
+    });
+    let orderList = data.list.filter((n) => {
+     return n.status != "0704";
+    });
+    this.setState({ orderList701, orderList702, orderList703, orderList });
+   }
+
+   let data2 = await axios.get("/v1/carrier", {
+    headers: {
+     "Content-Type": "application/json",
+     "X-AUTH-TOKEN": userInfo.token,
+    },
+   });
+
+   if (data2.data.data.workGroups) {
+    this.setState({ workGroups: data2.data.data.workGroups });
+   }
+  };
  }
 
- async componentDidMount() {
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-  let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq, {
-   headers: {
-    "Content-Type": "application/json",
-    "X-AUTH-TOKEN": userInfo.token,
-   },
-  });
-  if (data.list.length > 0) {
-   let orderList701 = data.list.filter((n) => {
-    return n.status == "0701";
-   });
-   let orderList702 = data.list.filter((n) => {
-    return n.status == "0702";
-   });
-   let orderList703 = data.list.filter((n) => {
-    return n.status == "0703";
-   });
-   let orderList = data.list;
-   this.setState({ orderList701, orderList702, orderList703, orderList });
-  }
-
-  let data2 = await axios.get("/v1/carrier", {
-   headers: {
-    "Content-Type": "application/json",
-    "X-AUTH-TOKEN": userInfo.token,
-   },
-  });
-
-  if (data2.data.data.workGroups) {
-   this.setState({ workGroups: data2.data.data.workGroups });
-  }
-
+ componentDidMount() {
+  this._getCarrierOrders();
   attachJiraIssueColletor();
   /*
   $(this.refs.main).DataTable({
@@ -334,12 +339,14 @@ class OrderManage extends Component {
                ? orderList701.map((obj, index) => {
                   return (
                    <OrderManageItem
+                    getCarrierOrders={this._getCarrierOrders}
                     obj={obj}
                     key={obj.orderSeq}
                     rcritTypeCodes={this.props.rcritTypeCodes}
                     tonTypeCodes={this.props.tonTypeCodes}
                     carTypeCodes={this.props.carTypeCodes}
                     changeWorkGroup={changeWorkGroup701}
+                    tabType={"ing"}
                     display={
                      changeWorkGroup701 == obj.workGroupNm ||
                      changeWorkGroup701 == "all"
@@ -388,11 +395,13 @@ class OrderManage extends Component {
                ? orderList702.map((obj, index) => {
                   return (
                    <OrderManageItem
+                    getCarrierOrders={this._getCarrierOrders}
                     obj={obj}
                     key={obj.orderSeq}
                     rcritTypeCodes={this.props.rcritTypeCodes}
                     tonTypeCodes={this.props.tonTypeCodes}
                     carTypeCodes={this.props.carTypeCodes}
+                    tabType={"complete"}
                     display={
                      changeWorkGroup702 == obj.workGroupNm ||
                      changeWorkGroup702 == "all"
@@ -441,11 +450,13 @@ class OrderManage extends Component {
                ? orderList703.map((obj, index) => {
                   return (
                    <OrderManageItem
+                    getCarrierOrders={this._getCarrierOrders}
                     obj={obj}
                     key={obj.orderSeq}
                     rcritTypeCodes={this.props.rcritTypeCodes}
                     tonTypeCodes={this.props.tonTypeCodes}
                     carTypeCodes={this.props.carTypeCodes}
+                    tabType={"temp"}
                     display={
                      changeWorkGroup703 == obj.workGroupNm ||
                      changeWorkGroup703 == "all"
@@ -505,11 +516,13 @@ class OrderManage extends Component {
                ? orderList.map((obj, index) => {
                   return (
                    <OrderManageItem
+                    getCarrierOrders={this._getCarrierOrders}
                     obj={obj}
                     key={obj.orderSeq}
                     rcritTypeCodes={this.props.rcritTypeCodes}
                     tonTypeCodes={this.props.tonTypeCodes}
                     carTypeCodes={this.props.carTypeCodes}
+                    tabType={"all"}
                     display={
                      changeWorkGroup == obj.workGroupNm ||
                      changeWorkGroup == "all"
@@ -525,6 +538,54 @@ class OrderManage extends Component {
            </div>
           </div>
          </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div
+      className="modal fade"
+      id="saveCompleteModalPopup"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="saveCompleteModalPopup"
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">마감이 완료되었습니다.</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div
+      className="modal fade"
+      id="deleteCompleteModalPopup"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="deleteCompleteModalPopup"
+      aria-hidden="true"
+     >
+      <div className="modal-dialog modal-dialog-centered" role="document">
+       <div className="modal-content">
+        <div className="modal-header">
+         <h5 className="modal-title">삭제 완료되었습니다.</h5>
+         <button
+          className="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+         >
+          <span aria-hidden="true">×</span>
+         </button>
         </div>
        </div>
       </div>
