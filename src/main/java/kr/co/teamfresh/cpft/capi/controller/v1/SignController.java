@@ -128,7 +128,7 @@ public class SignController {
 		return responseService.getSuccessResult();
 	}
 	
-	@ApiOperation(value = "로그인", notes = "이메일 회원 로그인을 한다.")
+	@ApiOperation(value = "로그아웃", notes = "회원 로그아웃을 한다.")
 	@PostMapping(value = "/logout")
 	public CommonResult logout() {
 		return responseService.getSuccessResult();

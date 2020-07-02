@@ -18,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
@@ -74,9 +76,10 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
 	private Set<Order> orders = new HashSet<Order>(0);
 
 	@ManyToOne
-	@JoinColumn(name = "CARRIER_SEQ", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "CARRIER_SEQ", insertable = false, updatable = false)
 	@JsonManagedReference
 	private Carrier carrier;
+	
 	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(
@@ -86,6 +89,15 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
     @Column(name="ROLE")
 	@Builder.Default
 	private List<String> roles = new ArrayList<>();
+
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "rolePK.user")
+	private Set<UserRole> userRoles= new HashSet<UserRole>(0);
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "USER_SEQ")
+    private TruckOwner truckOwner;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,5 +1,7 @@
 package kr.co.teamfresh.cpft.capi.controller.v1;
 
+import java.util.List;
+
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -18,12 +20,14 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import kr.co.teamfresh.cpft.capi.advice.exception.CUserNotFoundException;
+import kr.co.teamfresh.cpft.capi.config.dto.user.UserDTO;
 import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
 import kr.co.teamfresh.cpft.capi.model.response.ListResult;
 import kr.co.teamfresh.cpft.capi.model.response.SingleResult;
 import kr.co.teamfresh.cpft.capi.repo.UserJpaRepo;
 import kr.co.teamfresh.cpft.capi.service.ResponseService;
+import kr.co.teamfresh.cpft.capi.util.ObjectMapperUtils;
 import lombok.RequiredArgsConstructor;
 
 @Api(tags = { "2. User" })
@@ -76,5 +80,14 @@ public class UserController {
 		userJpaRepo.deleteById(msrl);
 // 성공 결과 정보만 필요한경우 getSuccessResult()를 이용하여 결과를 출력한다.
 		return responseService.getSuccessResult();
+	}
+	
+
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token", required = true, dataType = "String", paramType = "header") })
+	@ApiOperation(value = "권한별 사용자 조회", notes = "권한별 사용자들을 조회한다.")
+	@GetMapping(value = "/user/role/{role}")
+	public ListResult<UserDTO> findAllUserByRole(@PathVariable String role) {
+		return responseService.getListResult(ObjectMapperUtils.mapAll(userJpaRepo.findAllByUserRolesRolePKRole(role), UserDTO.class));
 	}
 }
