@@ -10,19 +10,6 @@ import "datatables.net-dt";
 import { Component } from "react";
 import OrderManageItem from "./OrderManageItem";
 
-const columns = [
- {
-  title: "Name",
-  width: 120,
-  data: "name",
- },
- {
-  title: "Nickname",
-  width: 180,
-  data: "nickname",
- },
-];
-
 class OrderManage extends Component {
  constructor(props) {
   super(props);
@@ -100,13 +87,6 @@ class OrderManage extends Component {
  componentDidMount() {
   this._getCarrierOrders();
   attachJiraIssueColletor();
-  /*
-  $(this.refs.main).DataTable({
-   dom: '<"data-table-wrapper"t>',
-   data: this.props.names,
-   columns,
-   ordering: false,
-  });*/
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
    target: "#stickyNav",

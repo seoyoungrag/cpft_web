@@ -2,11 +2,16 @@ package kr.co.teamfresh.cpft.capi.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
+import kr.co.teamfresh.cpft.capi.entity.order.Order;
 import kr.co.teamfresh.cpft.capi.model.response.CommonResult;
 import kr.co.teamfresh.cpft.capi.model.response.ListResult;
+import kr.co.teamfresh.cpft.capi.model.response.PageReqRes;
 import kr.co.teamfresh.cpft.capi.model.response.SingleResult;
+import kr.co.teamfresh.cpft.capi.util.ObjectMapperUtils;
 
 @Service // 해당 Class가 Service임을 명시합니다.
 public class ResponseService {
@@ -40,6 +45,15 @@ public class ResponseService {
 		return result;
 	}
 
+	public <T,D> PageReqRes<D> getPageResult(PageReqRes<D> page, Page<T> list, Class<D> d) {
+		page.setRecordsTotal(list.getTotalElements());
+		page.setRecordsFiltered(list.getTotalElements());
+		List<D> dtoList = ObjectMapperUtils.mapAll(list.getContent(), d);
+		page.setData(dtoList);
+		setSuccessResult(page);
+		return page;
+	}
+	
 // 다중건 결과를 처리하는 메소드
 	public <T> ListResult<T> getListResult(List<T> list) {
 		ListResult<T> result = new ListResult<>();
@@ -70,4 +84,5 @@ public class ResponseService {
 		result.setCode(CommonResponse.SUCCESS.getCode());
 		result.setMsg(CommonResponse.SUCCESS.getMsg());
 	}
+
 }

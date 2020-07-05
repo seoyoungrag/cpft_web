@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import kr.co.teamfresh.cpft.capi.config.dto.carrier.CarrierDTO;
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
 import lombok.Data;
@@ -14,7 +16,9 @@ import lombok.Data;
 public class UserDTO implements Serializable{
 
 	private String userSeq;
+	@JsonIgnore
 	private String userLoginId;
+	@JsonIgnore
 	private String userLoginPw;
 	private String userNm;
 	private String userEmail;

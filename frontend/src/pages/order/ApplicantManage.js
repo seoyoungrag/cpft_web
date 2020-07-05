@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import axios from "axios";
 import MainStructure from "components/structure/MainStructure";
 import "./ApplicantManage.css";
 
@@ -7,7 +9,6 @@ import $ from "jquery";
 $.DataTable = require("datatables.net");
 import "datatables.net-dt";
 import { Component } from "react";
-import Input from "./Input";
 
 const columns = [
  {
@@ -26,12 +27,29 @@ class ApplicantManage extends Component {
  constructor(props) {
   super(props);
   this.state = {
+    orderList: [],
    names: [],
    orderSelecteButtonValue: "",
+  };
+  this._getCarrierOrders = async () => {
+   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+   let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq, {
+    headers: {
+     "Content-Type": "application/json",
+     "X-AUTH-TOKEN": userInfo.token,
+    },
+   });
+   if (data.list.length > 0) {
+    let orderList = data.list.filter((n) => {
+     return n.status != "0704";
+    });
+    this.setState({ orderList });
+   }
   };
  }
 
  componentDidMount() {
+  this._getCarrierOrders();
   attachJiraIssueColletor();
   const reactClass = this;
   $("#orderSelectMenu a").on("click", function () {
@@ -130,6 +148,9 @@ class ApplicantManage extends Component {
  }
 
  render() {
+  const {
+   orderList
+  } = this.state;
   return (
    <MainStructure>
     <main>
@@ -164,8 +185,59 @@ class ApplicantManage extends Component {
       <div className="card mb-4">
        <div className="card-header">지원자 관리</div>
        <div className="card-body">
+            <div className="form-row my-2 mb-3">
+             <select
+              className="form-control col-12"
+              id="orderSelecteButton"
+              //onChange={this._changeWorkGroup701}
+             >
+             <option value="all">전체보기</option>
+             {orderList.length > 0
+              ? orderList.map((obj, index) => {
+                var content = 'W'+obj.workGroupNm+'C'+obj.carrierSeq+'U'+obj.userSeq+'O'+obj.orderSeq;
+                content +=
+                this.props.rcritTypeCodes
+                 .filter((e) => {
+                  return e.code == obj.rcritType;
+                 })
+                 .map((r) => {
+                  return r.codeValue;
+                 });
+                 content +=' '+obj.carrierNm
+                 content +=' '
+                 +this.props.tonTypeCodes
+                .filter((e) => {
+                 return e.code == obj.tonType;
+                })
+                .map((r) => {
+                 return r.codeValue;
+                });
+                content +=' '+this.props.carTypeCodes
+                .filter((e) => {
+                 return e.code == obj.carType;
+                })
+                .map((r) => {
+                 return r.codeValue;
+                });
+                content +=' '+(obj.workingDaysType == "fiveDay"
+                ? "주5일"
+                : obj.workingDaysType == "sixDay"
+                ? "주6일"
+                : null)
+                content +=' '+obj.payAmt+' '+obj.detailMatter;
+                 return (
+             <option
+             key={obj.orderSeq}
+              value={obj.orderSeq}
+             >
+              {content}
+             </option>
+                 )}) : null}
+             </select>
+            </div>
+         {/*}
         <div className="row">
-         <div className="col-sm-12 col-md-6">
+         <div className="col-sm-12 col-md-12">
           <div className="col-12 row h-100">
            <div className="btn-group dropdown col-12 h-100 text-wrap w-auto">
             <button
@@ -183,18 +255,49 @@ class ApplicantManage extends Component {
              aria-labelledby="orderSelecteButton"
              id="orderSelectMenu"
             >
-             <a
-              className="dropdown-item w-100 text-truncate"
-              href="#"
-              data-orderid="001"
-             >
-              001 팀프레시 하남 고정 개인사업자 차주 모집, 동해물과 백두산이
-              마르고 닳도록 하느님이 보우하사 우리 나라 만세 무궁화 삼천리
-              화려강산 대한사람 대한으로 길이 보전하세
-             </a>
-             <a className="dropdown-item" href="#" data-orderid="002">
-              002 팀프레시 하남 고정 개인사업자 차주 모집
-             </a>
+            {orderList.length > 0
+             ? orderList.map((obj, index) => {
+                return (
+                  <a
+                   className="dropdown-item w-100 text-truncate"
+                   href="#"
+                   key={obj.orderSeq}
+                   data-orderid={obj.orderSeq}
+                  >
+                  W{obj.workGroupNm}C{obj.carrierSeq}U{obj.userSeq}O{obj.orderSeq}{" "}
+                  
+           {this.props.rcritTypeCodes
+            .filter((e) => {
+             return e.code == obj.rcritType;
+            })
+            .map((r) => {
+             return r.codeValue;
+            })}
+            {obj.carrierNm}{" "}
+          {this.props.tonTypeCodes
+           .filter((e) => {
+            return e.code == obj.tonType;
+           })
+           .map((r) => {
+            return r.codeValue;
+           })}{" "}
+          {this.props.carTypeCodes
+           .filter((e) => {
+            return e.code == obj.carType;
+           })
+           .map((r) => {
+            return r.codeValue;
+           })}{" "}
+          {obj.workingDaysType == "fiveDay"
+           ? "주5일"
+           : obj.workingDaysType == "sixDay"
+           ? "주6일"
+           : null}
+          &nbsp;{obj.payAmt} {obj.detailMatter}
+                  </a>
+                );
+               })
+             : null}
 
              <div className="dropdown-divider"></div>
              <a className="dropdown-item" href="#" data-orderid="">
@@ -259,6 +362,7 @@ class ApplicantManage extends Component {
           </div>
          ) : null}
         </div>
+        */}
         <div className="datatable table-responsive">
          <div
           id="dataTable_wrapper"
@@ -949,4 +1053,16 @@ class ApplicantManage extends Component {
  }
 }
 
-export default ApplicantManage;
+const mapStateToProps = (state) => ({
+  codes: state.codes.codes,
+  orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
+  rcritTypeCodes: state.codes.rcritTypeCodes,
+  carTypeCodes: state.codes.carTypeCodes,
+  tonTypeCodes: state.codes.tonTypeCodes,
+  payFullTypeCodes: state.codes.payFullTypeCodes,
+  workDayCodes: state.codes.workDayCodes,
+  token: state.auth.userInfo.token,
+  carrierSeq: state.auth.userInfo.carrierSeq,
+  userSeq: state.auth.userInfo.userSeq,
+ });
+export default connect(mapStateToProps)(ApplicantManage);

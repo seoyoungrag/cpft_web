@@ -14,7 +14,8 @@ logging:
     com.sun.xml.ws.transport.http.client.HttpTransportPipe: debug
     org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod: debug
     org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: debug
-    
+    org.hibernate.resource.jdbc.internal.ResourceRegistryStandardImpl: trace
+    org.hibernate.type.descriptor.sql.BasicExtractor: debug
 spring:
   profiles: dev
   redis:
@@ -29,13 +30,13 @@ spring:
       pool-name: hikari-cp
       maximum-pool-size: 30
       minimum-idle: 2
-      data-source-properties:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     showSql: true
+    show-sql: true
     properties:
       hibernate:
         globally_quoted_identifiers: true
