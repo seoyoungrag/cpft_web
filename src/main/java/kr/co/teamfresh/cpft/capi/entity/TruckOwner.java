@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwner;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +45,7 @@ public class TruckOwner {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "truckPK.truckOnwer")
 	private Set<Truck> trucks = new HashSet<Truck>(0);
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.truckOnwer")
+	private Set<OrderTruckOwner> orders = new HashSet<OrderTruckOwner>(0);
 }
