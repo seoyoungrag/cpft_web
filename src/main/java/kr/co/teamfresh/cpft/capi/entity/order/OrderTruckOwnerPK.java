@@ -17,7 +17,7 @@ import lombok.Data;
 @Embeddable
 public class OrderTruckOwnerPK implements Serializable {
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ORDER_SEQ", nullable = false)
 	@JsonProperty(access = Access.READ_ONLY)
 	private Order order;

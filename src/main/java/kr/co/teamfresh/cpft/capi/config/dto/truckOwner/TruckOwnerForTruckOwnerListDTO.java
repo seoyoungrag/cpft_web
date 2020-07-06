@@ -6,11 +6,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerForApplicationListDTO;
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerForTruckOwnerListDTO;
 import lombok.Data;
 
 @Data
-public class TruckOwnerForApplicationListDTO implements Serializable{
+public class TruckOwnerForTruckOwnerListDTO implements Serializable{
 
 	private String userSeq;
 	@JsonIgnore
@@ -24,6 +24,6 @@ public class TruckOwnerForApplicationListDTO implements Serializable{
     private String carrerDetail;
     private String phone;
 	private List<TruckDTO> trucks = new ArrayList<TruckDTO>(0);
-	private List<String> crqfcs = new ArrayList<>();
-	
+	private List<String> crqfcs = new ArrayList<>(0);
+	private List<OrderTruckOwnerForTruckOwnerListDTO> orders = new ArrayList<OrderTruckOwnerForTruckOwnerListDTO>(0);
 }

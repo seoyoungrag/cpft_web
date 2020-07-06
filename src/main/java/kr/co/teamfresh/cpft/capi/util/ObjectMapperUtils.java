@@ -13,8 +13,10 @@ import org.modelmapper.spi.MappingContext;
 
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderDtoToEnMap;
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderEnToDtoMap;
-import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderTruckOwnerEnToDtoMap;
-import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.TruckOwnerEnToDtoMap;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderTruckOwnerEnToDtoForApplicationListMap;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderTruckOwnerEnToDtoForOwnerTruckListMap;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.TruckOwnerEnToForApplicationListDtoMap;
+import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.TruckOwnerEnToForTruckOwnerListDtoMap;
 
 public class ObjectMapperUtils {
 
@@ -45,8 +47,10 @@ public class ObjectMapperUtils {
     	});
 		modelMapper.addMappings(new OrderDtoToEnMap());
 		modelMapper.addMappings(new OrderEnToDtoMap());
-		modelMapper.addMappings(new TruckOwnerEnToDtoMap());
-		modelMapper.addMappings(new OrderTruckOwnerEnToDtoMap());
+		modelMapper.addMappings(new TruckOwnerEnToForApplicationListDtoMap());
+		modelMapper.addMappings(new TruckOwnerEnToForTruckOwnerListDtoMap());
+		modelMapper.addMappings(new OrderTruckOwnerEnToDtoForApplicationListMap());
+		modelMapper.addMappings(new OrderTruckOwnerEnToDtoForOwnerTruckListMap());
 		//modelMapper.addConverter(new OrderDtoToOrderEnCv());
 	}
 

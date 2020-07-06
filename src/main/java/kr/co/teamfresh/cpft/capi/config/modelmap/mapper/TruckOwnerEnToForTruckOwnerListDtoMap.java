@@ -8,11 +8,11 @@ import java.util.Set;
 import org.modelmapper.PropertyMap;
 
 import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckDTO;
-import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerForApplicationListDTO;
+import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerForTruckOwnerListDTO;
 import kr.co.teamfresh.cpft.capi.entity.Truck;
 import kr.co.teamfresh.cpft.capi.entity.TruckOwner;
 
-public class TruckOwnerEnToForApplicationListDtoMap extends PropertyMap<TruckOwner, TruckOwnerForApplicationListDTO> {
+public class TruckOwnerEnToForTruckOwnerListDtoMap extends PropertyMap<TruckOwner, TruckOwnerForTruckOwnerListDTO> {
 	@Override
 	protected void configure() {
 		map().setUserEmail(source.getUser().getUserEmail());
@@ -20,7 +20,6 @@ public class TruckOwnerEnToForApplicationListDtoMap extends PropertyMap<TruckOwn
 		using(ctx -> generateTruck( (Set<Truck>)ctx.getSource()) ).map(source.getTrucks(), destination.getTrucks());
 		//using(ctx -> generateOrderTruckOwner( (Set<OrderTruckOwner>)ctx.getSource()) ).map(source.getOrders(), destination.getOrders());
 	}
-
 
 	private List<TruckDTO> generateTruck(Set<Truck> trucks) {
 		List<TruckDTO> rtnList = new ArrayList<>();

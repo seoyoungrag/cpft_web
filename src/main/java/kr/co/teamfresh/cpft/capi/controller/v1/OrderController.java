@@ -29,8 +29,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
-import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerDTO;
-import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerDTO;
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerForApplicationListDTO;
+import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerForApplicationListDTO;
 import kr.co.teamfresh.cpft.capi.entity.TruckOwner;
 import kr.co.teamfresh.cpft.capi.entity.TruckOwner_;
 import kr.co.teamfresh.cpft.capi.entity.order.Order;
@@ -74,15 +74,15 @@ public class OrderController {
 
 	@ApiOperation(value = "오더의 지원자(차주) 조회", notes = "오더의 지원자들을 조회한다.")
 	@GetMapping("/{orderSeq}/truckOwner")
-	public PageReqRes<OrderTruckOwner, OrderTruckOwnerDTO> listOrderTruckOwnerBydOrderSeq(@PathVariable String orderSeq,
-			@ApiParam(value = "오더 지원자 페이징 정보", required = true) @ModelAttribute PageReqRes<OrderTruckOwner, OrderTruckOwnerDTO> page) {
+	public PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> listOrderTruckOwnerBydOrderSeq(@PathVariable String orderSeq,
+			@ApiParam(value = "오더 지원자 페이징 정보", required = true) @ModelAttribute PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> page) {
 		if (orderSeq.equals("all")) {
 			return responseService.getPageResult(page, orderService.listOrderTruckOwnerOrderByOrderSeq(page),
-					OrderTruckOwnerDTO.class);
+					OrderTruckOwnerForApplicationListDTO.class);
 		} else {
 			return responseService.getPageResult(page,
 					orderService.listOrderTruckOwnerByOrderSeqOrderByOrderSeq(orderSeq, page),
-					OrderTruckOwnerDTO.class);
+					OrderTruckOwnerForApplicationListDTO.class);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class OrderController {
 	@Transactional
 	public SingleResult<Integer> updateOrderTruckOwnerIsRead(@PathVariable String orderSeq,
 			@PathVariable String userSeq,
-			@ApiParam(value = "오더 지원 열람 여부", required = true) @RequestBody OrderTruckOwnerDTO ordertruckOwnerDTO) {
+			@ApiParam(value = "오더 지원 열람 여부", required = true) @RequestBody OrderTruckOwnerForApplicationListDTO ordertruckOwnerDTO) {
 
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaUpdate<OrderTruckOwner> update = cb.createCriteriaUpdate(OrderTruckOwner.class);
@@ -109,7 +109,7 @@ public class OrderController {
 	@Transactional
 	public SingleResult<Integer> updateOrderTruckOwnerStatus(@PathVariable String orderSeq,
 			@PathVariable String userSeq,
-			@ApiParam(value = "오더 지원의 진행 상태 정보", required = true) @RequestBody OrderTruckOwnerDTO ordertruckOwnerDTO) {
+			@ApiParam(value = "오더 지원의 진행 상태 정보", required = true) @RequestBody OrderTruckOwnerForApplicationListDTO ordertruckOwnerDTO) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaUpdate<OrderTruckOwner> update = cb.createCriteriaUpdate(OrderTruckOwner.class);
 		Root<OrderTruckOwner> orderTruckOwnerRoot = update.from(OrderTruckOwner.class);

@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
-import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerDTO;
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerForApplicationListDTO;
 import kr.co.teamfresh.cpft.capi.entity.order.Order;
 import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwner;
 import kr.co.teamfresh.cpft.capi.model.response.PageReqRes;
@@ -52,11 +52,11 @@ public class OrderService {
 	}
 	*/
 
-	public Page<OrderTruckOwner> listOrderTruckOwnerOrderByOrderSeq(PageReqRes<OrderTruckOwner, OrderTruckOwnerDTO> pageable) {
+	public Page<OrderTruckOwner> listOrderTruckOwnerOrderByOrderSeq(PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
 		return orderTruckOwnerJpaRepo.findAllByOrderByOrderTruckOwnerPKOrderOrderSeq(pageable);
 	}
 
-	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderByOrderSeq(String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerDTO> pageable) {
+	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderByOrderSeq(String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
 		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderOrderSeqOrderByOrderTruckOwnerPKOrderOrderSeq(orderSeq, pageable);
 	}
 	

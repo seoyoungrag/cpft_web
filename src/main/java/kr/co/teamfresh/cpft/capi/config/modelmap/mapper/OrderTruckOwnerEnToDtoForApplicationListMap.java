@@ -5,20 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import org.modelmapper.PropertyMap;
 
-import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerDTO;
-import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckDTO;
-import kr.co.teamfresh.cpft.capi.entity.Truck;
+import kr.co.teamfresh.cpft.capi.config.dto.order.OrderTruckOwnerForApplicationListDTO;
 import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwner;
 
-public class OrderTruckOwnerEnToDtoMap extends PropertyMap<OrderTruckOwner, OrderTruckOwnerDTO> {
+public class OrderTruckOwnerEnToDtoForApplicationListMap extends PropertyMap<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> {
 	@Override
 	protected void configure() {
 		map(source.getOrderTruckOwnerPK().getOrder()).setOrder(null);
@@ -35,36 +28,6 @@ public class OrderTruckOwnerEnToDtoMap extends PropertyMap<OrderTruckOwner, Orde
 		} else {
 			return createdAt.toInstant(ZoneOffset.UTC).atZone(ZoneId.of("Asia/Seoul")).toLocalDate();
 		}
-	}
-
-	private List<TruckDTO> generateTruck(Set<Truck> trucks) {
-		List<TruckDTO> rtnList = new ArrayList<>();
-		Iterator<Truck> it = trucks.iterator();
-		while (it.hasNext()) {
-			Truck t = it.next();
-			TruckDTO dto = new TruckDTO();
-			dto.setCarType(t.getTruckPK().getCarType());
-			dto.setTonType(t.getTruckPK().getTonType());
-			rtnList.add(dto);
-		}
-		rtnList.sort(new Comparator<TruckDTO>() {
-			@Override
-			public int compare(TruckDTO arg0, TruckDTO arg1) {
-				// TODO Auto-generated method stub
-				int carType0 = Integer.parseInt(arg0.getCarType());
-				int carType1 = Integer.parseInt(arg1.getCarType());
-				int tonType0 = Integer.parseInt(arg0.getTonType());
-				int tonType1 = Integer.parseInt(arg1.getTonType());
-				
-				if (carType0 == carType1 && tonType0 == tonType1)
-					return 0;
-				else if (carType0 > carType1) {
-					return 1;
-				}else
-					return -1;
-			}
-		});
-		return rtnList;
 	}
 
 }
