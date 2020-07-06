@@ -3,7 +3,7 @@ package kr.co.teamfresh.cpft.capi.config.dto.order;
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.teamfresh.cpft.capi.entity.common.CommonDate;
+import kr.co.teamfresh.cpft.capi.config.dto.CommonDate;
 import lombok.Data;
 
 @Data

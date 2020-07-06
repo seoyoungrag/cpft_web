@@ -1,9 +1,13 @@
 package kr.co.teamfresh.cpft.capi.entity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,11 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwner;
+import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Getter 
 @Setter
 @NoArgsConstructor 
@@ -42,10 +48,22 @@ public class TruckOwner {
     
     @Column(name="CARRER_DETAIL")
     private String carrerDetail;
+    
+    @Column(name="PHONE")
+    private String phone;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "truckPK.truckOnwer")
 	private Set<Truck> trucks = new HashSet<Truck>(0);
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.truckOnwer")
 	private Set<OrderTruckOwner> orders = new HashSet<OrderTruckOwner>(0);
+	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(
+			name="TRUCK_OWNER_CRQFC",
+			joinColumns=@JoinColumn(name = "USER_SEQ", referencedColumnName = "USER_SEQ")
+	)
+    @Column(name="CRQFC")
+	@Builder.Default
+	private List<String> crqfcs = new ArrayList<>();
 }

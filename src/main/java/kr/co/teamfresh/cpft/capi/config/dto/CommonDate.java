@@ -1,4 +1,4 @@
-package kr.co.teamfresh.cpft.capi.entity.common;
+package kr.co.teamfresh.cpft.capi.config.dto;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package kr.co.teamfresh.cpft.capi.controller.code;
+package kr.co.teamfresh.cpft.capi.controller.v1;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
