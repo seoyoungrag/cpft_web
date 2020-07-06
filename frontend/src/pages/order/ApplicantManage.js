@@ -140,7 +140,6 @@ class ApplicantManage extends Component {
     $(row)
      .unbind()
      .on("click", function () {
-      console.log(data);
       if (data.isRead == "N") {
        axios
         .put(
@@ -160,8 +159,6 @@ class ApplicantManage extends Component {
       $("#applicantModalCarrer").text(data.carrerCn);
       $("#applicantModalCert").html(certs);
       $("#applicantModalMsg").text(data.message);
-      console.log(data.order.orderSeq);
-      console.log(data.truckOwner.userSeq);
       $("#applicantModalStatusIngBtn").data("orderSeq", data.order.orderSeq);
       $("#applicantModalStatusIngBtn").data("userSeq", data.truckOwner.userSeq);
       $("#applicantModalStatusIngBtn")
@@ -274,6 +271,11 @@ class ApplicantManage extends Component {
      targets: [2],
      createdCell: function (td, cellData, rowData, row, col) {
       var content = "";
+      cellData.sort(function (a, b) {
+       // 오름차순
+       return a.carType < b.carType ? -1 : a.carType > b.carType ? 1 : 0;
+       // 광희, 명수, 재석, 형돈
+      });
       cellData.map((obj, index) => {
        if (index > 0) {
         content += "</p>";
@@ -339,7 +341,7 @@ class ApplicantManage extends Component {
     type: "GET",
     data: function (d) {
      delete d.columns;
-     console.log(d);
+
      return d;
     },
    },
@@ -414,225 +416,228 @@ class ApplicantManage extends Component {
 
  render() {
   const { orderList, orderSelecteButtonValue } = this.state;
+  const { carTypeCodes, tonTypeCodes } = this.props;
   return (
    <MainStructure>
-    <main>
-     <div className="page-header pb-10 page-header-dark bg-gradient-primary-to-secondary">
-      <div className="container-fluid">
-       <div className="page-header-content">
-        <h1 className="page-header-title">
-         <div className="page-header-icon">
-          <svg
-           xmlns="http://www.w3.org/2000/svg"
-           width="24"
-           height="24"
-           viewBox="0 0 24 24"
-           fill="none"
-           stroke="currentColor"
-           strokeWidth="2"
-           strokeLinecap="round"
-           strokeLinejoin="round"
-           className="feather feather-edit-3"
-          >
-           <path d="M12 20h9"></path>
-           <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-          </svg>
-         </div>
-         <span>지원자 관리</span>
-        </h1>
-        <div className="page-header-subtitle">지원자를 관리합니다.</div>
-       </div>
-      </div>
-     </div>
-     <div className="container-fluid mt-n10">
-      <div className="card mb-4">
-       <div className="card-header">지원자 관리</div>
-       <div className="card-body">
-        <div className="form-row my-2 mb-3">
-         <select
-          className="form-control col-12"
-          id="orderSelecteButton"
-          onChange={this._changeOrderBySelect}
-         >
-          <option value="all">전체보기</option>
-          {orderList.length > 0
-           ? orderList.map((obj, index) => {
-              var content =
-               "W" +
-               obj.workGroupNm +
-               "C" +
-               obj.carrierSeq +
-               "U" +
-               obj.userSeq +
-               "O" +
-               obj.orderSeq;
-              content += this.props.rcritTypeCodes
-               .filter((e) => {
-                return e.code == obj.rcritType;
-               })
-               .map((r) => {
-                return r.codeValue;
-               });
-              content += " " + obj.carrierNm;
-              content +=
-               " " +
-               this.props.tonTypeCodes
-                .filter((e) => {
-                 return e.code == obj.tonType;
-                })
-                .map((r) => {
-                 return r.codeValue;
-                });
-              content +=
-               " " +
-               this.props.carTypeCodes
-                .filter((e) => {
-                 return e.code == obj.carType;
-                })
-                .map((r) => {
-                 return r.codeValue;
-                });
-              content +=
-               " " +
-               (obj.workingDaysType == "fiveDay"
-                ? "주5일"
-                : obj.workingDaysType == "sixDay"
-                ? "주6일"
-                : null);
-              content += " " + obj.payAmt + " " + obj.detailMatter;
-              return (
-               <option key={obj.orderSeq} value={obj.orderSeq}>
-                {content}
-               </option>
-              );
-             })
-           : null}
-         </select>
-        </div>
-        <div className="datatable table-responsive">
-         <table
-          id="applicantManageTbl"
-          ref="applicantManageTbl"
-          className="table table-bordered table-hover"
-          width="100%"
-          cellSpacing="0"
-          role="grid"
-          aria-describedby="dataTable_info"
-         />
-        </div>
-       </div>
-      </div>
-      <div
-       className="modal fade"
-       id="applicantModal"
-       tabIndex="-1"
-       role="dialog"
-       aria-labelledby="applicantModalTitle"
-       aria-hidden="true"
-      >
-       <div className="modal-dialog modal-dialog-centered" role="document">
-        <div className="modal-content">
-         <div className="modal-header">
-          <h5 className="modal-title" id="applicantModalTitle">
-           오더번호 001
-          </h5>
-          <button
-           className="close"
-           type="button"
-           data-dismiss="modal"
-           aria-label="Close"
-          >
-           <span aria-hidden="true">×</span>
-          </button>
-         </div>
-         <div className="modal-body">
-          <div className="card mb-4">
-           <div className="card-body">
-            <h5 className="card-title text-primary row m-auto p-auto">
-             <dt id="applicantModalUserNm">김차일</dt>&nbsp;{" "}
-             <dd id="applicantModalUserPhone">010-1111-1411</dd>
-            </h5>
-            <div className="card-text row">
-             <dl className="col-6 row mb-auto">
-              <dt className="col-3 h-25 d-flex justify-content-end">차량:</dt>{" "}
-              <dd id="applicantModalCarAndTon" className="col-9 h-25 ">
-               1t 냉장
-              </dd>
-              <dt className="col-3 h-25 d-flex justify-content-end">경력:</dt>{" "}
-              <dd className="col-9 h-25" id="applicantModalCarrer">
-               1년 미만
-              </dd>
-             </dl>
-             <dl className="col-6">
-              <dt className="mb-3">면허 및 자격</dt>
-              <dd id="applicantModalCert"></dd>
-             </dl>
-             <dl className="col-12 m-auto">
-              <dt className="mb-3">메시지</dt>
-              <dd id="applicantModalMsg">
-               성실함으로 열심히 하겠습니다. 처음이지만 적극적으로!
-              </dd>
-             </dl>
-            </div>
-           </div>
-           <a
-            className="card-footer d-flex align-items-center justify-content-between"
-            href="#"
+    {carTypeCodes && tonTypeCodes ? (
+     <main>
+      <div className="page-header pb-10 page-header-dark bg-gradient-primary-to-secondary">
+       <div className="container-fluid">
+        <div className="page-header-content">
+         <h1 className="page-header-title">
+          <div className="page-header-icon">
+           <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-edit-3"
            >
-            차주 상세 보기
-            <svg
-             xmlns="http://www.w3.org/2000/svg"
-             width="24"
-             height="24"
-             viewBox="0 0 24 24"
-             fill="none"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-             className="feather feather-arrow-right"
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+           </svg>
+          </div>
+          <span>지원자 관리</span>
+         </h1>
+         <div className="page-header-subtitle">지원자를 관리합니다.</div>
+        </div>
+       </div>
+      </div>
+      <div className="container-fluid mt-n10">
+       <div className="card mb-4">
+        <div className="card-header">지원자 관리</div>
+        <div className="card-body">
+         <div className="form-row my-2 mb-3">
+          <select
+           className="form-control col-12"
+           id="orderSelecteButton"
+           onChange={this._changeOrderBySelect}
+          >
+           <option value="all">전체보기</option>
+           {orderList.length > 0
+            ? orderList.map((obj, index) => {
+               var content =
+                "W" +
+                obj.workGroupNm +
+                "C" +
+                obj.carrierSeq +
+                "U" +
+                obj.userSeq +
+                "O" +
+                obj.orderSeq;
+               content += this.props.rcritTypeCodes
+                .filter((e) => {
+                 return e.code == obj.rcritType;
+                })
+                .map((r) => {
+                 return r.codeValue;
+                });
+               content += " " + obj.carrierNm;
+               content +=
+                " " +
+                this.props.tonTypeCodes
+                 .filter((e) => {
+                  return e.code == obj.tonType;
+                 })
+                 .map((r) => {
+                  return r.codeValue;
+                 });
+               content +=
+                " " +
+                this.props.carTypeCodes
+                 .filter((e) => {
+                  return e.code == obj.carType;
+                 })
+                 .map((r) => {
+                  return r.codeValue;
+                 });
+               content +=
+                " " +
+                (obj.workingDaysType == "fiveDay"
+                 ? "주5일"
+                 : obj.workingDaysType == "sixDay"
+                 ? "주6일"
+                 : null);
+               content += " " + obj.payAmt + " " + obj.detailMatter;
+               return (
+                <option key={obj.orderSeq} value={obj.orderSeq}>
+                 {content}
+                </option>
+               );
+              })
+            : null}
+          </select>
+         </div>
+         <div className="datatable table-responsive">
+          <table
+           id="applicantManageTbl"
+           ref="applicantManageTbl"
+           className="table table-bordered table-hover"
+           width="100%"
+           cellSpacing="0"
+           role="grid"
+           aria-describedby="dataTable_info"
+          />
+         </div>
+        </div>
+       </div>
+       <div
+        className="modal fade"
+        id="applicantModal"
+        tabIndex="-1"
+        role="dialog"
+        aria-labelledby="applicantModalTitle"
+        aria-hidden="true"
+       >
+        <div className="modal-dialog modal-dialog-centered" role="document">
+         <div className="modal-content">
+          <div className="modal-header">
+           <h5 className="modal-title" id="applicantModalTitle">
+            오더번호 001
+           </h5>
+           <button
+            className="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+           >
+            <span aria-hidden="true">×</span>
+           </button>
+          </div>
+          <div className="modal-body">
+           <div className="card mb-4">
+            <div className="card-body">
+             <h5 className="card-title text-primary row m-auto p-auto">
+              <dt id="applicantModalUserNm">김차일</dt>&nbsp;{" "}
+              <dd id="applicantModalUserPhone">010-1111-1411</dd>
+             </h5>
+             <div className="card-text row">
+              <dl className="col-6 row mb-auto">
+               <dt className="col-3 h-25 d-flex justify-content-end">차량:</dt>{" "}
+               <dd id="applicantModalCarAndTon" className="col-9 h-25 ">
+                1t 냉장
+               </dd>
+               <dt className="col-3 h-25 d-flex justify-content-end">경력:</dt>{" "}
+               <dd className="col-9 h-25" id="applicantModalCarrer">
+                1년 미만
+               </dd>
+              </dl>
+              <dl className="col-6">
+               <dt className="mb-3">면허 및 자격</dt>
+               <dd id="applicantModalCert"></dd>
+              </dl>
+              <dl className="col-12 m-auto">
+               <dt className="mb-3">메시지</dt>
+               <dd id="applicantModalMsg">
+                성실함으로 열심히 하겠습니다. 처음이지만 적극적으로!
+               </dd>
+              </dl>
+             </div>
+            </div>
+            <a
+             className="card-footer d-flex align-items-center justify-content-between"
+             href="#"
             >
-             <line x1="5" y1="12" x2="19" y2="12"></line>
-             <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-           </a>
+             차주 상세 보기
+             <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-arrow-right"
+             >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+             </svg>
+            </a>
+           </div>
+          </div>
+          <div className="modal-footer">
+           <button
+            className="btn btn-secondary"
+            type="button"
+            data-dismiss="modal"
+           >
+            닫기
+           </button>
+           <button
+            className="btn badge-warning"
+            id="applicantModalStatusIngBtn"
+            type="button"
+           >
+            연락중
+           </button>
+           <button
+            className="btn badge-success"
+            id="applicantModalStatusCompleteBtn"
+            type="button"
+           >
+            채용확정
+           </button>
+           <button
+            className="btn btn-danger"
+            id="applicantModalStatusRejectBtn"
+            type="button"
+           >
+            채용거절
+           </button>
           </div>
          </div>
-         <div className="modal-footer">
-          <button
-           className="btn btn-secondary"
-           type="button"
-           data-dismiss="modal"
-          >
-           닫기
-          </button>
-          <button
-           className="btn badge-warning"
-           id="applicantModalStatusIngBtn"
-           type="button"
-          >
-           연락중
-          </button>
-          <button
-           className="btn badge-success"
-           id="applicantModalStatusCompleteBtn"
-           type="button"
-          >
-           채용확정
-          </button>
-          <button
-           className="btn btn-danger"
-           id="applicantModalStatusRejectBtn"
-           type="button"
-          >
-           채용거절
-          </button>
-         </div>
         </div>
        </div>
       </div>
-     </div>
-    </main>
+     </main>
+    ) : null}
    </MainStructure>
   );
  }
