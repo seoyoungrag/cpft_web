@@ -21,5 +21,7 @@ public class TruckOwnerDTO implements Serializable{
     private int age;
     private String carrerCn;
     private String carrerDetail;
+    private String phone;
 	private List<TruckDTO> trucks = new ArrayList<TruckDTO>(0);
+	private List<String> crqfcs = new ArrayList<>();
 }

@@ -1,5 +1,10 @@
 package kr.co.teamfresh.cpft.capi.config.modelmap.mapper;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,8 +22,18 @@ public class OrderTruckOwnerEnToDtoMap extends PropertyMap<OrderTruckOwner, Orde
 	protected void configure() {
 		map(source.getOrderTruckOwnerPK().getOrder()).setOrder(null);
 		map(source.getOrderTruckOwnerPK().getTruckOnwer()).setTruckOwner(null);
+		using(ctx -> generateDate( ((OrderTruckOwner)ctx.getSource()).getCreatedAt() )).map(source, destination.getCreatedAt());
+		using(ctx -> generateDate( ((OrderTruckOwner)ctx.getSource()).getModifiedAt() )).map(source, destination.getModifiedAt());
 	}
 
+	private LocalDate generateDate(LocalDateTime createdAt) {
+		if(createdAt==null) {
+			return Instant.now().atZone(ZoneId.of("Asia/Seoul")).toLocalDate();
+		}else {
+		return createdAt.toInstant(ZoneOffset.UTC).atZone(ZoneId.of("Asia/Seoul")).toLocalDate();
+		}
+	}
+	
 	private List<TruckDTO> generateTruck(Set<Truck> trucks) {
 		List<TruckDTO> rtnList = new ArrayList<>();
 		Iterator<Truck> it = trucks.iterator();

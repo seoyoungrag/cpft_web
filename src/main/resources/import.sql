@@ -67,39 +67,51 @@ insert into WORK_GROUP (carrier_seq, work_group_nm, work_group_manager) values (
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('2', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'ahreum.yu', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '유아름', 'ahreum.yu@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('2', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('2', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('2', 30, '1년 미만','1년 미만');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('2', 30, '1년 미만','1년 미만','123-1234-1234');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('2', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('2', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('2', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('2', '0302' ,'0407', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('3', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner1', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '황차주', 'carowner1@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('3', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('3', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('3', 31, '2년','2년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('3', 31, '2년','2년','123-1234-1235');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('3', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('3', '0304' ,'0403', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('3', '0302' ,'0405', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('4', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner2', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '엄차주', 'carowner2@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('4', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('4', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('4', 32, '3년','3년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('4', 32, '3년','3년','123-1234-1236');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('4', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('4', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('4', '0305' ,'0402', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('5', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner3', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '양차주', 'carowner3@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('5', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('5', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('5', 33, '4년','4년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('5', 33, '4년','4년','123-1234-1237');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('5', '1종 대형');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('5', '0306' ,'0403', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('5', '0304' ,'0406', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('6', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner4', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '서차주', 'carowner4@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('6', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('6', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('6', 34, '5년','5년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('6', 34, '5년','5년','123-1234-1238');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('6', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('6', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('6', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('6', '0306' ,'0403', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('7', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner5', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '최차주', 'carowner5@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('7', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('7', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('7', 35, '6년','6년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('7', 35, '6년','6년','123-1234-1239');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('7', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('7', '화물운송자격증 보유');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('7', '0305' ,'0404', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('7', '0310' ,'0409', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('7', '0309' ,'0409', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
@@ -107,31 +119,45 @@ insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIE
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('8', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner6', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '신채주', 'carowner6@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('8', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('8', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('8', 36,  '1년','1년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('8', 36,  '1년','1년','123-1234-1240');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('8', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('8', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('8', '0308' ,'0408', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('9', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner7', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '임차주', 'carowner7@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('9', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('9', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('9', 37, '2년','2년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('9', 37, '2년','2년','123-1234-1241');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('9', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('9', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('9', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('9', '0307' ,'0407', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('10', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner8', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '이차주', 'carowner8@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('10', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('10', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('10', 36,  '3년','3년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('10', 36,  '3년','3년','123-1234-1242');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('10', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('10', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('10', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('10', '0306' ,'0406', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('11', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'carowner9', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '홍차주', 'carowner9@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('11', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('11', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('11', 35,  '6년','6년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('11', 35,  '6년','6년','123-1234-1243');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('11', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('11', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('11', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('11', '0305' ,'0405', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
 insert into user (user_seq, created_at, modified_at, user_login_id, user_login_pw, user_nm,user_email, carrier_seq) values ('12', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'timflabs', '{bcrypt}$2a$10$C85WGE28Oij97u8ydXJjf./J5fsTy3z77HzKwea90IlI4Pmeuiaxu', '팀프랩스', 'develop@timf.co.kr',null);
 insert into user_role (user_seq, role) values ('12', 'ROLE_USER');
 insert into user_role (user_seq, role) values ('12', 'ROLE_TRUCKOWNER');
-insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL") values('12', 34, '5년','5년');
+insert into TRUCK_OWNER ("USER_SEQ", "AGE", "CARRER_CN", "CARRER_DETAIL","PHONE") values('12', 34, '5년','5년','123-1234-1244');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('12', '1종 대형');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('12', '화물운송자격증 보유');
+insert into TRUCK_OWNER_CRQFC ("USER_SEQ", "CRQFC") values('12', '개인사업자');
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('12', '0301' ,'0401', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('12', '0302' ,'0402', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 insert into TRUCK_OWNER_TRUCK (USER_SEQ, CAR_TYPE, TON_TYPE, CREATED_AT, MODIFIED_AT) values ('12', '0303' ,'0403', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
