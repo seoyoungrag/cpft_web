@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class OrderTruckOwnerDTO implements Serializable{
 
-	private String orderSeq;
+	private OrderDTO order;
 	private TruckOwnerDTO truckOwner;
 	private String message;
 	private String status;

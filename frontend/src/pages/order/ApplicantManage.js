@@ -27,7 +27,7 @@ class ApplicantManage extends Component {
  constructor(props) {
   super(props);
   this.state = {
-    orderList: [],
+   orderList: [],
    names: [],
    orderSelecteButtonValue: "",
   };
@@ -45,6 +45,12 @@ class ApplicantManage extends Component {
     });
     this.setState({ orderList });
    }
+  };
+  this._changeOrderBySelect = async (e) => {
+   let { data } = await axios.get(
+    "/v1/order/" + $(e.target).val() + "/truckOwner?start=0&length=30"
+   );
+   console.log(data);
   };
  }
 
@@ -148,9 +154,7 @@ class ApplicantManage extends Component {
  }
 
  render() {
-  const {
-   orderList
-  } = this.state;
+  const { orderList } = this.state;
   return (
    <MainStructure>
     <main>
@@ -185,57 +189,68 @@ class ApplicantManage extends Component {
       <div className="card mb-4">
        <div className="card-header">지원자 관리</div>
        <div className="card-body">
-            <div className="form-row my-2 mb-3">
-             <select
-              className="form-control col-12"
-              id="orderSelecteButton"
-              //onChange={this._changeWorkGroup701}
-             >
-             <option value="all">전체보기</option>
-             {orderList.length > 0
-              ? orderList.map((obj, index) => {
-                var content = 'W'+obj.workGroupNm+'C'+obj.carrierSeq+'U'+obj.userSeq+'O'+obj.orderSeq;
-                content +=
-                this.props.rcritTypeCodes
-                 .filter((e) => {
-                  return e.code == obj.rcritType;
-                 })
-                 .map((r) => {
-                  return r.codeValue;
-                 });
-                 content +=' '+obj.carrierNm
-                 content +=' '
-                 +this.props.tonTypeCodes
+        <div className="form-row my-2 mb-3">
+         <select
+          className="form-control col-12"
+          id="orderSelecteButton"
+          onChange={this._changeOrderBySelect}
+         >
+          <option value="all">전체보기</option>
+          {orderList.length > 0
+           ? orderList.map((obj, index) => {
+              var content =
+               "W" +
+               obj.workGroupNm +
+               "C" +
+               obj.carrierSeq +
+               "U" +
+               obj.userSeq +
+               "O" +
+               obj.orderSeq;
+              content += this.props.rcritTypeCodes
+               .filter((e) => {
+                return e.code == obj.rcritType;
+               })
+               .map((r) => {
+                return r.codeValue;
+               });
+              content += " " + obj.carrierNm;
+              content +=
+               " " +
+               this.props.tonTypeCodes
                 .filter((e) => {
                  return e.code == obj.tonType;
                 })
                 .map((r) => {
                  return r.codeValue;
                 });
-                content +=' '+this.props.carTypeCodes
+              content +=
+               " " +
+               this.props.carTypeCodes
                 .filter((e) => {
                  return e.code == obj.carType;
                 })
                 .map((r) => {
                  return r.codeValue;
                 });
-                content +=' '+(obj.workingDaysType == "fiveDay"
+              content +=
+               " " +
+               (obj.workingDaysType == "fiveDay"
                 ? "주5일"
                 : obj.workingDaysType == "sixDay"
                 ? "주6일"
-                : null)
-                content +=' '+obj.payAmt+' '+obj.detailMatter;
-                 return (
-             <option
-             key={obj.orderSeq}
-              value={obj.orderSeq}
-             >
-              {content}
-             </option>
-                 )}) : null}
-             </select>
-            </div>
-         {/*}
+                : null);
+              content += " " + obj.payAmt + " " + obj.detailMatter;
+              return (
+               <option key={obj.orderSeq} value={obj.orderSeq}>
+                {content}
+               </option>
+              );
+             })
+           : null}
+         </select>
+        </div>
+        {/*}
         <div className="row">
          <div className="col-sm-12 col-md-12">
           <div className="col-12 row h-100">
@@ -1054,15 +1069,15 @@ class ApplicantManage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  codes: state.codes.codes,
-  orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
-  rcritTypeCodes: state.codes.rcritTypeCodes,
-  carTypeCodes: state.codes.carTypeCodes,
-  tonTypeCodes: state.codes.tonTypeCodes,
-  payFullTypeCodes: state.codes.payFullTypeCodes,
-  workDayCodes: state.codes.workDayCodes,
-  token: state.auth.userInfo.token,
-  carrierSeq: state.auth.userInfo.carrierSeq,
-  userSeq: state.auth.userInfo.userSeq,
- });
+ codes: state.codes.codes,
+ orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
+ rcritTypeCodes: state.codes.rcritTypeCodes,
+ carTypeCodes: state.codes.carTypeCodes,
+ tonTypeCodes: state.codes.tonTypeCodes,
+ payFullTypeCodes: state.codes.payFullTypeCodes,
+ workDayCodes: state.codes.workDayCodes,
+ token: state.auth.userInfo.token,
+ carrierSeq: state.auth.userInfo.carrierSeq,
+ userSeq: state.auth.userInfo.userSeq,
+});
 export default connect(mapStateToProps)(ApplicantManage);

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @ApiModel
-public class PageReqRes<T> extends CommonResult implements Pageable {
+public class PageReqRes<T,D> extends CommonResult implements Pageable {
 
 	public int draw;
     @ApiModelProperty(value = "start", example = "0", position = 1)
@@ -27,7 +27,7 @@ public class PageReqRes<T> extends CommonResult implements Pageable {
 	public int length;
     private long recordsTotal;
     private long recordsFiltered;
-    private List<T> data;
+    private List<D> data;
     
     private List<DatatableOrderingVO> order;
 	

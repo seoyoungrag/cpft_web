@@ -45,7 +45,7 @@ public class ResponseService {
 		return result;
 	}
 
-	public <T,D> PageReqRes<D> getPageResult(PageReqRes<D> page, Page<T> list, Class<D> d) {
+	public <T,D> PageReqRes<T,D> getPageResult(PageReqRes<T,D> page, Page<T> list, Class<D> d) {
 		page.setRecordsTotal(list.getTotalElements());
 		page.setRecordsFiltered(list.getTotalElements());
 		List<D> dtoList = ObjectMapperUtils.mapAll(list.getContent(), d);
