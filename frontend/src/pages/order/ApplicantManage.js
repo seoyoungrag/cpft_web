@@ -60,9 +60,7 @@ class ApplicantManage extends Component {
   this._changeOrderBySelect = async (e) => {
    const table = $(this.refs.applicantManageTbl).DataTable();
 
-   table.ajax
-    .url("/v1/order/" + $(e.target).val() + "/truckOwner?start=0&length=10")
-    .load();
+   table.ajax.url("/v1/order/" + $(e.target).val() + "/truckOwner").load();
    this.reloadTableData();
    this.setState({
     orderSelecteButtonValue: $(e.target).val(),
