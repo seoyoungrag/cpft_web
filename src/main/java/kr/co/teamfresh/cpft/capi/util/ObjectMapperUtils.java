@@ -11,7 +11,6 @@ import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.spi.MappingContext;
 
-import kr.co.teamfresh.cpft.capi.config.modelmap.converter.OrderDtoToOrderEnCv;
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderDtoToEnMap;
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderEnToDtoMap;
 import kr.co.teamfresh.cpft.capi.config.modelmap.mapper.OrderTruckOwnerEnToDtoMap;

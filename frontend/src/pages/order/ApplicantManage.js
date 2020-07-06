@@ -65,7 +65,6 @@ class ApplicantManage extends Component {
    this.setState({
     orderSelecteButtonValue: $(e.target).val(),
    });
-   console.log($(e.target).val());
   };
  }
 
@@ -138,10 +137,22 @@ class ApplicantManage extends Component {
      }
      certs += obj;
     });
-
     $(row)
      .unbind()
      .on("click", function () {
+      console.log(data);
+      if (data.isRead == "N") {
+       axios
+        .put(
+         `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/isRead`,
+         {
+          isRead: "Y",
+         }
+        )
+        .then(function (response) {
+         $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+        });
+      }
       $("#applicantModalTitle").text(orderNm);
       $("#applicantModalUserNm").text(data.truckOwner.userNm);
       $("#applicantModalUserPhone").text(data.truckOwner.phone);
@@ -149,21 +160,85 @@ class ApplicantManage extends Component {
       $("#applicantModalCarrer").text(data.carrerCn);
       $("#applicantModalCert").html(certs);
       $("#applicantModalMsg").text(data.message);
-      /*
-      if(data.status=='0801'){
-        $("#applicantModalStatusIngBtn").show();
-        $("#applicantModalStatusCompleteBtn").show();
-        $("#applicantModalStatusRejectBtn").show();
-      }else if(data.status=='0802'){
-        $("#applicantModalStatusIngBtn").show();
-        $("#applicantModalStatusCompleteBtn").show();
-        $("#applicantModalStatusRejectBtn").show();
-      }else{
-        $("#applicantModalStatusIngBtn").show();
-        $("#applicantModalStatusCompleteBtn").show();
-        $("#applicantModalStatusRejectBtn").show();
+      console.log(data.order.orderSeq);
+      console.log(data.truckOwner.userSeq);
+      $("#applicantModalStatusIngBtn").data("orderSeq", data.order.orderSeq);
+      $("#applicantModalStatusIngBtn").data("userSeq", data.truckOwner.userSeq);
+      $("#applicantModalStatusIngBtn")
+       .unbind()
+       .on("click", function () {
+        axios
+         .put(
+          `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+          {
+           status: "0801",
+          }
+         )
+         .then(function (response) {
+          $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+          $("#applicantModal").modal("hide");
+         });
+       });
+
+      $("#applicantModalStatusCompleteBtn").data(
+       "orderSeq",
+       data.order.orderSeq
+      );
+      $("#applicantModalStatusCompleteBtn").data(
+       "userSeq",
+       data.truckOwner.userSeq
+      );
+
+      $("#applicantModalStatusCompleteBtn")
+       .unbind()
+       .on("click", function () {
+        axios
+         .put(
+          `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+          {
+           status: "0802",
+          }
+         )
+         .then(function (response) {
+          $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+          $("#applicantModal").modal("hide");
+         });
+       });
+
+      $("#applicantModalStatusRejectBtn").data("orderSeq", data.order.orderSeq);
+      $("#applicantModalStatusRejectBtn").data(
+       "userSeq",
+       data.truckOwner.userSeq
+      );
+      $("#applicantModalStatusRejectBtn")
+       .unbind()
+       .on("click", function () {
+        axios
+         .put(
+          `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+          {
+           status: "0803",
+          }
+         )
+         .then(function (response) {
+          $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+          $("#applicantModal").modal("hide");
+         });
+       });
+
+      if (data.status == "0801") {
+       $("#applicantModalStatusIngBtn").hide();
+       $("#applicantModalStatusCompleteBtn").show();
+       $("#applicantModalStatusRejectBtn").show();
+      } else if (data.status == "0802") {
+       $("#applicantModalStatusIngBtn").show();
+       $("#applicantModalStatusCompleteBtn").hide();
+       $("#applicantModalStatusRejectBtn").show();
+      } else {
+       $("#applicantModalStatusIngBtn").show();
+       $("#applicantModalStatusCompleteBtn").show();
+       $("#applicantModalStatusRejectBtn").hide();
       }
-      */
       $("#applicantModal").modal();
      });
    },
@@ -532,14 +607,14 @@ class ApplicantManage extends Component {
            닫기
           </button>
           <button
-           className="btn btn-info"
+           className="btn badge-warning"
            id="applicantModalStatusIngBtn"
            type="button"
           >
            연락중
           </button>
           <button
-           className="btn btn-primary"
+           className="btn badge-success"
            id="applicantModalStatusCompleteBtn"
            type="button"
           >

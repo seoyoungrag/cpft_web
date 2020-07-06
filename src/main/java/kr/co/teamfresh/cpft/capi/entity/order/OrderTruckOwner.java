@@ -24,6 +24,12 @@ public class OrderTruckOwner extends CommonDateEntity implements Serializable{
 	@EmbeddedId
 	private OrderTruckOwnerPK orderTruckOwnerPK;
 
+	@Column(nullable = false, name="ORDER_SEQ", insertable = false, updatable = false)
+	private String orderSeq;
+
+	@Column(nullable = false, name="USER_SEQ", insertable = false, updatable = false)
+	private String userSeq;
+	
 	@Column(nullable = false, length = 100, name="MESSAGE")
 	private String message;
 
