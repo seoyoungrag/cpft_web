@@ -95,7 +95,7 @@ class ApplicantManage extends Component {
     }
    }
   });
-
+/*
   const COM = this;
   const table = $(this.refs.applicantManageTbl).DataTable({
    createdRow: function (row, data) {
@@ -346,7 +346,264 @@ class ApplicantManage extends Component {
     },
    },
   });
+  */
  }
+ componentDidUpdate(prevProps) {
+  // 전형적인 사용 사례 (props 비교를 잊지 마세요)
+  if (this.props.carTypeCodes  && this.props.tonTypeCodes && !$.fn.DataTable.isDataTable(this.refs.applicantManageTbl)) {
+    const COM = this;
+    const table = $(this.refs.applicantManageTbl).DataTable({
+     createdRow: function (row, data) {
+      var obj = data;
+      var orderNm =
+       "W" +
+       obj.order.workGroupNm +
+       "C" +
+       obj.order.carrierSeq +
+       "U" +
+       obj.order.userSeq +
+       "O" +
+       obj.order.orderSeq;
+  
+      var carAndTon = "";
+      data.truckOwner.trucks.map((obj, index) => {
+       if (index > 0) {
+        carAndTon += "</br>";
+       }
+       var car = obj.carType;
+       car = COM.props.carTypeCodes.filter((obj, index) => {
+        if (obj.code == car) {
+         return true;
+        }
+       })[0].codeValue;
+       var ton = obj.tonType;
+       ton = COM.props.tonTypeCodes.filter((obj, index) => {
+        if (obj.code == ton) {
+         return true;
+        }
+       })[0].codeValue;
+       carAndTon += car + " " + ton;
+      });
+  
+      var certs = "";
+      data.truckOwner.crqfcs.map((obj, index) => {
+       if (index > 0) {
+        certs += "</br>";
+       }
+       certs += obj;
+      });
+      $(row)
+       .unbind()
+       .on("click", function () {
+        if (data.isRead == "N") {
+         axios
+          .put(
+           `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/isRead`,
+           {
+            isRead: "Y",
+           }
+          )
+          .then(function (response) {
+           $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+          });
+        }
+        $("#applicantModalTitle").text(orderNm);
+        $("#applicantModalUserNm").text(data.truckOwner.userNm);
+        $("#applicantModalUserPhone").text(data.truckOwner.phone);
+        $("#applicantModalCarAndTon").html(carAndTon);
+        $("#applicantModalCarrer").text(data.carrerCn);
+        $("#applicantModalCert").html(certs);
+        $("#applicantModalMsg").text(data.message);
+        $("#applicantModalStatusIngBtn").data("orderSeq", data.order.orderSeq);
+        $("#applicantModalStatusIngBtn").data("userSeq", data.truckOwner.userSeq);
+        $("#applicantModalStatusIngBtn")
+         .unbind()
+         .on("click", function () {
+          axios
+           .put(
+            `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+            {
+             status: "0801",
+            }
+           )
+           .then(function (response) {
+            $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+            $("#applicantModal").modal("hide");
+           });
+         });
+  
+        $("#applicantModalStatusCompleteBtn").data(
+         "orderSeq",
+         data.order.orderSeq
+        );
+        $("#applicantModalStatusCompleteBtn").data(
+         "userSeq",
+         data.truckOwner.userSeq
+        );
+  
+        $("#applicantModalStatusCompleteBtn")
+         .unbind()
+         .on("click", function () {
+          axios
+           .put(
+            `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+            {
+             status: "0802",
+            }
+           )
+           .then(function (response) {
+            $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+            $("#applicantModal").modal("hide");
+           });
+         });
+  
+        $("#applicantModalStatusRejectBtn").data("orderSeq", data.order.orderSeq);
+        $("#applicantModalStatusRejectBtn").data(
+         "userSeq",
+         data.truckOwner.userSeq
+        );
+        $("#applicantModalStatusRejectBtn")
+         .unbind()
+         .on("click", function () {
+          axios
+           .put(
+            `/v1/order/${data.order.orderSeq}/truckOwner/${data.truckOwner.userSeq}/status`,
+            {
+             status: "0803",
+            }
+           )
+           .then(function (response) {
+            $(COM.refs.applicantManageTbl).DataTable().ajax.reload(null, false);
+            $("#applicantModal").modal("hide");
+           });
+         });
+  
+        if (data.status == "0801") {
+         $("#applicantModalStatusIngBtn").hide();
+         $("#applicantModalStatusCompleteBtn").show();
+         $("#applicantModalStatusRejectBtn").show();
+        } else if (data.status == "0802") {
+         $("#applicantModalStatusIngBtn").show();
+         $("#applicantModalStatusCompleteBtn").hide();
+         $("#applicantModalStatusRejectBtn").show();
+        } else {
+         $("#applicantModalStatusIngBtn").show();
+         $("#applicantModalStatusCompleteBtn").show();
+         $("#applicantModalStatusRejectBtn").hide();
+        }
+        $("#applicantModal").modal();
+       });
+     },
+     language: DataTable_language,
+     columnDefs: [
+      {
+       defaultContent: "-",
+       targets: "_all",
+      },
+      {
+       targets: [0],
+       createdCell: function (td, cellData, rowData, row, col) {
+        var obj = rowData;
+        var content =
+         "W" +
+         obj.order.workGroupNm +
+         "C" +
+         obj.order.carrierSeq +
+         "U" +
+         obj.order.userSeq +
+         "O" +
+         obj.order.orderSeq;
+        $(td).text(content);
+       },
+      },
+      {
+       targets: [1],
+       createdCell: function (td, cellData, rowData, row, col) {
+        $(td).text(cellData.userNm + "/" + cellData.age);
+       },
+      },
+      {
+       targets: [2],
+       createdCell: function (td, cellData, rowData, row, col) {
+        var content = "";
+        cellData.sort(function (a, b) {
+         // 오름차순
+         return a.carType < b.carType ? -1 : a.carType > b.carType ? 1 : 0;
+         // 광희, 명수, 재석, 형돈
+        });
+        cellData.map((obj, index) => {
+         if (index > 0) {
+          content += "</p>";
+         }
+         var car = obj.carType;
+         car = COM.props.carTypeCodes.filter((obj, index) => {
+          if (obj.code == car) {
+           return true;
+          }
+         })[0].codeValue;
+         var ton = obj.tonType;
+         ton = COM.props.tonTypeCodes.filter((obj, index) => {
+          if (obj.code == ton) {
+           return true;
+          }
+         })[0].codeValue;
+         content += car + " " + ton;
+        });
+        $(td).html(content);
+       },
+      },
+      {
+       targets: [6],
+       createdCell: function (td, cellData, rowData, row, col) {
+        if (cellData == "Y") {
+         $(td).html('<div class="badge badge-primary badge-pill">열람</div>');
+        } else {
+         $(td).html('<div class="badge badge-secondary badge-pill">미열람</div>');
+        }
+       },
+      },
+      {
+       targets: [7],
+       createdCell: function (td, cellData, rowData, row, col) {
+        if (cellData == "0801") {
+         $(td).html('<div class="badge badge-warning badge-pill">연락중</div>');
+        } else if (cellData == "0802") {
+         $(td).html('<div class="badge badge-success badge-pill">채용확정</div>');
+        } else {
+         $(td).html('<div class="badge badge-danger badge-pill">채용거절</div>');
+        }
+        //$(td).text(cellData.userNm + "/" + cellData.age);
+       },
+      },
+     ],
+     processing: true,
+     serverSide: true,
+     responsive: true,
+     autoWidth: false,
+     width: "100%",
+     paging: true,
+     ordering: false,
+     select: false,
+     dom:
+      "<'row'<'col-sm-12'rt>>" +
+      "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+     data: this.state.DataTable,
+     columns,
+     ordering: false,
+     ajax: {
+      url: "/v1/order/" + $("#orderSelecteButton").val() + "/truckOwner",
+  
+      type: "GET",
+      data: function (d) {
+       delete d.columns;
+  
+       return d;
+      },
+     },
+    });
+   
+  }
+}
  componentWillUnmount() {
   $(".data-table-wrapper").find("table").DataTable().destroy(true);
  }
