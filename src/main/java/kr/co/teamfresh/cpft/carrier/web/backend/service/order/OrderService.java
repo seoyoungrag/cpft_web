@@ -56,12 +56,12 @@ public class OrderService {
 	}
 	*/
 
-	public Page<OrderTruckOwner> listOrderTruckOwnerByStatusOrderByOrderSeq(String status, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
-		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusOrderByOrderTruckOwnerPKOrderOrderSeq(status, pageable);
+	public Page<OrderTruckOwner> listOrderTruckOwnerByStatusOrderByCreatedAt(String status, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
+		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusOrderByCreatedAtAscOrderSeqAscUserSeqAsc(status, pageable);
 	}
 
-	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderAndStatusByOrderSeq(String status, String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
-		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByOrderTruckOwnerPKOrderOrderSeq(status, orderSeq, pageable);
+	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(String status, String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
+		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByCreatedAtAscOrderSeqAscUserSeqAsc(status, orderSeq, pageable);
 	}
 	
 }

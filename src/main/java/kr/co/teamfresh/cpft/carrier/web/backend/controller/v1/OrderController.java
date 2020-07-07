@@ -80,11 +80,11 @@ public class OrderController {
 	public PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> listOrderTruckOwnerBydOrderSeq(@PathVariable String orderSeq,@PathVariable String status,
 			@ApiParam(value = "오더 지원자 페이징 정보", required = true) @ModelAttribute PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> page) {
 		if (orderSeq.equals("all")) {
-			return responseService.getPageResult(page, orderService.listOrderTruckOwnerByStatusOrderByOrderSeq(status, page),
+			return responseService.getPageResult(page, orderService.listOrderTruckOwnerByStatusOrderByCreatedAt(status, page),
 					OrderTruckOwnerForApplicationListDTO.class);
 		} else {
 			return responseService.getPageResult(page,
-					orderService.listOrderTruckOwnerByOrderSeqOrderAndStatusByOrderSeq(status, orderSeq, page),
+					orderService.listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(status, orderSeq, page),
 					OrderTruckOwnerForApplicationListDTO.class);
 		}
 	}
