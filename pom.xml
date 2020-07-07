@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.teamfresh.cpft</groupId>
-	<artifactId>cadmin</artifactId>
+	<artifactId>carrier.web.backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>cadmin</name>
-	<description>cargo platform for truck api server(capi)</description>
+	<name>CarrierWeb</name>
+	<description>cargo platform for truck, carrier Web(CarrierWeb)</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
