@@ -10,6 +10,9 @@ class OrderManageItem extends Component {
 
  render() {
   const { obj, tabType, getCarrierOrders } = this.props;
+  if(obj.status=='0702'){
+  console.log(obj);
+  }
   this.modalClickUpdate = (obj, tabType) => {
    console.log("#updateModalPopup" + obj.orderSeq + tabType);
    $("#updateModalPopup" + obj.orderSeq + tabType).modal("hide");
@@ -170,25 +173,25 @@ class OrderManageItem extends Component {
           <li className="w-25">
            <strong className="stepTit">지원자</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            1
+             {obj.orderTruckOwners.length}
            </a>
           </li>
           <li className="apyStatusNotRead w-25">
            <strong className="stepTit">열람</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            0
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.isRead=='Y').length}
            </a>
           </li>
           <li className="on w-25">
            <strong className="stepTit">연락중</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            1
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.status=='0801').length}
            </a>
           </li>
           <li className="w-25">
            <strong className="stepTit">최종합격</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            0
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.status=='0802').length}
            </a>
           </li>
          </ul>
@@ -201,25 +204,25 @@ class OrderManageItem extends Component {
           <li className="w-25">
            <strong className="stepTit">지원자</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            1
+             {obj.orderTruckOwners.length}
            </a>
           </li>
           <li className="apyStatusNotRead w-25">
            <strong className="stepTit">열람</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            0
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.isRead=='Y').length}
            </a>
           </li>
           <li className="on w-25">
            <strong className="stepTit">연락중</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            1
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.status=='0801').length}
            </a>
           </li>
           <li className="w-25">
            <strong className="stepTit">최종합격</strong>
            <a href="#" className="itemNum tahoma devLinkExpire" data-pts="-77">
-            0
+            {obj.orderTruckOwners.filter((obj,idx)=>obj.status=='0802').length}
            </a>
           </li>
          </ul>

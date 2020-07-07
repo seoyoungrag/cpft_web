@@ -85,7 +85,6 @@ class OrderManage extends Component {
  }
 
  componentDidMount() {
-  this._getCarrierOrders();
   attachJiraIssueColletor();
   // Activate Bootstrap scrollspy for the sticky nav component
   $("body").scrollspy({
@@ -111,6 +110,9 @@ class OrderManage extends Component {
     }
    }
   });
+  this._getCarrierOrders();
+ }
+ componentDidUpdate() {
  }
  componentWillUnmount() {
   $(".data-table-wrapper").find("table").DataTable().destroy(true);

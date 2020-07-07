@@ -1,7 +1,9 @@
 package kr.co.teamfresh.cpft.carrier.web.backend.dto.order;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import kr.co.teamfresh.cpft.carrier.web.backend.dto.CommonDate;
 import lombok.Data;
@@ -33,4 +35,5 @@ public class OrderDTO extends CommonDate {
 	private String detailMatter;
 	private String status;
 	private String workingAreaEtc;
+	private Set<OrderTruckOwnerForOrderManageDTO> orderTruckOwners = new HashSet<OrderTruckOwnerForOrderManageDTO>(0);
 }
