@@ -13,11 +13,11 @@ import "vendor/datatables/jquery.dataTables.min.js";
 import { Component } from "react";
 
 const columns = [
- { title: "운송그룹", data: "orders", width: "15%" },
- { title: "담당자", data: "orders", width: "15%" },
+ { title: "운송그룹", data: "ordersComplete", width: "15%" },
+ { title: "담당자", data: "ordersComplete", width: "15%" },
  { title: "차주명", data: "userNm", width: "15%" },
- { title: "근무 현황", data: "orders", width: "20%" },
- { title: "근무일", data: "orders", width: "20%" },
+ { title: "근무 현황", data: "ordersComplete", width: "20%" },
+ { title: "근무일", data: "ordersComplete", width: "20%" },
  { title: "연락처", data: "phone", width: "15%" },
 ];
 
@@ -120,9 +120,9 @@ class TruckOwnerList extends Component {
         if (cellData.length > 0 && index > 0) {
          status += "</br>";
         }
-        if (obj.order.status == "0701") {
+        if (obj.status == "0801") {
          status += "연락중";
-        } else if (obj.order.status == "0702") {
+        } else if (obj.status == "0802") {
          status += "근무중";
         } else {
          status += "탈락";
@@ -175,7 +175,7 @@ class TruckOwnerList extends Component {
     columns,
     ordering: false,
     ajax: {
-     url: "/v1/truckOwner",
+     url: "/v1/truckOwner/order/status/0702/orderTruckOwner/status/0802",
 
      type: "GET",
      data: function (d) {

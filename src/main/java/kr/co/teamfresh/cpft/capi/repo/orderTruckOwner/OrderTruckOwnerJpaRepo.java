@@ -9,7 +9,7 @@ import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwnerPK;
 
 public interface OrderTruckOwnerJpaRepo extends JpaRepository<OrderTruckOwner, OrderTruckOwnerPK> {
 
-	Page<OrderTruckOwner> findAllByOrderByOrderTruckOwnerPKOrderOrderSeq(Pageable pageable);
-	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderOrderSeqOrderByOrderTruckOwnerPKOrderOrderSeq(String orderSeq, Pageable pageable);
+	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderStatusOrderByOrderTruckOwnerPKOrderOrderSeq(String status, Pageable pageable);
+	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByOrderTruckOwnerPKOrderOrderSeq(String status, String orderSeq, Pageable pageable);
 
 }

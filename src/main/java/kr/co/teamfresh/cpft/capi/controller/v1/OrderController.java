@@ -65,23 +65,30 @@ public class OrderController {
 		return responseService.getSingleResult(orderService.saveOrder(ObjectMapperUtils.map(order, Order.class)));
 	}
 
-	@ApiOperation(value = "오더 조회", notes = "사용자 운송사의 오더를 조회한다.")
+	@ApiOperation(value = "모든 오더 조회", notes = "사용자 운송사의 모든 오더를 조회한다.")
 	@GetMapping("/carrier/{carrierSeq}")
 	public ListResult<OrderDTO> listOrderByCarrierId(@RequestHeader("X-AUTH-TOKEN") String token,
 			@PathVariable String carrierSeq) {
 		return responseService.getListResult(orderService.findAllByCarrierSeq(carrierSeq));
 	}
+	
+	@ApiOperation(value = "특정 오더 조회", notes = "사용자 운송사의 진행상테에 대한 오더를 조회한다.")
+	@GetMapping("/carrier/{carrierSeq}/order/status/{status}")
+	public ListResult<OrderDTO> listOrderByCarrierIdAndStatus(@RequestHeader("X-AUTH-TOKEN") String token,
+			@PathVariable String carrierSeq, @PathVariable String status) {
+		return responseService.getListResult(orderService.findAllByCarrierSeqAndStatus(carrierSeq, status));
+	}
 
 	@ApiOperation(value = "오더의 지원자(차주) 조회", notes = "오더의 지원자들을 조회한다.")
-	@GetMapping("/{orderSeq}/truckOwner")
-	public PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> listOrderTruckOwnerBydOrderSeq(@PathVariable String orderSeq,
+	@GetMapping("/{orderSeq}/status/{status}/truckOwner")
+	public PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> listOrderTruckOwnerBydOrderSeq(@PathVariable String orderSeq,@PathVariable String status,
 			@ApiParam(value = "오더 지원자 페이징 정보", required = true) @ModelAttribute PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> page) {
 		if (orderSeq.equals("all")) {
-			return responseService.getPageResult(page, orderService.listOrderTruckOwnerOrderByOrderSeq(page),
+			return responseService.getPageResult(page, orderService.listOrderTruckOwnerByStatusOrderByOrderSeq(status, page),
 					OrderTruckOwnerForApplicationListDTO.class);
 		} else {
 			return responseService.getPageResult(page,
-					orderService.listOrderTruckOwnerByOrderSeqOrderByOrderSeq(orderSeq, page),
+					orderService.listOrderTruckOwnerByOrderSeqOrderAndStatusByOrderSeq(status, orderSeq, page),
 					OrderTruckOwnerForApplicationListDTO.class);
 		}
 	}

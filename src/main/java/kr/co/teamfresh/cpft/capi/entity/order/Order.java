@@ -129,7 +129,9 @@ public class Order extends CommonDateEntity implements Serializable {
 	@JoinColumn(name = "CARRIER_SEQ", insertable = false, updatable = false, nullable = false)
 	@JsonManagedReference
 	private Carrier carrier;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.order")
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.order")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="ORDER_SEQ")
 	private Set<OrderTruckOwner> orderTruckOwners = new HashSet<OrderTruckOwner>(0);
 
 }

@@ -25,5 +25,6 @@ public class TruckOwnerForTruckOwnerListDTO implements Serializable{
     private String phone;
 	private List<TruckDTO> trucks = new ArrayList<TruckDTO>(0);
 	private List<String> crqfcs = new ArrayList<>(0);
-	private List<OrderTruckOwnerForTruckOwnerListDTO> orders = new ArrayList<OrderTruckOwnerForTruckOwnerListDTO>(0);
+	private List<OrderTruckOwnerForTruckOwnerListDTO> ordersComplete = new ArrayList<OrderTruckOwnerForTruckOwnerListDTO>(0);
+	//private List<OrderTruckOwnerForTruckOwnerListDTO> ordersComplete = new ArrayList<OrderTruckOwnerForTruckOwnerListDTO>(0);
 }

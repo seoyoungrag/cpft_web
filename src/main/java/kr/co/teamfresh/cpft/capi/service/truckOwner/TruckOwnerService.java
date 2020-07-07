@@ -5,7 +5,6 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerForApplicationListDTO;
 import kr.co.teamfresh.cpft.capi.config.dto.truckOwner.TruckOwnerForTruckOwnerListDTO;
 import kr.co.teamfresh.cpft.capi.entity.TruckOwner;
 import kr.co.teamfresh.cpft.capi.model.response.PageReqRes;
@@ -25,6 +24,10 @@ public class TruckOwnerService {
 
 	public Page<TruckOwner> findAllByOrderByUserUserSeq(PageReqRes<TruckOwner, TruckOwnerForTruckOwnerListDTO> page) {
 		return truckOwnerJpaRepo.findAllByOrderByUserUserSeq(page);
+	}
+
+	public Page<TruckOwner> findAllByOrderTruckOwnerStatusAndOrderStatusOrderByUserUserSeq(String orderTruckOwnerStatus, String orderStatus, PageReqRes<TruckOwner, TruckOwnerForTruckOwnerListDTO> page) {
+		return truckOwnerJpaRepo.findAllByOrdersStatusAndOrdersOrderTruckOwnerPKOrderStatusOrderByUserUserSeq(orderTruckOwnerStatus, orderStatus, page);
 	}
 	
 }

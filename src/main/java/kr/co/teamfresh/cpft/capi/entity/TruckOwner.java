@@ -17,9 +17,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.Where;
+
 import kr.co.teamfresh.cpft.capi.entity.order.OrderTruckOwner;
-import lombok.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,6 +60,10 @@ public class TruckOwner {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.truckOnwer")
 	private Set<OrderTruckOwner> orders = new HashSet<OrderTruckOwner>(0);
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orderTruckOwnerPK.truckOnwer")
+    @Where(clause = "status = '0802'")
+	private Set<OrderTruckOwner> ordersComplete = new HashSet<OrderTruckOwner>(0);
 	
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(

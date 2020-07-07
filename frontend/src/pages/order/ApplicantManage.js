@@ -44,7 +44,7 @@ class ApplicantManage extends Component {
   };
   this._getCarrierOrders = async () => {
    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-   let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq, {
+   let { data } = await axios.get("/v1/order/carrier/" + userInfo.carrierSeq+"/order/status/0701", {
     headers: {
      "Content-Type": "application/json",
      "X-AUTH-TOKEN": userInfo.token,
@@ -60,7 +60,7 @@ class ApplicantManage extends Component {
   this._changeOrderBySelect = async (e) => {
    const table = $(this.refs.applicantManageTbl).DataTable();
 
-   table.ajax.url("/v1/order/" + $(e.target).val() + "/truckOwner").load();
+   table.ajax.url("/v1/order/" + $(e.target).val() + "/status/0701/truckOwner").load();
    this.reloadTableData();
    this.setState({
     orderSelecteButtonValue: $(e.target).val(),
@@ -339,7 +339,7 @@ class ApplicantManage extends Component {
      columns,
      ordering: false,
      ajax: {
-      url: "/v1/order/" + $("#orderSelecteButton").val() + "/truckOwner",
+      url: "/v1/order/" + $("#orderSelecteButton").val() + "/status/0701/truckOwner",
   
       type: "GET",
       data: function (d) {

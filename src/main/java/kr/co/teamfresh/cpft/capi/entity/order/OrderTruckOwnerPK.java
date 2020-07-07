@@ -17,12 +17,12 @@ import lombok.Data;
 @Embeddable
 public class OrderTruckOwnerPK implements Serializable {
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "ORDER_SEQ", nullable = false)
 	@JsonProperty(access = Access.READ_ONLY)
 	private Order order;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "USER_SEQ", nullable = false)
 	@JsonProperty(access = Access.READ_ONLY)
 	private TruckOwner truckOnwer;

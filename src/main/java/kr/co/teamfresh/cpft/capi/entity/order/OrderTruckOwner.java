@@ -2,10 +2,22 @@ package kr.co.teamfresh.cpft.capi.entity.order;
 
 import java.io.Serializable;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
 import lombok.AllArgsConstructor;
@@ -38,4 +50,5 @@ public class OrderTruckOwner extends CommonDateEntity implements Serializable{
 
 	@Column(nullable = false, length = 100, name="IS_READ")
 	private String isRead;
+	
 }

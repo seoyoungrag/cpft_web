@@ -11,7 +11,7 @@ import kr.co.teamfresh.cpft.capi.entity.order.Order;
 public interface OrderJpaRepo extends JpaRepository<Order, String> {
 
 	List<Order> findAllByCarrierCarrierSeqOrderByOrderSeq(String carrierSeq);
-
+	List<Order> findAllByCarrierCarrierSeqAndStatusOrderByOrderSeq(String carrierSeq, String status);
 	Page<Order> findAllByCarrierCarrierSeqAndOrderSeqOrderByOrderSeq(String carrierSeq, String orderSeq, Pageable pageable);
 
 }
