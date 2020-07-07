@@ -1,12 +1,14 @@
 package kr.co.teamfresh.cpft.capi.config.dto.carrier;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroupPK;
 import lombok.Data;
 
 @Data
 public class WorkGroupDTO implements Serializable {
-	private WorkGroupPK workGroupPk;
-	private String workGroupManager;
+	private String carrierSeq;
+	private String workGroupNm;
+	private List<WorkGroupManagerDTO> workGroupManagers = new ArrayList<WorkGroupManagerDTO>();
 }

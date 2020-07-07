@@ -306,12 +306,8 @@ class OrderManage extends Component {
               {workGroups.length > 0
                ? workGroups.map((obj, index) => {
                   return (
-                   <option
-                    key={obj.workGroupPk.workGroupNm}
-                    value={obj.workGroupPk.workGroupNm}
-                    data-manager={obj.workGroupManager}
-                   >
-                    {obj.workGroupPk.workGroupNm}
+                   <option key={obj.workGroupNm} value={obj.workGroupNm}>
+                    {obj.workGroupNm}
                    </option>
                   );
                  })
@@ -363,12 +359,8 @@ class OrderManage extends Component {
               {workGroups.length > 0
                ? workGroups.map((obj, index) => {
                   return (
-                   <option
-                    key={obj.workGroupPk.workGroupNm}
-                    value={obj.workGroupPk.workGroupNm}
-                    data-manager={obj.workGroupManager}
-                   >
-                    {obj.workGroupPk.workGroupNm}
+                   <option key={obj.workGroupNm} value={obj.workGroupNm}>
+                    {obj.workGroupNm}
                    </option>
                   );
                  })
@@ -419,12 +411,8 @@ class OrderManage extends Component {
               {workGroups.length > 0
                ? workGroups.map((obj, index) => {
                   return (
-                   <option
-                    key={obj.workGroupPk.workGroupNm}
-                    value={obj.workGroupPk.workGroupNm}
-                    data-manager={obj.workGroupManager}
-                   >
-                    {obj.workGroupPk.workGroupNm}
+                   <option key={obj.workGroupNm} value={obj.workGroupNm}>
+                    {obj.workGroupNm}
                    </option>
                   );
                  })
@@ -486,12 +474,8 @@ class OrderManage extends Component {
               {workGroups.length > 0
                ? workGroups.map((obj, index) => {
                   return (
-                   <option
-                    key={obj.workGroupPk.workGroupNm}
-                    value={obj.workGroupPk.workGroupNm}
-                    data-manager={obj.workGroupManager}
-                   >
-                    {obj.workGroupPk.workGroupNm}
+                   <option key={obj.workGroupNm} value={obj.workGroupNm}>
+                    {obj.workGroupNm}
                    </option>
                   );
                  })

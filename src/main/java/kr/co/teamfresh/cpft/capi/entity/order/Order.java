@@ -34,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import kr.co.teamfresh.cpft.capi.entity.Carrier;
 import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroup;
+import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroupManager;
 import kr.co.teamfresh.cpft.capi.entity.common.CommonDateEntity;
 
 import kr.co.teamfresh.cpft.capi.config.dto.order.OrderDTO;
@@ -42,7 +43,6 @@ import kr.co.teamfresh.cpft.capi.entity.User;
 import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroup;
 import kr.co.teamfresh.cpft.capi.entity.carrier.WorkGroupPK;
 import kr.co.teamfresh.cpft.capi.entity.order.Order;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -65,7 +65,8 @@ public class Order extends CommonDateEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "WORK_GROUP_NM", referencedColumnName = "WORK_GROUP_NM", nullable = false)
 	@JoinColumn(name = "CARRIER_SEQ", referencedColumnName = "CARRIER_SEQ", nullable = false)
-	private WorkGroup workGroup;
+	@JoinColumn(name = "WORK_GROUP_MANAGER_NM", referencedColumnName = "WORK_GROUP_MANAGER_NM", nullable = false)
+	private WorkGroupManager workGroupManager;
 	@Column(nullable = false, length = 200, name="RCRIT_TYPE")
 	private String rcritType;
 	@Column(nullable = false, length = 200, name="RCRIT_MANS")

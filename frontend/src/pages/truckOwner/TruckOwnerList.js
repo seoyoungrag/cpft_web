@@ -13,32 +13,32 @@ import "vendor/datatables/jquery.dataTables.min.js";
 import { Component } from "react";
 
 const columns = [
-    { title: "운송그룹", data: "orders", width: "15%" },
-    { title: "담당자", data: "orders", width: "15%" },
-    { title: "차주명", data: "userNm", width: "15%" },
-    { title: "근무 현황", data: "orders", width: "20%" },
-    { title: "근무일", data: "orders", width: "20%" },
-    { title: "연락처", data: "phone", width: "15%" },
-   ];
+ { title: "운송그룹", data: "orders", width: "15%" },
+ { title: "담당자", data: "orders", width: "15%" },
+ { title: "차주명", data: "userNm", width: "15%" },
+ { title: "근무 현황", data: "orders", width: "20%" },
+ { title: "근무일", data: "orders", width: "20%" },
+ { title: "연락처", data: "phone", width: "15%" },
+];
 
-   const DataTable_language = {
-    decimal: ",",
-    thousands: ".",
-    paginate: {
-     first: "",
-     last: "",
-     previous: "<",
-     next: ">",
-    },
-    processing: "처리 중 입니다.",
-    emptyTable: "처리할 내용이 없습니다.",
-    info: "총 _PAGES_페이지/_TOTAL_개 중 (_START_ ~ _END_) ",
-   };
+const DataTable_language = {
+ decimal: ",",
+ thousands: ".",
+ paginate: {
+  first: "",
+  last: "",
+  previous: "<",
+  next: ">",
+ },
+ processing: "처리 중 입니다.",
+ emptyTable: "처리할 내용이 없습니다.",
+ info: "총 _PAGES_페이지/_TOTAL_개 중 (_START_ ~ _END_) ",
+};
 class TruckOwnerList extends Component {
  constructor(props) {
   super(props);
   this.state = {
-   startRendering: ''
+   startRendering: "",
   };
  }
  componentDidMount() {
@@ -68,120 +68,124 @@ class TruckOwnerList extends Component {
    }
   });
   this.setState({
-    startRendering: 1
-  })
+   startRendering: 1,
+  });
  }
  componentDidUpdate(prevProps) {
-    if (this.props.carTypeCodes  && this.props.tonTypeCodes && !$.fn.DataTable.isDataTable(this.refs.truckOwnerListTbl)) {
-      const COM = this;
-      const table = $(this.refs.truckOwnerListTbl).DataTable({
-        createdRow: function (row, data) {
-        },
-        language: DataTable_language,
-        columnDefs: [
-         {
-          defaultContent: "-",
-          targets: "_all",
-         },
-         {
-          targets: [0],
-          createdCell: function (td, cellData, rowData, row, col) {
-              var workGroup = '';
-              cellData.map((obj, index) => {
-             if (cellData.length> 0 && index > 0) {
-              workGroup += "</br>";
-             }
-             workGroup += obj.order.workGroupNm;
-            });
-           $(td).html(workGroup);
-          },
-         },
-         {
-          targets: [1],
-          createdCell: function (td, cellData, rowData, row, col) {
-            var manager = '';
-            cellData.map((obj, index) => {
-           if (cellData.length> 0 && index > 0) {
-            manager += "</br>";
+  if (
+   this.props.carTypeCodes &&
+   this.props.tonTypeCodes &&
+   !$.fn.DataTable.isDataTable(this.refs.truckOwnerListTbl)
+  ) {
+   const COM = this;
+   const table = $(this.refs.truckOwnerListTbl).DataTable({
+    createdRow: function (row, data) {},
+    language: DataTable_language,
+    columnDefs: [
+     {
+      defaultContent: "-",
+      targets: "_all",
+     },
+     {
+      targets: [0],
+      createdCell: function (td, cellData, rowData, row, col) {
+       var workGroup = "";
+       cellData.map((obj, index) => {
+        if (cellData.length > 0 && index > 0) {
+         workGroup += "</br>";
+        }
+        workGroup += obj.order.workGroupNm;
+       });
+       $(td).html(workGroup);
+      },
+     },
+     {
+      targets: [1],
+      createdCell: function (td, cellData, rowData, row, col) {
+       var manager = "";
+       cellData.map((obj, index) => {
+        if (cellData.length > 0 && index > 0) {
+         manager += "</br>";
+        }
+        manager += obj.order.workGroupManager;
+       });
+       $(td).html(manager);
+      },
+     },
+     {
+      targets: [3],
+      createdCell: function (td, cellData, rowData, row, col) {
+       var status = "";
+       cellData.map((obj, index) => {
+        if (cellData.length > 0 && index > 0) {
+         status += "</br>";
+        }
+        if (obj.order.status == "0701") {
+         status += "연락중";
+        } else if (obj.order.status == "0702") {
+         status += "근무중";
+        } else {
+         status += "탈락";
+        }
+       });
+       $(td).html(status);
+      },
+     },
+     {
+      targets: [4],
+      createdCell: function (td, cellData, rowData, row, col) {
+       var workDays = "";
+       cellData.map((obj, index) => {
+        if (cellData.length > 0 && index > 0) {
+         workDays += "</br>";
+        }
+        var workDay = obj.order.workDays
+         .map((obj1, index) => {
+          return COM.props.workDayCodes.filter((obj2, index) => {
+           if (obj2.code == obj1) {
+            return true;
            }
-           manager += obj.order.workGroupManager;
-          });
-         $(td).html(manager);
-          },
-         },
-         {
-          targets: [3],
-          createdCell: function (td, cellData, rowData, row, col) {
-            var status = '';
-            cellData.map((obj, index) => {
-           if (cellData.length> 0 && index > 0) {
-            status += "</br>";
-           }
-           if(obj.order.status=='0701'){
-            status += '연락중';
-           }else if(obj.order.status=='0702'){
-            status += '근무중';
-           }else{
-            status += '탈락';
-           }
-          });
-         $(td).html(status);
-          },
-         },
-         {
-          targets: [4],
-          createdCell: function (td, cellData, rowData, row, col) {
-            var workDays = '';
-            cellData.map((obj, index) => {
-           if (cellData.length> 0 && index > 0) {
-            workDays += "</br>";
-           }
-           var workDay = obj.order.workDays.map((obj1, index) => {
-            return COM.props.workDayCodes.filter((obj2, index) => {
-                if (obj2.code == obj1) {
-                 return true;
-                }
-               })[0].codeValue;
-           }).join();
-           if(obj.order.workingDaysType=='fiveDay'){
-            workDays += '주5일' + ' ('+workDay+')';
-           }else if(obj.order.status=='sixDay'){
-            workDays += '주6일' + ' ('+workDay+')';
-           }else{
-            workDays += '' + workDay;
-           }
-          });
-         $(td).html(workDays);
-          },
-         },
-        ],
-        processing: true,
-        serverSide: true,
-        responsive: true,
-        autoWidth: false,
-        width: "100%",
-        paging: true,
-        ordering: false,
-        select: false,
-        dom:
-         "<'row'<'col-sm-12'rt>>" +
-         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        data: this.state.DataTable,
-        columns,
-        ordering: false,
-        ajax: {
-         url: "/v1/truckOwner",
-     
-         type: "GET",
-         data: function (d) {
-          delete d.columns;
-     
-          return d;
-         },
-        },
-       
-      });
-    }  
+          })[0].codeValue;
+         })
+         .join();
+        if (obj.order.workingDaysType == "fiveDay") {
+         workDays += "주5일" + " (" + workDay + ")";
+        } else if (obj.order.status == "sixDay") {
+         workDays += "주6일" + " (" + workDay + ")";
+        } else {
+         workDays += "" + workDay;
+        }
+       });
+       $(td).html(workDays);
+      },
+     },
+    ],
+    processing: true,
+    serverSide: true,
+    responsive: true,
+    autoWidth: false,
+    width: "100%",
+    paging: true,
+    ordering: false,
+    select: false,
+    dom:
+     "<'row'<'col-sm-12'rt>>" +
+     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+    data: this.state.DataTable,
+    columns,
+    ordering: false,
+    ajax: {
+     url: "/v1/truckOwner",
+
+     type: "GET",
+     data: function (d) {
+      delete d.columns;
+
+      return d;
+     },
+    },
+   });
+  }
  }
  componentWillUnmount() {
   $(".data-table-wrapper").find("table").DataTable().destroy(true);
@@ -224,27 +228,26 @@ class TruckOwnerList extends Component {
       <div className="card mb-4">
        <div className="card-header row">
         <div className="col-6">전체 차주 리스트</div>
-        <div class="col-sm-12 col-md-6 row">
-         <div class="col-12 d-flex justify-content-end">
-          <button class="btn btn-info">
+        <div className="col-sm-12 col-md-6 row">
+         <div className="col-12 d-flex justify-content-end">
+          <button className="btn btn-info">
            <span>관리</span>
           </button>
          </div>
         </div>
        </div>
        <div className="card-body">
-           
-         <div className="datatable table-responsive">
-          <table
-           id="truckOwnerListTbl"
-           ref="truckOwnerListTbl"
-           className="table table-bordered table-hover"
-           width="100%"
-           cellSpacing="0"
-           role="grid"
-           aria-describedby="dataTable_info"
-          />
-         </div>
+        <div className="datatable table-responsive">
+         <table
+          id="truckOwnerListTbl"
+          ref="truckOwnerListTbl"
+          className="table table-bordered table-hover"
+          width="100%"
+          cellSpacing="0"
+          role="grid"
+          aria-describedby="dataTable_info"
+         />
+        </div>
        </div>
       </div>
       <div
@@ -338,15 +341,15 @@ class TruckOwnerList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    codes: state.codes.codes,
-    orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
-    rcritTypeCodes: state.codes.rcritTypeCodes,
-    carTypeCodes: state.codes.carTypeCodes,
-    tonTypeCodes: state.codes.tonTypeCodes,
-    payFullTypeCodes: state.codes.payFullTypeCodes,
-    workDayCodes: state.codes.workDayCodes,
-    token: state.auth.userInfo.token,
-    carrierSeq: state.auth.userInfo.carrierSeq,
-    userSeq: state.auth.userInfo.userSeq,
-   });
+ codes: state.codes.codes,
+ orderRegisWorkGroupCodes: state.codes.orderRegisWorkGroupCodes,
+ rcritTypeCodes: state.codes.rcritTypeCodes,
+ carTypeCodes: state.codes.carTypeCodes,
+ tonTypeCodes: state.codes.tonTypeCodes,
+ payFullTypeCodes: state.codes.payFullTypeCodes,
+ workDayCodes: state.codes.workDayCodes,
+ token: state.auth.userInfo.token,
+ carrierSeq: state.auth.userInfo.carrierSeq,
+ userSeq: state.auth.userInfo.userSeq,
+});
 export default connect(mapStateToProps)(TruckOwnerList);

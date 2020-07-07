@@ -5,9 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import org.modelmapper.PropertyMap;
 
@@ -21,8 +18,8 @@ public class OrderEnToDtoMap extends PropertyMap<Order, OrderDTO> {
 		map().setCarrierNm(source.getCarrier().getCarrierNm());
 		map().setUserSeq(source.getUser().getUserSeq());
 		map().setUserNm(source.getUser().getUserNm());
-		map().setWorkGroupNm(source.getWorkGroup().getWorkGroupPk().getWorkGroupNm());
-		map().setWorkGroupManager(source.getWorkGroup().getWorkGroupManager());
+		map().setWorkGroupNm(source.getWorkGroupManager().getWorkGroupManagerPK().getWorkGroupNm());
+		map().setWorkGroupManager(source.getWorkGroupManager().getWorkGroupManagerPK().getWorkGroupManagerNm());
 		using(ctx -> generateDate( ((Order)ctx.getSource()).getCreatedAt() )).map(source, destination.getCreatedAt());
 		using(ctx -> generateDate( ((Order)ctx.getSource()).getModifiedAt() )).map(source, destination.getModifiedAt());
 	}

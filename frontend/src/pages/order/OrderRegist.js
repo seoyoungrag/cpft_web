@@ -39,7 +39,6 @@ export const VALIDATION_ORDER_REGIST_FORM = {
   },
  },
  submitHandler: function (form) {
-  console.log(form);
   alert("valid form submitted");
   return false;
  },
@@ -81,6 +80,7 @@ class OrderRegist extends Component {
    registOrderWorkingAreaEtcMatterToggle: false,
    orderRegistWorkTypeValue: "",
    workGroups: [],
+   workGroupManagers: [],
    order: null,
   };
   this.orderRegistWorkGroupRef = React.createRef();
@@ -104,9 +104,15 @@ class OrderRegist extends Component {
     })
     .then((res) => {
      if (res.status == 200) {
-      //console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
-       document.getElementById("orderRegistForm").reset();
+       this.setState({
+        order: null,
+       });
+       $("#orderRegistForm input[type=text]").val("");
+       $("#orderRegistForm select").val("");
+       $("#orderRegistForm input[type=checkbox]").prop("checked", false);
+       $("#orderRegistForm input[type=radio]").prop("checked", false);
+       //document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
       }
      } else {
@@ -136,7 +142,14 @@ class OrderRegist extends Component {
      if (res.status == 200) {
       //console.log(res.data.data.orderSeq);
       if (res.data.data.orderSeq > 0) {
-       document.getElementById("orderRegistForm").reset();
+       this.setState({
+        order: null,
+       });
+       $("#orderRegistForm input[type=text]").val("");
+       $("#orderRegistForm select").val("");
+       $("#orderRegistForm input[type=checkbox]").prop("checked", false);
+       $("#orderRegistForm input[type=radio]").prop("checked", false);
+       //document.getElementById("orderRegistForm").reset();
        $("#saveCompleteModalPopup").modal();
       }
      } else {
@@ -168,7 +181,16 @@ class OrderRegist extends Component {
    }
   };
   this._changeWorkGroup = (e) => {
-   $("#workGroupManager").val($("option:selected", e.target).data("manager"));
+   //console.log($("option:selected", e.target).data("managers"));
+   //$("#workGroupManager").val($("option:selected", e.target).data("managers"));
+   $("#workGroupManager").html("");
+   var workGroupManagers = $("option:selected", e.target)
+    .data("managers")
+    .split(",");
+
+   workGroupManagers.map((e1, i) => {
+    $("#workGroupManager").append(new Option(`${e1}`, `${e1}`));
+   });
   };
   this._getDaumAddressFinder = (event) => {
    new daum.Postcode({
@@ -372,13 +394,19 @@ class OrderRegist extends Component {
    },
   });
   if (data.data.workGroups) {
-   this.setState({ workGroups: data.data.workGroups });
+   this.setState({
+    workGroups: data.data.workGroups,
+    workGroupManagers:
+     data.data.workGroups && data.data.workGroups.length > 0
+      ? data.data.workGroups[0].workGroupManagers
+      : [],
+   });
   }
-
+  /*
   $("#workGroupManager").val(
    $("option:selected", this.orderRegistWorkGroupRef.current).data("manager")
   );
-
+*/
   attachJiraIssueColletor();
 
   // Activate Bootstrap scrollspy for the sticky nav component
@@ -414,7 +442,7 @@ class OrderRegist extends Component {
    this.props.location.state.order
     ? this.props.location.state.order
     : null;
-  console.log(order);
+
   if (order) {
    $("#orderSeq").val(order.orderSeq);
    $("#carrierSeq").val(order.carrierSeq);
@@ -424,6 +452,15 @@ class OrderRegist extends Component {
     "checked",
     true
    );
+   $("#workGroupManager").html("");
+   var workGroupManagers = $("option:selected", "#orderRegisWorkGroup")
+    .data("managers")
+    .split(",");
+
+   workGroupManagers.map((e1, i) => {
+    $("#workGroupManager").append(new Option(`${e1}`, `${e1}`));
+   });
+   $("#workGroupManager").val(order.workGroupManager);
    $("#rcritMans").val(order.rcritMans);
    order.carTypes.map((e) => {
     $("input:checkbox[name=carTypes]:input[value=" + e + "]").attr(
@@ -467,7 +504,7 @@ class OrderRegist extends Component {
  }
 
  render() {
-  const { workGroups } = this.state;
+  const { workGroups, workGroupManagers } = this.state;
   const order =
    this.props.location &&
    this.props.location.state &&
@@ -562,11 +599,13 @@ class OrderRegist extends Component {
                  ? workGroups.map((obj, index) => {
                     return (
                      <option
-                      key={obj.workGroupPk.workGroupNm}
-                      value={obj.workGroupPk.workGroupNm}
-                      data-manager={obj.workGroupManager}
+                      key={obj.workGroupNm}
+                      value={obj.workGroupNm}
+                      data-managers={obj.workGroupManagers.map((e) => {
+                       return e.workGroupManagerNm;
+                      })}
                      >
-                      {obj.workGroupPk.workGroupNm}
+                      {obj.workGroupNm}
                      </option>
                     );
                    })
@@ -578,16 +617,26 @@ class OrderRegist extends Component {
                >
                 담당자
                </label>
-
-               <input
+               <select
                 className="form-control col-12 col-sm-4"
                 id="workGroupManager"
                 name="workGroupManager"
-                type="text"
-                readOnly
-                placeholder="서영락"
                 key="workGroupManager"
-               />
+               >
+                {workGroupManagers.length > 0
+                 ? workGroupManagers.map((obj, index) => {
+                    console.log(obj);
+                    return (
+                     <option
+                      key={obj.workGroupManagerNm}
+                      value={obj.workGroupManagerNm}
+                     >
+                      {obj.workGroupManagerNm}
+                     </option>
+                    );
+                   })
+                 : null}
+               </select>
               </div>
               <div className="form-group row">
                <label
