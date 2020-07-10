@@ -126,6 +126,11 @@
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.gavlyukovskiy</groupId>
+			<artifactId>p6spy-spring-boot-starter</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -145,20 +150,20 @@
 			<id>dev</id>
 			<build>
 				<plugins>
-	                <plugin>
-	                    <groupId>org.apache.maven.plugins</groupId>
-	                    <artifactId>maven-surefire-plugin</artifactId>
-	                    <configuration>
-	                        <argLine>-Dspring.profiles.active=dev</argLine>
-	                    </configuration>
-	                </plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>-Dspring.profiles.active=dev</argLine>
+						</configuration>
+					</plugin>
 					<plugin>
 						<groupId>org.bsc.maven</groupId>
 						<artifactId>maven-processor-plugin</artifactId>
 						<version>3.3.3</version>
 						<executions>
 							<execution>
-         						<id>process</id>
+								<id>process</id>
 								<goals>
 									<goal>process</goal>
 								</goals>
@@ -191,20 +196,20 @@
 			<!-- <activation> <activeByDefault>true</activeByDefault> </activation> -->
 			<build>
 				<plugins>
-	                <plugin>
-	                    <groupId>org.apache.maven.plugins</groupId>
-	                    <artifactId>maven-surefire-plugin</artifactId>
-	                    <configuration>
-	                        <argLine>-Dspring.profiles.active=prod</argLine>
-	                    </configuration>
-	                </plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>-Dspring.profiles.active=prod</argLine>
+						</configuration>
+					</plugin>
 					<plugin>
 						<groupId>org.bsc.maven</groupId>
 						<artifactId>maven-processor-plugin</artifactId>
 						<version>3.3.3</version>
 						<executions>
 							<execution>
-         						<id>process</id>
+								<id>process</id>
 								<goals>
 									<goal>process</goal>
 								</goals>
