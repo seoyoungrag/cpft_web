@@ -20,7 +20,7 @@ import kr.co.teamfresh.cpft.carrier.web.backend.service.ResponseService;
 import kr.co.teamfresh.cpft.carrier.web.backend.service.truckOwner.TruckOwnerService;
 import lombok.RequiredArgsConstructor;
 
-@Api(tags = { "6. TruckOwner" })
+@Api(tags = { "7. TruckOwner" })
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/v1/truckOwner")
