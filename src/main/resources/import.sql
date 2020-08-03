@@ -7,6 +7,7 @@ INSERT into CODE_CTGRY values('완제/무제');
 INSERT into CODE_CTGRY values('요일');
 INSERT into CODE_CTGRY values('오더진행상태');
 INSERT into CODE_CTGRY values('차주지원상태');
+INSERT into CODE_CTGRY values('지역');
 insert into code values('0100',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','운송그룹','N','운송그룹');
 insert into code values('0101',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','TS','Y','TS');
 insert into code values('0102',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','LF','Y','LF');
@@ -55,6 +56,24 @@ insert into code values('0800',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'차주�
 insert into code values('0801',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'차주지원상태','연락중','Y','연락중');
 insert into code values('0802',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'차주지원상태','채용확정','Y','채용확정');
 insert into code values('0803',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'차주지원상태','채용거절','Y','채용거절');
+insert into code values('0900',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','지역','N','차주지원상태');
+insert into code values('0901',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','서울','Y','서울');
+insert into code values('0902',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경기','Y','경기');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','인천','Y','인천');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','부산','Y','부산');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대구','Y','대구');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','광주','Y','광주');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대전','Y','대전');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','울산','Y','울산');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','세종','Y','세종');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','강원','Y','강원');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경남','Y','경남');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경북','Y','경북');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전남','Y','전남');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전북','Y','전북');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충남','Y','충남');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충북','Y','충북');
+insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','제주','Y','제주');
 
 insert into CARRIER (CARRIER_SEQ, CARRIER_NM, created_at, modified_at) values ('1', '팀프레시', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
