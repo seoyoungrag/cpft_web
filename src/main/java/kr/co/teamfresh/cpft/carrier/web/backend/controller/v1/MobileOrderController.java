@@ -19,14 +19,14 @@ import lombok.RequiredArgsConstructor;
 @Api(tags = { "8. Order(for Mobile)" })
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1/order/mobile")
+@RequestMapping(value = "/v1/mobile/order")
 public class MobileOrderController {
 	Logger logger = LoggerFactory.getLogger(MobileOrderController.class);
 	private final ResponseService responseService;
 	private final OrderService orderService;
 
 	@ApiOperation(value = "진행상테로 오더 조회", notes = "진행상테에 대한 오더를 조회한다.")
-	@GetMapping("/order/status/{status}")
+	@GetMapping("/status/{status}")
 	public ListResult<OrderDTO> listOrderByCarrierIdAndStatus(@RequestHeader("X-AUTH-TOKEN") String token, @PathVariable String status) {
 		return responseService.getListResult(orderService.findAllByStatus(status));
 	}
