@@ -63,5 +63,9 @@ public class OrderService {
 	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(String status, String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
 		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByCreatedAtAscOrderSeqAscUserSeqAsc(status, orderSeq, pageable);
 	}
+
+	public List<OrderDTO> findAllByStatus(String status) {
+		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByStatusOrderByOrderSeq(status), OrderDTO.class);
+	}
 	
 }
