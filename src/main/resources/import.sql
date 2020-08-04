@@ -61,19 +61,19 @@ insert into code values('0901',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역',
 insert into code values('0902',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경기','Y','경기');
 insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','인천','Y','인천');
 insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','부산','Y','부산');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대구','Y','대구');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','광주','Y','광주');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대전','Y','대전');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','울산','Y','울산');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','세종','Y','세종');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','강원','Y','강원');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경남','Y','경남');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경북','Y','경북');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전남','Y','전남');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전북','Y','전북');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충남','Y','충남');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충북','Y','충북');
-insert into code values('0903',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','제주','Y','제주');
+insert into code values('0904',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대구','Y','대구');
+insert into code values('0905',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','광주','Y','광주');
+insert into code values('0906',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','대전','Y','대전');
+insert into code values('0907',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','울산','Y','울산');
+insert into code values('0908',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','세종','Y','세종');
+insert into code values('0909',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','강원','Y','강원');
+insert into code values('0910',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경남','Y','경남');
+insert into code values('0911',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','경북','Y','경북');
+insert into code values('0912',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전남','Y','전남');
+insert into code values('0913',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','전북','Y','전북');
+insert into code values('0914',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충남','Y','충남');
+insert into code values('0915',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','충북','Y','충북');
+insert into code values('0916',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'지역','제주','Y','제주');
 
 insert into CARRIER (CARRIER_SEQ, CARRIER_NM, created_at, modified_at) values ('1', '팀프레시', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
