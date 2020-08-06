@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import kr.co.teamfresh.cpft.carrier.web.backend.dto.order.OrderDTO;
 import kr.co.teamfresh.cpft.carrier.web.backend.model.response.ListResult;
+import kr.co.teamfresh.cpft.carrier.web.backend.model.response.SingleResult;
 import kr.co.teamfresh.cpft.carrier.web.backend.service.ResponseService;
 import kr.co.teamfresh.cpft.carrier.web.backend.service.order.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,11 @@ public class MobileOrderController {
 	@GetMapping("/status/{status}")
 	public ListResult<OrderDTO> listOrderByCarrierIdAndStatus(@RequestHeader("X-AUTH-TOKEN") String token, @PathVariable String status) {
 		return responseService.getListResult(orderService.findAllByStatus(status));
+	}
+
+	@ApiOperation(value = "오더아이디로 오더 조회", notes = "오더아이디로 오더를 조회한다.")
+	@GetMapping("{orderSeq}")
+	public SingleResult<OrderDTO> getOrderByOrderSeq(@RequestHeader("X-AUTH-TOKEN") String token, @PathVariable String orderSeq) {
+		return responseService.getSingleResult(orderService.findOne(orderSeq));
 	}
 }

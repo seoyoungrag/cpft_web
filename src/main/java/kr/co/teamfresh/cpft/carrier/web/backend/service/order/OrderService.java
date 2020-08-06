@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import kr.co.teamfresh.cpft.carrier.web.backend.advice.exception.CResourceNotExistException;
 import kr.co.teamfresh.cpft.carrier.web.backend.dto.order.OrderDTO;
 import kr.co.teamfresh.cpft.carrier.web.backend.dto.order.OrderTruckOwnerForApplicationListDTO;
 import kr.co.teamfresh.cpft.carrier.web.backend.entity.order.Order;
@@ -68,4 +69,7 @@ public class OrderService {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByStatusOrderByOrderSeq(status), OrderDTO.class);
 	}
 	
+	public OrderDTO findOne(String id) {
+		return ObjectMapperUtils.map(orderJpaRepo.findById(id).orElseThrow(CResourceNotExistException::new), OrderDTO.class);
+	}
 }
