@@ -72,4 +72,12 @@ public class OrderService {
 	public OrderDTO findOne(String id) {
 		return ObjectMapperUtils.map(orderJpaRepo.findById(id).orElseThrow(CResourceNotExistException::new), OrderDTO.class);
 	}
+
+	public List<OrderTruckOwner> findOrderByOrderTruckOwnersAndStatus(String status, String userSeq) {
+		return orderTruckOwnerJpaRepo.findAllByStatusAndUserSeqOrderByOrderSeq(status, userSeq);
+	}
+
+	public List<OrderTruckOwner> findOrderByOrderTruckOwners(String userSeq) {
+		return orderTruckOwnerJpaRepo.findAllByUserSeqOrderByOrderSeq(userSeq);
+	}
 }
