@@ -9,6 +9,9 @@ INSERT into CODE_CTGRY values('오더진행상태');
 INSERT into CODE_CTGRY values('차주지원상태');
 INSERT into CODE_CTGRY values('지역');
 INSERT into CODE_CTGRY values('경력');
+INSERT into CODE_CTGRY values('근무요일');
+INSERT into CODE_CTGRY values('근무시간');
+INSERT into CODE_CTGRY values('급여');
 insert into code values('0100',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','운송그룹','N','운송그룹');
 insert into code values('0101',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','TS','Y','TS');
 insert into code values('0102',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'운송그룹','LF','Y','LF');
@@ -99,9 +102,9 @@ insert into code values('1206',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무�
 insert into code values('1207',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무시간','새벽~오전','Y','새벽~오전');
 insert into code values('1208',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무시간','풀타임(8시간 이상)','Y','풀타임(8시간 이상)');
 insert into code values('1300',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'급여','급여','N','급여');
-insert into code values('1301',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무요일','월급','Y','월급');
-insert into code values('1302',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무요일','일급','Y','일급');
-insert into code values('1303',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'근무요일','면접 후 결정','Y','면접 후 결정');
+insert into code values('1301',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'급여','월급','Y','월급');
+insert into code values('1302',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'급여','일급','Y','일급');
+insert into code values('1303',CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP(),'급여','면접 후 결정','Y','면접 후 결정');
 
 insert into CARRIER (CARRIER_SEQ, CARRIER_NM, created_at, modified_at) values ('1', '팀프레시', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
 
