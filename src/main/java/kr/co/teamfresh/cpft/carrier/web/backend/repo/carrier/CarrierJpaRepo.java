@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.co.teamfresh.cpft.carrier.web.backend.entity.Carrier;
 
-public interface CarrierJpaRepo extends JpaRepository<Carrier, String> {
+public interface CarrierJpaRepo extends JpaRepository<Carrier, Integer> {
 
-	Carrier findAllByCarrierSeq(String carrierSeq);
+	Carrier findAllByCarrierSeq(Integer carrierSeq);
 }

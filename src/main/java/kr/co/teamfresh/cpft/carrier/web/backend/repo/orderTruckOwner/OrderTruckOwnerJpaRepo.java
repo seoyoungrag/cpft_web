@@ -12,8 +12,8 @@ import kr.co.teamfresh.cpft.carrier.web.backend.entity.order.OrderTruckOwnerPK;
 public interface OrderTruckOwnerJpaRepo extends JpaRepository<OrderTruckOwner, OrderTruckOwnerPK> {
 
 	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderStatusOrderByCreatedAtAscOrderSeqAscUserSeqAsc(String status, Pageable pageable);
-	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByCreatedAtAscOrderSeqAscUserSeqAsc(String status, String orderSeq, Pageable pageable);
-	List<OrderTruckOwner> findAllByStatusAndUserSeqOrderByOrderSeq(String status, String userSeq);
-	List<OrderTruckOwner> findAllByUserSeqOrderByOrderSeq(String userSeq);
+	Page<OrderTruckOwner> findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByCreatedAtAscOrderSeqAscUserSeqAsc(String status, Integer orderSeq, Pageable pageable);
+	List<OrderTruckOwner> findAllByStatusAndUserSeqOrderByOrderSeq(String status, Integer userSeq);
+	List<OrderTruckOwner> findAllByUserSeqOrderByOrderSeq(Integer userSeq);
 
 }

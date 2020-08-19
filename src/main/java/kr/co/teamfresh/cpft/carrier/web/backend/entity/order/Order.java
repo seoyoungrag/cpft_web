@@ -53,7 +53,7 @@ public class Order extends CommonDateEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="ORDER_SEQ")
-	private String orderSeq;
+	private Integer orderSeq;
 	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "WORK_GROUP_NM", referencedColumnName = "WORK_GROUP_NM", nullable = false)

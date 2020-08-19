@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.co.teamfresh.cpft.carrier.web.backend.entity.User;
 
-public interface UserJpaRepo extends JpaRepository<User, String> {
+public interface UserJpaRepo extends JpaRepository<User, Integer> {
 	Optional<User> findByUserLoginId(String id);
 
 	Optional<User> findByUserEmail(String email);

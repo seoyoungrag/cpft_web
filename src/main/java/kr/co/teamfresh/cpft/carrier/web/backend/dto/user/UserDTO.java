@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class UserDTO implements Serializable{
 
-	private String userSeq;
+	private Integer userSeq;
 	@JsonIgnore
 	private String userLoginId;
 	@JsonIgnore

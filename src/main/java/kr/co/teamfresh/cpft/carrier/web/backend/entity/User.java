@@ -54,7 +54,7 @@ public class User extends CommonDateEntity implements UserDetails { // 날짜 �
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="USER_SEQ")
-	private String userSeq;
+	private Integer userSeq;
 	
 	@Column(nullable = false, unique = true, length = 50, name="USER_LOGIN_ID")
 	private String userLoginId;

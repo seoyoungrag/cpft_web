@@ -33,7 +33,7 @@ public class Carrier extends CommonDateEntity  implements Serializable {
 	@Id // pk
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CARRIER_SEQ")
-	private String carrierSeq;
+	private Integer carrierSeq;
 
 	@Column(nullable = false, length = 100, name="CARRIER_NM")
 	private String CarrierNm;

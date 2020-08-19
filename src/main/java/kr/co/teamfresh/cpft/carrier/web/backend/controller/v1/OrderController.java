@@ -64,14 +64,14 @@ public class OrderController {
 	@ApiOperation(value = "모든 오더 조회", notes = "사용자 운송사의 모든 오더를 조회한다.")
 	@GetMapping("/carrier/{carrierSeq}")
 	public ListResult<OrderDTO> listOrderByCarrierId(@RequestHeader("X-AUTH-TOKEN") String token,
-			@PathVariable String carrierSeq) {
+			@PathVariable Integer carrierSeq) {
 		return responseService.getListResult(orderService.findAllByCarrierSeq(carrierSeq));
 	}
 	
 	@ApiOperation(value = "특정 오더 조회", notes = "사용자 운송사의 진행상테에 대한 오더를 조회한다.")
 	@GetMapping("/carrier/{carrierSeq}/order/status/{status}")
 	public ListResult<OrderDTO> listOrderByCarrierIdAndStatus(@RequestHeader("X-AUTH-TOKEN") String token,
-			@PathVariable String carrierSeq, @PathVariable String status) {
+			@PathVariable Integer carrierSeq, @PathVariable String status) {
 		return responseService.getListResult(orderService.findAllByCarrierSeqAndStatus(carrierSeq, status));
 	}
 
@@ -84,7 +84,7 @@ public class OrderController {
 					OrderTruckOwnerForApplicationListDTO.class);
 		} else {
 			return responseService.getPageResult(page,
-					orderService.listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(status, orderSeq, page),
+					orderService.listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(status, Integer.valueOf(orderSeq), page),
 					OrderTruckOwnerForApplicationListDTO.class);
 		}
 	}

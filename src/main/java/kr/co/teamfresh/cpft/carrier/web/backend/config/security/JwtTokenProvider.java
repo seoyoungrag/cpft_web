@@ -70,8 +70,8 @@ public class JwtTokenProvider { // JWT 토큰을 생성 및 검증 모듈
 		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("carrier", HashMap.class);
 	}
 	*/
-	public String getCarrierSeq(String token) {
-		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("carrierSeq", String.class);
+	public Integer getCarrierSeq(String token) {
+		return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().get("carrierSeq", Integer.class);
 	}
 // Request의 Header에서 token 파싱 : "X-AUTH-TOKEN: jwt토큰"
 	public String resolveToken(HttpServletRequest req) {

@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class WorkGroupDTO implements Serializable {
-	private String carrierSeq;
+	private Integer carrierSeq;
 	private String workGroupNm;
 	private List<WorkGroupManagerDTO> workGroupManagers = new ArrayList<WorkGroupManagerDTO>();
 }

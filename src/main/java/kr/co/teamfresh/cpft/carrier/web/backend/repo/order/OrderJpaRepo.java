@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.co.teamfresh.cpft.carrier.web.backend.entity.order.Order;
 
-public interface OrderJpaRepo extends JpaRepository<Order, String> {
+public interface OrderJpaRepo extends JpaRepository<Order, Integer> {
 
-	List<Order> findAllByCarrierCarrierSeqOrderByOrderSeq(String carrierSeq);
-	List<Order> findAllByCarrierCarrierSeqAndStatusOrderByOrderSeq(String carrierSeq, String status);
-	Page<Order> findAllByCarrierCarrierSeqAndOrderSeqOrderByOrderSeq(String carrierSeq, String orderSeq, Pageable pageable);
+	List<Order> findAllByCarrierCarrierSeqOrderByOrderSeq(Integer carrierSeq);
+	List<Order> findAllByCarrierCarrierSeqAndStatusOrderByOrderSeq(Integer carrierSeq, String status);
+	Page<Order> findAllByCarrierCarrierSeqAndOrderSeqOrderByOrderSeq(Integer carrierSeq, Integer orderSeq, Pageable pageable);
 	List<Order> findAllByStatusOrderByOrderSeq(String status);
 
 }

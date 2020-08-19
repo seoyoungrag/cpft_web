@@ -38,7 +38,7 @@ public class CarrierController {
 	public SingleResult<CarrierDTO> findCarrier(@RequestHeader("X-AUTH-TOKEN") String token) {
 		try {
 			//Map carrier = jwtTokenProvider.getCarrier(token);
-			String carrier = jwtTokenProvider.getCarrierSeq(token);
+			Integer carrier = jwtTokenProvider.getCarrierSeq(token);
 			if (carrier != null) {
 
 				return responseService.getSingleResult(carrierService.findCarrier(carrier));

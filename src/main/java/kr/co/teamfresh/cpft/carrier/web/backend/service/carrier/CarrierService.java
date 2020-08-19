@@ -19,12 +19,12 @@ public class CarrierService  extends AbstractService{
 	private final CarrierJpaRepo carrierJpaRepo;
 	
 	//@Cacheable(value = CacheKey.CARRIER, key = "#carrierSeq", unless = "#result == null")
-	public CarrierDTO findCarrier(String carrierSeq) {
+	public CarrierDTO findCarrier(Integer carrierSeq) {
 		return ObjectMapperUtils.map(carrierJpaRepo.findAllByCarrierSeq(carrierSeq), CarrierDTO.class);
 	}
 	
 	//@Cacheable(value = CacheKey.CARRIER, key = "#carrierSeq", unless = "#result == null")
-	public Carrier findCarrierForCache(String carrierSeq) {
+	public Carrier findCarrierForCache(Integer carrierSeq) {
 		//Carrier carrier = carrierJpaRepo.findById(carrierSeq).orElseThrow(CResourceNotExistException::new);
 		return carrierJpaRepo.findAllByCarrierSeq(carrierSeq);
 	}

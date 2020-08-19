@@ -20,19 +20,19 @@ public class OrderDtoToEnMap extends PropertyMap<OrderDTO, Order> {
 		using(ctx -> generateUser(((OrderDTO)ctx.getSource()).getUserSeq())).map(source, destination.getUser());
 	}
 
-	private User generateUser(String userSeq) {
+	private User generateUser(Integer userSeq) {
 		User c = new User();
 		c.setUserSeq(userSeq);
 		return c;
 	}
 
-	private Carrier generateCarrer(String carrierSeq) {
+	private Carrier generateCarrer(Integer carrierSeq) {
 		Carrier c = new Carrier();
 		c.setCarrierSeq(carrierSeq);
 		return c;
 	}
 
-	private WorkGroupManager generateWorkGroup(String carrierSeq, String workGroupNm, String workGroupManager) {
+	private WorkGroupManager generateWorkGroup(Integer carrierSeq, String workGroupNm, String workGroupManager) {
     	WorkGroupManager wg = new WorkGroupManager();
     	WorkGroupManagerPK workGroupManagerPK = new WorkGroupManagerPK(carrierSeq, workGroupNm, workGroupManager);
     	wg.setWorkGroupManagerPK(workGroupManagerPK);

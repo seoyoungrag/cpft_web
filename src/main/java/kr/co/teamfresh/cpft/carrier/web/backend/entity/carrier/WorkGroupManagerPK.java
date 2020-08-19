@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class WorkGroupManagerPK implements Serializable {
 
     @Column(name = "CARRIER_SEQ")
-	private String carrierSeq;
+	private Integer carrierSeq;
     @Column(name = "WORK_GROUP_NM")
 	private String workGroupNm;
     @Column(name = "WORK_GROUP_MANAGER_NM")

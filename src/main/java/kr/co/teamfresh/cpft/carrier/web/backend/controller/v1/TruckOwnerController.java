@@ -33,7 +33,7 @@ public class TruckOwnerController {
 	@ApiOperation(value = "오더가 있는 지원자(차주) 조회", notes = "차주 중 특정 오더를 지원한 사용자를 조회한다.")
 	@GetMapping("/order/{orderSeq}")
 	public PageReqRes<TruckOwner, TruckOwnerForTruckOwnerListDTO> listTruckOwnerBydOrderSeq(
-			@PathVariable String orderSeq, 
+			@PathVariable Integer orderSeq, 
 			@ApiParam(value = "오더 지원자 페이징 정보", required = true) @ModelAttribute PageReqRes<TruckOwner,TruckOwnerForTruckOwnerListDTO> page) {
 		return responseService.getPageResult(page, truckOwnerService.findAllByOrdersOrderSeqOrderByUserUserSeq(orderSeq, page), TruckOwnerForTruckOwnerListDTO.class);	
 	}

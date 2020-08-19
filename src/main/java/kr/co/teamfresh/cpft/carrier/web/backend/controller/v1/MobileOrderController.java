@@ -42,7 +42,7 @@ public class MobileOrderController {
 	@ApiOperation(value = "오더아이디로 오더 조회", notes = "오더아이디로 오더를 조회한다.")
 	@GetMapping("{orderSeq}")
 	public SingleResult<OrderDTO> getOrderByOrderSeq(@RequestHeader("X-AUTH-TOKEN") String token,
-			@PathVariable String orderSeq) {
+			@PathVariable Integer orderSeq) {
 		return responseService.getSingleResult(orderService.findOne(orderSeq));
 	}
 
@@ -50,7 +50,7 @@ public class MobileOrderController {
 	@GetMapping("/status/{status}/truckOwner/{userSeq}")
 	public ListResult<OrderTruckOwnerForTruckOwnerListDTO> listOrderByTruckOwnerUserSeqAndStatus(
 			@RequestHeader("X-AUTH-TOKEN") String token,
-			@PathVariable String status, @PathVariable String userSeq) {
+			@PathVariable String status, @PathVariable Integer userSeq) {
 		List<OrderTruckOwnerForTruckOwnerListDTO> orderList = new ArrayList<OrderTruckOwnerForTruckOwnerListDTO>();
 		if (status.equals("all")) {
 			List<OrderTruckOwner> orderTruckOwnerList = orderService.findOrderByOrderTruckOwners(userSeq);

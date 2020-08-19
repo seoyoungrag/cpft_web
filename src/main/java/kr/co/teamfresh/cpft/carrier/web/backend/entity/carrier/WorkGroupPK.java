@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class WorkGroupPK implements Serializable {
     @Column(name = "CARRIER_SEQ")
-	private String carrierSeq;
+	private Integer carrierSeq;
     @Column(name = "WORK_GROUP_NM")
 	private String workGroupNm;
 }

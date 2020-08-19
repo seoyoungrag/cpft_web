@@ -42,11 +42,11 @@ public class OrderService {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAll(), OrderDTO.class);
 	}
 
-	public List<OrderDTO> findAllByCarrierSeqAndStatus(String carrierSeq, String status) {
+	public List<OrderDTO> findAllByCarrierSeqAndStatus(Integer carrierSeq, String status) {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByCarrierCarrierSeqAndStatusOrderByOrderSeq(carrierSeq, status), OrderDTO.class);
 	}
 	
-	public List<OrderDTO> findAllByCarrierSeq(String carrierSeq) {
+	public List<OrderDTO> findAllByCarrierSeq(Integer carrierSeq) {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByCarrierCarrierSeqOrderByOrderSeq(carrierSeq), OrderDTO.class);
 	}
 
@@ -61,7 +61,7 @@ public class OrderService {
 		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusOrderByCreatedAtAscOrderSeqAscUserSeqAsc(status, pageable);
 	}
 
-	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(String status, String orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
+	public Page<OrderTruckOwner> listOrderTruckOwnerByOrderSeqOrderAndStatusByCreatedAt(String status, Integer orderSeq, PageReqRes<OrderTruckOwner, OrderTruckOwnerForApplicationListDTO> pageable) {
 		return orderTruckOwnerJpaRepo.findAllByOrderTruckOwnerPKOrderStatusAndOrderTruckOwnerPKOrderOrderSeqOrderByCreatedAtAscOrderSeqAscUserSeqAsc(status, orderSeq, pageable);
 	}
 
@@ -69,15 +69,15 @@ public class OrderService {
 		return ObjectMapperUtils.mapAll(orderJpaRepo.findAllByStatusOrderByOrderSeq(status), OrderDTO.class);
 	}
 	
-	public OrderDTO findOne(String id) {
+	public OrderDTO findOne(Integer id) {
 		return ObjectMapperUtils.map(orderJpaRepo.findById(id).orElseThrow(CResourceNotExistException::new), OrderDTO.class);
 	}
 
-	public List<OrderTruckOwner> findOrderByOrderTruckOwnersAndStatus(String status, String userSeq) {
+	public List<OrderTruckOwner> findOrderByOrderTruckOwnersAndStatus(String status, Integer userSeq) {
 		return orderTruckOwnerJpaRepo.findAllByStatusAndUserSeqOrderByOrderSeq(status, userSeq);
 	}
 
-	public List<OrderTruckOwner> findOrderByOrderTruckOwners(String userSeq) {
+	public List<OrderTruckOwner> findOrderByOrderTruckOwners(Integer userSeq) {
 		return orderTruckOwnerJpaRepo.findAllByUserSeqOrderByOrderSeq(userSeq);
 	}
 }

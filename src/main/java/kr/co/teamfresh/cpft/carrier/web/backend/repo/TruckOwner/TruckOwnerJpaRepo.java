@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.co.teamfresh.cpft.carrier.web.backend.entity.TruckOwner;
 
-public interface TruckOwnerJpaRepo extends JpaRepository<TruckOwner, String> {
+public interface TruckOwnerJpaRepo extends JpaRepository<TruckOwner, Integer> {
 
-	Page<TruckOwner> findAllByOrdersOrderTruckOwnerPKOrderOrderSeqOrderByUserUserSeq(String orderSeq, Pageable pageable);
+	Page<TruckOwner> findAllByOrdersOrderTruckOwnerPKOrderOrderSeqOrderByUserUserSeq(Integer orderSeq, Pageable pageable);
 
 	Page<TruckOwner> findAllByOrderByUserUserSeq(Pageable page);
 	

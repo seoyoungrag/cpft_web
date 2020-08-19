@@ -10,11 +10,11 @@ import lombok.Data;
 
 @Data
 public class OrderDTO extends CommonDate {
-	private String carrierSeq;
+	private Integer carrierSeq;
 	private String carrierNm;
-	private String userSeq;
+	private Integer userSeq;
 	private String userNm;
-	private String orderSeq;
+	private Integer orderSeq;
 	private String workGroupNm;
 	private String workGroupManager;
 	private String rcritType;

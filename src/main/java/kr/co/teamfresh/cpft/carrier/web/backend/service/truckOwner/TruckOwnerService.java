@@ -18,7 +18,7 @@ public class TruckOwnerService {
 
 	private final TruckOwnerJpaRepo truckOwnerJpaRepo; 
 	
-	public Page<TruckOwner> findAllByOrdersOrderSeqOrderByUserUserSeq(String orderSeq, PageReqRes<TruckOwner, TruckOwnerForTruckOwnerListDTO> page) {
+	public Page<TruckOwner> findAllByOrdersOrderSeqOrderByUserUserSeq(Integer orderSeq, PageReqRes<TruckOwner, TruckOwnerForTruckOwnerListDTO> page) {
 		return truckOwnerJpaRepo.findAllByOrdersOrderTruckOwnerPKOrderOrderSeqOrderByUserUserSeq(orderSeq, page);
 	}
 

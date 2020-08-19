@@ -35,7 +35,7 @@ import lombok.Setter;
 @Table(name = "TRUCK_OWNER") 
 public class TruckOwner {
 
-	@Id @Column(name="USER_SEQ") String userSeq;
+	@Id @Column(name="USER_SEQ") Integer userSeq;
 	
     @MapsId
     @OneToOne(mappedBy = "truckOwner")
