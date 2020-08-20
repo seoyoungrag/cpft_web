@@ -336,3 +336,48 @@ insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIE
 insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values (6, 10, CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '안녕하세요7.', '0801');
 insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values (6, 11, CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'N', '안녕하세요8.', '0802');
 insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values (6, 12, CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '안녕하세요9.', '0803');
+
+
+insert into "ORDER" ("CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM", "WORK_GROUP_MANAGER_NM") values (CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), '연락. 02-521-1524', '박스 일340건', '경기도', '월400만원', '0501', '11', '0201', '0701', '0401', '1', '08', '02', '00', '00', '경기도 성남시 분당구 이매동 1', 'sixDay','1','LF','신형석');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('7', '0306');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('7', '0307');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('7', '0308');
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('7', '0601')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('7', '0602')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('7', '0603')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('7', '0604')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('7', '0605')
+insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values ('7', '2', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '처음이지만 성실함으로 열심히 하겠습니다.', '0801');
+
+insert into "ORDER" ("CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM", "WORK_GROUP_MANAGER_NM") values (CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), '연락. 02-978-3154', '박스 일 52건', '서울시', '월520만원', '0501', '11', '0201', '0701', '0401', '1', '08', '02', '00', '00', '서울특별시 강남구 봉은사로 108', 'fiveDay','1','TS','서영락');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('8', '0306');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('8', '0307');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('8', '0308');
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('8', '0601')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('8', '0602')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('8', '0603')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('8', '0604')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('8', '0605')
+insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values ('8', '2', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '처음이지만 성실함으로 열심히 하겠습니다.', '0801');
+
+insert into "ORDER" ("CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM", "WORK_GROUP_MANAGER_NM") values (CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), '연락. 02-1234-1234', '박스 일 35건', '서울시', '월350만원', '0501', '11', '0201', '0701', '0401', '1', '08', '02', '00', '00', '서울특별시 마포구 월드컵로 243-48', 'fiveDay','1','TS','서영락');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('9', '0306');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('9', '0307');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('9', '0308');
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('9', '0601')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('9', '0602')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('9', '0603')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('9', '0604')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('9', '0605')
+insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values ('9', '2', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '처음이지만 성실함으로 열심히 하겠습니다.', '0801');
+
+insert into "ORDER" ("CREATED_AT", "MODIFIED_AT", "DETAIL_MATTER", "DLVY_PRDLST", "OPRAT_SCTN", "PAY_AMT", "PAY_FULL_TYPE", "RCRIT_MANS", "RCRIT_TYPE", "STATUS", "TON_TYPE", "USER_SEQ", "WORK_HOUR_END", "WORK_HOUR_START", "WORK_MINUTE_END", "WORK_MINUTE_START", "WORKING_AREA", "WORKING_DAYS_TYPE", "CARRIER_SEQ", "WORK_GROUP_NM", "WORK_GROUP_MANAGER_NM") values (CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), '연락. 02-1234-1234', '박스 일 22건', '전라북도', '월220만원', '0501', '11', '0201', '0701', '0401', '1', '08', '02', '00', '00', '전라북도 군산시 미원로 17', 'fiveDay','1','TS','김동영');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('10', '0306');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('10', '0307');
+insert into "ORDER_CAR_TYPE" ("ORDER_SEQ", "CAR_TYPE") values ('10', '0308');
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('10', '0601')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('10', '0602')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('10', '0603')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('10', '0604')
+insert into "ORDER_WORK_DAY" ("ORDER_SEQ", "WORK_DAY") values ('10', '0605')
+insert into "ORDER_TRUCK_OWNER" ("ORDER_SEQ", "USER_SEQ", "CREATED_AT", "MODIFIED_AT", "IS_READ", "MESSAGE", "STATUS") values ('10', '2', CURRENT_TIMESTAMP(0), CURRENT_TIMESTAMP(0), 'Y', '처음이지만 성실함으로 열심히 하겠습니다.', '0801');
