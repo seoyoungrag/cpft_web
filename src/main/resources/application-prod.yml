@@ -1,3 +1,5 @@
+server:
+  port: 19001
 logging:
   file:
     max-history: 7
