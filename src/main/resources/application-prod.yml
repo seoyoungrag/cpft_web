@@ -27,17 +27,16 @@ spring:
     host: localhost
     port: 6379
   datasource:
-    url: jdbc:h2:~/test;IGNORECASE=TRUE;DB_CLOSE_ON_EXIT=TRUE;AUTO_SERVER=TRUE;
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: yrseo
+    url: jdbc:oracle:thin:@100.100.100.31:1521/cdb1
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: admin
+    password: Timf180525
     hikari:
       pool-name: hikari-cp
       maximum-pool-size: 30
       minimum-idle: 2
-      data-source-properties:
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.Oracle12cDialect
     hibernate:
       ddl-auto: create-drop
       naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
